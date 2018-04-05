@@ -10,7 +10,8 @@
   "babel": {
     "presets": ["es2015"]
   },
-  "author": "",
+  "author": "Janek Rahrt",
+  "repository": "github:janek26/msgreader",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
