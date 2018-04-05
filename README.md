@@ -1,7 +1,10 @@
 # msgreader
 Outlook Item File (.msg) reader in JavaScript Npm Module
+
 Original project: https://github.com/ykarpovich/msg.reader
+
 Online demo: http://ykarpovich.github.io/msg.reader/examples/example.html
+
 This repo contains the core of the original project as npm package.
 ## How to use
 ```javascript
