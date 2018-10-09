@@ -1,19 +1,20 @@
 {
-  "name": "msgreader",
-  "version": "1.1.0",
+  "name": "@freiraum/msgreader",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
+  "private": false,
   "scripts": {
     "build": "node_modules/@babel/cli/bin/babel.js src --out-dir lib",
     "test": "echo \"Error: no test specified\"",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "babel": {
     "presets": [
       "@babel/preset-env"
     ]
   },
-  "author": "Janek Rahrt",
+  "author": "@datsteves (FreiraumIO)",
   "repository": "github:FreiraumIO/msgreader",
   "license": "ISC",
   "devDependencies": {

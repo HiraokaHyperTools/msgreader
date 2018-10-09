@@ -9,7 +9,7 @@ This repo contains the core of the original project as npm package.
 ## How to use
 ```javascript
 import fs from 'fs'
-import MsgReader from './'
+import MsgReader from '@freiraum/msgreader'
 
 const msgFileBuffer = fs.readFileSync('./data/test.msg')
 const testMsg = new MsgReader(msgFileBuffer)
