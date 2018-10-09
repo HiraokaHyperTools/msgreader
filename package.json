@@ -4,18 +4,21 @@
   "description": "",
   "main": "lib/index.js",
   "scripts": {
+    "build": "node_modules/@babel/cli/bin/babel.js src --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepublish": "node_modules/babel-cli/bin/babel.js src --out-dir lib"
+    "prepublish": "npm run build"
   },
   "babel": {
-    "presets": ["es2015"]
+    "presets": [
+      "@babel/preset-env"
+    ]
   },
   "author": "Janek Rahrt",
-  "repository": "github:janek26/msgreader",
+  "repository": "github:FreiraumIO/msgreader",
   "license": "ISC",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1"
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0"
   }
 }
