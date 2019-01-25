@@ -408,7 +408,7 @@ export default class MsgReader {
 
   getFileData() {
     if (!isMSGFile(this.ds)) {
-      return {error: 'Unsupported file type!'};
+      return { error: 'Unsupported file type!' };
     }
     if (this.fileData == null) {
       this.fileData = parseMsgData(this.ds);
@@ -425,6 +425,6 @@ export default class MsgReader {
     var fieldProperty = this.fileData.propertyData[attachData.dataId];
     var fieldData = getFieldValue(this.ds, this.fileData, fieldProperty, getFieldType(fieldProperty));
 
-    return {fileName: attachData.fileName, content: fieldData};
+    return { fileName: attachData.fileName, content: fieldData };
   }
 }

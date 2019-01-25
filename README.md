@@ -1,15 +1,19 @@
 # msgreader
-Outlook Item File (.msg) reader in JavaScript Npm Module
 
-Original project: https://github.com/ykarpovich/msg.reader
+Outlook Item File (.msg) reader in JavaScript npm Module
 
-Online demo: http://ykarpovich.github.io/msg.reader/examples/example.html
+Original projects:
 
-This repo contains the core of the original project as npm package.
+- https://github.com/FreiraumIO/msgreader
+- https://github.com/ykarpovich/msg.reader
+
+This repo contains the core of the modified project as npm package.
+
 ## How to use
+
 ```javascript
 import fs from 'fs'
-import MsgReader from '@freiraum/msgreader'
+import MsgReader from '@kenjiuno/msgreader'
 
 const msgFileBuffer = fs.readFileSync('./data/test.msg')
 const testMsg = new MsgReader(msgFileBuffer)

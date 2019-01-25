@@ -1,11 +1,11 @@
 {
-  "name": "@freiraum/msgreader",
-  "version": "1.1.1",
+  "name": "@kenjiuno/msgreader",
+  "version": "1.1.3",
   "description": "",
   "main": "lib/index.js",
   "private": false,
   "scripts": {
-    "build": "node_modules/@babel/cli/bin/babel.js src --out-dir lib",
+    "build": "babel src --out-dir lib",
     "test": "echo \"Error: no test specified\"",
     "prepare": "npm run build"
   },
@@ -14,8 +14,8 @@
       "@babel/preset-env"
     ]
   },
-  "author": "@datsteves (FreiraumIO)",
-  "repository": "github:FreiraumIO/msgreader",
+  "author": "kenjiuno",
+  "repository": "github:HiraokaHyperTools/msgreader",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.0.0",
