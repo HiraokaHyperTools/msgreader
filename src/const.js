@@ -65,7 +65,6 @@ export default {
         '3704': 'fileNameShort',
         '3707': 'fileName',
         '3712': 'pidContentId',
-        '3701': 'dataBinary',
         // recipient specific
         '3001': 'name',
         '3003': 'email'
