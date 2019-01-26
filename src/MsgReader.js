@@ -265,6 +265,8 @@ function fieldsDataDirInner(ds, msgData, dirProperty, fields) {
     var recipientField = {};
     fields.recipients.push(recipientField);
     fieldsDataDir(ds, msgData, dirProperty, recipientField);
+  } else if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.NAMEID) == 0) {
+    // unknown, skip
   } else {
 
     // other dir

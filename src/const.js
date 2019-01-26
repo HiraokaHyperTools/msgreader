@@ -48,7 +48,8 @@ export default {
       PREFIX: {
         ATTACHMENT: '__attach_version1.0',
         RECIPIENT: '__recip_version1.0',
-        DOCUMENT: '__substg1.'
+        DOCUMENT: '__substg1.',
+        NAMEID: '__nameid_version1.0'
       },
       // example (use fields as needed)
       NAME_MAPPING: {
@@ -58,6 +59,7 @@ export default {
         '0c1f': 'senderEmail',
         '1000': 'body',
         '007d': 'headers',
+        '1009': 'compressedRtf',
         // attachment specific
         '3703': 'extension',
         '3704': 'fileNameShort',
