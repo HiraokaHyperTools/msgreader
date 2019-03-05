@@ -1,3 +1,7 @@
 src
 yarn.lock
 data
+test/
+MEMO.md
+tsconfig.json
+.babelrc

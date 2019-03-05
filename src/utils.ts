@@ -1,4 +1,4 @@
-export function arraysEqual(a, b) {
+export function arraysEqual(a: ArrayLike<any>, b: ArrayLike<any>): boolean {
   if (a === b) return true;
   if (a == null || b == null) return false;
   if (a.length != b.length) return false;
@@ -9,7 +9,7 @@ export function arraysEqual(a, b) {
   return true;
 }
 
-export function uInt2int(data) {
+export function uInt2int(data: number[]): number[] {
   var result = new Array(data.length);
   for (var i = 0; i < data.length; i++) {
     result[i] = data[i] << 24 >> 24;

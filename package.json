@@ -1,18 +1,17 @@
 {
   "name": "@kenjiuno/msgreader",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "private": false,
   "scripts": {
-    "build": "babel src --out-dir lib",
-    "test": "echo \"Error: no test specified\"",
-    "prepare": "npm run build"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
+    "build": "npm run build:types && npm run build:js",
+    "build:js": "babel src --out-dir lib --extensions .ts",
+    "build:types": "tsc --emitDeclarationOnly",
+    "test": "npm run mocha",
+    "prepare": "npm run build",
+    "mocha": "set NODE_ENV=test && mocha"
   },
   "author": "kenjiuno",
   "repository": "github:HiraokaHyperTools/msgreader",
@@ -20,6 +19,15 @@
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0"
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/node": "^11.10.4",
+    "mocha": "^6.0.2",
+    "typescript": "^3.3.3333"
+  },
+  "dependencies": {
+    "@kenjiuno/iconvlite-wrapper-with-iso2022jp": "^0.1.0"
   }
 }
