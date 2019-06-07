@@ -1,6 +1,6 @@
 {
   "name": "@kenjiuno/msgreader",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,8 +24,8 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
     "@types/node": "^11.10.4",
-    "mocha": "^6.0.2",
-    "typescript": "^3.3.3333"
+    "mocha": "^6.1.4",
+    "typescript": "^3.5.1"
   },
   "dependencies": {
     "@kenjiuno/iconvlite-wrapper-with-iso2022jp": "^0.1.0"
