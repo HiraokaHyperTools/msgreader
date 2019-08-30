@@ -1,6 +1,6 @@
 {
   "name": "@kenjiuno/msgreader",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,7 +10,7 @@
     "build:js": "babel src --out-dir lib --extensions .ts",
     "build:types": "tsc --emitDeclarationOnly",
     "test": "npm run mocha",
-    "prepare": "npm run build",
+    "prepare": "npm run build && npm run test",
     "mocha": "set NODE_ENV=test && mocha"
   },
   "author": "kenjiuno",
