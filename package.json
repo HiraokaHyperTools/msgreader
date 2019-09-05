@@ -24,6 +24,7 @@
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-typescript": "^7.3.3",
     "@types/node": "^12.6.2",
+    "commander": "^3.0.1",
     "mocha": "^6.1.4",
     "typescript": "^3.5.3"
   },
