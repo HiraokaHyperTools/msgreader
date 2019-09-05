@@ -44,6 +44,8 @@ function getNextBlockInner(ds: DataStream, msgData: MsgData, offset: number, blo
   var currentBlockIndex = offset % msgData.bigBlockLength;
 
   var startBlockOffset = blockOffsetData[currentBlock];
+  if (typeof startBlockOffset == "undefined")
+    return CONST.MSG.END_OF_CHAIN;
 
   return getBlockAt(ds, msgData, startBlockOffset)[currentBlockIndex];
 }
@@ -127,7 +129,7 @@ function sbatData(ds: DataStream, msgData: MsgData): number[] {
   var result = [];
   var startIndex = msgData.sbatStart;
 
-  for (var i = 0; i < msgData.sbatCount && startIndex != CONST.MSG.END_OF_CHAIN; i++) {
+  for (var i = 0; i < msgData.sbatCount && startIndex && startIndex != CONST.MSG.END_OF_CHAIN; i++) {
     result.push(startIndex);
     startIndex = getNextBlock(ds, msgData, startIndex);
   }
@@ -142,7 +144,6 @@ function xbatData(ds: DataStream, msgData: MsgData): void {
   var nextBlockAt = msgData.xbatStart;
   for (var i = 0; i < msgData.xbatCount; i++) {
     var xBatBlock = getBlockAt(ds, msgData, nextBlockAt);
-    nextBlockAt = xBatBlock[msgData.xBlockLength];
 
     var blocksToProcess = Math.min(remainingBlocks, msgData.xBlockLength);
     for (var j = 0; j < blocksToProcess; j++) {
@@ -153,6 +154,10 @@ function xbatData(ds: DataStream, msgData: MsgData): void {
       msgData.batData.push(blockStartAt);
     }
     remainingBlocks -= blocksToProcess;
+
+    nextBlockAt = xBatBlock[msgData.xBlockLength];
+    if (nextBlockAt == CONST.MSG.UNUSED_BLOCK || nextBlockAt == CONST.MSG.END_OF_CHAIN)
+      break;
   }
 }
 
@@ -222,6 +227,9 @@ function convertBlockToProperties(ds: DataStream, msgData: MsgData, propertyBloc
   var propertyOffset = getBlockOffsetAt(msgData, propertyBlockOffset);
 
   for (var i = 0; i < propertyCount; i++) {
+    if(ds.byteLength < propertyOffset + CONST.MSG.PROP.TYPE_OFFSET)
+      break;
+
     var propertyType = ds.readByte(propertyOffset + CONST.MSG.PROP.TYPE_OFFSET);
     switch (propertyType) {
       case CONST.MSG.PROP.TYPE_ENUM.ROOT:
@@ -240,7 +248,7 @@ function convertBlockToProperties(ds: DataStream, msgData: MsgData, propertyBloc
 
 function createPropertyHierarchy(props: Property[], nodeProperty: Property): void {
 
-  if (nodeProperty.childProperty == CONST.MSG.PROP.NO_INDEX) {
+  if (!nodeProperty || nodeProperty.childProperty == CONST.MSG.PROP.NO_INDEX) {
     return;
   }
   nodeProperty.children = [];
@@ -373,7 +381,7 @@ function fieldsData(ds: DataStream, msgData: MsgData): FieldsData {
 
 function fieldsDataDir(ds: DataStream, msgData: MsgData, dirProperty: Property, fields: FieldsData) {
 
-  if (dirProperty.children && dirProperty.children.length > 0) {
+  if (dirProperty && dirProperty.children && dirProperty.children.length > 0) {
     for (var i = 0; i < dirProperty.children.length; i++) {
       var childProperty = msgData.propertyData[dirProperty.children[i]];
 
