@@ -227,7 +227,7 @@ function convertBlockToProperties(ds: DataStream, msgData: MsgData, propertyBloc
   var propertyOffset = getBlockOffsetAt(msgData, propertyBlockOffset);
 
   for (var i = 0; i < propertyCount; i++) {
-    if(ds.byteLength < propertyOffset + CONST.MSG.PROP.TYPE_OFFSET)
+    if (ds.byteLength < propertyOffset + CONST.MSG.PROP.TYPE_OFFSET)
       break;
 
     var propertyType = ds.readByte(propertyOffset + CONST.MSG.PROP.TYPE_OFFSET);
@@ -469,8 +469,7 @@ var extractorFieldValue = {
       },
       'binary': function extractBatBinary(ds: DataStream, msgData: MsgData, blockStartOffset: number, bigBlockOffset: number, blockSize: number) {
         ds.seek(blockStartOffset + bigBlockOffset);
-        var toReadLength = Math.min(Math.min(msgData.bigBlockSize - bigBlockOffset, blockSize), CONST.MSG.SMALL_BLOCK_SIZE);
-        return ds.readUint8Array(toReadLength);
+        return ds.readUint8Array(blockSize);
       }
     }
   },
