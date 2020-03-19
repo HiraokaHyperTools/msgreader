@@ -5,4 +5,3 @@ test/
 MEMO.md
 tsconfig.json
 .babelrc
-/cli.js

@@ -29,6 +29,7 @@
     "typescript": "^3.5.3"
   },
   "dependencies": {
+    "@kenjiuno/decompressrtf": "^0.1.2",
     "@kenjiuno/iconvlite-wrapper-with-iso2022jp": "^0.1.0"
   }
 }
