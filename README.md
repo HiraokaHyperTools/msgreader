@@ -7,7 +7,8 @@ Original projects:
 - https://github.com/FreiraumIO/msgreader
 - https://github.com/ykarpovich/msg.reader
 
-This repo contains the core of the modified project as npm package.
+This repo contains the code of the modified project.
+And also it is published as a [npm package](https://www.npmjs.com/package/@kenjiuno/msgreader).
 
 ## How to use
 
@@ -48,4 +49,89 @@ const testMsgAttachment0 = testMsg.getAttachment(testMsgInfo.attachments[0])
     content: <Uint8Array> //content removed
   }
 **/
+```
+
+### List attachment files
+
+```javascript
+  const msgFileBuffer = fs.readFileSync(msgFilePath)
+  const testMsg = new MsgReader(msgFileBuffer)
+  const testMsgInfo = testMsg.getFileData()
+
+  for (const att of testMsgInfo.attachments) {
+    console.log(att.fileName);
+    // testMsg.getAttachment(att).content
+  }
+```
+
+## Build msgreader locally
+
+```bat
+yarn
+```
+
+## Optional command line tool
+
+This can be used for testing this tool.
+
+```bat
+C:\Proj\msgreader>node cli -h
+Usage: cli [options] [command]
+
+Options:
+  -h, --help                             output usage information
+
+Commands:
+  parse [options] <msgFilePath>          Parse msg file and print parsed structure
+  rtf <msgFilePath> [saveToRtfFilePath]  Parse msg file and print decompressed rtf
+  list-att <msgFilePath>                 Parse msg file and list attachment file names
+  save-att <msgFilePath> <saveToDir>     Parse msg file and write all attachment files
+```
+
+Obtain decompressed RTF file from `test/test1.msg`:
+
+```bat
+C:\Proj\msgreader>node cli rtf test\test1.msg test1.rtf
+
+C:\Proj\msgreader>type test1.rtf
+{\rtf1\ansi\ansicpg1252\fromtext \fbidis \deff0{\fonttbl
+{\f0\fswiss Arial;}
+{\f1\fmodern Courier New;}
+{\f2\fnil\fcharset2 Symbol;}
+{\f3\fmodern\fcharset0 Courier New;}}
+{\colortbl\red0\green0\blue0;\red0\green0\blue255;}
+\uc1\pard\plain\deftab360 \f0\fs20 body\par
+}
+```
+
+List attachment files in `test/test2.msg`:
+
+```bat
+C:\Proj\msgreader>node cli list-att test\test2.msg
+A.txt
+```
+
+Extract attacument files into folder `test2`:
+
+```bat
+C:\Proj\msgreader>node cli save-att test\test2.msg test2
+```
+
+```bat
+C:\Proj\msgreader>dir test2
+ Volume in drive C has no label.
+ Volume Serial Number is CA6D-4F59
+
+ Directory of C:\Proj\msgreader\test2
+
+2020/03/19  19:40    <DIR>          .
+2020/03/19  19:40    <DIR>          ..
+2020/03/19  19:40                11 A.txt
+               1 File(s)             11 bytes
+               2 Dir(s)   9,542,762,496 bytes free
+```
+
+```bat
+C:\Proj\msgreader>type test2\A.txt
+attach test
 ```
