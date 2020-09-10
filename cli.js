@@ -39,6 +39,28 @@ program
     }
   });
 
+function listAttachmentsRecursively(fieldsData, delimiter) {
+  const attachments = []
+
+  const walk = (fieldsData, prefix, attachments) => {
+    for (const att of fieldsData.attachments) {
+      if (att.innerMsgContent) {
+        walk(att.innerMsgContentFields, att.name + delimiter, attachments);
+      }
+      else {
+        attachments.push({
+          fileName: prefix + att.fileName,
+          attachmentRef: att,
+        })
+      }
+    }
+  }
+
+  walk(fieldsData, "", attachments)
+
+  return attachments
+}
+
 program
   .command('list-att <msgFilePath>')
   .description('Parse msg file and list attachment file names')
@@ -47,8 +69,9 @@ program
     const testMsg = new MsgReader(msgFileBuffer)
     const testMsgInfo = testMsg.getFileData()
 
-    for (const att of testMsgInfo.attachments) {
-      console.log(att.fileName);
+    const attachments = listAttachmentsRecursively(testMsgInfo, "_");
+    for (let attachment of attachments) {
+      console.log(attachment.fileName)
     }
   });
 
@@ -62,9 +85,10 @@ program
 
     fs.mkdirSync(path.resolve(saveToDir), { recursive: true })
 
-    for (const att of testMsgInfo.attachments) {
-      const attFilePath = path.resolve(saveToDir, att.fileName);
-      fs.writeFileSync(attFilePath, testMsg.getAttachment(att).content)
+    const attachments = listAttachmentsRecursively(testMsgInfo, "_");
+    for (let attachment of attachments) {
+      const attFilePath = path.resolve(saveToDir, attachment.fileName);
+      fs.writeFileSync(attFilePath, testMsg.getAttachment(attachment.attachmentRef).content)
     }
   });
 

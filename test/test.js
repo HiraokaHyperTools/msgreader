@@ -41,4 +41,69 @@ describe('MsgReader', function () {
       );
     });
   });
+
+  describe('msgInMsg.msg', function () {
+    var msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
+    var testMsg = new MsgReader(msgFileBuffer);
+    var testMsgInfo = testMsg.getFileData();
+
+    it('2 attachments', function () {
+      assert.strictEqual(2, testMsgInfo.attachments.length);
+    });
+
+    it('first is innerMsgContent', function () {
+      assert.strictEqual(true, testMsgInfo.attachments[0].innerMsgContent);
+    });
+
+    it('second is not innerMsgContent', function () {
+      assert.strictEqual(undefined, testMsgInfo.attachments[1].innerMsgContent);
+    });
+
+    it('first sub msg has no attachment', function () {
+      assert.strictEqual(0, testMsgInfo.attachments[0].innerMsgContentFields.attachments.length);
+    });
+
+  });
+
+
+  describe('msgInMsgInMsg.msg', function () {
+    var msgFileBuffer = fs.readFileSync('test/msgInMsgInMsg.msg');
+    var testMsg = new MsgReader(msgFileBuffer);
+    var testMsgInfo = testMsg.getFileData();
+
+    it('2 attachments', function () {
+      assert.strictEqual(2, testMsgInfo.attachments.length);
+    });
+
+    it('first att is innerMsgContent', function () {
+      assert.strictEqual(true,
+        testMsgInfo.attachments[0].innerMsgContent);
+    });
+
+    it('second att is not innerMsgContent', function () {
+      assert.strictEqual(undefined,
+        testMsgInfo.attachments[1].innerMsgContent);
+    });
+
+    it('first sub msg has 2 attachments', function () {
+      assert.strictEqual(2,
+        testMsgInfo.attachments[0].innerMsgContentFields.attachments.length);
+    });
+
+    it('first sub msg: first att is innerMsgContent', function () {
+      assert.strictEqual(true,
+        testMsgInfo.attachments[0].innerMsgContentFields.attachments[0].innerMsgContent);
+    });
+
+    it('first sub msg: second att is not innerMsgContent', function () {
+      assert.strictEqual(undefined,
+        testMsgInfo.attachments[0].innerMsgContentFields.attachments[1].innerMsgContent);
+    });
+
+    it('first sub msg: first msg has no attachment', function () {
+      assert.strictEqual(0,
+        testMsgInfo.attachments[0].innerMsgContentFields.attachments[0].innerMsgContentFields.attachments.length);
+    });
+
+  });
 });

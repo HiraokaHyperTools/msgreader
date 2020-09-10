@@ -363,7 +363,8 @@ interface SomeOxProps {
 interface FieldsData extends SomeOxProps {
   contentLength?: number;
   dataId?: any;
-  innerMsgContent?: boolean;
+  innerMsgContent?: true;
+  innerMsgContentFields?: FieldsData;
   attachments?: FieldsData[];
   recipients?: FieldsData[];
   error?: string;
@@ -417,7 +418,12 @@ function fieldsDataDirInner(ds: DataStream, msgData: MsgData, dirProperty: Prope
     if (childFieldType != CONST.MSG.FIELD.DIR_TYPE.INNER_MSG) {
       fieldsDataDir(ds, msgData, dirProperty, fields);
     } else {
-      // MSG as attachment currently isn't supported
+      const innerMsgContentFields = {
+        attachments: [],
+        recipients: [],
+      }
+      fieldsDataDir(ds, msgData, dirProperty, innerMsgContentFields);
+      fields.innerMsgContentFields = innerMsgContentFields;
       fields.innerMsgContent = true;
     }
   }
