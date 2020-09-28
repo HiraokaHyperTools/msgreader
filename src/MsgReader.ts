@@ -360,7 +360,11 @@ interface SomeOxProps {
   email?: string;
 }
 
-interface FieldsData extends SomeOxProps {
+interface SomeParsedOxProps {
+  recipType?: "to" | "cc" | "bcc";
+}
+
+interface FieldsData extends SomeOxProps, SomeParsedOxProps {
   contentLength?: number;
   dataId?: any;
   innerMsgContent?: true;
@@ -380,7 +384,7 @@ function fieldsData(ds: DataStream, msgData: MsgData): FieldsData {
   return fields;
 }
 
-function fieldsDataDir(ds: DataStream, msgData: MsgData, dirProperty: Property, fields: FieldsData) {
+function fieldsDataDir(ds: DataStream, msgData: MsgData, dirProperty: Property, fields: FieldsData, subClass?: string) {
 
   if (dirProperty && dirProperty.children && dirProperty.children.length > 0) {
     for (var i = 0; i < dirProperty.children.length; i++) {
@@ -391,6 +395,10 @@ function fieldsDataDir(ds: DataStream, msgData: MsgData, dirProperty: Property, 
       } else if (childProperty.type == CONST.MSG.PROP.TYPE_ENUM.DOCUMENT
         && childProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.DOCUMENT) == 0) {
         fieldsDataDocument(ds, msgData, childProperty, fields);
+      } else if (childProperty.type == CONST.MSG.PROP.TYPE_ENUM.DOCUMENT
+        && subClass === "recip"
+        && childProperty.name.split("\0")[0] === "__properties_version1.0") {
+        fieldsRecipProperties(ds, msgData, childProperty, fields);
       }
     }
   }
@@ -408,7 +416,7 @@ function fieldsDataDirInner(ds: DataStream, msgData: MsgData, dirProperty: Prope
     // recipient
     var recipientField = {};
     fields.recipients.push(recipientField);
-    fieldsDataDir(ds, msgData, dirProperty, recipientField);
+    fieldsDataDir(ds, msgData, dirProperty, recipientField, "recip");
   } else if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.NAMEID) == 0) {
     // unknown, skip
   } else {
@@ -444,6 +452,49 @@ function fieldsDataDocument(ds: DataStream, msgData: MsgData, documentProperty: 
     // attachment specific info
     fields.dataId = documentProperty.index;
     fields.contentLength = documentProperty.sizeBlock;
+  }
+}
+
+function fieldsRecipProperties(ds: DataStream, msgData: MsgData, documentProperty: Property, fields: FieldsData): void {
+  const propertiesBinary: Uint8Array = getFieldValue(ds, msgData, documentProperty, "0102");
+  const propertiesDs = new DataStream(propertiesBinary, 0, DataStream.LITTLE_ENDIAN);
+
+  // See: [MS-OXMSG]: Outlook Item (.msg) File Format, 2.4 Property Stream
+  // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
+
+  propertiesDs.readUint32();
+  propertiesDs.readUint32();
+
+  const PtypInteger32 = 0x0003;
+  const PidTagRecipientType = 0x0C150003;
+
+  while (!propertiesDs.isEof()) {
+    const propertyTag = propertiesDs.readUint32();
+    const flags = propertiesDs.readUint32();
+
+    const ptyp = propertyTag & 0xFFFF;
+    let value = undefined;
+    if (ptyp === PtypInteger32) {
+      value = propertiesDs.readUint32();
+      propertiesDs.readUint32();
+    } else {
+      propertiesDs.readUint32();
+      propertiesDs.readUint32();
+    }
+    if (propertyTag === PidTagRecipientType) {
+      const MAPI_TO = 1;
+      const MAPI_CC = 2;
+      const MAPI_BCC = 3;
+      if (value === MAPI_TO) {
+        fields["recipType"] = "to";
+      }
+      else if (value === MAPI_CC) {
+        fields["recipType"] = "cc";
+      }
+      else if (value === MAPI_BCC) {
+        fields["recipType"] = "bcc";
+      }
+    }
   }
 }
 
