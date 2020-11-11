@@ -9,6 +9,7 @@
     "build": "npm run build:types && npm run build:js",
     "build:js": "babel src --out-dir lib --extensions .ts",
     "build:types": "tsc --emitDeclarationOnly",
+    "build:use-tsc": "tsc",
     "test": "npm run mocha",
     "prepare": "npm run build && npm run test",
     "mocha": "set NODE_ENV=test && mocha"
