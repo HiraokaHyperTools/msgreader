@@ -14,10 +14,10 @@ describe('MsgReader', function () {
     it('has 2 recipients', function () {
       assert.deepStrictEqual(testMsgInfo.recipients, [
         {
-          name: 'to@example.com', email: 'to@example.com', recipType: "to"
+          dataType: "recipient", name: 'to@example.com', email: 'to@example.com', recipType: "to"
         },
         {
-          name: 'cc@example.com', email: 'cc@example.com', recipType: "cc"
+          dataType: "recipient", name: 'cc@example.com', email: 'cc@example.com', recipType: "cc"
         }
       ]);
     });
@@ -132,16 +132,14 @@ describe('MsgReader', function () {
     var testMsgInfo = testMsg.getFileData();
 
     it('has 3 recipients', function () {
-      it('has 2 recipients', function () {
-        assert.deepStrictEqual(
-          testMsgInfo.recipients,
-          [
-            { name: 'ToUser', email: 'to@example.com', recipType: 'to' },
-            { name: 'ToCc', email: 'cc@example.com', recipType: 'cc' },
-            { name: 'ToBcc', email: 'bcc@example.com', recipType: 'bcc' }
-          ]
-        );
-      });
+      assert.deepStrictEqual(
+        testMsgInfo.recipients,
+        [
+          { dataType: "recipient", name: 'ToUser', email: 'to@example.com', recipType: 'to' },
+          { dataType: "recipient", name: 'ToCc', email: 'cc@example.com', recipType: 'cc' },
+          { dataType: "recipient", name: 'ToBcc', email: 'bcc@example.com', recipType: 'bcc' }
+        ]
+      );
     });
   });
 });

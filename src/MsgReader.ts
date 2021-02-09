@@ -22,6 +22,10 @@ import DataStream from './DataStream'
 
 // MSG Reader implementation
 
+class ParserConfig {
+  propertyObserver?: (fields: FieldsData, subClass: string, fileName: string, raw: Uint8Array | null) => void;
+}
+
 // check MSG file header
 function isMSGFile(ds: DataStream): boolean {
   ds.seek(0);
@@ -59,7 +63,7 @@ function getNextBlockSmall(ds: DataStream, msgData: MsgData, offset: number): nu
 }
 
 // convert binary data to dictionary
-function parseMsgData(ds: DataStream): MsgData {
+function parseMsgData(ds: DataStream, parserConfig: ParserConfig): MsgData {
   var msgData: MsgData = headerData(ds);
   msgData.batData = batData(ds, msgData);
   msgData.sbatData = sbatData(ds, msgData);
@@ -67,7 +71,7 @@ function parseMsgData(ds: DataStream): MsgData {
     xbatData(ds, msgData);
   }
   msgData.propertyData = propertyData(ds, msgData);
-  msgData.fieldsData = fieldsData(ds, msgData);
+  msgData.fieldsData = fieldsData(ds, msgData, parserConfig);
 
   return msgData;
 }
@@ -365,6 +369,7 @@ interface SomeParsedOxProps {
 }
 
 interface FieldsData extends SomeOxProps, SomeParsedOxProps {
+  dataType: null | "msg" | "attachment" | "recipient";
   contentLength?: number;
   dataId?: any;
   innerMsgContent?: true;
@@ -375,23 +380,33 @@ interface FieldsData extends SomeOxProps, SomeParsedOxProps {
 }
 
 // extract real fields
-function fieldsData(ds: DataStream, msgData: MsgData): FieldsData {
-  var fields = {
+function fieldsData(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig): FieldsData {
+  const fields: FieldsData = {
+    dataType: "msg",
     attachments: [],
     recipients: []
   };
-  fieldsDataDir(ds, msgData, msgData.propertyData[0], fields);
+  fieldsDataDir(ds, msgData, parserConfig, msgData.propertyData[0], fields);
   return fields;
 }
 
-function fieldsDataDir(ds: DataStream, msgData: MsgData, dirProperty: Property, fields: FieldsData, subClass?: string) {
-
+function fieldsDataDir(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig, dirProperty: Property, fields: FieldsData, subClass?: string) {
   if (dirProperty && dirProperty.children && dirProperty.children.length > 0) {
     for (var i = 0; i < dirProperty.children.length; i++) {
       var childProperty = msgData.propertyData[dirProperty.children[i]];
+      if (childProperty.type === CONST.MSG.PROP.TYPE_ENUM.DOCUMENT) {
+        parserConfig.propertyObserver(
+          fields,
+          subClass,
+          childProperty.name,
+          getFieldRawData(ds, msgData, childProperty)
+        )
+      }
 
-      if (childProperty.type == CONST.MSG.PROP.TYPE_ENUM.DIRECTORY) {
-        fieldsDataDirInner(ds, msgData, childProperty, fields)
+      if (subClass === "nameid") {
+        // skip normal processing
+      } else if (childProperty.type == CONST.MSG.PROP.TYPE_ENUM.DIRECTORY) {
+        fieldsDataDirInner(ds, msgData, parserConfig, childProperty, fields)
       } else if (childProperty.type == CONST.MSG.PROP.TYPE_ENUM.DOCUMENT
         && childProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.DOCUMENT) == 0) {
         fieldsDataDocument(ds, msgData, childProperty, fields);
@@ -404,33 +419,39 @@ function fieldsDataDir(ds: DataStream, msgData: MsgData, dirProperty: Property, 
   }
 }
 
-function fieldsDataDirInner(ds: DataStream, msgData: MsgData, dirProperty: Property, fields: FieldsData): void {
+function fieldsDataDirInner(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig, dirProperty: Property, fields: FieldsData): void {
   if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.ATTACHMENT) == 0) {
 
     // attachment
-    var attachmentField = {};
+    const attachmentField: FieldsData = {
+      dataType: "attachment",
+    };
     fields.attachments.push(attachmentField);
-    fieldsDataDir(ds, msgData, dirProperty, attachmentField);
+    fieldsDataDir(ds, msgData, parserConfig, dirProperty, attachmentField);
   } else if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.RECIPIENT) == 0) {
 
     // recipient
-    var recipientField = {};
+    const recipientField: FieldsData = {
+      dataType: "recipient",
+    };
     fields.recipients.push(recipientField);
-    fieldsDataDir(ds, msgData, dirProperty, recipientField, "recip");
+    fieldsDataDir(ds, msgData, parserConfig, dirProperty, recipientField, "recip");
   } else if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.NAMEID) == 0) {
-    // unknown, skip
+    // unknown, read
+    fieldsDataDir(ds, msgData, parserConfig, dirProperty, fields, "nameid");
   } else {
 
     // other dir
-    var childFieldType = getFieldType(dirProperty);
+    const childFieldType = getFieldType(dirProperty);
     if (childFieldType != CONST.MSG.FIELD.DIR_TYPE.INNER_MSG) {
-      fieldsDataDir(ds, msgData, dirProperty, fields);
+      fieldsDataDir(ds, msgData, parserConfig, dirProperty, fields);
     } else {
-      const innerMsgContentFields = {
+      const innerMsgContentFields: FieldsData = {
+        dataType: "msg",
         attachments: [],
         recipients: [],
       }
-      fieldsDataDir(ds, msgData, dirProperty, innerMsgContentFields);
+      fieldsDataDir(ds, msgData, parserConfig, dirProperty, innerMsgContentFields);
       fields.innerMsgContentFields = innerMsgContentFields;
       fields.innerMsgContent = true;
     }
@@ -616,9 +637,29 @@ function getFieldValue(ds: DataStream, msgData: MsgData, fieldProperty: Property
   return value;
 }
 
+function getFieldRawData(ds: DataStream, msgData: MsgData, fieldProperty: Property): Uint8Array {
+  if (fieldProperty.sizeBlock < CONST.MSG.BIG_BLOCK_MIN_DOC_SIZE) {
+    const valueExtractor
+      = extractorFieldValue.sbat;
+    const dataTypeExtractor: (ds: DataStream, msgData: MsgData, blockStartOffset: number, bigBlockOffset: number, blockSize: number) => any
+      = valueExtractor.dataType['binary'];
+
+    return valueExtractor.extractor(ds, msgData, fieldProperty, dataTypeExtractor);
+  }
+  else {
+    const valueExtractor
+      = extractorFieldValue.bat;
+    const dataTypeExtractor: (ds: DataStream, fieldProperty: Property) => any
+      = valueExtractor.dataType['binary'];
+
+    return valueExtractor.extractor(ds, msgData, fieldProperty, dataTypeExtractor);
+  }
+}
+
 export default class MsgReader {
   ds: DataStream;
   fileData: MsgData;
+  parserConfig: ParserConfig
 
   constructor(arrayBuffer: ArrayBuffer | DataView) {
     this.ds = new DataStream(arrayBuffer, 0, DataStream.LITTLE_ENDIAN);
@@ -626,10 +667,15 @@ export default class MsgReader {
 
   getFileData(): FieldsData {
     if (!isMSGFile(this.ds)) {
-      return { error: 'Unsupported file type!' };
+      return { dataType: null, error: 'Unsupported file type!' };
     }
     if (this.fileData == null) {
-      this.fileData = parseMsgData(this.ds);
+      this.fileData = parseMsgData(
+        this.ds,
+        {
+          propertyObserver: (this.parserConfig?.propertyObserver) || (() => { }),
+        }
+      );
     }
     return this.fileData.fieldsData;
   }

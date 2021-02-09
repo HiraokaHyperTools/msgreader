@@ -1,6 +1,7 @@
 const program = require('commander');
 
 const MsgReader = require('./lib/MsgReader').default;
+const { props, typeNames } = require('./lib/Defs');
 
 const fs = require('fs');
 const path = require('path');
@@ -90,6 +91,40 @@ program
       const attFilePath = path.resolve(saveToDir, attachment.fileName);
       fs.writeFileSync(attFilePath, testMsg.getAttachment(attachment.attachmentRef).content)
     }
+  });
+
+program
+  .command('dump <msgFilePath>')
+  .description('Dump msg file and print data')
+  .option('-p, --print-raw-data', 'print raw data')
+  .action((msgFilePath, options) => {
+    const msgFileBuffer = fs.readFileSync(msgFilePath)
+    const testMsg = new MsgReader(msgFileBuffer)
+    let msgIndex = 0
+    testMsg.parserConfig = {
+      propertyObserver: (fields, subClass, fileName, raw) => {
+        if (fields.msgIndex === undefined) {
+          fields.msgIndex = msgIndex++
+        }
+        if (fields.dataType === "msg") {
+          if (fileName.startsWith("__substg1.0_")) {
+            // __substg1.0_003B0102
+            const key = fileName.substr(12, 8)
+            const prop = props.filter(it => it.key === key).shift()
+            const type = typeNames[parseInt(key.substr(4), 16)]
+            console.info(
+              "msgIdx:", fields.msgIndex,
+              "tag:", `0x${key}`,
+              "name:", prop && prop.name || null,
+              "type:", type && type || null,
+              "size:", raw && raw.byteLength,
+              "data:", options.printRawData ? raw : undefined,
+            )
+          }
+        }
+      }
+    }
+    const testMsgInfo = testMsg.getFileData()
   });
 
 program
