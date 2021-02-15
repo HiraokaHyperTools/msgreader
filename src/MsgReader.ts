@@ -23,7 +23,7 @@ import DataStream from './DataStream'
 // MSG Reader implementation
 
 class ParserConfig {
-  propertyObserver?: (fields: FieldsData, subClass: string, fileName: string, raw: Uint8Array | null) => void;
+  propertyObserver?: (fields: FieldsData, tag: number, raw: Uint8Array | null) => void;
 }
 
 // check MSG file header
@@ -38,16 +38,16 @@ function getBlockOffsetAt(msgData: MsgData, offset: number): number {
 }
 
 function getBlockAt(ds: DataStream, msgData: MsgData, offset: number): Int32Array {
-  var startOffset = getBlockOffsetAt(msgData, offset);
+  const startOffset = getBlockOffsetAt(msgData, offset);
   ds.seek(startOffset);
   return ds.readInt32Array(msgData.bigBlockLength);
 }
 
 function getNextBlockInner(ds: DataStream, msgData: MsgData, offset: number, blockOffsetData: any[]): number {
-  var currentBlock = Math.floor(offset / msgData.bigBlockLength);
-  var currentBlockIndex = offset % msgData.bigBlockLength;
+  const currentBlock = Math.floor(offset / msgData.bigBlockLength);
+  const currentBlockIndex = offset % msgData.bigBlockLength;
 
-  var startBlockOffset = blockOffsetData[currentBlock];
+  const startBlockOffset = blockOffsetData[currentBlock];
   if (typeof startBlockOffset == "undefined")
     return CONST.MSG.END_OF_CHAIN;
 
@@ -64,7 +64,7 @@ function getNextBlockSmall(ds: DataStream, msgData: MsgData, offset: number): nu
 
 // convert binary data to dictionary
 function parseMsgData(ds: DataStream, parserConfig: ParserConfig): MsgData {
-  var msgData: MsgData = headerData(ds);
+  const msgData: MsgData = headerData(ds);
   msgData.batData = batData(ds, msgData);
   msgData.sbatData = sbatData(ds, msgData);
   if (msgData.xbatCount > 0) {
@@ -116,24 +116,24 @@ function headerData(ds): MsgData {
 }
 
 function batCountInHeader(msgData: MsgData): number {
-  var maxBatsInHeader = (CONST.MSG.S_BIG_BLOCK_SIZE - CONST.MSG.HEADER.BAT_START_OFFSET) / 4;
+  const maxBatsInHeader = (CONST.MSG.S_BIG_BLOCK_SIZE - CONST.MSG.HEADER.BAT_START_OFFSET) / 4;
   return Math.min(msgData.batCount, maxBatsInHeader);
 }
 
 function batData(ds: DataStream, msgData: MsgData): number[] {
-  var result = new Array(batCountInHeader(msgData));
+  const result = new Array(batCountInHeader(msgData));
   ds.seek(CONST.MSG.HEADER.BAT_START_OFFSET);
-  for (var i = 0; i < result.length; i++) {
+  for (let i = 0; i < result.length; i++) {
     result[i] = ds.readInt32()
   }
   return result;
 }
 
 function sbatData(ds: DataStream, msgData: MsgData): number[] {
-  var result = [];
-  var startIndex = msgData.sbatStart;
+  const result = [];
+  let startIndex = msgData.sbatStart;
 
-  for (var i = 0; i < msgData.sbatCount && startIndex && startIndex != CONST.MSG.END_OF_CHAIN; i++) {
+  for (let i = 0; i < msgData.sbatCount && startIndex && startIndex != CONST.MSG.END_OF_CHAIN; i++) {
     result.push(startIndex);
     startIndex = getNextBlock(ds, msgData, startIndex);
   }
@@ -141,17 +141,17 @@ function sbatData(ds: DataStream, msgData: MsgData): number[] {
 }
 
 function xbatData(ds: DataStream, msgData: MsgData): void {
-  var batCount = batCountInHeader(msgData);
-  var batCountTotal = msgData.batCount;
-  var remainingBlocks = batCountTotal - batCount;
+  const batCount = batCountInHeader(msgData);
+  const batCountTotal = msgData.batCount;
+  let remainingBlocks = batCountTotal - batCount;
 
-  var nextBlockAt = msgData.xbatStart;
-  for (var i = 0; i < msgData.xbatCount; i++) {
-    var xBatBlock = getBlockAt(ds, msgData, nextBlockAt);
+  let nextBlockAt = msgData.xbatStart;
+  for (let i = 0; i < msgData.xbatCount; i++) {
+    let xBatBlock = getBlockAt(ds, msgData, nextBlockAt);
 
-    var blocksToProcess = Math.min(remainingBlocks, msgData.xBlockLength);
-    for (var j = 0; j < blocksToProcess; j++) {
-      var blockStartAt = xBatBlock[j];
+    const blocksToProcess = Math.min(remainingBlocks, msgData.xBlockLength);
+    for (let j = 0; j < blocksToProcess; j++) {
+      const blockStartAt = xBatBlock[j];
       if (blockStartAt == CONST.MSG.UNUSED_BLOCK || blockStartAt == CONST.MSG.END_OF_CHAIN) {
         break;
       }
@@ -167,9 +167,9 @@ function xbatData(ds: DataStream, msgData: MsgData): void {
 
 // extract property data and property hierarchy
 function propertyData(ds: DataStream, msgData: MsgData): Property[] {
-  var props: Property[] = [];
+  const props: Property[] = [];
 
-  var currentOffset = msgData.propertyStart;
+  let currentOffset = msgData.propertyStart;
 
   while (currentOffset != CONST.MSG.END_OF_CHAIN) {
     convertBlockToProperties(ds, msgData, currentOffset, props);
@@ -180,7 +180,7 @@ function propertyData(ds: DataStream, msgData: MsgData): Property[] {
 }
 
 function convertName(ds: DataStream, offset: number): string {
-  var nameLength = ds.readShort(offset + CONST.MSG.PROP.NAME_SIZE_OFFSET);
+  const nameLength = ds.readShort(offset + CONST.MSG.PROP.NAME_SIZE_OFFSET);
   if (nameLength < 1) {
     return '';
   } else {
@@ -227,14 +227,14 @@ function convertProperty(ds: DataStream, index: number, offset: number): Propert
 
 function convertBlockToProperties(ds: DataStream, msgData: MsgData, propertyBlockOffset: number, props: Property[]): void {
 
-  var propertyCount = msgData.bigBlockSize / CONST.MSG.PROP.PROPERTY_SIZE;
-  var propertyOffset = getBlockOffsetAt(msgData, propertyBlockOffset);
+  const propertyCount = msgData.bigBlockSize / CONST.MSG.PROP.PROPERTY_SIZE;
+  let propertyOffset = getBlockOffsetAt(msgData, propertyBlockOffset);
 
-  for (var i = 0; i < propertyCount; i++) {
+  for (let i = 0; i < propertyCount; i++) {
     if (ds.byteLength < propertyOffset + CONST.MSG.PROP.TYPE_OFFSET)
       break;
 
-    var propertyType = ds.readByte(propertyOffset + CONST.MSG.PROP.TYPE_OFFSET);
+    const propertyType = ds.readByte(propertyOffset + CONST.MSG.PROP.TYPE_OFFSET);
     switch (propertyType) {
       case CONST.MSG.PROP.TYPE_ENUM.ROOT:
       case CONST.MSG.PROP.TYPE_ENUM.DIRECTORY:
@@ -257,10 +257,10 @@ function createPropertyHierarchy(props: Property[], nodeProperty: Property): voi
   }
   nodeProperty.children = [];
 
-  var children = [nodeProperty.childProperty];
+  const children = [nodeProperty.childProperty];
   while (children.length != 0) {
-    var currentIndex = children.shift();
-    var current = props[currentIndex];
+    const currentIndex = children.shift();
+    const current = props[currentIndex];
     if (current == null) {
       continue;
     }
@@ -362,6 +362,34 @@ interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3003-PidTagEmailAddress.md
    */
   email?: string;
+
+  /**
+   * Contains the time, in UTC, that the object was created.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3007-PidTagCreationTime.md
+   */
+  creationTime?: string;
+
+  /**
+   * Contains the time, in UTC, of the last modification to the object.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3008-PidTagLastModificationTime.md
+   */
+  lastModificationTime?: string;
+
+  /**
+   * Contains the current time, in UTC, when the email message is submitted.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0039-PidTagClientSubmitTime.md
+   */
+  clientSubmitTime?: string;
+
+  /**
+   * Specifies the time (in UTC) when the server received the message.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0E06-PidTagMessageDeliveryTime.md
+   */
+  messageDeliveryTime?: string;
 }
 
 interface SomeParsedOxProps {
@@ -386,22 +414,14 @@ function fieldsData(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig
     attachments: [],
     recipients: []
   };
-  fieldsDataDir(ds, msgData, parserConfig, msgData.propertyData[0], fields);
+  fieldsDataDir(ds, msgData, parserConfig, msgData.propertyData[0], fields, "root");
   return fields;
 }
 
 function fieldsDataDir(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig, dirProperty: Property, fields: FieldsData, subClass?: string) {
   if (dirProperty && dirProperty.children && dirProperty.children.length > 0) {
-    for (var i = 0; i < dirProperty.children.length; i++) {
-      var childProperty = msgData.propertyData[dirProperty.children[i]];
-      if (childProperty.type === CONST.MSG.PROP.TYPE_ENUM.DOCUMENT) {
-        parserConfig.propertyObserver(
-          fields,
-          subClass,
-          childProperty.name,
-          getFieldRawData(ds, msgData, childProperty)
-        )
-      }
+    for (let i = 0; i < dirProperty.children.length; i++) {
+      const childProperty = msgData.propertyData[dirProperty.children[i]];
 
       if (subClass === "nameid") {
         // skip normal processing
@@ -409,11 +429,16 @@ function fieldsDataDir(ds: DataStream, msgData: MsgData, parserConfig: ParserCon
         fieldsDataDirInner(ds, msgData, parserConfig, childProperty, fields)
       } else if (childProperty.type == CONST.MSG.PROP.TYPE_ENUM.DOCUMENT
         && childProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.DOCUMENT) == 0) {
-        fieldsDataDocument(ds, msgData, childProperty, fields);
+
+        fieldsDataDocument(ds, msgData, parserConfig, childProperty, fields);
       } else if (childProperty.type == CONST.MSG.PROP.TYPE_ENUM.DOCUMENT
-        && subClass === "recip"
         && childProperty.name.split("\0")[0] === "__properties_version1.0") {
-        fieldsRecipProperties(ds, msgData, childProperty, fields);
+        if (subClass === "recip") {
+          fieldsRecipProperties(ds, msgData, parserConfig, childProperty, fields);
+        }
+        else if (subClass === "root") {
+          fieldsRootProperties(ds, msgData, parserConfig, childProperty, fields);
+        }
       }
     }
   }
@@ -427,7 +452,7 @@ function fieldsDataDirInner(ds: DataStream, msgData: MsgData, parserConfig: Pars
       dataType: "attachment",
     };
     fields.attachments.push(attachmentField);
-    fieldsDataDir(ds, msgData, parserConfig, dirProperty, attachmentField);
+    fieldsDataDir(ds, msgData, parserConfig, dirProperty, attachmentField, "attachment");
   } else if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.RECIPIENT) == 0) {
 
     // recipient
@@ -444,26 +469,32 @@ function fieldsDataDirInner(ds: DataStream, msgData: MsgData, parserConfig: Pars
     // other dir
     const childFieldType = getFieldType(dirProperty);
     if (childFieldType != CONST.MSG.FIELD.DIR_TYPE.INNER_MSG) {
-      fieldsDataDir(ds, msgData, parserConfig, dirProperty, fields);
+      // ignore
     } else {
       const innerMsgContentFields: FieldsData = {
         dataType: "msg",
         attachments: [],
         recipients: [],
       }
-      fieldsDataDir(ds, msgData, parserConfig, dirProperty, innerMsgContentFields);
+      fieldsDataDir(ds, msgData, parserConfig, dirProperty, innerMsgContentFields, "sub");
       fields.innerMsgContentFields = innerMsgContentFields;
       fields.innerMsgContent = true;
     }
   }
 }
 
-function fieldsDataDocument(ds: DataStream, msgData: MsgData, documentProperty: Property, fields: FieldsData): void {
-  var value = documentProperty.name.substring(12).toLowerCase();
-  var fieldClass = value.substring(0, 4);
-  var fieldType = value.substring(4, 8);
+function fieldsDataDocument(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig, documentProperty: Property, fields: FieldsData): void {
+  const value = documentProperty.name.substring(12).toLowerCase();
+  const fieldClass = value.substring(0, 4);
+  const fieldType = value.substring(4, 8);
 
-  var fieldName = CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
+  parserConfig.propertyObserver(
+    fields,
+    parseInt(value.substring(0, 8), 16),
+    getFieldRawData(ds, msgData, documentProperty)
+  )
+
+  const fieldName = CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
 
   if (fieldName) {
     fields[fieldName] = getFieldValue(ds, msgData, documentProperty, fieldType);
@@ -476,15 +507,55 @@ function fieldsDataDocument(ds: DataStream, msgData: MsgData, documentProperty: 
   }
 }
 
-function fieldsRecipProperties(ds: DataStream, msgData: MsgData, documentProperty: Property, fields: FieldsData): void {
-  const propertiesBinary: Uint8Array = getFieldValue(ds, msgData, documentProperty, "0102");
-  const propertiesDs = new DataStream(propertiesBinary, 0, DataStream.LITTLE_ENDIAN);
+function fileTimeToUnixEpoch(time: number) {
+  return (time - 116444736000000000) / 10000;
+}
+
+function fieldsRootProperties(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig, documentProperty: Property, fields: FieldsData): void {
+  const propertiesBinary: Uint8Array = getFieldRawData(ds, msgData, documentProperty);
+  const propertiesDs = new DataStream(propertiesBinary, 32, DataStream.LITTLE_ENDIAN);
 
   // See: [MS-OXMSG]: Outlook Item (.msg) File Format, 2.4 Property Stream
   // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
 
-  propertiesDs.readUint32();
-  propertiesDs.readUint32();
+  const typeConverters = {
+    0x0040: (dataView: DataView) => {
+      const fileTime = dataView.getUint32(0, true) + (4294967296.0 * dataView.getUint32(4, true));
+      return new Date(fileTimeToUnixEpoch(fileTime)).toUTCString();
+    },
+  };
+  const names = {
+    0x0039: 'clientSubmitTime',
+    0x0E06: 'messageDeliveryTime',
+    0x3007: 'creationTime',
+    0x3008: 'lastModificationTime',
+  };
+
+  while (!propertiesDs.isEof()) {
+    const propertyTag = propertiesDs.readUint32();
+    const flags = propertiesDs.readUint32();
+
+    const arr = propertiesDs.readUint8Array(8);
+    const dataView = new DataView(arr.buffer);
+
+    parserConfig.propertyObserver(fields, propertyTag, arr);
+
+    const typeConverter = typeConverters[propertyTag & 0xFFFF];
+    if (typeConverter) {
+      const name = names[(propertyTag / 65536) & 0xFFFF];
+      if (name) {
+        fields[name] = typeConverter(dataView);
+      }
+    }
+  }
+}
+
+function fieldsRecipProperties(ds: DataStream, msgData: MsgData, parserConfig: ParserConfig, documentProperty: Property, fields: FieldsData): void {
+  const propertiesBinary: Uint8Array = getFieldRawData(ds, msgData, documentProperty);
+  const propertiesDs = new DataStream(propertiesBinary, 8, DataStream.LITTLE_ENDIAN);
+
+  // See: [MS-OXMSG]: Outlook Item (.msg) File Format, 2.4 Property Stream
+  // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
 
   const PtypInteger32 = 0x0003;
   const PidTagRecipientType = 0x0C150003;
@@ -502,6 +573,9 @@ function fieldsRecipProperties(ds: DataStream, msgData: MsgData, documentPropert
       propertiesDs.readUint32();
       propertiesDs.readUint32();
     }
+
+    parserConfig.propertyObserver(fields, propertyTag, new Uint8Array(8));
+
     if (propertyTag === PidTagRecipientType) {
       const MAPI_TO = 1;
       const MAPI_CC = 2;
@@ -520,15 +594,15 @@ function fieldsRecipProperties(ds: DataStream, msgData: MsgData, documentPropert
 }
 
 function getFieldType(fieldProperty: Property): string {
-  var value = fieldProperty.name.substring(12).toLowerCase();
+  const value = fieldProperty.name.substring(12).toLowerCase();
   return value.substring(4, 8);
 }
 
 // extractor structure to manage bat/sbat block types and different data types
-var extractorFieldValue = {
+const extractorFieldValue = {
   sbat: {
     'extractor': function extractDataViaSbat(ds: DataStream, msgData: MsgData, fieldProperty: Property, dataTypeExtractor: (ds: DataStream, msgData: MsgData, blockStartOffset: number, bigBlockOffset: number, blockSize: number) => any) {
-      var chain = getChainByBlockSmall(ds, msgData, fieldProperty);
+      const chain = getChainByBlockSmall(ds, msgData, fieldProperty);
       if (chain.length == 1) {
         return readDataByBlockSmall(ds, msgData, fieldProperty.startBlock, fieldProperty.sizeBlock, dataTypeExtractor);
       } else if (chain.length > 1) {
@@ -553,7 +627,7 @@ var extractorFieldValue = {
   },
   bat: {
     'extractor': function extractDataViaBat(ds: DataStream, msgData: MsgData, fieldProperty: Property, dataTypeExtractor: (ds: DataStream, fieldProperty: Property) => any) {
-      var offset = getBlockOffsetAt(msgData, fieldProperty.startBlock);
+      const offset = getBlockOffsetAt(msgData, fieldProperty.startBlock);
       ds.seek(offset);
       return dataTypeExtractor(ds, fieldProperty);
     },
@@ -572,37 +646,37 @@ var extractorFieldValue = {
 };
 
 function readDataByBlockSmall(ds: DataStream, msgData: MsgData, startBlock: number, blockSize: number, dataTypeExtractor: (ds: DataStream, msgData: MsgData, blockStartOffset: number, bigBlockOffset: number, blockSize: number) => any) {
-  var byteOffset = startBlock * CONST.MSG.SMALL_BLOCK_SIZE;
-  var bigBlockNumber = Math.floor(byteOffset / msgData.bigBlockSize);
-  var bigBlockOffset = byteOffset % msgData.bigBlockSize;
+  const byteOffset = startBlock * CONST.MSG.SMALL_BLOCK_SIZE;
+  const bigBlockNumber = Math.floor(byteOffset / msgData.bigBlockSize);
+  const bigBlockOffset = byteOffset % msgData.bigBlockSize;
 
-  var rootProp = msgData.propertyData[0];
+  const rootProp = msgData.propertyData[0];
 
-  var nextBlock = rootProp.startBlock;
-  for (var i = 0; i < bigBlockNumber; i++) {
+  let nextBlock = rootProp.startBlock;
+  for (let i = 0; i < bigBlockNumber; i++) {
     nextBlock = getNextBlock(ds, msgData, nextBlock);
   }
-  var blockStartOffset = getBlockOffsetAt(msgData, nextBlock);
+  const blockStartOffset = getBlockOffsetAt(msgData, nextBlock);
 
   return dataTypeExtractor(ds, msgData, blockStartOffset, bigBlockOffset, blockSize);
 }
 
 function readChainDataByBlockSmall(ds: DataStream, msgData: MsgData, fieldProperty: Property, chain: number[], dataTypeExtractor: (ds: DataStream, msgData: MsgData, blockStartOffset: number, bigBlockOffset: number, blockSize: number) => any) {
-  var resultData = new Int8Array(fieldProperty.sizeBlock);
+  const resultData = new Int8Array(fieldProperty.sizeBlock);
 
-  for (var i = 0, idx = 0; i < chain.length; i++) {
-    var data = readDataByBlockSmall(ds, msgData, chain[i], CONST.MSG.SMALL_BLOCK_SIZE, extractorFieldValue.sbat.dataType.binary);
-    for (var j = 0; j < data.length; j++) {
+  for (let i = 0, idx = 0; i < chain.length; i++) {
+    const data = readDataByBlockSmall(ds, msgData, chain[i], CONST.MSG.SMALL_BLOCK_SIZE, extractorFieldValue.sbat.dataType.binary);
+    for (let j = 0; j < data.length; j++) {
       resultData[idx++] = data[j];
     }
   }
-  var localDs = new DataStream(resultData, 0, DataStream.LITTLE_ENDIAN);
+  const localDs = new DataStream(resultData, 0, DataStream.LITTLE_ENDIAN);
   return dataTypeExtractor(localDs, msgData, 0, 0, fieldProperty.sizeBlock);
 }
 
 function getChainByBlockSmall(ds: DataStream, msgData: MsgData, fieldProperty: Property): number[] {
-  var blockChain = [];
-  var nextBlockSmall = fieldProperty.startBlock;
+  const blockChain = [];
+  let nextBlockSmall = fieldProperty.startBlock;
   while (nextBlockSmall != CONST.MSG.END_OF_CHAIN) {
     blockChain.push(nextBlockSmall);
     nextBlockSmall = getNextBlockSmall(ds, msgData, nextBlockSmall);
@@ -611,7 +685,7 @@ function getChainByBlockSmall(ds: DataStream, msgData: MsgData, fieldProperty: P
 }
 
 function getFieldValue(ds: DataStream, msgData: MsgData, fieldProperty: Property, type: string): any {
-  var value = null;
+  let value = null;
 
   if (fieldProperty.sizeBlock < CONST.MSG.BIG_BLOCK_MIN_DOC_SIZE) {
     const valueExtractor
@@ -638,22 +712,7 @@ function getFieldValue(ds: DataStream, msgData: MsgData, fieldProperty: Property
 }
 
 function getFieldRawData(ds: DataStream, msgData: MsgData, fieldProperty: Property): Uint8Array {
-  if (fieldProperty.sizeBlock < CONST.MSG.BIG_BLOCK_MIN_DOC_SIZE) {
-    const valueExtractor
-      = extractorFieldValue.sbat;
-    const dataTypeExtractor: (ds: DataStream, msgData: MsgData, blockStartOffset: number, bigBlockOffset: number, blockSize: number) => any
-      = valueExtractor.dataType['binary'];
-
-    return valueExtractor.extractor(ds, msgData, fieldProperty, dataTypeExtractor);
-  }
-  else {
-    const valueExtractor
-      = extractorFieldValue.bat;
-    const dataTypeExtractor: (ds: DataStream, fieldProperty: Property) => any
-      = valueExtractor.dataType['binary'];
-
-    return valueExtractor.extractor(ds, msgData, fieldProperty, dataTypeExtractor);
-  }
+  return getFieldValue(ds, msgData, fieldProperty, '0102');
 }
 
 export default class MsgReader {
@@ -686,9 +745,9 @@ export default class MsgReader {
     @return {Object} The attachment for specific attachment key
     */
   getAttachment(attach: number | FieldsData): { fileName: string; content: Uint8Array } {
-    var attachData = typeof attach === 'number' ? this.fileData.fieldsData.attachments[attach] : attach;
-    var fieldProperty = this.fileData.propertyData[attachData.dataId];
-    var fieldData = getFieldValue(this.ds, this.fileData, fieldProperty, getFieldType(fieldProperty));
+    const attachData = typeof attach === 'number' ? this.fileData.fieldsData.attachments[attach] : attach;
+    const fieldProperty = this.fileData.propertyData[attachData.dataId];
+    const fieldData = getFieldValue(this.ds, this.fileData, fieldProperty, getFieldType(fieldProperty));
 
     return { fileName: attachData.fileName, content: fieldData };
   }

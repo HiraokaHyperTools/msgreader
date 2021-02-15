@@ -102,25 +102,22 @@ program
     const testMsg = new MsgReader(msgFileBuffer)
     let msgIndex = 0
     testMsg.parserConfig = {
-      propertyObserver: (fields, subClass, fileName, raw) => {
+      propertyObserver: (fields, tag, raw) => {
         if (fields.msgIndex === undefined) {
-          fields.msgIndex = msgIndex++
+          fields.msgIndex = msgIndex++;
         }
         if (fields.dataType === "msg") {
-          if (fileName.startsWith("__substg1.0_")) {
-            // __substg1.0_003B0102
-            const key = fileName.substr(12, 8)
-            const prop = props.filter(it => it.key === key).shift()
-            const type = typeNames[parseInt(key.substr(4), 16)]
-            console.info(
-              "msgIdx:", fields.msgIndex,
-              "tag:", `0x${key}`,
-              "name:", prop && prop.name || null,
-              "type:", type && type || null,
-              "size:", raw && raw.byteLength,
-              "data:", options.printRawData ? raw : undefined,
-            )
-          }
+          const key = tag.toString(16).padStart(8, "0").toUpperCase();
+          const prop = props.filter(it => it.key === key).shift();
+          const type = typeNames[parseInt(key.substr(4), 16)];
+          console.info(
+            "msgIdx:", fields.msgIndex,
+            "tag:", `0x${key}`,
+            "name:", prop && prop.name || null,
+            "type:", type && type || null,
+            "size:", raw && raw.byteLength,
+            "data:", options.printRawData ? raw : undefined,
+          )
         }
       }
     }

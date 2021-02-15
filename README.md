@@ -138,3 +138,33 @@ C:\Proj\msgreader>dir test2
 C:\Proj\msgreader>type test2\A.txt
 attach test
 ```
+
+Checking date times from `sent.msg`:
+
+```bat
+node cli parse test\sent.msg
+
+{
+  dataType: 'msg',
+  attachments: [],
+  recipients: [
+    {
+      dataType: 'recipient',
+      name: "'xmailuser@xmailserver.test'",
+      email: 'xmailuser@xmailserver.test',
+      recipType: 'to'
+    }
+  ],
+  senderEmail: 'xmailuser@xmailserver.test',
+  subject: 'Sent time',
+  body: 'Test mail\r\n\r\n',
+  senderName: 'xmailuser',
+  compressedRtf: Uint8Array(1409) [
+    ...
+  ],
+  creationTime: 'Mon, 15 Feb 2021 08:19:21 GMT',
+  lastModificationTime: 'Mon, 15 Feb 2021 08:19:21 GMT',
+  clientSubmitTime: 'Mon, 15 Feb 2021 08:19:04 GMT',
+  messageDeliveryTime: 'Mon, 15 Feb 2021 08:19:00 GMT'
+}
+```

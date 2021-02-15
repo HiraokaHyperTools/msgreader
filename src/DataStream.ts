@@ -15,17 +15,16 @@ export default class DataStream {
   _buffer: ArrayBuffer;
   _dataView: DataView;
 
-  constructor(arrayBuffer: ArrayBuffer | DataView, byteOffset: number | null, endianness: boolean | null) {
+  constructor(arrayBuffer: ArrayBuffer | DataView | Uint8Array | Int8Array, byteOffset: number | null, endianness: boolean | null) {
     this._byteOffset = byteOffset || 0;
     if (arrayBuffer instanceof ArrayBuffer) {
       this.buffer = arrayBuffer;
-    } else if (typeof arrayBuffer == "object") {
-      this.dataView = arrayBuffer as DataView;
-      if (byteOffset) {
-        this._byteOffset += byteOffset;
-      }
+    } else if (arrayBuffer instanceof DataView) {
+      this.dataView = arrayBuffer;
+    } else if (arrayBuffer && arrayBuffer.buffer instanceof ArrayBuffer) {
+      this.buffer = arrayBuffer.buffer;
     } else {
-      this.buffer = new ArrayBuffer(arrayBuffer || 1);
+      throw new Error("Unknown arrayBuffer");
     }
     this.position = 0;
     this.endianness = endianness == null ? DataStream.LITTLE_ENDIAN : endianness;
@@ -964,7 +963,7 @@ export default class DataStream {
   static flipArrayEndianness(array) {
     var u8 = new Uint8Array(array.buffer, array.byteOffset, array.byteLength);
     for (var i = 0; i < array.byteLength; i += array.BYTES_PER_ELEMENT) {
-      for (var j = i + array.BYTES_PER_ELEMENT - 1, k = i; j > k; j-- , k++) {
+      for (var j = i + array.BYTES_PER_ELEMENT - 1, k = i; j > k; j--, k++) {
         var tmp = u8[k];
         u8[k] = u8[j];
         u8[j] = tmp;

@@ -5,3 +5,4 @@ test/
 MEMO.md
 tsconfig.json
 .babelrc
+azure-pipelines.yml
