@@ -287,12 +287,16 @@ interface SomeOxProps {
   /**
    * Contains the subject of the email message.
    * 
+   * Target dataType = 'msg'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0037-PidTagSubject.md
    */
   subject?: string;
 
   /**
    * Contains the display name of the sending mailbox owner.
+   * 
+   * Target dataType = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1A-PidTagSenderName.md
    */
@@ -301,12 +305,16 @@ interface SomeOxProps {
   /**
    * Contains the email address of the sending mailbox owner.
    * 
+   * Target dataType = 'msg'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1F-PidTagSenderEmailAddress.md
    */
   senderEmail?: string;
 
   /**
    * Contains message body text in plain text format.
+   * 
+   * Target dataType = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1000-PidTagBody.md
    */
@@ -315,12 +323,16 @@ interface SomeOxProps {
   /**
    * Contains transport-specific message envelope information for email.
    * 
+   * Target dataType = 'msg'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/007D-PidTagTransportMessageHeaders.md
    */
   headers?: string;
 
   /**
    * Contains message body text in compressed RTF format.
+   * 
+   * Target dataType = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1009-PidTagRtfCompressed.md
    */
@@ -329,28 +341,44 @@ interface SomeOxProps {
   /**
    * Contains a file name extension that indicates the document type of an attachment.
    * 
+   * Target dataType = 'attachment'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3703-PidTagAttachExtension.md
    */
   extension?: string;
 
+  /**
+   * Contains an attachment's base file name and extension, excluding path.
+   * 
+   * Target dataType = 'attachment'.
+   * 
+   * @see https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachfilename-canonical-property
+   */
   fileNameShort?: string;
 
   /**
-   * Contains the full filename and extension of the Attachment object.
+   * Contains an attachment's long filename and extension, excluding path.
    * 
+   * Target dataType = 'attachment'.
+   * 
+   * @see https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachlongfilename-canonical-property
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3707-PidTagAttachLongFilename.md
    */
   fileName?: string;
 
   /**
    * Contains a content identifier unique to the Message object that matches a
-   * 
+
+   * Target dataType = 'attachment'.
+  * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3712-PidTagAttachContentId.md
    */
   pidContentId?: string;
 
   /**
    * Contains the display name of the folder.
+   * 
+   * Target dataType = 'recipient'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3001-PidTagDisplayName.md
    */
@@ -359,12 +387,16 @@ interface SomeOxProps {
   /**
    * Contains the email address of a Message object.
    * 
+   * Target dataType = 'recipient'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3003-PidTagEmailAddress.md
    */
   email?: string;
 
   /**
    * Contains the time, in UTC, that the object was created.
+   * 
+   * Target dataType = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3007-PidTagCreationTime.md
    */
@@ -373,12 +405,16 @@ interface SomeOxProps {
   /**
    * Contains the time, in UTC, of the last modification to the object.
    * 
+   * Target dataType = 'msg'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3008-PidTagLastModificationTime.md
    */
   lastModificationTime?: string;
 
   /**
    * Contains the current time, in UTC, when the email message is submitted.
+   * 
+   * Target dataType = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0039-PidTagClientSubmitTime.md
    */
@@ -387,9 +423,40 @@ interface SomeOxProps {
   /**
    * Specifies the time (in UTC) when the server received the message.
    * 
+   * Target dataType = 'msg'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0E06-PidTagMessageDeliveryTime.md
    */
   messageDeliveryTime?: string;
+
+  /**
+   * This undocumented `creatorSMTPAddress` will be attached
+   * when you send a mail via Exchange Online server.
+   * 
+   * Target dataType = 'msg'.
+   * 
+   * @see https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols
+   */
+  creatorSMTPAddress?: string;
+
+  /**
+   * This undocumented `lastModifierSMTPAddress` will be attached
+   * when you send a mail via Exchange Online server.
+   * 
+   * Target dataType = 'msg'.
+   * 
+   * @see https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols
+   */
+  lastModifierSMTPAddress?: string;
+
+  /**
+   * Contains the SMTP address of the Message object.
+   * 
+   * Target dataType = 'recipient'.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/39FE-PidTagSmtpAddress.md
+   */
+  smtpAddress?: string;
 }
 
 interface SomeParsedOxProps {
