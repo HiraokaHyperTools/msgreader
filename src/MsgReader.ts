@@ -457,6 +457,19 @@ interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/39FE-PidTagSmtpAddress.md
    */
   smtpAddress?: string;
+
+  /**
+   * Contains the name of the last mail user to change the Message object.
+   * 
+   * A email address may be stored in `lastModifierName`, if it was sent through Exchange Server.
+   * 
+   * `lastModifierSMTPAddress` or `smtpAddress` may not be stored in some cases.
+   * 
+   * Target dataType = 'msg'.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FFA-PidTagLastModifierName.md
+   */
+   lastModifierName?: string;
 }
 
 interface SomeParsedOxProps {

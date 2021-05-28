@@ -62,6 +62,7 @@ export default {
         '1000': 'body',
         '007d': 'headers',
         '1009': 'compressedRtf',
+        '3ffa': 'lastModifierName',
         // attachment specific
         '3703': 'extension',
         '3704': 'fileNameShort',
