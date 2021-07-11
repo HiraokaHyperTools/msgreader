@@ -2,6 +2,7 @@ const program = require('commander');
 
 const MsgReader = require('./lib/MsgReader').default;
 const { props, typeNames } = require('./lib/Defs');
+const { Store } = require('./lib/CFBF');
 
 const fs = require('fs');
 const path = require('path');
@@ -122,6 +123,19 @@ program
       }
     }
     const testMsgInfo = testMsg.getFileData()
+  });
+
+program
+  .command('try <msgFilePath>')
+  .description('Test CFBF')
+  .action((msgFilePath, options) => {
+    const msgFileBuffer = fs.readFileSync(msgFilePath);
+    const store = new Store(msgFileBuffer);
+    store.parse();
+    console.log(store.propertyData);
+    store.readProperty(store.propertyData[2]);
+    store.readProperty(store.propertyData[27]);
+    store.readProperty(store.propertyData[32]);
   });
 
 program

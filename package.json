@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "@kenjiuno/decompressrtf": "^0.1.3",
-    "@kenjiuno/iconvlite-wrapper-with-iso2022jp": "^0.1.0"
+    "@kenjiuno/iconvlite-wrapper-with-iso2022jp": "^0.1.0",
+    "cfb": "^1.2.0"
   },
   "resolutions": {
     "browserslist": "4.16.6"
