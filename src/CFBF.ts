@@ -11,9 +11,7 @@ enum TypeEnum {
     ROOT = 5,
 }
 
-class Property {
-    index: number;
-
+export interface Property {
     type: TypeEnum;
     name: string;
     previousProperty: number;
@@ -24,7 +22,7 @@ class Property {
     children?: number[];
 }
 
-export class Store {
+export class Reader {
     ds: DataStream;
     bigBlockSize: number;
     bigBlockLength: number;
@@ -70,13 +68,12 @@ export class Store {
         if (nameLength < 1) {
             return '';
         } else {
-            return this.ds.readStringAt(offset, nameLength / 2);
+            return this.ds.readStringAt(offset, nameLength / 2).split('\0')[0];
         }
     }
 
-    private convertProperty(index: number, offset: number): Property {
+    private convertProperty(offset: number): Property {
         return {
-            index: index,
             type: this.ds.readByte(offset + CONST.MSG.PROP.TYPE_OFFSET),
             name: this.convertName(offset),
             // hierarchy
@@ -103,7 +100,7 @@ export class Store {
                 case CONST.MSG.PROP.TYPE_ENUM.ROOT:
                 case CONST.MSG.PROP.TYPE_ENUM.DIRECTORY:
                 case CONST.MSG.PROP.TYPE_ENUM.DOCUMENT:
-                    props.push(this.convertProperty(i, propertyOffset));
+                    props.push(this.convertProperty(propertyOffset));
                     break;
             }
 
