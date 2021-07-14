@@ -22,6 +22,14 @@ export interface Property {
     children?: number[];
 }
 
+interface CFolder {
+    name: string;
+
+    subFolders(): CFolder[];
+    fileNames(): string[];
+    readFile(fileName: string): Uint8Array | null;
+}
+
 export class Reader {
     ds: DataStream;
     bigBlockSize: number;
@@ -299,5 +307,51 @@ export class Reader {
             this.ds.seek(offset);
             return this.ds.readUint8Array(fieldProperty.sizeBlock);
         }
+    }
+
+    private folderOf(index: number): CFolder | null {
+        const { propertyData } = this;
+        if (!propertyData) {
+            return null;
+        }
+        const folder = propertyData[index];
+        return {
+            name: folder.name,
+            fileNames: () => {
+                const { children } = folder;
+                if (children) {
+                    return children
+                        .map(subIndex => propertyData[subIndex])
+                        .filter(it => it.type === TypeEnum.DOCUMENT)
+                        .map(it => it.name);
+                }
+                return [];
+            },
+            subFolders: () => {
+                const { children } = folder;
+                if (children) {
+                    return children
+                        .filter(subIndex => propertyData[subIndex].type == TypeEnum.DIRECTORY)
+                        .map(subIndex => this.folderOf(subIndex));
+                }
+                return [];
+            },
+            readFile: (fileName) => {
+                const { children } = folder;
+                if (children) {
+                    for (let subIndex of children) {
+                        const file = propertyData[subIndex];
+                        if (file && file.type === TypeEnum.DOCUMENT && file.name === fileName) {
+                            return this.readProperty(file);
+                        }
+                    }
+                }
+                return null;
+            },
+        }
+    }
+
+    rootFolder(): CFolder {
+        return this.folderOf(0);
     }
 }

@@ -132,10 +132,7 @@ program
     const msgFileBuffer = fs.readFileSync(msgFilePath);
     const store = new Reader(msgFileBuffer);
     store.parse();
-    console.log(store.propertyData);
-    store.readProperty(store.propertyData[2]);
-    store.readProperty(store.propertyData[27]);
-    store.readProperty(store.propertyData[32]);
+    console.info(store.rootFolder().fileNames());
   });
 
 program
