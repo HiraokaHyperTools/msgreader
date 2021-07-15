@@ -138,7 +138,7 @@ class LiteBurner {
 
         this.liteEnts[0].firstSector = firstMiniDataSector;
 
-        const firstFatSector = this.fat.allocateAs(RoundUpto512(4 * this.fat.count()) / 512, -3);
+        const firstFatSector = this.fat.allocateAs(RoundUpto512(4 * (this.fat.count() + this.fat.count() / 128 + this.fat.count() / (128 * 109))) / 512, -3);
         const numFatSectors = this.fat.count() - firstFatSector;
 
         const numDifatSectors = (numFatSectors > 109)

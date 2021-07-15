@@ -16,6 +16,7 @@ function removeCompressedRtf(msg) {
 
 
 const assert = require('assert');
+const { TypeEnum } = require('../lib/Reader');
 describe('MsgReader', function () {
   const MsgReader = require('../lib/MsgReader').default;
 
@@ -525,6 +526,52 @@ describe('MsgReader', function () {
   });
 });
 
+
+describe('Burner', function () {
+  const burn = require('../lib/Burner').burn;
+  const Reader = require('../lib/Reader').Reader;
+
+  const test = (x) => {
+    const array = burn([
+      {
+        name: "Root Entry",
+        type: TypeEnum.ROOT,
+        length: 0,
+        children: [1],
+      },
+      {
+        name: "file",
+        type: TypeEnum.DOCUMENT,
+        length: x,
+        binaryProvider: () => new Uint8Array(x),
+      }
+    ]);
+
+    const reader = new Reader(array);
+    reader.parse();
+  };
+
+  it('known boundary test', function () {
+    test(64513);
+    test(129537);
+  });
+
+  it.skip('sequential boundary test', function () {
+    this.timeout(1000 * 60 * 60);
+    //64513
+    //129537
+    // 129K 6sec
+    //   1M 4min
+    for (let x = 1024 * 1024; x < 9 * 1024 * 1024; x++) {
+      try {
+        test(x);
+      }
+      catch (ex) {
+        throw new Error(`${x}`);
+      }
+    }
+  });
+});
 
 describe('DataStream', function () {
   const DataStream = require('../lib/DataStream').default;
