@@ -35,6 +35,14 @@ function RoundUpto64(bytes: number) {
     return (bytes + 63) & (~63);
 }
 
+function repeatValue(value: number, count: number): number[] {
+    const array = [];
+    for (let x = 0; x < count; x++) {
+        array.push(value);
+    }
+    return array;
+}
+
 class LiteFat {
     sectors: number[];
 
@@ -47,6 +55,14 @@ class LiteFat {
         for (let x = 0; x < count; x++) {
             const next = (x + 1 === count) ? -2 : first + x + 1;
             this.sectors.push(next);
+        }
+        return first;
+    }
+
+    allocateAs(count: number, value: number): number {
+        const first = this.sectors.length;
+        for (let x = 0; x < count; x++) {
+            this.sectors.push(value);
         }
         return first;
     }
@@ -71,7 +87,7 @@ class LiteBurner {
     array: ArrayBuffer;
 
     constructor(entries: Entry[]) {
-        this.fat = new LiteFat([-3]);
+        this.fat = new LiteFat([]);
         this.miniFat = new LiteFat([]);
 
         this.liteEnts = entries
@@ -122,15 +138,31 @@ class LiteBurner {
 
         this.liteEnts[0].firstSector = firstMiniDataSector;
 
+        const firstFatSector = this.fat.allocateAs(RoundUpto512(4 * this.fat.count()) / 512, -3);
+        const numFatSectors = this.fat.count() - firstFatSector;
+
+        const numDifatSectors = (numFatSectors > 109)
+            ? RoundUpto512(4 * (numFatSectors - 109)) / 512
+            : 0;
+
+        const firstDifatSector = (numDifatSectors !== 0)
+            ? this.fat.allocateAs(numDifatSectors, -4)
+            : -2;
+
         const array = new ArrayBuffer(512 * (1 + this.fat.count()));
         const ds = new DataStream(array, 0, DataStream.LITTLE_ENDIAN);
         ds.dynamicSize = false;
 
-        if (this.fat.finalize(512 / 4).count() > 128) {
-            throw new Error("FAT overflowed!");
-        }
-
         this.miniFat.finalize(512 / 4);
+
+        const difat1 = [];
+        const difat2 = [];
+
+        {
+            for (let x = 0; x < numFatSectors; x++) {
+                ((x < 109) ? difat1 : difat2).push(firstFatSector + x);
+            }
+        }
 
         // header
 
@@ -145,26 +177,24 @@ class LiteBurner {
             ds.writeUint16(6); //ushort MiniSectorShift
 
             ds.seek(0x2C);
-            ds.writeInt32(1); //int32 NumberOfFATSectors
+            ds.writeInt32(numFatSectors); //int32 NumberOfFATSectors
             ds.writeInt32(entriesFirstSector); //int32 FirstDirectorySectorLocation
 
             ds.seek(0x38);
             ds.writeInt32(4096); //int32 MiniStreamCutoffSize
             ds.writeInt32(firstMiniFatSector); //int32 FirstMiniFATSectorLocation
             ds.writeInt32(numMiniFatSectors); //int32 NumberOfMiniFATSectors
-            ds.writeInt32(-2); //int32 FirstDIFATSectorLocation
+            ds.writeInt32(firstDifatSector); //int32 FirstDIFATSectorLocation
+            ds.writeInt32(numDifatSectors); //int32 NumberOfDIFATSectors
 
-            ds.seek(0x4C);
-            ds.writeInt32(0); //int32 DIFAT[0]
-            for (let x = 1; x < 109; x++) {
+            let x = 0;
+            for (; x < difat1.length; x++) {
+                ds.writeInt32(difat1[x]); //int32 DIFAT[x]
+            }
+            for (; x < 109; x++) {
                 ds.writeInt32(-1); //int32 DIFAT[x]
             }
         }
-
-        // fat
-
-        ds.seek(512 * (1));
-        ds.writeInt32Array(this.fat.sectors);
 
         // entries
 
@@ -224,6 +254,18 @@ class LiteBurner {
 
         ds.seek(512 * (1 + firstMiniFatSector));
         ds.writeInt32Array(this.miniFat.sectors);
+
+        // fat
+
+        ds.seek(512 * (1 + firstFatSector));
+        ds.writeInt32Array(this.fat.sectors);
+
+        // difat
+
+        if (numDifatSectors >= 1) {
+            ds.seek(512 * (1 + firstDifatSector));
+            ds.writeInt32Array(difat2);
+        }
 
         this.array = array;
     }
