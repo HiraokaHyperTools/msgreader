@@ -27,11 +27,6 @@ class ParserConfig {
   propertyObserver?: (fields: FieldsData, tag: number, raw: Uint8Array | null) => void;
 }
 
-interface MsgData {
-  fieldsData?: FieldsData;
-  propertyData?: Property[];
-}
-
 /**
  * CONST.MSG.PROP.TYPE_ENUM
  */
@@ -256,6 +251,7 @@ interface FieldsData extends SomeOxProps, SomeParsedOxProps {
   dataType: null | "msg" | "attachment" | "recipient";
   contentLength?: number;
   dataId?: number;
+  folderId?: number;
   innerMsgContent?: true;
   innerMsgContentFields?: FieldsData;
   attachments?: FieldsData[];
@@ -298,7 +294,7 @@ export default class MsgReader {
     const fieldClass = value.substring(0, 4);
     const fieldType = value.substring(4, 8);
 
-    parserConfig.propertyObserver(
+    parserConfig.propertyObserver && parserConfig.propertyObserver(
       fields,
       parseInt(value.substring(0, 8), 16),
       documentProperty.provider()
@@ -354,7 +350,7 @@ export default class MsgReader {
         this.fieldsDataDir(parserConfig, dirProperty, rootFolder, innerMsgContentFields, "sub");
         fields.innerMsgContentFields = innerMsgContentFields;
         fields.innerMsgContent = true;
-        fields.dataId = dirProperty.dataId;
+        fields.folderId = dirProperty.dataId;
 
         this.innerMsgBurners[dirProperty.dataId] = () => this.burnMsg(dirProperty, rootFolder);
       }
@@ -376,13 +372,14 @@ export default class MsgReader {
 
   private registerFolder(entries: Entry[], index: number, folder: CFolder, rootFolder: CFolder, depth: number): void {
     for (let set of folder.fileNameSets()) {
-      let { provider } = set;
+      let { provider, length } = set;
       if (depth === 0 && set.name === "__properties_version1.0") {
         const src = provider();
         const dst = new Uint8Array(src.length + 8);
         dst.set(src.subarray(0, 24), 0);
         dst.set(src.subarray(24), 32);
         provider = () => dst;
+        length = dst.length;
       }
       const subIndex = entries.length;
       entries[index].children.push(subIndex);
@@ -391,7 +388,7 @@ export default class MsgReader {
           name: set.name,
           type: TypeEnum.DOCUMENT,
           binaryProvider: provider,
-          length: set.length,
+          length: length,
         }
       );
     }
@@ -582,9 +579,9 @@ export default class MsgReader {
     */
   getAttachment(attach: number | FieldsData): { fileName: string; content: Uint8Array } {
     const attachData = typeof attach === 'number' ? this.fieldsData.attachments[attach] : attach;
-    if (attachData.innerMsgContent === true && typeof attachData.dataId === "number") {
+    if (attachData.innerMsgContent === true && typeof attachData.folderId === "number") {
       // inner msg
-      return { fileName: attachData.fileName, content: this.innerMsgBurners[attachData.dataId]() };
+      return { fileName: attachData.fileName, content: this.innerMsgBurners[attachData.folderId]() };
     }
     else {
       // raw attachment file

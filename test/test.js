@@ -26,6 +26,7 @@ describe('MsgReader', function () {
     removeCompressedRtf(testMsgInfo);
     it('exact match with pre rendered data (except on compressedRtf)', function () {
       assert.deepStrictEqual(
+        testMsgInfo,
         {
           "dataType": "msg",
           "attachments": [],
@@ -49,8 +50,7 @@ describe('MsgReader', function () {
           "creationTime": "Tue, 05 Mar 2019 07:22:33 GMT",
           "lastModificationTime": "Tue, 05 Mar 2019 07:22:33 GMT",
           "messageDeliveryTime": "Tue, 05 Mar 2019 07:22:17 GMT"
-        },
-        testMsgInfo
+        }
       );
     });
   });
@@ -64,6 +64,7 @@ describe('MsgReader', function () {
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
       assert.deepStrictEqual(
+        testMsgInfo,
         {
           "dataType": "msg",
           "attachments": [{
@@ -78,22 +79,21 @@ describe('MsgReader', function () {
           "compressedRtf": undefined,
           "recipients": [],
           "body": " \r\n",
-          "subject": null,
+          "subject": "",
           "creationTime": "Tue, 05 Mar 2019 07:41:09 GMT",
           "lastModificationTime": "Tue, 05 Mar 2019 07:41:09 GMT",
           "messageDeliveryTime": "Tue, 05 Mar 2019 07:41:04 GMT"
-        },
-        testMsgInfo
+        }
       );
     });
 
     it('verify attachment: A.txt', function () {
       assert.deepStrictEqual(
+        testMsgAttachment0,
         {
           fileName: 'A.txt',
           content: new Uint8Array([97, 116, 116, 97, 99, 104, 32, 116, 101, 115, 116])
-        },
-        testMsgAttachment0
+        }
       );
     });
   });
@@ -103,14 +103,18 @@ describe('MsgReader', function () {
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
     removeCompressedRtf(testMsgInfo);
+    const testMsgAttachment0 = testMsg.getAttachment(0);
+    const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
       assert.deepStrictEqual(
+        testMsgInfo,
         {
           "dataType": "msg",
           "attachments": [
             {
               "dataType": "attachment",
+              "folderId": 38,
               "name": "Microsoft Outlook テスト メッセージ",
               "innerMsgContentFields": {
                 "dataType": "msg",
@@ -149,8 +153,42 @@ describe('MsgReader', function () {
           "creationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
           "lastModificationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
           "messageDeliveryTime": "Thu, 10 Sep 2020 10:18:08 GMT"
-        },
-        testMsgInfo
+        }
+      );
+    });
+
+    it('testMsgAttachment0 === testMsgAttachments0', function () {
+      assert.deepStrictEqual(testMsgAttachment0, testMsgAttachments0);
+    });
+
+    it('re-parse and verify inner testMsgAttachments0', function () {
+      const subReader = new MsgReader(testMsgAttachments0.content);
+      const subInfo = subReader.getFileData();
+      removeCompressedRtf(subInfo);
+
+      assert.deepStrictEqual(
+        subInfo,
+        {
+          "dataType": "msg",
+          "attachments": [],
+          "compressedRtf": undefined,
+          "recipients": [
+            {
+              "dataType": "recipient",
+              "name": "xmailuser",
+              "email": "xmailuser@xmailserver.test",
+              "recipType": "to"
+            }
+          ],
+          "subject": "Microsoft Outlook テスト メッセージ",
+          "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:56695)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tTue, 12 May 2020 14:45:17 +0900\r\nFrom: Microsoft Outlook <xmailuser@xmailserver.test>\r\nTo: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>\r\nSubject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=\r\nMIME-Version: 1.0\r\nContent-Type: text/html;\r\n    charset=\"utf-8\"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
+          "senderName": "Microsoft Outlook",
+          "senderEmail": "xmailuser@xmailserver.test",
+          "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
+          "creationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
+          "lastModificationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
+          "messageDeliveryTime": "Tue, 12 May 2020 05:45:17 GMT"
+        }
       );
     });
 
@@ -162,20 +200,29 @@ describe('MsgReader', function () {
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
     removeCompressedRtf(testMsgInfo);
+    const testMsgAttachments0 = testMsg.getAttachment(
+      testMsgInfo.attachments[0]
+    );
+    const testMsgAttachments0AndItsAttachments0 = testMsg.getAttachment(
+      testMsgInfo.attachments[0].innerMsgContentFields.attachments[0]
+    );
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
       assert.deepStrictEqual(
+        testMsgInfo,
         {
           "dataType": "msg",
           "attachments": [
             {
               "dataType": "attachment",
+              "folderId": 38,
               "name": "I have attachments!",
               "innerMsgContentFields": {
                 "dataType": "msg",
                 "attachments": [
                   {
                     "dataType": "attachment",
+                    "folderId": 60,
                     "name": "Microsoft Outlook テスト メッセージ",
                     "innerMsgContentFields": {
                       "dataType": "msg",
@@ -231,11 +278,95 @@ describe('MsgReader', function () {
           "creationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
           "lastModificationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
           "messageDeliveryTime": "Thu, 10 Sep 2020 10:21:41 GMT"
-        },
-        testMsgInfo
+        }
       );
     });
 
+    it('re-parse and verify inner testMsgAttachments0', function () {
+      const subReader = new MsgReader(testMsgAttachments0.content);
+      const subInfo = subReader.getFileData();
+      removeCompressedRtf(subInfo);
+
+      assert.deepStrictEqual(
+        subInfo,
+        {
+          "dataType": "msg",
+          "attachments": [
+            {
+              "dataType": "attachment",
+              "innerMsgContentFields": {
+                "dataType": "msg",
+                "attachments": [],
+                "recipients": [
+                  {
+                    "dataType": "recipient",
+                    "name": "xmailuser",
+                    "email": "xmailuser@xmailserver.test",
+                    "recipType": "to"
+                  }
+                ],
+                "subject": "Microsoft Outlook テスト メッセージ",
+                "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:56695)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tTue, 12 May 2020 14:45:17 +0900\r\nFrom: Microsoft Outlook <xmailuser@xmailserver.test>\r\nTo: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>\r\nSubject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=\r\nMIME-Version: 1.0\r\nContent-Type: text/html;\r\n    charset=\"utf-8\"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
+                "senderName": "Microsoft Outlook",
+                "senderEmail": "xmailuser@xmailserver.test",
+                "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
+                "compressedRtf": undefined
+              },
+              "innerMsgContent": true,
+              "folderId": 41,
+              "name": "Microsoft Outlook テスト メッセージ"
+            },
+            {
+              "dataType": "attachment",
+              "name": "green.png",
+              "dataId": 92,
+              "contentLength": 134,
+              "extension": ".png",
+              "fileNameShort": "green.png",
+              "fileName": "green.png"
+            }
+          ],
+          "recipients": [],
+          "subject": "I have attachments!",
+          "body": "I have attachments!\r\n",
+          "compressedRtf": undefined,
+          "creationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+          "lastModificationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+          "messageDeliveryTime": "Thu, 10 Sep 2020 10:18:08 GMT"
+        }
+      );
+    });
+
+    it('re-parse and verify inner testMsgAttachments0AndItsAttachments0', function () {
+      const subReader = new MsgReader(testMsgAttachments0AndItsAttachments0.content);
+      const subInfo = subReader.getFileData();
+      removeCompressedRtf(subInfo);
+
+      assert.deepStrictEqual(
+        subInfo,
+        {
+          "dataType": "msg",
+          "attachments": [],
+          "recipients": [
+            {
+              "dataType": "recipient",
+              "name": "xmailuser",
+              "email": "xmailuser@xmailserver.test",
+              "recipType": "to"
+            }
+          ],
+          "subject": "Microsoft Outlook テスト メッセージ",
+          "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:56695)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tTue, 12 May 2020 14:45:17 +0900\r\nFrom: Microsoft Outlook <xmailuser@xmailserver.test>\r\nTo: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>\r\nSubject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=\r\nMIME-Version: 1.0\r\nContent-Type: text/html;\r\n    charset=\"utf-8\"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
+          "senderName": "Microsoft Outlook",
+          "senderEmail": "xmailuser@xmailserver.test",
+          "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
+          "compressedRtf": undefined,
+          "creationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+          "lastModificationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+          "messageDeliveryTime": "Tue, 12 May 2020 05:45:17 GMT"
+        }
+      );
+    });
   });
 
   describe('Subject.msg', function () {
@@ -246,6 +377,7 @@ describe('MsgReader', function () {
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
       assert.deepStrictEqual(
+        testMsgInfo,
         {
           "dataType": "msg",
           "attachments": [],
@@ -276,8 +408,6 @@ describe('MsgReader', function () {
           "lastModificationTime": "Mon, 28 Sep 2020 11:28:52 GMT",
           "messageDeliveryTime": "Mon, 28 Sep 2020 11:28:39 GMT"
         }
-        ,
-        testMsgInfo
       );
     });
   });
@@ -290,6 +420,7 @@ describe('MsgReader', function () {
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
       assert.deepStrictEqual(
+        testMsgInfo,
         {
           "dataType": "msg",
           "attachments": [],
@@ -310,8 +441,7 @@ describe('MsgReader', function () {
           "lastModificationTime": "Mon, 15 Feb 2021 08:19:21 GMT",
           "clientSubmitTime": "Mon, 15 Feb 2021 08:19:04 GMT",
           "messageDeliveryTime": "Mon, 15 Feb 2021 08:19:00 GMT"
-        },
-        testMsgInfo
+        }
       );
     });
   });
