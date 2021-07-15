@@ -364,9 +364,10 @@ export default class MsgReader {
   private burnMsg(folder: CFolder, rootFolder: CFolder): Uint8Array {
     const entries: Entry[] = [
       {
-        name: "Root",
+        name: "Root Entry",
         type: TypeEnum.ROOT,
         children: [],
+        length: 0,
       }
     ];
     this.registerFolder(entries, 0, folder, rootFolder, 0);
@@ -390,6 +391,7 @@ export default class MsgReader {
           name: set.name,
           type: TypeEnum.DOCUMENT,
           binaryProvider: provider,
+          length: set.length,
         }
       );
     }
@@ -405,6 +407,7 @@ export default class MsgReader {
             name: source.name,
             type: TypeEnum.DIRECTORY,
             children: [],
+            length: 0,
           }
         );
         this.registerFolder(entries, subIndex, source, rootFolder, depth + 1);
@@ -418,6 +421,7 @@ export default class MsgReader {
           name: subFolder.name,
           type: TypeEnum.DIRECTORY,
           children: [],
+          length: 0,
         }
       );
       this.registerFolder(entries, subIndex, subFolder, rootFolder, depth + 1);

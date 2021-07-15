@@ -1,0 +1,58 @@
+//------------------------------------------------
+//--- 010 Editor v11.0.1 Binary Template
+//
+//      File: CFB
+//   Authors: kenjiuno
+//   Version: 0.1
+//   Purpose: [MS-CFB]: Compound File Binary File
+//  Category: Archive
+// File Mask: *.msg
+//  ID Bytes: D0 CF 11 E0 A1 B1 1A E1
+//   History: 
+//------------------------------------------------
+
+LittleEndian();
+
+// See: https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/05060311-bfce-4b12-874d-71fd4ce63aea
+
+struct Header {
+ uint64 HeaderSignature;
+ GUID HeaderCLSID;
+ ushort MinorVersion;
+ ushort MajorVersion;
+ ushort ByteOrder;
+ ushort SectorShift;
+ ushort MiniSectorShift;
+ byte Reserved[6];
+ int32 NumberOfDirectorySectors;
+ int32 NumberOfFATSectors;
+ int32 FirstDirectorySectorLocation;
+ int32 TransactionSignatureNumber;
+ int32 MiniStreamCutoffSize;
+ int32 FirstMiniFATSectorLocation;
+ int32 NumberOfMiniFATSectors;
+ int32 FirstDIFATSectorLocation;
+ int32 NumberOfDIFATSectors;
+ int32 DIFAT[109];
+};
+
+Header header;
+
+struct Dir {
+ wchar_t DirectoryEntryName[32];
+ ushort DirectoryEntryNameLength;
+ byte ObjectType;
+ byte IsBlack;
+ int32 LeftSiblingID;
+ int32 RightSiblingID;
+ int32 ChildID;
+ GUID CLSID;
+ uint32 StateBits;
+ int64 CreationTime;
+ int64 ModifiedTime;
+ int32 StartingSectorLocation;
+ int64 StreamSize;
+};
+
+FSeek(512 * (1+header.FirstDirectorySectorLocation));
+Dir dir[4];
