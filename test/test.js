@@ -161,7 +161,7 @@ describe('MsgReader', function () {
       assert.deepStrictEqual(testMsgAttachment0, testMsgAttachments0);
     });
 
-    it('re-parse and verify inner testMsgAttachments0', function () {
+    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
       removeCompressedRtf(subInfo);
@@ -282,7 +282,7 @@ describe('MsgReader', function () {
       );
     });
 
-    it('re-parse and verify inner testMsgAttachments0', function () {
+    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
       removeCompressedRtf(subInfo);
@@ -337,7 +337,7 @@ describe('MsgReader', function () {
       );
     });
 
-    it('re-parse and verify inner testMsgAttachments0AndItsAttachments0', function () {
+    it('re-parse and verify rebuilt inner testMsgAttachments0AndItsAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0AndItsAttachments0.content);
       const subInfo = subReader.getFileData();
       removeCompressedRtf(subInfo);
@@ -445,7 +445,86 @@ describe('MsgReader', function () {
       );
     });
   });
+
+  describe('longerFat.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/longerFat.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+
+    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
+      const subReader = new MsgReader(testMsgAttachments0.content);
+      const subInfo = subReader.getFileData();
+      removeCompressedRtf(subInfo);
+
+      assert.deepStrictEqual(
+        subInfo,
+        {
+          "dataType": "msg",
+          "attachments": [
+            {
+              "dataType": "attachment",
+              "name": "64KB.bin",
+              "dataId": 35,
+              "contentLength": 65536,
+              "extension": ".bin",
+              "fileNameShort": "64KB.bin",
+              "fileName": "64KB.bin"
+            }
+          ],
+          "recipients": [],
+          "subject": "Has 64KB.bin",
+          "body": " \r\n",
+          "compressedRtf": undefined,
+          "creationTime": "Thu, 15 Jul 2021 13:31:27 GMT",
+          "lastModificationTime": "Thu, 15 Jul 2021 13:31:27 GMT",
+          "messageDeliveryTime": "Thu, 15 Jul 2021 13:30:21 GMT"
+        }
+      );
+
+      require('fs').writeFileSync('a.json', JSON.stringify(subInfo, null, 2));
+    });
+  });
+
+  describe('longerDifat.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/longerDifat.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+
+    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
+      const subReader = new MsgReader(testMsgAttachments0.content);
+      const subInfo = subReader.getFileData();
+      removeCompressedRtf(subInfo);
+
+      assert.deepStrictEqual(
+        subInfo,
+        {
+          "dataType": "msg",
+          "attachments": [
+            {
+              "dataType": "attachment",
+              "name": "8MiB.bin",
+              "dataId": 37,
+              "contentLength": 8388608,
+              "extension": ".bin",
+              "fileNameShort": "8MiB.bin",
+              "fileName": "8MiB.bin"
+            }
+          ],
+          "recipients": [],
+          "subject": "Has 8MiB.bin",
+          "body": " \r\n",
+          "compressedRtf": undefined,
+          "creationTime": "Thu, 15 Jul 2021 13:42:25 GMT",
+          "lastModificationTime": "Thu, 15 Jul 2021 13:42:25 GMT",
+          "messageDeliveryTime": "Thu, 15 Jul 2021 13:41:55 GMT"
+        }
+      );
+    });
+  });
 });
+
 
 describe('DataStream', function () {
   const DataStream = require('../lib/DataStream').default;
