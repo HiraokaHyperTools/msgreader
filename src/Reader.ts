@@ -5,7 +5,7 @@ import CONST from './const'
 /**
  * CONST.MSG.PROP.TYPE_ENUM
  */
-enum TypeEnum {
+export enum TypeEnum {
     DIRECTORY = 1,
     DOCUMENT = 2,
     ROOT = 5,
@@ -22,7 +22,7 @@ export interface Property {
     children?: number[];
 }
 
-interface CFolder {
+export interface CFolder {
     name: string;
 
     subFolders(): CFolder[];
@@ -30,6 +30,9 @@ interface CFolder {
     readFile(fileName: string): Uint8Array | null;
 }
 
+/**
+ * Original CFBF reader implementation existed in MsgReader.
+ */
 export class Reader {
     ds: DataStream;
     bigBlockSize: number;
@@ -277,7 +280,6 @@ export class Reader {
     private readChainDataByBlockSmall(fieldProperty: Property, chain: number[]): Uint8Array {
         let resultData = new Uint8Array(fieldProperty.sizeBlock);
 
-        console.info(resultData.length);
         for (let i = 0, idx = 0; i < chain.length; i++) {
             const data = this.readDataByBlockSmall(chain[i], CONST.MSG.SMALL_BLOCK_SIZE);
             if (resultData.length < idx + data.length) {

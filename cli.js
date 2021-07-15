@@ -2,7 +2,7 @@ const program = require('commander');
 
 const MsgReader = require('./lib/MsgReader').default;
 const { props, typeNames } = require('./lib/Defs');
-const { Reader } = require('./lib/CFBF');
+const { Reader } = require('./lib/Reader');
 
 const fs = require('fs');
 const path = require('path');
@@ -126,13 +126,29 @@ program
   });
 
 program
-  .command('try <msgFilePath>')
-  .description('Test CFBF')
-  .action((msgFilePath, options) => {
+  .command('expose <msgFilePath> <exportToDir>')
+  .description('Expose files/folders in Compound File Binary Format (CFBF)')
+  .action((msgFilePath, exportToDir, options) => {
     const msgFileBuffer = fs.readFileSync(msgFilePath);
     const store = new Reader(msgFileBuffer);
     store.parse();
-    console.info(store.rootFolder().fileNames());
+    function expose(folder, saveTo) {
+      fs.mkdir(saveTo, { recursive: true }, (err) => {
+        if (err) {
+          return;
+        }
+        for (let fileName of folder.fileNames()) {
+          const array = folder.readFile(fileName);
+          const path = saveTo + "/" + fileName;
+          console.info(path);
+          fs.writeFileSync(path, (array === null) ? [] : array);
+        }
+        for (let subFolder of folder.subFolders()) {
+          expose(subFolder, saveTo + "/" + subFolder.name);
+        }
+      });
+    }
+    expose(store.rootFolder(), exportToDir);
   });
 
 program
