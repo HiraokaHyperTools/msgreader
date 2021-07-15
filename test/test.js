@@ -482,8 +482,6 @@ describe('MsgReader', function () {
           "messageDeliveryTime": "Thu, 15 Jul 2021 13:30:21 GMT"
         }
       );
-
-      require('fs').writeFileSync('a.json', JSON.stringify(subInfo, null, 2));
     });
   });
 
@@ -547,16 +545,24 @@ describe('Burner', function () {
       }
     ]);
 
+    //require('fs').writeFileSync(x + ".msg", array);
     const reader = new Reader(array);
     reader.parse();
   };
 
-  it('known boundary test', function () {
+  it('known boundary tests', function () {
+    test(4095);
+    test(4096);
+    test(8192);
+    test(64000);
     test(64513);
     test(129537);
+    test(1024 * 8192);
+    test(1024 * 8192 * 2);
+    test(1024 * 8192 * 3);
   });
 
-  it.skip('sequential boundary test', function () {
+  it.skip('sequential boundary tests', function () {
     this.timeout(1000 * 60 * 60);
     //64513
     //129537

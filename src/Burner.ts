@@ -67,10 +67,10 @@ class LiteFat {
         return first;
     }
 
-    finalize(boundary: number): this {
+    finalize(boundary: number, value: number): this {
         let num = (boundary - (this.sectors.length % boundary)) % boundary;
         for (; num >= 1; num -= 1) {
-            this.sectors.push(-1);
+            this.sectors.push(value);
         }
         return this;
     }
@@ -129,8 +129,10 @@ class LiteBurner {
                 : this.miniFat.allocate(RoundUpto64(liteEnt.entry.length) / 64);
         }
 
-        const firstMiniFatSector = this.fat.allocate(RoundUpto512(4 * this.miniFat.count()) / 512);
-        const numMiniFatSectors = this.fat.count() - firstMiniFatSector;
+        const numMiniFatSectors = RoundUpto512(4 * this.miniFat.count()) / 512;
+        const firstMiniFatSector = (numMiniFatSectors !== 0)
+            ? this.fat.allocate(numMiniFatSectors)
+            : -2;
 
         const bytesMiniFat = 64 * this.miniFat.count();
 
@@ -153,7 +155,7 @@ class LiteBurner {
         const ds = new DataStream(array, 0, DataStream.LITTLE_ENDIAN);
         ds.dynamicSize = false;
 
-        this.miniFat.finalize(512 / 4);
+        this.miniFat.finalize(512 / 4, -1);
 
         const difat1 = [];
         const difat2 = [];
@@ -222,9 +224,12 @@ class LiteBurner {
             const length = (x === 0)
                 ? bytesMiniFat
                 : liteEnt.entry.length;
+            const firstSector = (length !== 0)
+                ? liteEnt.firstSector
+                : (liteEnt.entry.type === TypeEnum.DIRECTORY ? 0 : -2);
 
             ds.seek(pos + 0x74);
-            ds.writeInt32(liteEnt.firstSector);
+            ds.writeInt32(firstSector);
             ds.writeInt32(length);
         }
 
@@ -256,6 +261,8 @@ class LiteBurner {
         ds.writeInt32Array(this.miniFat.sectors);
 
         // fat
+
+        this.fat.finalize(512 / 4, -1);
 
         ds.seek(512 * (1 + firstFatSector));
         ds.writeInt32Array(this.fat.sectors);
