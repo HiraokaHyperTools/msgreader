@@ -47,6 +47,10 @@ function listAttachmentsRecursively(fieldsData, delimiter) {
   const walk = (fieldsData, prefix, attachments) => {
     for (const att of fieldsData.attachments) {
       if (att.innerMsgContent) {
+        attachments.push({
+          fileName: prefix + att.name + ".msg",
+          attachmentRef: att,
+        })
         walk(att.innerMsgContentFields, att.name + delimiter, attachments);
       }
       else {

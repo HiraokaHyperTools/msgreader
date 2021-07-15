@@ -2559,6 +2559,11 @@ ts-treemap@^1.0.0:
   resolved "https://registry.yarnpkg.com/ts-treemap/-/ts-treemap-1.1.0.tgz#3ce56c577332a125f5f5f3a8a06a362a4bccb444"
   integrity sha512-0rWi12x7Y3vLG0bsgPZxeb/GClCcK0JE2L3O00VUhhxP8z+5rVBtUyeCdHcIUl8bEANdCT/D5bjKMW+CnfUZlw==
 
+tslib@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.0.tgz#803b8cdab3e12ba581a4ca41c8839bbb0dacb09e"
+  integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
+
 typescript@^4.3.2:
   version "4.3.2"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.2.tgz#399ab18aac45802d6f2498de5054fcbbe716a805"

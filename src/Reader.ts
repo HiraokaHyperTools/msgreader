@@ -23,11 +23,21 @@ export interface Property {
 }
 
 export interface CFolder {
+    dataId: number;
     name: string;
 
     subFolders(): CFolder[];
     fileNames(): string[];
+    fileNameSets(): CFileSet[];
     readFile(fileName: string): Uint8Array | null;
+}
+
+export interface CFileSet {
+    dataId: number;
+    name: string;
+    length: number;
+
+    provider: () => Uint8Array;
 }
 
 /**
@@ -294,7 +304,7 @@ export class Reader {
         return resultData;
     }
 
-    readProperty(fieldProperty: Property): Uint8Array {
+    private readProperty(fieldProperty: Property): Uint8Array {
         if (fieldProperty.sizeBlock < CONST.MSG.BIG_BLOCK_MIN_DOC_SIZE) {
             const chain = this.getChainByBlockSmall(fieldProperty);
             if (chain.length == 1) {
@@ -302,13 +312,17 @@ export class Reader {
             } else if (chain.length > 1) {
                 return this.readChainDataByBlockSmall(fieldProperty, chain);
             }
-            return null;
+            return new Uint8Array(0);
         }
         else {
             const offset = this.getBlockOffsetAt(fieldProperty.startBlock);
             this.ds.seek(offset);
             return this.ds.readUint8Array(fieldProperty.sizeBlock);
         }
+    }
+
+    readFileOf(index: number): Uint8Array {
+        return this.readProperty(this.propertyData[index]);
     }
 
     private folderOf(index: number): CFolder | null {
@@ -318,6 +332,7 @@ export class Reader {
         }
         const folder = propertyData[index];
         return {
+            dataId: index,
             name: folder.name,
             fileNames: () => {
                 const { children } = folder;
@@ -326,6 +341,28 @@ export class Reader {
                         .map(subIndex => propertyData[subIndex])
                         .filter(it => it.type === TypeEnum.DOCUMENT)
                         .map(it => it.name);
+                }
+                return [];
+            },
+            fileNameSets: () => {
+                const { children } = folder;
+                if (children) {
+                    return children
+                        .map(
+                            subIndex => ({
+                                subIndex,
+                                entry: propertyData[subIndex]
+                            })
+                        )
+                        .filter(it => it.entry.type === TypeEnum.DOCUMENT)
+                        .map(
+                            it => ({
+                                name: it.entry.name,
+                                length: it.entry.sizeBlock,
+                                dataId: it.subIndex,
+                                provider: () => this.readProperty(it.entry),
+                            })
+                        );
                 }
                 return [];
             },
