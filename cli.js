@@ -156,4 +156,14 @@ program
   });
 
 program
+  .command('dummy1')
+  .action(() => {
+    const msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    const testMsgAttachment0 = testMsg.getAttachment(0);
+    console.log(testMsgAttachment0);
+  });
+
+program
   .parse(process.argv);

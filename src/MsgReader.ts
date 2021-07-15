@@ -581,7 +581,7 @@ export default class MsgReader {
     const attachData = typeof attach === 'number' ? this.fieldsData.attachments[attach] : attach;
     if (attachData.innerMsgContent === true && typeof attachData.folderId === "number") {
       // inner msg
-      return { fileName: attachData.fileName, content: this.innerMsgBurners[attachData.folderId]() };
+      return { fileName: attachData.name + ".msg", content: this.innerMsgBurners[attachData.folderId]() };
     }
     else {
       // raw attachment file
