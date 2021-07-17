@@ -47,7 +47,7 @@ export interface SomeOxProps {
   /**
    * Contains the subject of the email message.
    * 
-   * Target dataType = 'msg'.
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0037-PidTagSubject.md
    */
@@ -56,7 +56,7 @@ export interface SomeOxProps {
   /**
    * Contains the display name of the sending mailbox owner.
    * 
-   * Target dataType = 'msg'.
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1A-PidTagSenderName.md
    */
@@ -65,7 +65,12 @@ export interface SomeOxProps {
   /**
    * Contains the email address of the sending mailbox owner.
    * 
-   * Target dataType = 'msg'.
+   * e.g.
+   * 
+   * - `xmailuser@xmailserver.test` for {@link senderAddressType} = 'SMTP'
+   * - `/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (xxx)/CN=RECIPIENTS/CN=xxx` for {@link senderAddressType} = 'EX'
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1F-PidTagSenderEmailAddress.md
    */
@@ -74,7 +79,7 @@ export interface SomeOxProps {
   /**
    * Contains message body text in plain text format.
    * 
-   * Target dataType = 'msg'.
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1000-PidTagBody.md
    */
@@ -83,7 +88,27 @@ export interface SomeOxProps {
   /**
    * Contains transport-specific message envelope information for email.
    * 
-   * Target dataType = 'msg'.
+   * e.g.
+   * 
+   * ```
+   * Return-Path: <xmailuser@xmailserver.test>
+   * Delivered-To: xmailuser@xmailserver.test
+   * X-AuthUser: xmailuser@xmailserver.test
+   * Received: from H270 ([127.0.0.1]:56695)
+   *     by xmailserver.test with [XMail 1.27 ESMTP Server]
+   *     id <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;
+   *     Tue, 12 May 2020 14:45:17 +0900
+   * From: Microsoft Outlook <xmailuser@xmailserver.test>
+   * To: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>
+   * Subject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=
+   * MIME-Version: 1.0
+   * Content-Type: text/html;
+   *     charset=\"utf-8\"
+   * Content-Transfer-Encoding: 8bit
+   * 
+   * ```
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/007D-PidTagTransportMessageHeaders.md
    */
@@ -92,7 +117,7 @@ export interface SomeOxProps {
   /**
    * Contains message body text in compressed RTF format.
    * 
-   * Target dataType = 'msg'.
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1009-PidTagRtfCompressed.md
    */
@@ -101,7 +126,9 @@ export interface SomeOxProps {
   /**
    * Contains a file name extension that indicates the document type of an attachment.
    * 
-   * Target dataType = 'attachment'.
+   * e.g. `.png`
+   * 
+   * Target {@link dataType} = 'attachment'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3703-PidTagAttachExtension.md
    */
@@ -110,7 +137,9 @@ export interface SomeOxProps {
   /**
    * Contains an attachment's base file name and extension, excluding path.
    * 
-   * Target dataType = 'attachment'.
+   * e.g. `green.png`
+   * 
+   * Target {@link dataType} = 'attachment'.
    * 
    * @see https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachfilename-canonical-property
    */
@@ -119,7 +148,9 @@ export interface SomeOxProps {
   /**
    * Contains an attachment's long filename and extension, excluding path.
    * 
-   * Target dataType = 'attachment'.
+   * e.g. `green.png`
+   * 
+   * Target {@link dataType} = 'attachment'.
    * 
    * @see https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachlongfilename-canonical-property
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3707-PidTagAttachLongFilename.md
@@ -128,9 +159,10 @@ export interface SomeOxProps {
 
   /**
    * Contains a content identifier unique to the Message object that matches a
-
-   * Target dataType = 'attachment'.
-  * 
+   * corresponding "cid" URI schema reference in the HTML body of the Message object.
+   * 
+   * Target {@link dataType} = 'attachment'.
+   * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3712-PidTagAttachContentId.md
    */
   pidContentId?: string;
@@ -138,7 +170,13 @@ export interface SomeOxProps {
   /**
    * Contains the display name of the folder.
    * 
-   * Target dataType = 'recipient'.
+   * e.g.
+   * 
+   * - `xmailuser` for recipient.
+   * - `green.png` for generic attachment.
+   * - `I have attachments!` for msg attachment.
+   * 
+   * Target {@link dataType} = 'recipient' and 'attachment'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3001-PidTagDisplayName.md
    */
@@ -147,7 +185,12 @@ export interface SomeOxProps {
   /**
    * Contains the email address of a Message object.
    * 
-   * Target dataType = 'recipient'.
+   * e.g.
+   * 
+   * - `xmailuser@xmailserver.test` for {@link addressType} = 'SMTP'
+   * - `/o=ExchangeLabs/ou=Exchange Administrative Group (xxx)/cn=Recipients/cn=xxx` for {@link addressType} = 'EX'
+   * 
+   * Target {@link dataType} = 'recipient'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3003-PidTagEmailAddress.md
    */
@@ -156,7 +199,9 @@ export interface SomeOxProps {
   /**
    * Contains the time, in UTC, that the object was created.
    * 
-   * Target dataType = 'msg'.
+   * e.g. `Mon, 15 Feb 2021 08:19:21 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3007-PidTagCreationTime.md
    */
@@ -165,7 +210,9 @@ export interface SomeOxProps {
   /**
    * Contains the time, in UTC, of the last modification to the object.
    * 
-   * Target dataType = 'msg'.
+   * e.g. `Mon, 15 Feb 2021 08:19:21 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3008-PidTagLastModificationTime.md
    */
@@ -174,7 +221,9 @@ export interface SomeOxProps {
   /**
    * Contains the current time, in UTC, when the email message is submitted.
    * 
-   * Target dataType = 'msg'.
+   * e.g. `Mon, 15 Feb 2021 08:19:04 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0039-PidTagClientSubmitTime.md
    */
@@ -183,7 +232,9 @@ export interface SomeOxProps {
   /**
    * Specifies the time (in UTC) when the server received the message.
    * 
-   * Target dataType = 'msg'.
+   * e.g. `Mon, 15 Feb 2021 08:19:00 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0E06-PidTagMessageDeliveryTime.md
    */
@@ -193,9 +244,14 @@ export interface SomeOxProps {
    * This undocumented `creatorSMTPAddress` will be attached
    * when you send a mail via Exchange Online server.
    * 
-   * Target dataType = 'msg'.
+   * e.g.
+   * 
+   * - `xxx@xxx.onmicrosoft.com` for {@link senderAddressType} = 'EX'
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols
+   * @see https://github.com/HiraokaHyperTools/msgreader/issues/10
    */
   creatorSMTPAddress?: string;
 
@@ -203,18 +259,28 @@ export interface SomeOxProps {
    * This undocumented `lastModifierSMTPAddress` will be attached
    * when you send a mail via Exchange Online server.
    * 
-   * Target dataType = 'msg'.
+   * e.g.
+   * 
+   * - `xxx@xxx.onmicrosoft.com` for {@link senderAddressType} = 'EX'
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols
+   * @see https://github.com/HiraokaHyperTools/msgreader/issues/10
    */
   lastModifierSMTPAddress?: string;
 
   /**
    * Contains the SMTP address of the Message object.
    * 
-   * Target dataType = 'recipient'.
+   * e.g.
+   * 
+   * - `xxx@xxx.onmicrosoft.com` for {@link addressType} = 'EX'
+   * 
+   * Target {@link dataType} = 'recipient'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/39FE-PidTagSmtpAddress.md
+   * @see https://github.com/HiraokaHyperTools/msgreader/issues/10
    */
   smtpAddress?: string;
 
@@ -225,11 +291,46 @@ export interface SomeOxProps {
    * 
    * `lastModifierSMTPAddress` or `smtpAddress` may not be stored in some cases.
    * 
-   * Target dataType = 'msg'.
+   * e.g.
+   * 
+   * - `UnoKenji` for {@link senderAddressType} = 'EX'
+   * 
+   * Target {@link dataType} = 'msg'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FFA-PidTagLastModifierName.md
+   * @see https://github.com/HiraokaHyperTools/msgreader/issues/10
    */
   lastModifierName?: string;
+
+  /**
+   * Contains the email address type of a Message object.
+   * 
+   * e.g.
+   * 
+   * - `EX`
+   * - `SMTP`
+   * 
+   * Target {@link dataType} = 'recipient'.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3002-PidTagAddressType.md
+   * @see https://github.com/HiraokaHyperTools/msgreader/issues/10
+   */
+  addressType?: string;
+
+  /**
+   * Contains the email address type of the sending mailbox owner.
+   * 
+   * e.g.
+   * 
+   * - `EX`
+   * - `SMTP`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1E-PidTagSenderAddressType.md
+   * @see https://github.com/HiraokaHyperTools/msgreader/issues/10
+   */
+  senderAddressType?: string;
 }
 
 export interface SomeParsedOxProps {
@@ -242,7 +343,7 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
   /**
    * The attachment file's contentLength.
    * 
-   * Target dataType = 'attachment'.
+   * Target {@link dataType} = 'attachment'.
    */
   contentLength?: number;
 
@@ -251,7 +352,7 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * 
    * This is entry index to CFBF stream.
    * 
-   * Target dataType = 'attachment'.
+   * Target {@link dataType} = 'attachment'.
    */
   dataId?: number;
 
@@ -260,7 +361,7 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * 
    * This is entry index to CFBF storage.
    * 
-   * Target dataType = 'attachment'.
+   * Target {@link dataType} = 'attachment'.
    */
   folderId?: number;
 
@@ -269,14 +370,14 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * 
    * The inner msg is represented as a CFBF storage (not single CFBF stream).
    * 
-   * Target dataType = 'attachment'.
+   * Target {@link dataType} = 'attachment'.
    */
   innerMsgContent?: true;
 
   /**
    * The properties defined in inner msg.
    * 
-   * Target dataType = 'attachment'.
+   * Target {@link dataType} = 'attachment'.
    */
   innerMsgContentFields?: FieldsData;
 
@@ -297,7 +398,7 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * 
    * Use with {@link MsgReader.getAttachment}.
    * 
-   * Target dataType = 'msg'.
+   * Target {@link dataType} = 'msg'.
    */
   attachments?: FieldsData[];
 
@@ -313,14 +414,14 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * },
    * ```
    * 
-   * Target dataType = 'msg'.
+   * Target {@link dataType} = 'msg'.
    */
   recipients?: FieldsData[];
 
   /**
    * error is set on parse error.
    * 
-   * Target dataType = 'msg'.
+   * Target {@link dataType} = 'msg'.
    */
   error?: string;
 }
@@ -334,7 +435,7 @@ function fileTimeToUnixEpoch(time: number) {
  */
 export default class MsgReader {
   private reader: Reader;
-  fieldsData: FieldsData;
+  private fieldsData: FieldsData;
   parserConfig: ParserConfig;
   private innerMsgBurners: { [key: number]: () => Uint8Array };
 

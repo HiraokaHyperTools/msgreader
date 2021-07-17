@@ -33,12 +33,14 @@ describe('MsgReader', function () {
           "attachments": [],
           "recipients": [
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "to@example.com",
               "email": "to@example.com",
               "recipType": "to"
             },
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "cc@example.com",
               "email": "cc@example.com",
@@ -122,6 +124,7 @@ describe('MsgReader', function () {
                 "attachments": [],
                 "recipients": [
                   {
+                    "addressType": "SMTP",
                     "dataType": "recipient",
                     "name": "xmailuser",
                     "email": "xmailuser@xmailserver.test",
@@ -132,6 +135,7 @@ describe('MsgReader', function () {
                 "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
                 "subject": "Microsoft Outlook テスト メッセージ",
                 "senderName": "Microsoft Outlook",
+                "senderAddressType": "SMTP",
                 "senderEmail": "xmailuser@xmailserver.test",
                 "compressedRtf": undefined,
               },
@@ -175,6 +179,7 @@ describe('MsgReader', function () {
           "compressedRtf": undefined,
           "recipients": [
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "xmailuser",
               "email": "xmailuser@xmailserver.test",
@@ -183,6 +188,7 @@ describe('MsgReader', function () {
           ],
           "subject": "Microsoft Outlook テスト メッセージ",
           "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:56695)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tTue, 12 May 2020 14:45:17 +0900\r\nFrom: Microsoft Outlook <xmailuser@xmailserver.test>\r\nTo: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>\r\nSubject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=\r\nMIME-Version: 1.0\r\nContent-Type: text/html;\r\n    charset=\"utf-8\"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
+          "senderAddressType": "SMTP",
           "senderName": "Microsoft Outlook",
           "senderEmail": "xmailuser@xmailserver.test",
           "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
@@ -230,6 +236,7 @@ describe('MsgReader', function () {
                       "attachments": [],
                       "recipients": [
                         {
+                          "addressType": "SMTP",
                           "dataType": "recipient",
                           "name": "xmailuser",
                           "email": "xmailuser@xmailserver.test",
@@ -239,6 +246,7 @@ describe('MsgReader', function () {
                       "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:56695)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tTue, 12 May 2020 14:45:17 +0900\r\nFrom: Microsoft Outlook <xmailuser@xmailserver.test>\r\nTo: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>\r\nSubject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=\r\nMIME-Version: 1.0\r\nContent-Type: text/html;\r\n    charset=\"utf-8\"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
                       "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
                       "subject": "Microsoft Outlook テスト メッセージ",
+                      "senderAddressType": "SMTP",
                       "senderName": "Microsoft Outlook",
                       "senderEmail": "xmailuser@xmailserver.test",
                       "compressedRtf": undefined
@@ -300,6 +308,7 @@ describe('MsgReader', function () {
                 "attachments": [],
                 "recipients": [
                   {
+                    "addressType": "SMTP",
                     "dataType": "recipient",
                     "name": "xmailuser",
                     "email": "xmailuser@xmailserver.test",
@@ -308,6 +317,7 @@ describe('MsgReader', function () {
                 ],
                 "subject": "Microsoft Outlook テスト メッセージ",
                 "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:56695)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tTue, 12 May 2020 14:45:17 +0900\r\nFrom: Microsoft Outlook <xmailuser@xmailserver.test>\r\nTo: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>\r\nSubject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=\r\nMIME-Version: 1.0\r\nContent-Type: text/html;\r\n    charset=\"utf-8\"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
+                "senderAddressType": "SMTP",
                 "senderName": "Microsoft Outlook",
                 "senderEmail": "xmailuser@xmailserver.test",
                 "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
@@ -350,6 +360,7 @@ describe('MsgReader', function () {
           "attachments": [],
           "recipients": [
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "xmailuser",
               "email": "xmailuser@xmailserver.test",
@@ -358,6 +369,7 @@ describe('MsgReader', function () {
           ],
           "subject": "Microsoft Outlook テスト メッセージ",
           "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:56695)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S9> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tTue, 12 May 2020 14:45:17 +0900\r\nFrom: Microsoft Outlook <xmailuser@xmailserver.test>\r\nTo: =?utf-8?B?eG1haWx1c2Vy?= <xmailuser@xmailserver.test>\r\nSubject: =?utf-8?B?TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg+OCu+ODvOOCuA==?=\r\nMIME-Version: 1.0\r\nContent-Type: text/html;\r\n    charset=\"utf-8\"\r\nContent-Transfer-Encoding: 8bit\r\n\r\n",
+          "senderAddressType": "SMTP",
           "senderName": "Microsoft Outlook",
           "senderEmail": "xmailuser@xmailserver.test",
           "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
@@ -384,18 +396,21 @@ describe('MsgReader', function () {
           "attachments": [],
           "recipients": [
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "ToUser",
               "email": "to@example.com",
               "recipType": "to"
             },
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "ToCc",
               "email": "cc@example.com",
               "recipType": "cc"
             },
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "ToBcc",
               "email": "bcc@example.com",
@@ -427,12 +442,14 @@ describe('MsgReader', function () {
           "attachments": [],
           "recipients": [
             {
+              "addressType": "SMTP",
               "dataType": "recipient",
               "name": "'xmailuser@xmailserver.test'",
               "email": "xmailuser@xmailserver.test",
               "recipType": "to"
             }
           ],
+          "senderAddressType": "SMTP",
           "senderEmail": "xmailuser@xmailserver.test",
           "subject": "Sent time",
           "body": "Test mail\r\n\r\n",

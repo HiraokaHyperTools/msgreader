@@ -56,6 +56,7 @@ export default {
         // email specific
         '0037': 'subject',
         '0c1a': 'senderName',
+        '0c1e': 'senderAddressType',
         '0c1f': 'senderEmail',
         '5d0a': 'creatorSMTPAddress',
         '5d0b': 'lastModifierSMTPAddress',
@@ -70,6 +71,7 @@ export default {
         '3712': 'pidContentId',
         // recipient specific
         '3001': 'name',
+        '3002': 'addressType',
         '3003': 'email',
         '39fe': 'smtpAddress'
       },
