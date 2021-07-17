@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Entry | @kenjiuno/msgreader</title>
+	<title>CFileSet | @kenjiuno/msgreader</title>
 	<meta name="description" content="Documentation for @kenjiuno/msgreader">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -52,16 +52,16 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../modules.html">@kenjiuno/msgreader</a>
+					<a href="../index.html">@kenjiuno/msgreader</a>
 				</li>
 				<li>
-					<a href="../modules/Burner.html">Burner</a>
+					<a href="../modules/Reader.html">Reader</a>
 				</li>
 				<li>
-					<a href="Burner.Entry.html">Entry</a>
+					<a href="Reader.CFileSet.html">CFileSet</a>
 				</li>
 			</ul>
-			<h1>Interface Entry</h1>
+			<h1>Interface CFileSet</h1>
 		</div>
 	</div>
 </header>
@@ -71,24 +71,15 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>CFBF entry for CFBF burner.</p>
+						<p>The reader access to CFBF stream</p>
 					</div>
-					<p>These entries are stored in same order in CFBF.</p>
-					<p>The first entry must be <a href="../enums/Reader.TypeEnum.html#ROOT">ROOT</a>.</p>
-					<p>This <a href="../enums/Reader.TypeEnum.html#ROOT">ROOT</a> stream represents:</p>
-					<ul>
-						<li>The root folder as same as you see in real file system.
-						Including direct children files/folder.</li>
-						<li>The body of minifat.</li>
-					</ul>
-					<p>The secondary entries are collection of items having type either <a href="../enums/Reader.TypeEnum.html#DIRECTORY">DIRECTORY</a> or <a href="../enums/Reader.TypeEnum.html#DOCUMENT">DOCUMENT</a>.</p>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Entry</span>
+						<span class="target">CFileSet</span>
 					</li>
 				</ul>
 			</section>
@@ -99,16 +90,15 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Burner.Entry.html#children" class="tsd-kind-icon">children</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Burner.Entry.html#length" class="tsd-kind-icon">length</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Burner.Entry.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Burner.Entry.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Reader.CFileSet.html#dataId" class="tsd-kind-icon">data<wbr>Id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Reader.CFileSet.html#length" class="tsd-kind-icon">length</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="Reader.CFileSet.html#name" class="tsd-kind-icon">name</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="Burner.Entry.html#binaryProvider" class="tsd-kind-icon">binary<wbr>Provider</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="Reader.CFileSet.html#provider" class="tsd-kind-icon">provider</a></li>
 							</ul>
 						</section>
 					</div>
@@ -117,19 +107,18 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="children" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> children</h3>
-					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></div>
+					<a name="dataId" class="tsd-anchor"></a>
+					<h3>data<wbr>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">data<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/b644fa8/src/Burner.ts#L57">Burner.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/Reader.ts#L99">Reader.ts:99</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The indices to sub entries including <a href="../enums/Reader.TypeEnum.html#DOCUMENT">DOCUMENT</a> and <a href="../enums/Reader.TypeEnum.html#DIRECTORY">DIRECTORY</a>.</p>
+							<p>CFBF entry index.</p>
 						</div>
-						<p>This is valid only for <a href="../enums/Reader.TypeEnum.html#DIRECTORY">DIRECTORY</a> entry type.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -138,15 +127,13 @@
 					<div class="tsd-signature tsd-kind-icon">length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/b644fa8/src/Burner.ts#L50">Burner.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/Reader.ts#L109">Reader.ts:109</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Binary data length in byte unit.</p>
+							<p>The stream binary length in byte unit.</p>
 						</div>
-						<p>Has to match with <a href="Burner.Entry.html#binaryProvider">binaryProvider</a>&#39;s length.</p>
-						<p>This is valid only for <a href="../enums/Reader.TypeEnum.html#DOCUMENT">DOCUMENT</a> entry type. Otherwise set zero.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -155,58 +142,37 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/b644fa8/src/Burner.ts#L25">Burner.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/Reader.ts#L104">Reader.ts:104</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Entry name (max 32 chars).</p>
+							<p>Stream name.</p>
 						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../enums/Reader.TypeEnum.html" class="tsd-signature-type" data-tsd-kind="Enumeration">TypeEnum</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/b644fa8/src/Burner.ts#L34">Burner.ts:34</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>Entry type:</p>
-						</div>
-						<ul>
-							<li><a href="../enums/Reader.TypeEnum.html#DIRECTORY">DIRECTORY</a></li>
-							<li><a href="../enums/Reader.TypeEnum.html#DOCUMENT">DOCUMENT</a></li>
-							<li><a href="../enums/Reader.TypeEnum.html#ROOT">ROOT</a></li>
-						</ul>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface">
-					<a name="binaryProvider" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> binary<wbr>Provider</h3>
+					<a name="provider" class="tsd-anchor"></a>
+					<h3>provider</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-						<li class="tsd-signature tsd-kind-icon">binary<wbr>Provider<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">provider<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/b644fa8/src/Burner.ts#L41">Burner.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/Reader.ts#L114">Reader.ts:114</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Callback to supply binary data.</p>
+									<p>Read stream contents and get memory data.</p>
 								</div>
-								<p>This is valid only for <a href="../enums/Reader.TypeEnum.html#DOCUMENT">DOCUMENT</a> entry type.</p>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ArrayLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Uint8Array</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -216,9 +182,9 @@
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class=" ">
-						<a href="../modules.html">Modules</a>
+						<a href="../index.html">Modules</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/Burner.html">Burner</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -227,39 +193,45 @@
 					<li class=" tsd-kind-module">
 						<a href="../modules/MsgReader.html">Msg<wbr>Reader</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/Reader.html">Reader</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-enum tsd-parent-kind-module">
+						<a href="../enums/Reader.TypeEnum.html" class="tsd-kind-icon">Type<wbr>Enum</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-module">
+						<a href="../classes/Reader.Reader-1.html" class="tsd-kind-icon">Reader</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="Burner.Entry.html" class="tsd-kind-icon">Entry</a>
+						<a href="Reader.CFileSet.html" class="tsd-kind-icon">CFile<wbr>Set</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="Burner.Entry.html#children" class="tsd-kind-icon">children</a>
+								<a href="Reader.CFileSet.html#dataId" class="tsd-kind-icon">data<wbr>Id</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="Burner.Entry.html#length" class="tsd-kind-icon">length</a>
+								<a href="Reader.CFileSet.html#length" class="tsd-kind-icon">length</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="Burner.Entry.html#name" class="tsd-kind-icon">name</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="Burner.Entry.html#type" class="tsd-kind-icon">type</a>
+								<a href="Reader.CFileSet.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
-								<a href="Burner.Entry.html#binaryProvider" class="tsd-kind-icon">binary<wbr>Provider</a>
+								<a href="Reader.CFileSet.html#provider" class="tsd-kind-icon">provider</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/Burner.html#burn" class="tsd-kind-icon">burn</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="Reader.CFolder.html" class="tsd-kind-icon">CFolder</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="Reader.Property.html" class="tsd-kind-icon">Property</a>
 					</li>
 				</ul>
 			</nav>
