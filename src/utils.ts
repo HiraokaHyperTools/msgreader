@@ -1,3 +1,6 @@
+/**
+ * @internal
+ */
 export function arraysEqual(a: ArrayLike<any>, b: ArrayLike<any>): boolean {
   if (a === b) return true;
   if (a == null || b == null) return false;
@@ -9,6 +12,9 @@ export function arraysEqual(a: ArrayLike<any>, b: ArrayLike<any>): boolean {
   return true;
 }
 
+/**
+ * @internal
+ */
 export function uInt2int(data: number[]): number[] {
   var result = new Array(data.length);
   for (var i = 0; i < data.length; i++) {

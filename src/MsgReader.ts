@@ -23,7 +23,7 @@ import { burn, Entry } from './Burner';
 
 // MSG Reader implementation
 
-class ParserConfig {
+export interface ParserConfig {
   propertyObserver?: (fields: FieldsData, tag: number, raw: Uint8Array | null) => void;
 }
 
@@ -36,25 +36,14 @@ enum TypeEnum {
   ROOT = 5,
 }
 
-interface Property {
-  index: number;
-
-  type: TypeEnum;
-  name: string;
-  previousProperty: number;
-  nextProperty: number;
-  childProperty: number;
-  startBlock: number;
-  sizeBlock: number;
-  children?: number[];
-}
-
 /**
  * Some OXPROPS
  * 
- * Note that please sync with: CONST.MSG.FIELD.NAME_MAPPING
+ * Note that please sync with: `CONST.MSG.FIELD.NAME_MAPPING`
+ * 
+ * @see [[MS-OXPROPS]: Exchange Server Protocols Master Property List | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/f6ab1613-aefe-447d-a49c-18217230b148)
  */
-interface SomeOxProps {
+export interface SomeOxProps {
   /**
    * Contains the subject of the email message.
    * 
@@ -243,19 +232,96 @@ interface SomeOxProps {
   lastModifierName?: string;
 }
 
-interface SomeParsedOxProps {
+export interface SomeParsedOxProps {
   recipType?: "to" | "cc" | "bcc";
 }
 
-interface FieldsData extends SomeOxProps, SomeParsedOxProps {
+export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
   dataType: null | "msg" | "attachment" | "recipient";
+
+  /**
+   * The attachment file's contentLength.
+   * 
+   * Target dataType = 'attachment'.
+   */
   contentLength?: number;
+
+  /**
+   * The attachment file's dataId (for internal use).
+   * 
+   * This is entry index to CFBF stream.
+   * 
+   * Target dataType = 'attachment'.
+   */
   dataId?: number;
+
+  /**
+   * folderId is internal and valid for internal msg file.
+   * 
+   * This is entry index to CFBF storage.
+   * 
+   * Target dataType = 'attachment'.
+   */
   folderId?: number;
+
+  /**
+   * innerMsgContent is set to true, if this attachment is inner msg.
+   * 
+   * The inner msg is represented as a CFBF storage (not single CFBF stream).
+   * 
+   * Target dataType = 'attachment'.
+   */
   innerMsgContent?: true;
+
+  /**
+   * The properties defined in inner msg.
+   * 
+   * Target dataType = 'attachment'.
+   */
   innerMsgContentFields?: FieldsData;
+
+  /**
+   * The collection of attachment files:
+   * 
+   * ```json
+   * {
+   *   "dataType": "attachment",
+   *   "name": "A.txt",
+   *   "fileNameShort": "A.txt",
+   *   "dataId": 40,
+   *   "contentLength": 11,
+   *   "extension": ".txt",
+   *   "fileName": "A.txt"
+   * }
+   * ```
+   * 
+   * Use with {@link MsgReader.getAttachment}.
+   * 
+   * Target dataType = 'msg'.
+   */
   attachments?: FieldsData[];
+
+  /**
+   * The collection of recipients:
+   * 
+   * ```json
+   * {
+   *   "dataType": "recipient",
+   *   "name": "to@example.com",
+   *   "email": "to@example.com",
+   *   "recipType": "to"
+   * },
+   * ```
+   * 
+   * Target dataType = 'msg'.
+   */
   recipients?: FieldsData[];
+
+  /**
+   * error is set on parse error.
+   * 
+   * Target dataType = 'msg'.
+   */
   error?: string;
 }
 
@@ -263,11 +329,14 @@ function fileTimeToUnixEpoch(time: number) {
   return (time - 116444736000000000) / 10000;
 }
 
+/**
+ * The core implementation of MsgReader
+ */
 export default class MsgReader {
-  reader: Reader;
+  private reader: Reader;
   fieldsData: FieldsData;
   parserConfig: ParserConfig;
-  innerMsgBurners: { [key: number]: () => Uint8Array };
+  private innerMsgBurners: { [key: number]: () => Uint8Array };
 
   constructor(arrayBuffer: ArrayBuffer | DataView) {
     this.reader = new Reader(arrayBuffer);

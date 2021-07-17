@@ -3,11 +3,43 @@ import { arraysEqual } from "./utils";
 import CONST from './const'
 
 /**
- * CONST.MSG.PROP.TYPE_ENUM
+ * `Object Type` in `2.6.1 Compound File Directory Entry`
+ * 
+ * See also: [[MS-CFB]: Compound File Directory Entry | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/60fe8611-66c3-496b-b70d-a504c94c9ace)
  */
 export enum TypeEnum {
+    /**
+     * `Storage Object`
+     * 
+     * storage object: An object in a compound file that is analogous to a file system directory. The parent object of a storage object must be another storage object or the root storage object.
+     * 
+     * See also:
+     * 
+     * - [[MS-CFB]: Other Directory Entries | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/b37413bb-f3ef-4adc-b18e-29bddd62c26e)
+     * - [[MS-CFB]: Glossary | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/59ccb2ef-1ce5-41e3-bc30-075dea759d0a#gt_c3ddf892-3f55-4561-8804-20325dbc8fba)
+     */
     DIRECTORY = 1,
+
+    /**
+     * `Stream Object`
+     * 
+     * - stream object: An object in a compound file that is analogous to a file system file. The parent object of a stream object must be a storage object or the root storage object.
+     * 
+     * See also:
+     * - [[MS-CFB]: Compound File User-Defined Data Sectors | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/b089deda-be20-4b4a-aad5-fbe68bb19672)
+     * - [[MS-CFB]: Glossary | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/59ccb2ef-1ce5-41e3-bc30-075dea759d0a#gt_9f598e1c-0d65-4845-8f06-8d50f7a32fd5)
+     */
     DOCUMENT = 2,
+
+    /**
+     * `Root Storage Object`
+     * 
+     * - root storage object: A storage object in a compound file that must be accessed before any other storage objects and stream objects are referenced. It is the uppermost parent object in the storage object and stream object hierarchy.
+     * 
+     * See also:
+     * - [[MS-CFB]: Root Directory Entry | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/026fde6e-143d-41bf-a7da-c08b2130d50e)
+     * - [[MS-CFB]: Glossary | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-cfb/59ccb2ef-1ce5-41e3-bc30-075dea759d0a#gt_d49237e3-04dd-4823-a0a5-5e23f750a5f4)
+     */
     ROOT = 5,
 }
 
@@ -22,42 +54,84 @@ export interface Property {
     children?: number[];
 }
 
+/**
+ * The reader access to CFBF storage
+ */
 export interface CFolder {
+    /**
+     * CFBF entry index.
+     */
     dataId: number;
+
+    /**
+     * Storage name.
+     */
     name: string;
 
+    /**
+     * Sub folders.
+     */
     subFolders(): CFolder[];
+
+    /**
+     * Sub name set of streams.
+     */
     fileNames(): string[];
+
+    /**
+     * Sub read access set of stream.
+     */
     fileNameSets(): CFileSet[];
+
+    /**
+     * Read stream as binary to memory.
+     */
     readFile(fileName: string): Uint8Array | null;
 }
 
+/**
+ * The reader access to CFBF stream
+ */
 export interface CFileSet {
+    /**
+     * CFBF entry index.
+     */
     dataId: number;
+
+    /**
+     * Stream name.
+     */
     name: string;
+
+    /**
+     * The stream binary length in byte unit.
+     */
     length: number;
 
+    /**
+     * Read stream contents and get memory data.
+     */
     provider: () => Uint8Array;
 }
 
 /**
- * Original CFBF reader implementation existed in MsgReader.
+ * Original msg file (CFBF) reader which was implemented in MsgReader.
  */
 export class Reader {
-    ds: DataStream;
-    bigBlockSize: number;
-    bigBlockLength: number;
-    xBlockLength: number;
-    batCount: number;
-    propertyStart: number;
-    sbatStart: number;
-    sbatCount: number;
-    xbatStart: number;
-    xbatCount: number;
+    private ds: DataStream;
+    private bigBlockSize: number;
+    private bigBlockLength: number;
+    private xBlockLength: number;
+    private batCount: number;
+    private propertyStart: number;
+    private sbatStart: number;
+    private sbatCount: number;
+    private xbatStart: number;
+    private xbatCount: number;
 
-    batData?: number[];
-    sbatData?: number[];
-    propertyData?: Property[];
+    private batData?: number[];
+    private sbatData?: number[];
+    private propertyData?: Property[];
 
     constructor(arrayBuffer: ArrayBuffer | DataView) {
         this.ds = new DataStream(arrayBuffer, 0, DataStream.LITTLE_ENDIAN);
@@ -169,6 +243,9 @@ export class Reader {
         return props;
     }
 
+    /**
+     * Parse msg file.
+     */
     parse(): void {
         this.headerData();
         this.batData = this.batDataReader();
@@ -321,6 +398,13 @@ export class Reader {
         }
     }
 
+    /**
+     * Get binary from document in CFBF.
+     * 
+     * @param index entry index
+     * @returns binary
+     * @internal
+     */
     readFileOf(index: number): Uint8Array {
         return this.readProperty(this.propertyData[index]);
     }
@@ -390,6 +474,11 @@ export class Reader {
         }
     }
 
+    /**
+     * Get reader access to CFBF (valid after successful call of {@link parse}).
+     * 
+     * @returns root folder
+     */
     rootFolder(): CFolder {
         return this.folderOf(0);
     }

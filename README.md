@@ -13,6 +13,8 @@ Original projects:
 This repo contains the code of the modified project.
 And also it is published as a [npm package](https://www.npmjs.com/package/@kenjiuno/msgreader).
 
+Links: [_typedoc documentation_](https://hiraokahypertools.github.io/msgreader/)
+
 ## How to use
 
 ```javascript
