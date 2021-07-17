@@ -91,6 +91,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#addressType" class="tsd-kind-icon">address<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.FieldsData.html#attachments" class="tsd-kind-icon">attachments</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#body" class="tsd-kind-icon">body</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#clientSubmitTime" class="tsd-kind-icon">client<wbr>Submit<wbr>Time</a></li>
@@ -117,6 +118,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#pidContentId" class="tsd-kind-icon">pid<wbr>Content<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#recipType" class="tsd-kind-icon">recip<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.FieldsData.html#recipients" class="tsd-kind-icon">recipients</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#senderAddressType" class="tsd-kind-icon">sender<wbr>Address<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#senderEmail" class="tsd-kind-icon">sender<wbr>Email</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#senderName" class="tsd-kind-icon">sender<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="MsgReader.FieldsData.html#smtpAddress" class="tsd-kind-icon">smtp<wbr>Address</a></li>
@@ -128,13 +130,43 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="addressType" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> address<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">address<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#addressType">addressType</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L318">MsgReader.ts:318</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contains the email address type of a Message object.</p>
+						</div>
+						<p>e.g.</p>
+						<ul>
+							<li><code>EX</code></li>
+							<li><code>SMTP</code></li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;recipient&#39;.</p>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3002-PidTagAddressType.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3002-PidTagAddressType.md</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/msgreader/issues/10">https://github.com/HiraokaHyperTools/msgreader/issues/10</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="attachments" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> attachments</h3>
 					<div class="tsd-signature tsd-kind-icon">attachments<span class="tsd-signature-symbol">:</span> <a href="MsgReader.FieldsData.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldsData</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L302">MsgReader.ts:302</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L403">MsgReader.ts:403</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -152,7 +184,7 @@
 <span style="color: #000000">}</span>
 </code></pre>
 						<p>Use with <a href="../classes/MsgReader.MsgReader-1.html#getAttachment">MsgReader.getAttachment</a>.</p>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -162,14 +194,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#body">body</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L81">MsgReader.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L86">MsgReader.ts:86</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains message body text in plain text format.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1000-PidTagBody.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1000-PidTagBody.md</a></p>
@@ -184,14 +216,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#clientSubmitTime">clientSubmitTime</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L181">MsgReader.ts:181</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L230">MsgReader.ts:230</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the current time, in UTC, when the email message is submitted.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g. <code>Mon, 15 Feb 2021 08:19:04 GMT</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0039-PidTagClientSubmitTime.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0039-PidTagClientSubmitTime.md</a></p>
@@ -206,14 +239,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#compressedRtf">compressedRtf</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L99">MsgReader.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L124">MsgReader.ts:124</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains message body text in compressed RTF format.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1009-PidTagRtfCompressed.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1009-PidTagRtfCompressed.md</a></p>
@@ -227,14 +260,14 @@
 					<div class="tsd-signature tsd-kind-icon">content<wbr>Length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L247">MsgReader.ts:247</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L348">MsgReader.ts:348</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The attachment file&#39;s contentLength.</p>
 						</div>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -244,14 +277,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#creationTime">creationTime</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L163">MsgReader.ts:163</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L208">MsgReader.ts:208</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the time, in UTC, that the object was created.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g. <code>Mon, 15 Feb 2021 08:19:21 GMT</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3007-PidTagCreationTime.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3007-PidTagCreationTime.md</a></p>
@@ -266,7 +300,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#creatorSMTPAddress">creatorSMTPAddress</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L200">MsgReader.ts:200</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L256">MsgReader.ts:256</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -274,10 +308,17 @@
 							<p>This undocumented <code>creatorSMTPAddress</code> will be attached
 							when you send a mail via Exchange Online server.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>xxx@xxx.onmicrosoft.com</code> for <a href="MsgReader.FieldsData.html#senderAddressType">senderAddressType</a> = &#39;EX&#39;</li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols">https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/msgreader/issues/10">https://github.com/HiraokaHyperTools/msgreader/issues/10</a></p>
 							</dd>
 						</dl>
 					</div>
@@ -288,7 +329,7 @@
 					<div class="tsd-signature tsd-kind-icon">data<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L256">MsgReader.ts:256</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L357">MsgReader.ts:357</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -296,7 +337,7 @@
 							<p>The attachment file&#39;s dataId (for internal use).</p>
 						</div>
 						<p>This is entry index to CFBF stream.</p>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -305,7 +346,7 @@
 					<div class="tsd-signature tsd-kind-icon">data<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;msg&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;attachment&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;recipient&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L240">MsgReader.ts:240</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L341">MsgReader.ts:341</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -316,14 +357,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#email">email</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L154">MsgReader.ts:154</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L197">MsgReader.ts:197</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the email address of a Message object.</p>
 						</div>
-						<p>Target dataType = &#39;recipient&#39;.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>xmailuser@xmailserver.test</code> for <a href="MsgReader.FieldsData.html#addressType">addressType</a> = &#39;SMTP&#39;</li>
+							<li><code>/o=ExchangeLabs/ou=Exchange Administrative Group (xxx)/cn=Recipients/cn=xxx</code> for <a href="MsgReader.FieldsData.html#addressType">addressType</a> = &#39;EX&#39;</li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;recipient&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3003-PidTagEmailAddress.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3003-PidTagEmailAddress.md</a></p>
@@ -337,14 +383,14 @@
 					<div class="tsd-signature tsd-kind-icon">error<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L325">MsgReader.ts:325</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L426">MsgReader.ts:426</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>error is set on parse error.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -354,14 +400,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#extension">extension</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L108">MsgReader.ts:108</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L135">MsgReader.ts:135</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains a file name extension that indicates the document type of an attachment.</p>
 						</div>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>e.g. <code>.png</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3703-PidTagAttachExtension.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3703-PidTagAttachExtension.md</a></p>
@@ -376,14 +423,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#fileName">fileName</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L127">MsgReader.ts:127</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L158">MsgReader.ts:158</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains an attachment&#39;s long filename and extension, excluding path.</p>
 						</div>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>e.g. <code>green.png</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachlongfilename-canonical-property">https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachlongfilename-canonical-property</a></p>
@@ -401,14 +449,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#fileNameShort">fileNameShort</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L117">MsgReader.ts:117</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L146">MsgReader.ts:146</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains an attachment&#39;s base file name and extension, excluding path.</p>
 						</div>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>e.g. <code>green.png</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachfilename-canonical-property">https://docs.microsoft.com/en-US/office/client-developer/outlook/mapi/pidtagattachfilename-canonical-property</a></p>
@@ -422,7 +471,7 @@
 					<div class="tsd-signature tsd-kind-icon">folder<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L265">MsgReader.ts:265</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L366">MsgReader.ts:366</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -430,7 +479,7 @@
 							<p>folderId is internal and valid for internal msg file.</p>
 						</div>
 						<p>This is entry index to CFBF storage.</p>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -440,14 +489,31 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#headers">headers</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L90">MsgReader.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L115">MsgReader.ts:115</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains transport-specific message envelope information for email.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g.</p>
+						<pre><code><span style="color: #001080">Return</span><span style="color: #000000">-Path: &lt;</span><span style="color: #267F99">xmailuser</span><span style="color: #000000">@</span><span style="color: #267F99">xmailserver</span><span style="color: #000000">.</span><span style="color: #267F99">test</span><span style="color: #000000">&gt;</span>
+<span style="color: #001080">Delivered</span><span style="color: #000000">-To: </span><span style="color: #001080">xmailuser</span><span style="color: #000000">@</span><span style="color: #001080">xmailserver</span><span style="color: #000000">.</span><span style="color: #001080">test</span>
+<span style="color: #0070C1">X</span><span style="color: #000000">-AuthUser: </span><span style="color: #001080">xmailuser</span><span style="color: #000000">@</span><span style="color: #001080">xmailserver</span><span style="color: #000000">.</span><span style="color: #001080">test</span>
+<span style="color: #000000">Received: </span><span style="color: #001080">from</span><span style="color: #000000"> </span><span style="color: #795E26">H270</span><span style="color: #000000"> ([</span><span style="color: #098658">127.0</span><span style="color: #000000">.</span><span style="color: #098658">0.1</span><span style="color: #000000">]:</span><span style="color: #098658">56695</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #001080">by</span><span style="color: #000000"> </span><span style="color: #001080">xmailserver</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000"> </span><span style="color: #AF00DB">with</span><span style="color: #000000"> [</span><span style="color: #001080">XMail</span><span style="color: #000000"> </span><span style="color: #098658">1.27</span><span style="color: #000000"> </span><span style="color: #0070C1">ESMTP</span><span style="color: #000000"> </span><span style="color: #001080">Server</span><span style="color: #000000">]</span>
+<span style="color: #000000">    </span><span style="color: #001080">id</span><span style="color: #000000"> &lt;</span><span style="color: #0070C1">S9</span><span style="color: #000000">&gt; </span><span style="color: #001080">for</span><span style="color: #000000"> &lt;</span><span style="color: #001080">xmailuser</span><span style="color: #000000">@</span><span style="color: #001080">xmailserver</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000">&gt; </span><span style="color: #001080">from</span><span style="color: #000000"> &lt;</span><span style="color: #001080">xmailuser</span><span style="color: #000000">@</span><span style="color: #001080">xmailserver</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000">&gt;;</span>
+<span style="color: #000000">    </span><span style="color: #001080">Tue</span><span style="color: #000000">, </span><span style="color: #098658">12</span><span style="color: #000000"> </span><span style="color: #001080">May</span><span style="color: #000000"> </span><span style="color: #098658">2020</span><span style="color: #000000"> </span><span style="color: #098658">14</span><span style="color: #000000">:</span><span style="color: #098658">45</span><span style="color: #000000">:</span><span style="color: #098658">17</span><span style="color: #000000"> +</span><span style="color: #098658">0900</span>
+<span style="color: #000000">From: </span><span style="color: #001080">Microsoft</span><span style="color: #000000"> </span><span style="color: #001080">Outlook</span><span style="color: #000000"> &lt;</span><span style="color: #001080">xmailuser</span><span style="color: #000000">@</span><span style="color: #001080">xmailserver</span><span style="color: #000000">.</span><span style="color: #001080">test</span><span style="color: #000000">&gt;</span>
+<span style="color: #000000">To: =?</span><span style="color: #001080">utf</span><span style="color: #000000">-</span><span style="color: #098658">8</span><span style="color: #000000">?</span><span style="color: #0070C1">B</span><span style="color: #000000">?</span><span style="color: #001080">eG1haWx1c2Vy</span><span style="color: #000000">?= &lt;</span><span style="color: #267F99">xmailuser</span><span style="color: #000000">@</span><span style="color: #267F99">xmailserver</span><span style="color: #000000">.</span><span style="color: #267F99">test</span><span style="color: #000000">&gt;</span>
+<span style="color: #001080">Subject</span><span style="color: #000000">: =?</span><span style="color: #001080">utf</span><span style="color: #000000">-</span><span style="color: #098658">8</span><span style="color: #000000">?</span><span style="color: #0070C1">B</span><span style="color: #000000">?</span><span style="color: #001080">TWljcm9zb2Z0IE91dGxvb2sg44OG44K544OIIOODoeODg</span><span style="color: #000000">+</span><span style="color: #001080">OCu</span><span style="color: #000000">+</span><span style="color: #001080">ODvOOCuA</span><span style="color: #000000">==?=</span>
+<span style="color: #0070C1">MIME</span><span style="color: #000000">-</span><span style="color: #001080">Version</span><span style="color: #000000">: </span><span style="color: #098658">1.0</span>
+<span style="color: #001080">Content</span><span style="color: #000000">-</span><span style="color: #001080">Type</span><span style="color: #000000">: </span><span style="color: #001080">text</span><span style="color: #000000">/</span><span style="color: #001080">html</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #001080">charset</span><span style="color: #000000">=\</span><span style="color: #A31515">&quot;utf-8</span><span style="color: #EE0000">\&quot;</span>
+<span style="color: #A31515">Content-Transfer-Encoding: 8bi</span><span style="color: #CD3131">t</span>
+
+</code></pre>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/007D-PidTagTransportMessageHeaders.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/007D-PidTagTransportMessageHeaders.md</a></p>
@@ -461,7 +527,7 @@
 					<div class="tsd-signature tsd-kind-icon">inner<wbr>Msg<wbr>Content<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L274">MsgReader.ts:274</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L375">MsgReader.ts:375</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -469,7 +535,7 @@
 							<p>innerMsgContent is set to true, if this attachment is inner msg.</p>
 						</div>
 						<p>The inner msg is represented as a CFBF storage (not single CFBF stream).</p>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
@@ -478,14 +544,14 @@
 					<div class="tsd-signature tsd-kind-icon">inner<wbr>Msg<wbr>Content<wbr>Fields<span class="tsd-signature-symbol">:</span> <a href="MsgReader.FieldsData.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldsData</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L281">MsgReader.ts:281</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L382">MsgReader.ts:382</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>The properties defined in inner msg.</p>
 						</div>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -495,14 +561,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#lastModificationTime">lastModificationTime</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L172">MsgReader.ts:172</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L219">MsgReader.ts:219</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the time, in UTC, of the last modification to the object.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g. <code>Mon, 15 Feb 2021 08:19:21 GMT</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3008-PidTagLastModificationTime.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3008-PidTagLastModificationTime.md</a></p>
@@ -517,7 +584,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#lastModifierName">lastModifierName</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L232">MsgReader.ts:232</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L303">MsgReader.ts:303</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -526,10 +593,17 @@
 						</div>
 						<p>A email address may be stored in <code>lastModifierName</code>, if it was sent through Exchange Server.</p>
 						<p><code>lastModifierSMTPAddress</code> or <code>smtpAddress</code> may not be stored in some cases.</p>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>UnoKenji</code> for <a href="MsgReader.FieldsData.html#senderAddressType">senderAddressType</a> = &#39;EX&#39;</li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FFA-PidTagLastModifierName.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FFA-PidTagLastModifierName.md</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/msgreader/issues/10">https://github.com/HiraokaHyperTools/msgreader/issues/10</a></p>
 							</dd>
 						</dl>
 					</div>
@@ -541,7 +615,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#lastModifierSMTPAddress">lastModifierSMTPAddress</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L210">MsgReader.ts:210</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L271">MsgReader.ts:271</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -549,10 +623,17 @@
 							<p>This undocumented <code>lastModifierSMTPAddress</code> will be attached
 							when you send a mail via Exchange Online server.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>xxx@xxx.onmicrosoft.com</code> for <a href="MsgReader.FieldsData.html#senderAddressType">senderAddressType</a> = &#39;EX&#39;</li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols">https://social.microsoft.com/Forums/partner/en-US/8e15ac6d-0404-41c0-9af7-26a06ca797bf/meaning-of-mapi-identifiers-0x5d0a-and-0x5d0b?forum=os_exchangeprotocols</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/msgreader/issues/10">https://github.com/HiraokaHyperTools/msgreader/issues/10</a></p>
 							</dd>
 						</dl>
 					</div>
@@ -564,14 +645,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#messageDeliveryTime">messageDeliveryTime</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L190">MsgReader.ts:190</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L241">MsgReader.ts:241</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Specifies the time (in UTC) when the server received the message.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g. <code>Mon, 15 Feb 2021 08:19:00 GMT</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0E06-PidTagMessageDeliveryTime.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0E06-PidTagMessageDeliveryTime.md</a></p>
@@ -586,14 +668,20 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L145">MsgReader.ts:145</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L183">MsgReader.ts:183</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the display name of the folder.</p>
 						</div>
-						<p>Target dataType = &#39;recipient&#39;.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>xmailuser</code> for recipient.</li>
+							<li><code>green.png</code> for generic attachment.</li>
+							<li><code>I have attachments!</code> for msg attachment.</li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;recipient&#39; and &#39;attachment&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3001-PidTagDisplayName.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3001-PidTagDisplayName.md</a></p>
@@ -608,14 +696,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#pidContentId">pidContentId</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L136">MsgReader.ts:136</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L168">MsgReader.ts:168</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Contains a content identifier unique to the Message object that matches a</p>
+							<p>Contains a content identifier unique to the Message object that matches a
+							corresponding &quot;cid&quot; URI schema reference in the HTML body of the Message object.</p>
 						</div>
-						<p>Target dataType = &#39;attachment&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3712-PidTagAttachContentId.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3712-PidTagAttachContentId.md</a></p>
@@ -630,7 +719,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeParsedOxProps.html">SomeParsedOxProps</a>.<a href="MsgReader.SomeParsedOxProps.html#recipType">recipType</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L236">MsgReader.ts:236</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L337">MsgReader.ts:337</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -640,7 +729,7 @@
 					<div class="tsd-signature tsd-kind-icon">recipients<span class="tsd-signature-symbol">:</span> <a href="MsgReader.FieldsData.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldsData</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L318">MsgReader.ts:318</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L419">MsgReader.ts:419</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -654,7 +743,37 @@
 <span style="color: #000000">  </span><span style="color: #0451A5">&quot;recipType&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;to&quot;</span>
 <span style="color: #000000">},</span>
 </code></pre>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="senderAddressType" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sender<wbr>Address<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">sender<wbr>Address<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#senderAddressType">senderAddressType</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L333">MsgReader.ts:333</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contains the email address type of the sending mailbox owner.</p>
+						</div>
+						<p>e.g.</p>
+						<ul>
+							<li><code>EX</code></li>
+							<li><code>SMTP</code></li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1E-PidTagSenderAddressType.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1E-PidTagSenderAddressType.md</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/msgreader/issues/10">https://github.com/HiraokaHyperTools/msgreader/issues/10</a></p>
+							</dd>
+						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
@@ -664,14 +783,19 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#senderEmail">senderEmail</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L72">MsgReader.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L77">MsgReader.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the email address of the sending mailbox owner.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>xmailuser@xmailserver.test</code> for <a href="MsgReader.FieldsData.html#senderAddressType">senderAddressType</a> = &#39;SMTP&#39;</li>
+							<li><code>/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (xxx)/CN=RECIPIENTS/CN=xxx</code> for <a href="MsgReader.FieldsData.html#senderAddressType">senderAddressType</a> = &#39;EX&#39;</li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1F-PidTagSenderEmailAddress.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1F-PidTagSenderEmailAddress.md</a></p>
@@ -686,14 +810,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#senderName">senderName</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L63">MsgReader.ts:63</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L63">MsgReader.ts:63</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the display name of the sending mailbox owner.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1A-PidTagSenderName.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C1A-PidTagSenderName.md</a></p>
@@ -708,17 +832,24 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#smtpAddress">smtpAddress</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L219">MsgReader.ts:219</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L285">MsgReader.ts:285</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the SMTP address of the Message object.</p>
 						</div>
-						<p>Target dataType = &#39;recipient&#39;.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>xxx@xxx.onmicrosoft.com</code> for <a href="MsgReader.FieldsData.html#addressType">addressType</a> = &#39;EX&#39;</li>
+						</ul>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;recipient&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/39FE-PidTagSmtpAddress.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/39FE-PidTagSmtpAddress.md</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/msgreader/issues/10">https://github.com/HiraokaHyperTools/msgreader/issues/10</a></p>
 							</dd>
 						</dl>
 					</div>
@@ -730,14 +861,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="MsgReader.SomeOxProps.html">SomeOxProps</a>.<a href="MsgReader.SomeOxProps.html#subject">subject</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/9049821/src/MsgReader.ts#L54">MsgReader.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/d908e57/src/MsgReader.ts#L54">MsgReader.ts:54</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
 							<p>Contains the subject of the email message.</p>
 						</div>
-						<p>Target dataType = &#39;msg&#39;.</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0037-PidTagSubject.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0037-PidTagSubject.md</a></p>
@@ -777,6 +908,9 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="MsgReader.FieldsData.html" class="tsd-kind-icon">Fields<wbr>Data</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="MsgReader.FieldsData.html#addressType" class="tsd-kind-icon">address<wbr>Type</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.FieldsData.html#attachments" class="tsd-kind-icon">attachments</a>
 							</li>
@@ -854,6 +988,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.FieldsData.html#recipients" class="tsd-kind-icon">recipients</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="MsgReader.FieldsData.html#senderAddressType" class="tsd-kind-icon">sender<wbr>Address<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="MsgReader.FieldsData.html#senderEmail" class="tsd-kind-icon">sender<wbr>Email</a>
