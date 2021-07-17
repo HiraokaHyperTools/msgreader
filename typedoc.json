@@ -5,7 +5,7 @@
     "./src/MsgReader.ts",
     "./src/Reader.ts"
   ],
-  "out": "docs",
+  "out": "docs/typedoc",
   "excludePrivate": true,
   "excludeInternal": true,
   "readme": "none"
