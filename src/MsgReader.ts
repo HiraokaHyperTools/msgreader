@@ -357,7 +357,7 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
   dataId?: number;
 
   /**
-   * folderId is internal and valid for internal msg file.
+   * folderId is internal and valid for embedded msg file.
    * 
    * This is entry index to CFBF storage.
    * 
@@ -366,16 +366,16 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
   folderId?: number;
 
   /**
-   * innerMsgContent is set to true, if this attachment is inner msg.
+   * innerMsgContent is set to true, if this attachment is embedded msg.
    * 
-   * The inner msg is represented as a CFBF storage (not single CFBF stream).
+   * The embedded msg is represented as a CFBF storage (not single CFBF stream).
    * 
    * Target {@link dataType} = 'attachment'.
    */
   innerMsgContent?: true;
 
   /**
-   * The properties defined in inner msg.
+   * The properties defined in embedded msg.
    * 
    * Target {@link dataType} = 'attachment'.
    */
@@ -750,7 +750,7 @@ export default class MsgReader {
   getAttachment(attach: number | FieldsData): { fileName: string; content: Uint8Array } {
     const attachData = typeof attach === 'number' ? this.fieldsData.attachments[attach] : attach;
     if (attachData.innerMsgContent === true && typeof attachData.folderId === "number") {
-      // inner msg
+      // embedded msg
       return { fileName: attachData.name + ".msg", content: this.innerMsgBurners[attachData.folderId]() };
     }
     else {
