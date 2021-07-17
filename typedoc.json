@@ -7,5 +7,6 @@
   ],
   "out": "docs",
   "excludePrivate": true,
-  "excludeInternal": true
+  "excludeInternal": true,
+  "readme": "none"
 }
