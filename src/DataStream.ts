@@ -162,10 +162,9 @@ export default class DataStream {
 
   /**
     Internal function to resize the DataStream buffer when required.
-    @internal
     @param extra Number of bytes to add to the buffer allocation.
     */
-  _realloc(extra: number): void {
+  private _realloc(extra: number): void {
     if (!this._dynamicSize) {
       return;
     }
@@ -197,9 +196,8 @@ export default class DataStream {
     the virtual byteLength is smaller than the buffer byteLength (happens after
     growing the buffer with writes and not filling the extra space completely).
   
-    @internal
     */
-  _trimAlloc(): void {
+  private _trimAlloc(): void {
     if (this._byteLength == this._buffer.byteLength) {
       return;
     }
@@ -932,7 +930,7 @@ export default class DataStream {
     @param srcOffset Offset to the source ArrayBuffer.
     @param byteLength Number of bytes to copy.
    */
-  static memcpy(
+  private static memcpy(
     dst: ArrayBufferLike, dstOffset: number,
     src: ArrayBufferLike, srcOffset: number, byteLength: number
   ): void {
@@ -948,9 +946,8 @@ export default class DataStream {
     @param arrayIsLittleEndian True if the data in the array is
                                          little-endian. Set false for big-endian.
     @return The converted typed array.
-    @internal
    */
-  static arrayToNative(array, arrayIsLittleEndian: boolean) {
+  private static arrayToNative(array, arrayIsLittleEndian: boolean) {
     if (arrayIsLittleEndian == this.endianness) {
       return array;
     } else {
@@ -965,9 +962,8 @@ export default class DataStream {
     @param littleEndian True if the converted array should be
                                   little-endian. Set false for big-endian.
     @return The converted typed array.
-    @internal
    */
-  static nativeToEndian(array, littleEndian: boolean) {
+  private static nativeToEndian(array, littleEndian: boolean) {
     if (this.endianness == littleEndian) {
       return array;
     } else {
@@ -980,9 +976,8 @@ export default class DataStream {
   
     @param array Typed array to flip.
     @return The converted typed array.
-    @internal
    */
-  static flipArrayEndianness(array) {
+  private static flipArrayEndianness(array) {
     var u8 = new Uint8Array(array.buffer, array.byteOffset, array.byteLength);
     for (var i = 0; i < array.byteLength; i += array.BYTES_PER_ELEMENT) {
       for (var j = i + array.BYTES_PER_ELEMENT - 1, k = i; j > k; j--, k++) {
@@ -1000,9 +995,8 @@ export default class DataStream {
   
     @param array Array of character codes.
     @return String created from the character codes.
-    @internal
   **/
-  static createStringFromArray(array: ArrayLike<number>): string {
+  private static createStringFromArray(array: ArrayLike<number>): string {
     var str = "";
     for (var i = 0; i < array.length; i++) {
       str += String.fromCharCode(array[i]);
@@ -1011,7 +1005,7 @@ export default class DataStream {
   };
 
   /**
-    Seek position where DataStream#readStruct ran into a problem.
+    Seek position where {@link readStruct} ran into a problem.
     Useful for debugging struct parsing.
   
    */
