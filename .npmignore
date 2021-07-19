@@ -6,3 +6,7 @@ MEMO.md
 tsconfig.json
 .babelrc
 azure-pipelines.yml
+docs/
+typedoc.json
+.gitmodules
+others/

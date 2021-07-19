@@ -2,6 +2,7 @@ const program = require('commander');
 
 const MsgReader = require('./lib/MsgReader').default;
 const { props, typeNames } = require('./lib/Defs');
+const { Reader } = require('./lib/Reader');
 
 const fs = require('fs');
 const path = require('path');
@@ -46,6 +47,10 @@ function listAttachmentsRecursively(fieldsData, delimiter) {
   const walk = (fieldsData, prefix, attachments) => {
     for (const att of fieldsData.attachments) {
       if (att.innerMsgContent) {
+        attachments.push({
+          fileName: prefix + att.name + ".msg",
+          attachmentRef: att,
+        })
         walk(att.innerMsgContentFields, att.name + delimiter, attachments);
       }
       else {
@@ -122,6 +127,42 @@ program
       }
     }
     const testMsgInfo = testMsg.getFileData()
+  });
+
+program
+  .command('expose <msgFilePath> <exportToDir>')
+  .description('Expose files/folders in Compound File Binary Format (CFBF)')
+  .action((msgFilePath, exportToDir, options) => {
+    const msgFileBuffer = fs.readFileSync(msgFilePath);
+    const store = new Reader(msgFileBuffer);
+    store.parse();
+    function expose(folder, saveTo) {
+      fs.mkdir(saveTo, { recursive: true }, (err) => {
+        if (err) {
+          return;
+        }
+        for (let fileName of folder.fileNames()) {
+          const array = folder.readFile(fileName);
+          const path = saveTo + "/" + fileName;
+          console.info(path);
+          fs.writeFileSync(path, (array === null) ? [] : array);
+        }
+        for (let subFolder of folder.subFolders()) {
+          expose(subFolder, saveTo + "/" + subFolder.name);
+        }
+      });
+    }
+    expose(store.rootFolder(), exportToDir);
+  });
+
+program
+  .command('dummy1')
+  .action(() => {
+    const msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    const testMsgAttachment0 = testMsg.getAttachment(0);
+    console.log(testMsgAttachment0);
   });
 
 program
