@@ -1,0 +1,50 @@
+//------------------------------------------------
+//--- 010 Editor v11.0.1 Binary Template
+//
+//      File: 
+//   Authors: kenjiuno
+//   Version: 0.1
+//   Purpose: PidLidVerbStream Property
+//  Category: 
+// File Mask: 
+//  ID Bytes: 02 01
+//   History: 
+//------------------------------------------------
+
+struct VoteOption {
+ uint VerbType;
+ byte DisplayNameCount;
+ char DisplayName[DisplayNameCount];
+ byte MsgClsNameCount;
+ char MsgClsName[MsgClsNameCount];
+ byte Internal1StringCount;
+ char Internal1String[Internal1StringCount];
+ byte DisplayNameCountRepeat;
+ char DisplayNameRepeat[DisplayNameCountRepeat];
+ uint Internal2;
+ byte Internal3;
+ uint fUseUSHeaders;
+ uint Internal4;
+ uint SendBehavior;
+ uint Internal5;
+ uint ID;
+ int Internal6;
+};
+
+struct VoteOptionExtra{
+ byte DisplayNameCount;
+ wchar_t DisplayName[DisplayNameCount];
+ byte DisplayNameCountRepeat;
+ wchar_t DisplayNameRepeat[DisplayNameCountRepeat];
+};
+
+struct Header {
+ uint16 Version;
+ uint16 Count;
+ uint16 Dummy1;
+ VoteOption VoteOptions[Count] <optimize=false>;
+ uint16 Version2;
+ VoteOptionExtra VoteOptionExtras[Count] <optimize=false>;
+};
+
+Header header;
