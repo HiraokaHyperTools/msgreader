@@ -539,6 +539,58 @@ describe('MsgReader', function () {
       );
     });
   });
+
+  describe('attachAndInline.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/attachAndInline.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    removeCompressedRtf(testMsgInfo);
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      assert.deepStrictEqual(
+        testMsgInfo,
+        {
+          attachments: [
+            {
+              contentLength: 1558,
+              dataId: 47,
+              dataType: 'attachment',
+              extension: '.png',
+              fileName: 'attach.png',
+              fileNameShort: 'attach.png',
+              name: 'attach.png'
+            },
+            {
+              contentLength: 809,
+              dataId: 57,
+              dataType: 'attachment',
+              extension: '.png',
+              fileName: 'image001.png',
+              fileNameShort: 'image001.png',
+              name: 'image001.png',
+              pidContentId: 'image001.png@01D78380.EF6DC500'
+            }
+          ],
+          body: '\r\n \r\n',
+          compressedRtf: undefined,
+          creationTime: 'Tue, 27 Jul 2021 22:20:15 GMT',
+          dataType: 'msg',
+          lastModificationTime: 'Tue, 27 Jul 2021 22:20:15 GMT',
+          messageDeliveryTime: 'Tue, 27 Jul 2021 22:19:50 GMT',
+          recipients: [
+            {
+              addressType: 'SMTP',
+              dataType: 'recipient',
+              email: 'xmailuser@xmailserver.test',
+              name: 'xmailuser@xmailserver.test',
+              recipType: 'to'
+            }
+          ],
+          subject: 'Attach and inline'
+        }
+      );
+    });
+  });
 });
 
 
