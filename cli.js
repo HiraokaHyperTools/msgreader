@@ -111,12 +111,13 @@ program
         if (fields.msgIndex === undefined) {
           fields.msgIndex = msgIndex++;
         }
-        if (fields.dataType === "msg") {
+        {
           const key = tag.toString(16).padStart(8, "0").toUpperCase();
           const prop = props.filter(it => it.key === key).shift();
           const type = typeNames[parseInt(key.substr(4), 16)];
           console.info(
             "msgIdx:", fields.msgIndex,
+            "dataType:", `'${fields.dataType}'`,
             "tag:", `0x${key}`,
             "name:", prop && prop.name || null,
             "type:", type && type || null,

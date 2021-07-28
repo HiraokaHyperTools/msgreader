@@ -1,0 +1,21 @@
+{
+ "dataType": "msg",
+ "attachments": [
+  {
+   "dataType": "attachment",
+   "name": "64KB.bin",
+   "dataId": 35,
+   "contentLength": 65536,
+   "extension": ".bin",
+   "fileNameShort": "64KB.bin",
+   "fileName": "64KB.bin",
+   "attachmentHidden": false
+  }
+ ],
+ "recipients": [],
+ "subject": "Has 64KB.bin",
+ "body": " \r\n",
+ "creationTime": "Thu, 15 Jul 2021 13:31:27 GMT",
+ "lastModificationTime": "Thu, 15 Jul 2021 13:31:27 GMT",
+ "messageDeliveryTime": "Thu, 15 Jul 2021 13:30:21 GMT"
+}

@@ -1,0 +1,21 @@
+{
+ "dataType": "msg",
+ "attachments": [
+  {
+   "dataType": "attachment",
+   "name": "A.txt",
+   "fileNameShort": "A.txt",
+   "dataId": 40,
+   "contentLength": 11,
+   "extension": ".txt",
+   "fileName": "A.txt",
+   "attachmentHidden": false
+  }
+ ],
+ "recipients": [],
+ "body": " \r\n",
+ "subject": "",
+ "creationTime": "Tue, 05 Mar 2019 07:41:09 GMT",
+ "lastModificationTime": "Tue, 05 Mar 2019 07:41:09 GMT",
+ "messageDeliveryTime": "Tue, 05 Mar 2019 07:41:04 GMT"
+}

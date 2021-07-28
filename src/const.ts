@@ -69,6 +69,7 @@ export default {
         '3704': 'fileNameShort',
         '3707': 'fileName',
         '3712': 'pidContentId',
+        '7ffe': 'attachmentHidden',
         // recipient specific
         '3001': 'name',
         '3002': 'addressType',

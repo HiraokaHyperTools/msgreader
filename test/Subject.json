@@ -1,0 +1,32 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "name": "ToUser",
+   "email": "to@example.com",
+   "addressType": "SMTP",
+   "recipType": "to"
+  },
+  {
+   "dataType": "recipient",
+   "name": "ToCc",
+   "email": "cc@example.com",
+   "addressType": "SMTP",
+   "recipType": "cc"
+  },
+  {
+   "dataType": "recipient",
+   "name": "ToBcc",
+   "email": "bcc@example.com",
+   "addressType": "SMTP",
+   "recipType": "bcc"
+  }
+ ],
+ "subject": "Subject",
+ "body": "Message\r\n",
+ "creationTime": "Mon, 28 Sep 2020 11:28:52 GMT",
+ "lastModificationTime": "Mon, 28 Sep 2020 11:28:52 GMT",
+ "messageDeliveryTime": "Mon, 28 Sep 2020 11:28:39 GMT"
+}

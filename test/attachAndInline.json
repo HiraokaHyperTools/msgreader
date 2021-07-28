@@ -1,0 +1,40 @@
+{
+ "dataType": "msg",
+ "attachments": [
+  {
+   "dataType": "attachment",
+   "name": "attach.png",
+   "fileNameShort": "attach.png",
+   "dataId": 47,
+   "contentLength": 1558,
+   "extension": ".png",
+   "fileName": "attach.png",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "name": "image001.png",
+   "fileNameShort": "image001.png",
+   "dataId": 57,
+   "contentLength": 809,
+   "extension": ".png",
+   "fileName": "image001.png",
+   "pidContentId": "image001.png@01D78380.EF6DC500",
+   "attachmentHidden": true
+  }
+ ],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "name": "xmailuser@xmailserver.test",
+   "email": "xmailuser@xmailserver.test",
+   "addressType": "SMTP",
+   "recipType": "to"
+  }
+ ],
+ "subject": "Attach and inline",
+ "body": "\r\n \r\n",
+ "creationTime": "Tue, 27 Jul 2021 22:20:15 GMT",
+ "lastModificationTime": "Tue, 27 Jul 2021 22:20:15 GMT",
+ "messageDeliveryTime": "Tue, 27 Jul 2021 22:19:50 GMT"
+}

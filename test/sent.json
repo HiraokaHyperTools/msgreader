@@ -1,0 +1,22 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "name": "'xmailuser@xmailserver.test'",
+   "email": "xmailuser@xmailserver.test",
+   "addressType": "SMTP",
+   "recipType": "to"
+  }
+ ],
+ "senderEmail": "xmailuser@xmailserver.test",
+ "subject": "Sent time",
+ "body": "Test mail\r\n\r\n",
+ "senderName": "xmailuser",
+ "senderAddressType": "SMTP",
+ "creationTime": "Mon, 15 Feb 2021 08:19:21 GMT",
+ "lastModificationTime": "Mon, 15 Feb 2021 08:19:21 GMT",
+ "clientSubmitTime": "Mon, 15 Feb 2021 08:19:04 GMT",
+ "messageDeliveryTime": "Mon, 15 Feb 2021 08:19:00 GMT"
+}

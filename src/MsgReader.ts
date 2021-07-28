@@ -20,6 +20,7 @@ import CONST from './const'
 import DataStream from './DataStream'
 import { CFileSet, CFolder, Reader } from './Reader';
 import { burn, Entry } from './Burner';
+import { toHexStr } from './utils';
 
 // MSG Reader implementation
 
@@ -595,7 +596,7 @@ export default class MsgReader {
     }
   }
 
-  private fieldsRecipProperties(parserConfig: ParserConfig, documentProperty: CFileSet, fields: FieldsData): void {
+  private fieldsRecipAndAttachmentProperties(parserConfig: ParserConfig, documentProperty: CFileSet, fields: FieldsData): void {
     const propertiesBinary: Uint8Array = documentProperty.provider();
     const propertiesDs = new DataStream(propertiesBinary, 8, DataStream.LITTLE_ENDIAN);
 
@@ -603,23 +604,29 @@ export default class MsgReader {
     // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
 
     const PtypInteger32 = 0x0003;
+    const PtypBoolean = 0x000B;
     const PidTagRecipientType = 0x0C150003;
 
     while (!propertiesDs.isEof()) {
       const propertyTag = propertiesDs.readUint32();
       const flags = propertiesDs.readUint32();
 
+      const fieldClass = toHexStr((propertyTag >> 16) & 65535, 4);
+      const fieldType = toHexStr(propertyTag & 65535, 4);
+
       const ptyp = propertyTag & 0xFFFF;
       let value = undefined;
+      const rawDataPos = propertiesDs.position;
       if (ptyp === PtypInteger32) {
         value = propertiesDs.readUint32();
-        propertiesDs.readUint32();
-      } else {
-        propertiesDs.readUint32();
-        propertiesDs.readUint32();
+      } else if (ptyp === PtypBoolean) {
+        value = propertiesDs.readUint16() ? true : false;
       }
 
-      parserConfig.propertyObserver(fields, propertyTag, new Uint8Array(8));
+      propertiesDs.seek(rawDataPos);
+      const raw = propertiesDs.readUint8Array(8);
+
+      parserConfig.propertyObserver(fields, propertyTag, raw);
 
       if (propertyTag === PidTagRecipientType) {
         const MAPI_TO = 1;
@@ -633,6 +640,13 @@ export default class MsgReader {
         }
         else if (value === MAPI_BCC) {
           fields["recipType"] = "bcc";
+        }
+      }
+      else {
+        const fieldName = CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
+        //console.info("@", fieldClass, propertyTag, fieldName, value);
+        if (fieldName && value !== undefined) {
+          fields[fieldName] = value;
         }
       }
     }
@@ -693,8 +707,8 @@ export default class MsgReader {
         this.fieldsDataDocument(parserConfig, fileSet, fields);
       }
       else if (fileSet.name === "__properties_version1.0") {
-        if (subClass === "recip") {
-          this.fieldsRecipProperties(parserConfig, fileSet, fields);
+        if (subClass === "recip" || subClass === "attachment") {
+          this.fieldsRecipAndAttachmentProperties(parserConfig, fileSet, fields);
         }
         else if (subClass === "root") {
           this.fieldsRootProperties(parserConfig, fileSet, fields);

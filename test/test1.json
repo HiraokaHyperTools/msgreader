@@ -1,0 +1,25 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "name": "to@example.com",
+   "email": "to@example.com",
+   "addressType": "SMTP",
+   "recipType": "to"
+  },
+  {
+   "dataType": "recipient",
+   "name": "cc@example.com",
+   "email": "cc@example.com",
+   "addressType": "SMTP",
+   "recipType": "cc"
+  }
+ ],
+ "subject": "title",
+ "body": "body\r\n",
+ "creationTime": "Tue, 05 Mar 2019 07:22:33 GMT",
+ "lastModificationTime": "Tue, 05 Mar 2019 07:22:33 GMT",
+ "messageDeliveryTime": "Tue, 05 Mar 2019 07:22:17 GMT"
+}

@@ -22,3 +22,20 @@ export function uInt2int(data: number[]): number[] {
   }
   return result;
 }
+
+/**
+ * @internal
+ */
+export function toHexStr(value: number, padding: number): string {
+  let text = "";
+  while (value != 0) {
+    text = "0123456789abcdef"[value & 15] + text;
+    value >>= 4;
+    text = "0123456789abcdef"[value & 15] + text;
+    value >>= 4;
+  }
+  while (text.length < padding) {
+    text = "0" + text;
+  }
+  return text;
+}
