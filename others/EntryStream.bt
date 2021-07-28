@@ -1,0 +1,25 @@
+//------------------------------------------------
+//--- 010 Editor v11.0.1 Binary Template
+//
+//      File: 2.2.3.1.2 Entry Stream
+//   Authors: kenjiuno
+//   Version: 
+//   Purpose: https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/81159dd0-649e-4491-b216-877008b23f65
+//  Category: 
+// File Mask: __substg1.0_00030102
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+LittleEndian();
+
+struct Entry {
+ uint NameIdentifier_StringOffset;
+ uint16 PropertyIndex;
+ uint16 GUIDIndex:15;
+ uint16 StringNamedProperty:1;
+};
+
+while (!FEof()) {
+ Entry entry;
+}
