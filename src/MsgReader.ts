@@ -425,6 +425,16 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * Target {@link dataType} = 'msg'.
    */
   error?: string;
+
+  /**
+   * Indicates whether an attachment is hidden from the end user.
+   * 
+   * Target {@link dataType} = 'attachment'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagattachmenthidden-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/7FFE-PidTagAttachmentHidden.md
+   */
+   attachmentHidden?: boolean;
 }
 
 function fileTimeToUnixEpoch(time: number) {
