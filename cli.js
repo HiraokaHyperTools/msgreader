@@ -167,4 +167,13 @@ program
   });
 
 program
+  .command('dummy2')
+  .action(() => {
+    const msgFileBuffer = fs.readFileSync('test/voteItems.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    console.log(testMsgInfo);
+  });
+
+program
   .parse(process.argv);

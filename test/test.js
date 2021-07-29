@@ -17,7 +17,6 @@ function removeCompressedRtf(msg) {
 const generateJsonData = false;
 
 function use(testMsgInfo, jsonFilePath) {
-
   if (generateJsonData) {
     fs.writeFileSync(jsonFilePath, JSON.stringify(testMsgInfo, null, 1));
   }
@@ -188,6 +187,39 @@ describe('MsgReader', function () {
       use(testMsgInfo, 'test/attachAndInline.json');
     });
   });
+
+  describe('voteItems.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/voteItems.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    removeCompressedRtf(testMsgInfo);
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      use(testMsgInfo, 'test/voteItems.json');
+    });
+  });
+
+  describe('voteNo.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/voteNo.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    removeCompressedRtf(testMsgInfo);
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      use(testMsgInfo, 'test/voteNo.json');
+    });
+  });
+
+  describe('voteYes.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/voteYes.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    removeCompressedRtf(testMsgInfo);
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      use(testMsgInfo, 'test/voteYes.json');
+    });
+  });
 });
 
 
@@ -306,5 +338,50 @@ describe('DataStream', function () {
     assert.strictEqual(ds.readUint32(), 0x07060504);
     assert.strictEqual(ds.readUint32(), 0x0b0a0908);
     assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
+  });
+});
+
+
+describe('msftUuidStringify', function () {
+  const { msftUuidStringify } = require('../lib/utils');
+
+  it("basic", function () {
+    assert.strictEqual(
+      msftUuidStringify(
+        [
+          0x33, 0x22, 0x11, 0x00, 0x55, 0x44, 0x77, 0x66,
+          0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff
+        ],
+        0
+      ),
+      "00112233-4455-6677-8899-aabbccddeeff"
+    );
+    assert.strictEqual(
+      msftUuidStringify(
+        [
+          0xff,
+          0x33, 0x22, 0x11, 0x00, 0x55, 0x44, 0x77, 0x66,
+          0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff
+        ],
+        1
+      ),
+      "00112233-4455-6677-8899-aabbccddeeff"
+    );
+  });
+});
+
+describe('toHex', function () {
+  const { toHex1, toHex2, toHex4 } = require('../lib/utils');
+  it("toHex1", function () {
+    assert.strictEqual(toHex1(0x12), "12");
+    assert.strictEqual(toHex1(0xab), "ab");
+  });
+  it("toHex2", function () {
+    assert.strictEqual(toHex2(0x1234), "1234");
+    assert.strictEqual(toHex2(0xabcd), "abcd");
+  });
+  it("toHex4", function () {
+    assert.strictEqual(toHex4(0x12345678), "12345678");
+    assert.strictEqual(toHex4(0xabcdef01), "abcdef01");
   });
 });

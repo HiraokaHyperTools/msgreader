@@ -71,10 +71,17 @@ export default {
         '3712': 'pidContentId',
         '7ffe': 'attachmentHidden',
         // recipient specific
+        '0c15': 'recipType',
         '3001': 'name',
         '3002': 'addressType',
         '3003': 'email',
         '39fe': 'smtpAddress'
+      },
+      PIDLID_MAPPING: {
+        "00062008-0000-0000-c000-000000000046": {
+          0x00008520: { id: "PidLidVerbStream", },
+          0x00008524: { id: "PidLidVerbResponse", },
+        }
       },
       CLASS_MAPPING: {
         ATTACHMENT_DATA: '3701'
@@ -82,7 +89,9 @@ export default {
       TYPE_MAPPING: {
         '001e': 'string',
         '001f': 'unicode',
-        '0102': 'binary'
+        '0102': 'binary',
+        '0003': 'integer',
+        '000b': 'boolean',
       },
       DIR_TYPE: {
         INNER_MSG: '000d'

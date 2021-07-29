@@ -20,7 +20,9 @@ import CONST from './const'
 import DataStream from './DataStream'
 import { CFileSet, CFolder, Reader } from './Reader';
 import { burn, Entry } from './Burner';
-import { toHexStr } from './utils';
+import { msftUuidStringify, toHex2, toHex4 } from './utils';
+import { parse as entryStreamParser } from './EntryStreamParser';
+import { parse as parseVerbStream } from './VerbStreamParser';
 
 // MSG Reader implementation
 
@@ -434,7 +436,27 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagattachmenthidden-canonical-property
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/7FFE-PidTagAttachmentHidden.md
    */
-   attachmentHidden?: boolean;
+  attachmentHidden?: boolean;
+}
+
+interface KeyedEntry {
+  useName: boolean;
+
+  name?: string;
+
+  propertySet?: string;
+  propertyLid?: number;
+}
+
+enum KeyType {
+  root,
+  toSub,
+}
+
+interface FieldValuePair {
+  key: string;
+  keyType: KeyType;
+  value: string | Uint8Array;
 }
 
 function fileTimeToUnixEpoch(time: number) {
@@ -450,24 +472,97 @@ export default class MsgReader {
   parserConfig: ParserConfig;
   private innerMsgBurners: { [key: number]: () => Uint8Array };
 
+  /**
+   * pidTag: 0x8000 ~ 0xFFFF
+   */
+  private privatePidToKeyed: { [key: number]: KeyedEntry };
+
   constructor(arrayBuffer: ArrayBuffer | DataView) {
     this.reader = new Reader(arrayBuffer);
   }
 
-  private getFieldValue(fieldProperty: CFileSet, type: string): string | Uint8Array {
-    const array = fieldProperty.provider();
+  private decodeField(fieldClass: string, fieldType: string, provider: () => Uint8Array, insideProps: boolean): FieldValuePair {
+    const array = provider();
     const ds = new DataStream(array, 0, DataStream.LITTLE_ENDIAN);
 
-    const decodeAs = CONST.MSG.FIELD.TYPE_MAPPING[type];
-    if (0) { }
-    else if (decodeAs === "string") {
-      return ds.readString(fieldProperty.length);
-    }
-    else if (decodeAs === "unicode") {
-      return ds.readUCS2String(fieldProperty.length / 2);
+    let key = CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
+    let keyType = KeyType.root;
+
+    const classValue = parseInt(`0x${fieldClass}`);
+    if (classValue >= 0x8000) {
+      const keyed = this.privatePidToKeyed[classValue];
+      if (keyed) {
+        if (keyed.useName) {
+          key = keyed.name;
+          keyType = KeyType.toSub;
+        }
+        else {
+          const lidDict = CONST.MSG.FIELD.PIDLID_MAPPING[keyed.propertySet];
+          if (lidDict !== undefined) {
+            const prop = lidDict[keyed.propertyLid];
+            if (prop !== undefined) {
+              key = prop.id;
+              keyType = KeyType.toSub;
+            }
+          }
+        }
+      }
     }
 
-    return array;
+    let value: any = array;
+
+    let skip = false;
+
+    const decodeAs = CONST.MSG.FIELD.TYPE_MAPPING[fieldType];
+    if (0) { }
+    else if (key === "PidLidVerbStream") {
+      value = parseVerbStream(ds);
+    }
+    else if (decodeAs === "string") {
+      value = ds.readString(array.length);
+      skip = insideProps;
+    }
+    else if (decodeAs === "unicode") {
+      value = ds.readUCS2String(array.length / 2);
+      skip = insideProps;
+    }
+    else if (decodeAs === "integer") {
+      value = ds.readUint32();
+    }
+    else if (decodeAs === "boolean") {
+      value = ds.readUint16() ? true : false;
+    }
+
+    if (skip) {
+      key = undefined;
+    }
+
+    if (0) { }
+    else if (key === "PidLidVerbResponse") {
+      key = "votingResponse";
+      keyType = KeyType.root;
+    }
+    else if (key === "PidLidVerbStream") {
+      key = "votingOptions";
+      keyType = KeyType.root;
+    }
+    else if (key === "recipType") {
+      const MAPI_TO = 1;
+      const MAPI_CC = 2;
+      const MAPI_BCC = 3;
+      if (0) { }
+      else if (value === MAPI_TO) {
+        value = "to";
+      }
+      else if (value === MAPI_CC) {
+        value = "cc";
+      }
+      else if (value === MAPI_BCC) {
+        value = "bcc";
+      }
+    }
+
+    return { key, keyType, value };
   }
 
   private fieldsDataDocument(parserConfig: ParserConfig, documentProperty: CFileSet, fields: FieldsData): void {
@@ -481,16 +576,23 @@ export default class MsgReader {
       documentProperty.provider()
     )
 
-    const fieldName = CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
-
-    if (fieldName) {
-      fields[fieldName] = this.getFieldValue(documentProperty, fieldType);
-    }
     if (fieldClass == CONST.MSG.FIELD.CLASS_MAPPING.ATTACHMENT_DATA) {
 
       // attachment specific info
       fields.dataId = documentProperty.dataId;
       fields.contentLength = documentProperty.length;
+    }
+    else {
+      this.setDecodedFieldTo(fields, this.decodeField(fieldClass, fieldType, documentProperty.provider, false));
+    }
+  }
+
+  setDecodedFieldTo(fields: FieldsData, pair: FieldValuePair): void {
+    const { key, keyType, value } = pair;
+    if (key !== undefined) {
+      if (keyType === KeyType.root) {
+        fields[key] = value;
+      }
     }
   }
 
@@ -516,7 +618,7 @@ export default class MsgReader {
       this.fieldsDataDir(parserConfig, dirProperty, rootFolder, recipientField, "recip");
     } else if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.NAMEID) == 0) {
       // unknown, read
-      this.fieldsDataDir(parserConfig, dirProperty, rootFolder, fields, "nameid");
+      this.fieldsNameIdDir(parserConfig, dirProperty, rootFolder, fields);
     } else {
       // other dir
       const childFieldType = this.getFieldType(dirProperty);
@@ -576,7 +678,7 @@ export default class MsgReader {
     if (depth === 0) {
       // include root `__nameid_version1.0` folder.
       const sources = rootFolder.subFolders()
-        .filter(it => it.name === "__nameid_version1.0");
+        .filter(it => it.name === CONST.MSG.FIELD.PREFIX.NAMEID);
       for (let source of sources) {
         const subIndex = entries.length;
         entries[index].children.push(subIndex);
@@ -613,52 +715,18 @@ export default class MsgReader {
     // See: [MS-OXMSG]: Outlook Item (.msg) File Format, 2.4 Property Stream
     // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
 
-    const PtypInteger32 = 0x0003;
-    const PtypBoolean = 0x000B;
-    const PidTagRecipientType = 0x0C150003;
-
     while (!propertiesDs.isEof()) {
       const propertyTag = propertiesDs.readUint32();
       const flags = propertiesDs.readUint32();
 
-      const fieldClass = toHexStr((propertyTag >> 16) & 65535, 4);
-      const fieldType = toHexStr(propertyTag & 65535, 4);
+      const fieldClass = toHex2((propertyTag >> 16) & 65535);
+      const fieldType = toHex2(propertyTag & 65535);
 
-      const ptyp = propertyTag & 0xFFFF;
-      let value = undefined;
-      const rawDataPos = propertiesDs.position;
-      if (ptyp === PtypInteger32) {
-        value = propertiesDs.readUint32();
-      } else if (ptyp === PtypBoolean) {
-        value = propertiesDs.readUint16() ? true : false;
-      }
-
-      propertiesDs.seek(rawDataPos);
       const raw = propertiesDs.readUint8Array(8);
 
       parserConfig.propertyObserver(fields, propertyTag, raw);
 
-      if (propertyTag === PidTagRecipientType) {
-        const MAPI_TO = 1;
-        const MAPI_CC = 2;
-        const MAPI_BCC = 3;
-        if (value === MAPI_TO) {
-          fields["recipType"] = "to";
-        }
-        else if (value === MAPI_CC) {
-          fields["recipType"] = "cc";
-        }
-        else if (value === MAPI_BCC) {
-          fields["recipType"] = "bcc";
-        }
-      }
-      else {
-        const fieldName = CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
-        //console.info("@", fieldClass, propertyTag, fieldName, value);
-        if (fieldName && value !== undefined) {
-          fields[fieldName] = value;
-        }
-      }
+      this.setDecodedFieldTo(fields, this.decodeField(fieldClass, fieldType, () => raw, true));
     }
   }
 
@@ -702,11 +770,6 @@ export default class MsgReader {
   }
 
   private fieldsDataDir(parserConfig: ParserConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData, subClass?: string) {
-    if (subClass === "nameid") {
-      // skip normal processing
-      return;
-    }
-
     for (let subFolder of dirProperty.subFolders()) {
       this.fieldsDataDirInner(parserConfig, subFolder, rootFolder, fields);
     }
@@ -724,6 +787,58 @@ export default class MsgReader {
           this.fieldsRootProperties(parserConfig, fileSet, fields);
         }
       }
+    }
+  }
+
+  private fieldsNameIdDir(parserConfig: ParserConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData) {
+    let guidTable: Uint8Array = undefined;
+    let stringTable: Uint8Array = undefined;
+    let entryTable: Uint8Array = undefined;
+    for (let fileSet of dirProperty.fileNameSets()) {
+      if (0) { }
+      else if (fileSet.name.indexOf(CONST.MSG.FIELD.PREFIX.DOCUMENT) == 0) {
+        const value = fileSet.name.substring(12).toLowerCase();
+        const fieldClass = value.substring(0, 4);
+        const fieldType = value.substring(4, 8);
+
+        if (0) { }
+        else if (fieldClass === "0002" && fieldType === "0102") {
+          guidTable = fileSet.provider();
+        }
+        else if (fieldClass === "0003" && fieldType === "0102") {
+          entryTable = fileSet.provider();
+        }
+        else if (fieldClass === "0004" && fieldType === "0102") {
+          stringTable = fileSet.provider();
+        }
+      }
+    }
+    //console.log("%", guidTable, stringTable, entryTable);
+    if (guidTable !== undefined && stringTable !== undefined && entryTable !== undefined) {
+      const entries = entryStreamParser(entryTable);
+      const stringReader = new DataStream(stringTable, 0, DataStream.LITTLE_ENDIAN);
+      for (let entry of entries) {
+        if (entry.isStringProperty) {
+          stringReader.seek(entry.key);
+          const numTextBytes = stringReader.readUint32();
+
+          this.privatePidToKeyed[0x8000 | entry.propertyIndex] = {
+            useName: true,
+            name: stringReader.readUCS2String(numTextBytes / 2),
+          };
+        }
+        else {
+          this.privatePidToKeyed[0x8000 | entry.propertyIndex] = {
+            useName: false,
+            propertySet:
+              (entry.guidIndex === 1) ? "00020328-00000-0000-C000-00000000046"
+                : (entry.guidIndex === 2) ? "00020329-00000-0000-C000-00000000046"
+                  : msftUuidStringify(guidTable, 16 * (entry.guidIndex - 3)),
+            propertyLid: entry.key,
+          };
+        }
+      }
+      //console.log("@", this.privatePidToKeyed);
     }
   }
 
@@ -757,6 +872,7 @@ export default class MsgReader {
         };
       }
       this.innerMsgBurners = {};
+      this.privatePidToKeyed = {};
       this.fieldsData = this.parseMsgData(
         {
           propertyObserver: (this.parserConfig?.propertyObserver) || (() => { }),
