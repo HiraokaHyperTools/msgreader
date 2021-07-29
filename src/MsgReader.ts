@@ -613,7 +613,7 @@ export default class MsgReader {
     }
   }
 
-  setDecodedFieldTo(fields: FieldsData, pair: FieldValuePair): void {
+  private setDecodedFieldTo(fields: FieldsData, pair: FieldValuePair): void {
     const { key, keyType, value } = pair;
     if (key !== undefined) {
       if (keyType === KeyType.root) {
