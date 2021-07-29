@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SomeOxProps | @kenjiuno/msgreader</title>
-	<meta name="description" content="Documentation for @kenjiuno/msgreader">
+	<title>SomeOxProps | @kenjiuno/msgreader - v1.7.2-alpha.1</title>
+	<meta name="description" content="Documentation for @kenjiuno/msgreader - v1.7.2-alpha.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@kenjiuno/msgreader</a>
+					<a href="../index.html" class="title">@kenjiuno/msgreader - v1.7.2-alpha.1</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../index.html">@kenjiuno/msgreader</a>
+					<a href="../index.html">@kenjiuno/msgreader - v1.7.2-alpha.1</a>
 				</li>
 				<li>
 					<a href="../modules/MsgReader.html">MsgReader</a>
@@ -102,6 +102,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#addressType" class="tsd-kind-icon">address<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#attachmentHidden" class="tsd-kind-icon">attachment<wbr>Hidden</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#body" class="tsd-kind-icon">body</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#clientSubmitTime" class="tsd-kind-icon">client<wbr>Submit<wbr>Time</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#compressedRtf" class="tsd-kind-icon">compressed<wbr>Rtf</a></li>
@@ -123,7 +124,6 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#senderName" class="tsd-kind-icon">sender<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#smtpAddress" class="tsd-kind-icon">smtp<wbr>Address</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#subject" class="tsd-kind-icon">subject</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#votingOptions" class="tsd-kind-icon">voting<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#votingResponse" class="tsd-kind-icon">voting<wbr>Response</a></li>
 							</ul>
 						</section>
@@ -138,7 +138,7 @@
 					<div class="tsd-signature tsd-kind-icon">address<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L321">MsgReader.ts:321</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L321">MsgReader.ts:321</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -162,12 +162,36 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="attachmentHidden" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> attachment<wbr>Hidden</h3>
+					<div class="tsd-signature tsd-kind-icon">attachment<wbr>Hidden<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L346">MsgReader.ts:346</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Indicates whether an attachment is hidden from the end user.</p>
+						</div>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;attachment&#39;.</p>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagattachmenthidden-canonical-property">https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagattachmenthidden-canonical-property</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/7FFE-PidTagAttachmentHidden.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/7FFE-PidTagAttachmentHidden.md</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="body" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> body</h3>
 					<div class="tsd-signature tsd-kind-icon">body<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L89">MsgReader.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L89">MsgReader.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -188,7 +212,7 @@
 					<div class="tsd-signature tsd-kind-icon">client<wbr>Submit<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L233">MsgReader.ts:233</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L233">MsgReader.ts:233</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -210,7 +234,7 @@
 					<div class="tsd-signature tsd-kind-icon">compressed<wbr>Rtf<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Uint8Array</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L127">MsgReader.ts:127</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L127">MsgReader.ts:127</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -231,7 +255,7 @@
 					<div class="tsd-signature tsd-kind-icon">creation<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L211">MsgReader.ts:211</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L211">MsgReader.ts:211</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -253,7 +277,7 @@
 					<div class="tsd-signature tsd-kind-icon">creatorSMTPAddress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L259">MsgReader.ts:259</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L259">MsgReader.ts:259</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -282,7 +306,7 @@
 					<div class="tsd-signature tsd-kind-icon">email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L200">MsgReader.ts:200</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L200">MsgReader.ts:200</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -308,7 +332,7 @@
 					<div class="tsd-signature tsd-kind-icon">extension<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L138">MsgReader.ts:138</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L138">MsgReader.ts:138</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -330,7 +354,7 @@
 					<div class="tsd-signature tsd-kind-icon">file<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L161">MsgReader.ts:161</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L161">MsgReader.ts:161</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -355,7 +379,7 @@
 					<div class="tsd-signature tsd-kind-icon">file<wbr>Name<wbr>Short<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L149">MsgReader.ts:149</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L149">MsgReader.ts:149</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -377,7 +401,7 @@
 					<div class="tsd-signature tsd-kind-icon">headers<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L118">MsgReader.ts:118</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L118">MsgReader.ts:118</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -415,7 +439,7 @@
 					<div class="tsd-signature tsd-kind-icon">last<wbr>Modification<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L222">MsgReader.ts:222</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L222">MsgReader.ts:222</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -437,7 +461,7 @@
 					<div class="tsd-signature tsd-kind-icon">last<wbr>Modifier<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L306">MsgReader.ts:306</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L306">MsgReader.ts:306</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -467,7 +491,7 @@
 					<div class="tsd-signature tsd-kind-icon">last<wbr>ModifierSMTPAddress<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L274">MsgReader.ts:274</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L274">MsgReader.ts:274</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -496,7 +520,7 @@
 					<div class="tsd-signature tsd-kind-icon">message<wbr>Delivery<wbr>Time<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L244">MsgReader.ts:244</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L244">MsgReader.ts:244</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -518,7 +542,7 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L186">MsgReader.ts:186</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L186">MsgReader.ts:186</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -545,7 +569,7 @@
 					<div class="tsd-signature tsd-kind-icon">pid<wbr>Content<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L171">MsgReader.ts:171</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L171">MsgReader.ts:171</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -567,7 +591,7 @@
 					<div class="tsd-signature tsd-kind-icon">sender<wbr>Address<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L336">MsgReader.ts:336</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L336">MsgReader.ts:336</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -596,7 +620,7 @@
 					<div class="tsd-signature tsd-kind-icon">sender<wbr>Email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L80">MsgReader.ts:80</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L80">MsgReader.ts:80</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -622,7 +646,7 @@
 					<div class="tsd-signature tsd-kind-icon">sender<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L66">MsgReader.ts:66</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L66">MsgReader.ts:66</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -643,7 +667,7 @@
 					<div class="tsd-signature tsd-kind-icon">smtp<wbr>Address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L288">MsgReader.ts:288</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L288">MsgReader.ts:288</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -671,7 +695,7 @@
 					<div class="tsd-signature tsd-kind-icon">subject<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L57">MsgReader.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L57">MsgReader.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -687,38 +711,12 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="votingOptions" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> voting<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">voting<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L349">MsgReader.ts:349</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>VerbStream (PidLidVerbStream)</p>
-						</div>
-						<p>e.g. <code>Yes;No;Maybe</code>
-						e.g. <code>はい;いいえ;たぶん</code></p>
-						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
-						<dl class="tsd-comment-tags">
-							<dt>see</dt>
-							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/e11cc753-cecf-4fdc-bec7-23304d12388a">https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/e11cc753-cecf-4fdc-bec7-23304d12388a</a></p>
-							</dd>
-							<dt>see</dt>
-							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/89a70cdb-28ca-4d63-9deb-6d8c15c2cb47">https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/89a70cdb-28ca-4d63-9deb-6d8c15c2cb47</a></p>
-							</dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="votingResponse" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> voting<wbr>Response</h3>
 					<div class="tsd-signature tsd-kind-icon">voting<wbr>Response<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/0b515ea/src/MsgReader.ts#L362">MsgReader.ts:362</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/3b7c852/src/MsgReader.ts#L359">MsgReader.ts:359</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -778,6 +776,9 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeOxProps.html#addressType" class="tsd-kind-icon">address<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="MsgReader.SomeOxProps.html#attachmentHidden" class="tsd-kind-icon">attachment<wbr>Hidden</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeOxProps.html#body" class="tsd-kind-icon">body</a>
@@ -841,9 +842,6 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeOxProps.html#subject" class="tsd-kind-icon">subject</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="MsgReader.SomeOxProps.html#votingOptions" class="tsd-kind-icon">voting<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeOxProps.html#votingResponse" class="tsd-kind-icon">voting<wbr>Response</a>
