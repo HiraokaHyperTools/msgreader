@@ -334,6 +334,32 @@ export interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/msgreader/issues/10
    */
   senderAddressType?: string;
+
+  /**
+   * VerbStream (PidLidVerbStream)
+   * 
+   * e.g. `Yes;No;Maybe`
+   * e.g. `はい;いいえ;たぶん`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/e11cc753-cecf-4fdc-bec7-23304d12388a
+   * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/89a70cdb-28ca-4d63-9deb-6d8c15c2cb47
+   */
+  votingOptions?: string;
+
+  /**
+   * VerbResponse (PidLidVerbResponse)
+   * 
+   * e.g. `Yes`
+   * e.g. `はい`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/88f982ff-0146-422b-8545-0701b5e7916e
+   * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/eb67f145-2ceb-4427-bbc1-f67a6dcbd24b
+   */
+  votingResponse?: string;
 }
 
 export interface SomeParsedOxProps {

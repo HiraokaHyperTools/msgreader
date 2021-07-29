@@ -48,5 +48,5 @@ export function parse(ds: DataStream): string {
     return items
         .filter(it => it.VerbType === 4)
         .map(it => it.DisplayName)
-        .join("; ");
+        .join(";");
 }
