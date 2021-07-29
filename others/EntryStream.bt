@@ -14,12 +14,23 @@
 LittleEndian();
 
 struct Entry {
- uint NameIdentifier_StringOffset;
- uint16 PropertyIndex;
- uint16 GUIDIndex:15;
+ uint NameIdentifier_StringOffset <format=hex>;
  uint16 StringNamedProperty:1;
+ uint16 GUIDIndex:15;
+ uint16 PropertyIndex;
 };
 
+string FormatComment(Entry &e) {
+ string s = "";
+ SPrintf(s, "0x%04x, %d, %d, %d"
+  , e.NameIdentifier_StringOffset
+  , e.StringNamedProperty
+  , e.PropertyIndex
+  , e.GUIDIndex
+ );
+ return s;
+}
+
 while (!FEof()) {
- Entry entry;
+ Entry entry <comment=FormatComment>;
 }

@@ -1,0 +1,24 @@
+//------------------------------------------------
+//--- 010 Editor v11.0.1 Binary Template
+//
+//      File: String Stream
+//   Authors: 
+//   Version: 
+//   Purpose: https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/14dd4e27-58e1-4d6c-b4c2-7a1fd19d819c
+//  Category: 
+// File Mask: __substg1.0_00040102
+//  ID Bytes: 
+//   History: 
+//------------------------------------------------
+
+LittleEndian();
+
+struct Entry {
+ uint32 NameLength;
+ wchar_t Name[NameLength / 2];
+};
+
+while (!FEof()) {
+ Entry entry;
+ FSeek((FTell() + 3) & (~3));
+}
