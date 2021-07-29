@@ -8,5 +8,6 @@
   "out": "docs/typedoc",
   "excludePrivate": true,
   "excludeInternal": true,
-  "readme": "none"
+  "readme": "none",
+  "includeVersion": true
 }
