@@ -1,6 +1,6 @@
 {
   "name": "@kenjiuno/msgreader",
-  "version": "1.7.2",
+  "version": "1.7.3-alpha.1",
   "description": "",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

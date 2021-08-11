@@ -787,6 +787,9 @@ export default class MsgReader {
 
     while (!propertiesDs.isEof()) {
       const propertyTag = propertiesDs.readUint32();
+      if (propertyTag === 0) {
+        break;
+      }
       const flags = propertiesDs.readUint32();
 
       const arr = propertiesDs.readUint8Array(8);
