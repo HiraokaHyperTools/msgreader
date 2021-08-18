@@ -357,6 +357,22 @@ export interface SomeOxProps {
    * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/eb67f145-2ceb-4427-bbc1-f67a6dcbd24b
    */
   votingResponse?: string;
+
+  /**
+   * Contains message body text in HTML format.
+   * 
+   * @see https://docs.microsoft.com/ja-jp/office/client-developer/outlook/mapi/pidtagbodyhtml-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1013-PidTagBodyHtml.md
+   */
+  bodyHtml?: string;
+
+  /**
+   * Contains message body text in HTML format.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtaghtml-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1013-PidTagHtml.md
+   */
+  html?: Uint8Array;
 }
 
 export interface SomeParsedOxProps {
@@ -520,7 +536,8 @@ export default class MsgReader {
     const array = provider();
     const ds = new DataStream(array, 0, DataStream.LITTLE_ENDIAN);
 
-    let key = CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
+    let key = CONST.MSG.FIELD.FULL_NAME_MAPPING[`${fieldClass}${fieldType}`]
+      || CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
     let keyType = KeyType.root;
 
     const classValue = parseInt(`0x${fieldClass}`);

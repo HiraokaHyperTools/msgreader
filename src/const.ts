@@ -77,6 +77,10 @@ export default {
         '3003': 'email',
         '39fe': 'smtpAddress'
       },
+      FULL_NAME_MAPPING: {
+        '1013001f': 'bodyHtml',
+        '10130102': 'html',
+      },
       PIDLID_MAPPING: {
         "00062008-0000-0000-c000-000000000046": {
           0x00008520: { id: "PidLidVerbStream", },

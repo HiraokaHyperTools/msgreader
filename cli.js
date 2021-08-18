@@ -157,6 +157,27 @@ program
   });
 
 program
+  .command('html <msgFilePath>')
+  .description('Parse msg file and display 1013001f:bodyHtml or 10130102:html')
+  .option('-e, --encoding <encoding>', 'The encoding type to decode binary html.', 'utf8')
+  .action((msgFilePath, options) => {
+    const msgFileBuffer = fs.readFileSync(msgFilePath);
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    if (testMsgInfo.html !== undefined) {
+      console.log(Buffer.from(testMsgInfo.html).toString(options.encoding));
+    }
+    else if (testMsgInfo.bodyHtml !== undefined) {
+      console.log(testMsgInfo.bodyHtml);
+    }
+    else {
+      console.warn("no html is contained.");
+    }
+  });
+
+
+
+program
   .command('dummy1')
   .action(() => {
     const msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
