@@ -10,3 +10,5 @@ docs/
 typedoc.json
 .gitmodules
 others/
+/cli.js
+/.editorconfig
