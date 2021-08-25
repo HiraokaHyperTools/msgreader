@@ -15,6 +15,7 @@
  "headers": "Return-Path: <xmailuser@xmailserver.test>\r\nDelivered-To: xmailuser@xmailserver.test\r\nX-AuthUser: xmailuser@xmailserver.test\r\nReceived: from H270 ([127.0.0.1]:54153)\r\n\tby xmailserver.test with [XMail 1.27 ESMTP Server]\r\n\tid <S13> for <xmailuser@xmailserver.test> from <xmailuser@xmailserver.test>;\r\n\tThu, 29 Jul 2021 19:57:50 +0900\r\nFrom: \"xmailuser\" <xmailuser@xmailserver.test>\r\nTo: \"'xmailuser'\" <xmailuser@xmailserver.test>\r\nSubject: =?iso-2022-jp?B?GyRCJCQkJCQoGyhCOiAzIHZvdGUgaXRlbXM6IBskQiRPJCQbKEI=?=\r\n\t=?iso-2022-jp?B?OxskQiQkJCQkKBsoQjsbJEIkPyRWJHMbKEI=?=\r\nDate: Thu, 29 Jul 2021 19:57:50 +0900\r\nMessage-ID: <!&!AAAAAAAAAAAYAAAAAAAAAMhvd5eG4u1FrRI13ZUKpD3CgAAAEAAAACfDkx1LwvlJrcgpqnDqBPIBAAAAAA==@xmailserver.test>\r\nMIME-Version: 1.0\r\nContent-Type: application/ms-tnef;\r\n\tname=\"winmail.dat\"\r\nContent-Transfer-Encoding: base64\r\nContent-Disposition: attachment;\r\n\tfilename=\"winmail.dat\"\r\nX-Mailer: Microsoft Outlook 15.0\r\nContent-Language: ja\r\nThread-Index: AdeEaIQ+lL4xXQlpRZG40M0tYNz0wwAAA5CQ\r\nX-MS-TNEF-Correlator: 00000000C86F779786E2ED45AD1235DD950AA43DE4072000\r\n\r\n",
  "senderName": "xmailuser",
  "senderAddressType": "SMTP",
+ "inetAcctName": "xmailuser@xmailserver.test",
  "votingResponse": "いいえ",
  "creationTime": "Thu, 29 Jul 2021 10:58:27 GMT",
  "lastModificationTime": "Thu, 29 Jul 2021 10:58:27 GMT",

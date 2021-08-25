@@ -348,8 +348,10 @@ export interface SomeOxProps {
   /**
    * VerbResponse (PidLidVerbResponse)
    * 
-   * e.g. `Yes`
-   * e.g. `はい`
+   * e.g.
+   * 
+   * - `Yes`
+   * - `はい`
    * 
    * Target {@link dataType} = 'msg'.
    * 
@@ -373,6 +375,24 @@ export interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1013-PidTagHtml.md
    */
   html?: Uint8Array;
+
+  /**
+   * PidLidInternetAccountName
+   * 
+   * Specifies the user-visible email account name through which the email message is sent.
+   * 
+   * The format of this string is implementation dependent. 
+   * This property can be used by the client to determine which server to direct the mail to, 
+   * but is optional and the value has no meaning to the server.
+   * 
+   * e.g. `xmailuser@xmailserver.test`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidinternetaccountname-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/00008580-PidLidInternetAccountName.md
+   */
+  inetAcctName?: string;
 }
 
 export interface SomeParsedOxProps {
@@ -390,8 +410,10 @@ export interface SomeParsedOxProps {
   /**
    * VerbStream (PidLidVerbStream)
    * 
-   * e.g. `Yes;No;Maybe`
-   * e.g. `はい;いいえ;たぶん`
+   * e.g.
+   * 
+   * - `Yes;No;Maybe`
+   * - `はい;いいえ;たぶん`
    * 
    * Target {@link dataType} = 'msg'.
    * 
@@ -567,9 +589,6 @@ export default class MsgReader {
 
     const decodeAs = CONST.MSG.FIELD.TYPE_MAPPING[fieldType];
     if (0) { }
-    else if (key === "PidLidVerbStream") {
-      value = parseVerbStream(ds);
-    }
     else if (decodeAs === "string") {
       value = ds.readString(array.length);
       skip = insideProps;
@@ -590,12 +609,19 @@ export default class MsgReader {
     }
 
     if (0) { }
+    else if (key === "PidLidVerbStream") {
+      value = parseVerbStream(ds);
+    }
     else if (key === "PidLidVerbResponse") {
       key = "votingResponse";
       keyType = KeyType.root;
     }
     else if (key === "PidLidVerbStream") {
       key = "votingOptions";
+      keyType = KeyType.root;
+    }
+    else if (key === "PidLidInternetAccountName") {
+      key = "inetAcctName";
       keyType = KeyType.root;
     }
     else if (key === "recipType") {

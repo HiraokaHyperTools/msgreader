@@ -15,6 +15,7 @@
  "recipients": [],
  "subject": "Has 8MiB.bin",
  "body": " \r\n",
+ "inetAcctName": "xmailuser@xmailserver.test",
  "creationTime": "Thu, 15 Jul 2021 13:42:25 GMT",
  "lastModificationTime": "Thu, 15 Jul 2021 13:42:25 GMT",
  "messageDeliveryTime": "Thu, 15 Jul 2021 13:41:55 GMT"

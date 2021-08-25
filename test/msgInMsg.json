@@ -20,6 +20,7 @@
     "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
     "subject": "Microsoft Outlook テスト メッセージ",
     "senderName": "Microsoft Outlook",
+    "inetAcctName": "xmailuser@xmailserver.test",
     "senderEmail": "xmailuser@xmailserver.test"
    },
    "innerMsgContent": true,
@@ -41,6 +42,7 @@
  "recipients": [],
  "subject": "I have attachments!",
  "body": "I have attachments!\r\n",
+ "inetAcctName": "xmailuser@xmailserver.test",
  "creationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
  "lastModificationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
  "messageDeliveryTime": "Thu, 10 Sep 2020 10:18:08 GMT"

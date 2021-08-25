@@ -85,6 +85,7 @@ export default {
         "00062008-0000-0000-c000-000000000046": {
           0x00008520: { id: "PidLidVerbStream", },
           0x00008524: { id: "PidLidVerbResponse", },
+          0x00008580: { id: "PidLidInternetAccountName", },
         }
       },
       CLASS_MAPPING: {
