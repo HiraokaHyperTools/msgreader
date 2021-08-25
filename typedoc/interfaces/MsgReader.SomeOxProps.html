@@ -115,6 +115,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#fileNameShort" class="tsd-kind-icon">file<wbr>Name<wbr>Short</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#headers" class="tsd-kind-icon">headers</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#html" class="tsd-kind-icon">html</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#inetAcctName" class="tsd-kind-icon">inet<wbr>Acct<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#lastModificationTime" class="tsd-kind-icon">last<wbr>Modification<wbr>Time</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#lastModifierName" class="tsd-kind-icon">last<wbr>Modifier<wbr>Name</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeOxProps.html#lastModifierSMTPAddress" class="tsd-kind-icon">last<wbr>ModifierSMTPAddress</a></li>
@@ -477,6 +478,35 @@
 							</dd>
 							<dt>see</dt>
 							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1013-PidTagHtml.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/1013-PidTagHtml.md</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="inetAcctName" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> inet<wbr>Acct<wbr>Name</h3>
+					<div class="tsd-signature tsd-kind-icon">inet<wbr>Acct<wbr>Name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/a86ef0f/src/MsgReader.ts#L395">MsgReader.ts:395</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>PidLidInternetAccountName</p>
+						</div>
+						<p>Specifies the user-visible email account name through which the email message is sent.</p>
+						<p>The format of this string is implementation dependent.
+							This property can be used by the client to determine which server to direct the mail to,
+						but is optional and the value has no meaning to the server.</p>
+						<p>e.g. <code>xmailuser@xmailserver.test</code></p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidinternetaccountname-canonical-property">https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidinternetaccountname-canonical-property</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/00008580-PidLidInternetAccountName.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/00008580-PidLidInternetAccountName.md</a></p>
 							</dd>
 						</dl>
 					</div>
@@ -866,6 +896,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeOxProps.html#html" class="tsd-kind-icon">html</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="MsgReader.SomeOxProps.html#inetAcctName" class="tsd-kind-icon">inet<wbr>Acct<wbr>Name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeOxProps.html#lastModificationTime" class="tsd-kind-icon">last<wbr>Modification<wbr>Time</a>
