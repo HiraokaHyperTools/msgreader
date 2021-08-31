@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>RawProp | @kenjiuno/msgreader - v1.7.4-alpha.2</title>
-	<meta name="description" content="Documentation for @kenjiuno/msgreader - v1.7.4-alpha.2">
+	<title>RawProp | @kenjiuno/msgreader - v1.7.4-alpha.3</title>
+	<meta name="description" content="Documentation for @kenjiuno/msgreader - v1.7.4-alpha.3">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@kenjiuno/msgreader - v1.7.4-alpha.2</a>
+					<a href="../index.html" class="title">@kenjiuno/msgreader - v1.7.4-alpha.3</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../index.html">@kenjiuno/msgreader - v1.7.4-alpha.2</a>
+					<a href="../index.html">@kenjiuno/msgreader - v1.7.4-alpha.3</a>
 				</li>
 				<li>
 					<a href="../modules/MsgReader.html">MsgReader</a>
@@ -71,7 +71,7 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>RawProp includes raw data for every property.</p>
+						<p>RawProp includes value for every property.</p>
 					</div>
 				</div>
 			</section>
@@ -103,18 +103,18 @@
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="propertyLid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> property<wbr>Lid</h3>
+					<h3>property<wbr>Lid</h3>
 					<div class="tsd-signature tsd-kind-icon">property<wbr>Lid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L572">MsgReader.ts:572</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/4e7c1a8/src/MsgReader.ts#L578">MsgReader.ts:578</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Long ID (LID)</p>
+							<p>Long ID (LID), as lower case hex str (8 chars)</p>
 						</div>
-						<p>The private <a href="MsgReader.RawProp.html#propertyTag">propertyTag</a> (<code>8000</code> ~ <code>ffff</code>) should have both this and <a href="MsgReader.RawProp.html#propertySet">propertySet</a></p>
+						<p>The private <a href="MsgReader.RawProp.html#propertyTag">propertyTag</a> (<code>80000000</code> ~ <code>ffffffff</code>) should have both this and <a href="MsgReader.RawProp.html#propertySet">propertySet</a></p>
 						<p>e.g. <code>00008580</code> is set for PidLidInternetAccountName.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
@@ -125,18 +125,18 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="propertySet" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> property<wbr>Set</h3>
+					<h3>property<wbr>Set</h3>
 					<div class="tsd-signature tsd-kind-icon">property<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L561">MsgReader.ts:561</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/4e7c1a8/src/MsgReader.ts#L567">MsgReader.ts:567</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Property set</p>
+							<p>Property set, as lower case GUID str (36 chars)</p>
 						</div>
-						<p>The private <a href="MsgReader.RawProp.html#propertyTag">propertyTag</a> (<code>8000</code> ~ <code>ffff</code>) should have both this and <a href="MsgReader.RawProp.html#propertyLid">propertyLid</a></p>
+						<p>The private <a href="MsgReader.RawProp.html#propertyTag">propertyTag</a> (<code>80000000</code> ~ <code>ffffffff</code>) should have both this and <a href="MsgReader.RawProp.html#propertyLid">propertyLid</a></p>
 						<p>e.g. <code>00062008-0000-0000-c000-000000000046</code> is set for PSETID_Common.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
@@ -147,26 +147,34 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="propertyTag" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> property<wbr>Tag</h3>
+					<h3>property<wbr>Tag</h3>
 					<div class="tsd-signature tsd-kind-icon">property<wbr>Tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L550">MsgReader.ts:550</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/4e7c1a8/src/MsgReader.ts#L556">MsgReader.ts:556</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>PidTag.</p>
+							<p>PidTag, as lower case hex str (8 chars).</p>
 						</div>
 						<p>Every proerty should have single PidTag.</p>
+						<p>DWORD (8 hex chars) format is:</p>
+						<ul>
+							<li>HIWORD (first 4 chars) is identifier. e.g. <code>3001</code> is PidTagDisplayName.</li>
+							<li>LOWORD (last 4 chars) is data type. e.g. <code>001f</code> is PT_UNICODE.</li>
+						</ul>
 						<p>e.g.</p>
 						<ul>
-							<li><code>3001</code> is set for PidTagDisplayName.</li>
-							<li><code>8000</code> ~ <code>ffff</code> are private tags. Need to inspect: <a href="MsgReader.RawProp.html#propertySet">propertySet</a> and <a href="MsgReader.RawProp.html#propertyLid">propertyLid</a></li>
+							<li><code>3001001f</code> is set for PidTagDisplayName.</li>
+							<li><code>80000000</code> ~ <code>ffffffff</code> are private tags. Need to inspect: <a href="MsgReader.RawProp.html#propertySet">propertySet</a> and <a href="MsgReader.RawProp.html#propertyLid">propertyLid</a></li>
 						</ul>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
 							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/ed38d6e3-2871-4cb5-ab3e-0aebe9d02c21">[MS-OXPROPS]: Property ID Ranges | Microsoft Docs</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/MS-OXCDATA/0c77892e-288e-435a-9c49-be1c20c7afdb">[MS-OXCDATA]: Property Data Types | Microsoft Docs</a></p>
 							</dd>
 						</dl>
 					</div>
@@ -177,7 +185,7 @@
 					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L577">MsgReader.ts:577</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/4e7c1a8/src/MsgReader.ts#L583">MsgReader.ts:583</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
