@@ -520,7 +520,7 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
   error?: string;
 
   /**
-   * Raw properties obtained while decoding msg.
+   * All properties obtained while decoding msg.
    * 
    * To activate this:
    * 
@@ -532,44 +532,50 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
 }
 
 /**
- * RawProp includes raw data for every property.
+ * RawProp includes value for every property.
  */
 export interface RawProp {
   /**
-   * PidTag.
+   * PidTag, as lower case hex str (8 chars).
    * 
    * Every proerty should have single PidTag.
    * 
+   * DWORD (8 hex chars) format is:
+   * 
+   * - HIWORD (first 4 chars) is identifier. e.g. `3001` is PidTagDisplayName.
+   * - LOWORD (last 4 chars) is data type. e.g. `001f` is PT_UNICODE.
+   * 
    * e.g.
    * 
-   * - `3001` is set for PidTagDisplayName.
-   * - `8000` ~ `ffff` are private tags. Need to inspect: {@link propertySet} and {@link propertyLid}
+   * - `3001001f` is set for PidTagDisplayName.
+   * - `80000000` ~ `ffffffff` are private tags. Need to inspect: {@link propertySet} and {@link propertyLid}
    * 
    * @see [[MS-OXPROPS]: Property ID Ranges | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/ed38d6e3-2871-4cb5-ab3e-0aebe9d02c21)
+   * @see [[MS-OXCDATA]: Property Data Types | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/MS-OXCDATA/0c77892e-288e-435a-9c49-be1c20c7afdb)
    */
-  propertyTag?: string;
+  propertyTag: string | undefined;
 
   /**
-   * Property set
+   * Property set, as lower case GUID str (36 chars)
    * 
-   * The private {@link propertyTag} (`8000` ~ `ffff`) should have both this and {@link propertyLid}
+   * The private {@link propertyTag} (`80000000` ~ `ffffffff`) should have both this and {@link propertyLid}
    * 
    * e.g. `00062008-0000-0000-c000-000000000046` is set for PSETID_Common.
    * 
    * @see [[MS-OXPROPS]: Commonly Used Property Sets | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/cc9d955b-1492-47de-9dce-5bdea80a3323)
    */
-  propertySet?: string;
+  propertySet: string | undefined;
 
   /**
-   * Long ID (LID)
+   * Long ID (LID), as lower case hex str (8 chars)
    * 
-   * The private {@link propertyTag} (`8000` ~ `ffff`) should have both this and {@link propertySet}
+   * The private {@link propertyTag} (`80000000` ~ `ffffffff`) should have both this and {@link propertySet}
    * 
    * e.g. `00008580` is set for PidLidInternetAccountName.
    * 
    * @see [[MS-OXPROPS]: Structures | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/37dd7329-97a4-42ff-974d-d805ac4d7211)
    */
-  propertyLid?: string;
+  propertyLid: string | undefined;
 
   /**
    * The value depends on property.
