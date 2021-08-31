@@ -12,10 +12,15 @@ program
   .command('parse <msgFilePath>')
   .description('Parse msg file and print parsed structure')
   .option('-f, --full-json', 'print full JSON')
+  .option('-i, --include-raw-props', 'include raw (and also unknown) props')
   .action((msgFilePath, options) => {
     const msgFileBuffer = fs.readFileSync(msgFilePath)
     const testMsg = new MsgReader(msgFileBuffer)
-    const testMsgInfo = testMsg.getFileData()
+    testMsg.parserConfig = testMsg.parserConfig || {};
+    if (options.includeRawProps) {
+      testMsg.parserConfig.includeRawProps = true;
+    }
+    const testMsgInfo = testMsg.getFileData();
     console.log(
       options.fullJson
         ? JSON.stringify(testMsgInfo, null, 2)

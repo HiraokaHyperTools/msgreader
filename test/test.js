@@ -147,6 +147,17 @@ describe('MsgReader', function () {
     });
   });
 
+  describe('sent2.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/sent2.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    removeCompressedRtf(testMsgInfo);
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      use(testMsgInfo, 'test/sent2.json');
+    });
+  });
+
   describe('longerFat.msg', function () {
     const msgFileBuffer = fs.readFileSync('test/longerFat.msg');
     const testMsg = new MsgReader(msgFileBuffer);

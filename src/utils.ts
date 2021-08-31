@@ -45,7 +45,7 @@ export function toHexStr(value: number, padding: number): string {
 const hex = "0123456789abcdef";
 
 /**
- * byte to hex string
+ * byte to lower case hex string
  * 
  * @internal
  */
@@ -55,7 +55,7 @@ export function toHex1(value: number): string {
 }
 
 /**
- * little uint16 to hex string
+ * little uint16 to lower case hex string
  * 
  * @internal
  */
@@ -67,7 +67,7 @@ export function toHex2(value: number): string {
 }
 
 /**
- * little uint32 to hex string
+ * little uint32 to lower case hex string
  * 
  * @internal
  */

@@ -1,0 +1,27 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "name": "ku@digitaldolphins.jp",
+   "smtpAddress": "ku@digitaldolphins.jp",
+   "email": "ku@digitaldolphins.jp",
+   "addressType": "SMTP",
+   "recipType": "to"
+  }
+ ],
+ "senderEmail": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=A17940F5293148CCB36A0455DEAF4F84-KU",
+ "subject": "Sending test",
+ "senderName": "UnoKenji",
+ "senderAddressType": "EX",
+ "lastModifierSMTPAddress": "ku@digitaldolphins.onmicrosoft.com",
+ "body": "Hello.\r\n",
+ "lastModifierName": "UnoKenji",
+ "creatorSMTPAddress": "ku@digitaldolphins.onmicrosoft.com",
+ "inetAcctName": "ku@digitaldolphins.onmicrosoft.com",
+ "creationTime": "Tue, 31 Aug 2021 01:56:30 GMT",
+ "lastModificationTime": "Tue, 31 Aug 2021 01:56:30 GMT",
+ "clientSubmitTime": "Tue, 31 Aug 2021 01:56:16 GMT",
+ "messageDeliveryTime": "Tue, 31 Aug 2021 01:56:00 GMT"
+}

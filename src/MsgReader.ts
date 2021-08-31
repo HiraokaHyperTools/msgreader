@@ -27,7 +27,15 @@ import { parse as parseVerbStream } from './VerbStreamParser';
 // MSG Reader implementation
 
 export interface ParserConfig {
+  /**
+   * Observe property writing (this is not complete solution!)
+   */
   propertyObserver?: (fields: FieldsData, tag: number, raw: Uint8Array | null) => void;
+
+  /**
+   * Include {@link FieldsData.rawProps} while decoding msg.
+   */
+  includeRawProps?: boolean;
 }
 
 /**
@@ -510,6 +518,63 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * Target {@link dataType} = 'msg'.
    */
   error?: string;
+
+  /**
+   * Raw properties obtained while decoding msg.
+   * 
+   * To activate this:
+   * 
+   * - Prepare new {@link MsgReader.parserConfig}.
+   * - Set {@link ParserConfig.includeRawProps} to `true`.
+   * - And then invoke {@link MsgReader.getFileData}.
+   */
+  rawProps?: RawProp[];
+}
+
+/**
+ * RawProp includes raw data for every property.
+ */
+export interface RawProp {
+  /**
+   * PidTag.
+   * 
+   * Every proerty should have single PidTag.
+   * 
+   * e.g.
+   * 
+   * - `3001` is set for PidTagDisplayName.
+   * - `8000` ~ `ffff` are private tags. Need to inspect: {@link propertySet} and {@link propertyLid}
+   * 
+   * @see [[MS-OXPROPS]: Property ID Ranges | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/ed38d6e3-2871-4cb5-ab3e-0aebe9d02c21)
+   */
+  propertyTag?: string;
+
+  /**
+   * Property set
+   * 
+   * The private {@link propertyTag} (`8000` ~ `ffff`) should have both this and {@link propertyLid}
+   * 
+   * e.g. `00062008-0000-0000-c000-000000000046` is set for PSETID_Common.
+   * 
+   * @see [[MS-OXPROPS]: Commonly Used Property Sets | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/cc9d955b-1492-47de-9dce-5bdea80a3323)
+   */
+  propertySet?: string;
+
+  /**
+   * Long ID (LID)
+   * 
+   * The private {@link propertyTag} (`8000` ~ `ffff`) should have both this and {@link propertySet}
+   * 
+   * e.g. `00008580` is set for PidLidInternetAccountName.
+   * 
+   * @see [[MS-OXPROPS]: Structures | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/37dd7329-97a4-42ff-974d-d805ac4d7211)
+   */
+  propertyLid?: string;
+
+  /**
+   * The value depends on property.
+   */
+  value?: string | Uint8Array;
 }
 
 interface KeyedEntry {
@@ -530,6 +595,10 @@ interface FieldValuePair {
   key: string;
   keyType: KeyType;
   value: string | Uint8Array;
+
+  propertyTag?: string;
+  propertySet?: string;
+  propertyLid?: string
 }
 
 function fileTimeToUnixEpoch(time: number) {
@@ -542,7 +611,7 @@ function fileTimeToUnixEpoch(time: number) {
 export default class MsgReader {
   private reader: Reader;
   private fieldsData: FieldsData;
-  parserConfig: ParserConfig;
+  parserConfig?: ParserConfig;
   private innerMsgBurners: { [key: number]: () => Uint8Array };
 
   /**
@@ -562,6 +631,9 @@ export default class MsgReader {
       || CONST.MSG.FIELD.NAME_MAPPING[fieldClass];
     let keyType = KeyType.root;
 
+    let propertySet: string = undefined;
+    let propertyLid: string = undefined;
+
     const classValue = parseInt(`0x${fieldClass}`);
     if (classValue >= 0x8000) {
       const keyed = this.privatePidToKeyed[classValue];
@@ -571,6 +643,8 @@ export default class MsgReader {
           keyType = KeyType.toSub;
         }
         else {
+          propertySet = keyed.propertySet;
+          propertyLid = toHex4(keyed.propertyLid);
           const lidDict = CONST.MSG.FIELD.PIDLID_MAPPING[keyed.propertySet];
           if (lidDict !== undefined) {
             const prop = lidDict[keyed.propertyLid];
@@ -640,7 +714,9 @@ export default class MsgReader {
       }
     }
 
-    return { key, keyType, value };
+    const propertyTag = `${fieldClass}${fieldType}`;
+
+    return { key, keyType, value, propertyTag, propertySet, propertyLid, };
   }
 
   private fieldsDataDocument(parserConfig: ParserConfig, documentProperty: CFileSet, fields: FieldsData): void {
@@ -661,16 +737,32 @@ export default class MsgReader {
       fields.contentLength = documentProperty.length;
     }
     else {
-      this.setDecodedFieldTo(fields, this.decodeField(fieldClass, fieldType, documentProperty.provider, false));
+      this.setDecodedFieldTo(
+        parserConfig,
+        fields,
+        this.decodeField(fieldClass, fieldType, documentProperty.provider, false)
+      );
     }
   }
 
-  private setDecodedFieldTo(fields: FieldsData, pair: FieldValuePair): void {
+  private setDecodedFieldTo(parserConfig: ParserConfig, fields: FieldsData, pair: FieldValuePair): void {
     const { key, keyType, value } = pair;
     if (key !== undefined) {
       if (keyType === KeyType.root) {
         fields[key] = value;
       }
+    }
+    if (parserConfig.includeRawProps === true) {
+      fields.rawProps = fields.rawProps || [];
+      fields.rawProps.push(
+        {
+          propertyTag: pair.propertyTag,
+          propertySet: pair.propertySet,
+          propertyLid: pair.propertyLid,
+
+          value: value,
+        }
+      );
     }
   }
 
@@ -804,7 +896,11 @@ export default class MsgReader {
 
       parserConfig.propertyObserver(fields, propertyTag, raw);
 
-      this.setDecodedFieldTo(fields, this.decodeField(fieldClass, fieldType, () => raw, true));
+      this.setDecodedFieldTo(
+        parserConfig,
+        fields,
+        this.decodeField(fieldClass, fieldType, () => raw, true)
+      );
     }
   }
 
@@ -957,6 +1053,7 @@ export default class MsgReader {
       this.fieldsData = this.parseMsgData(
         {
           propertyObserver: (this.parserConfig?.propertyObserver) || (() => { }),
+          includeRawProps: this.parserConfig?.includeRawProps,
         }
       );
     }
