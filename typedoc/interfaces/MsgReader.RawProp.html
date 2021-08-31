@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SomeParsedOxProps | @kenjiuno/msgreader - v1.7.4-alpha.2</title>
+	<title>RawProp | @kenjiuno/msgreader - v1.7.4-alpha.2</title>
 	<meta name="description" content="Documentation for @kenjiuno/msgreader - v1.7.4-alpha.2">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,26 +58,28 @@
 					<a href="../modules/MsgReader.html">MsgReader</a>
 				</li>
 				<li>
-					<a href="MsgReader.SomeParsedOxProps.html">SomeParsedOxProps</a>
+					<a href="MsgReader.RawProp.html">RawProp</a>
 				</li>
 			</ul>
-			<h1>Interface SomeParsedOxProps</h1>
+			<h1>Interface RawProp</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>RawProp includes raw data for every property.</p>
+					</div>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">SomeParsedOxProps</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="MsgReader.FieldsData.html" class="tsd-signature-type" data-tsd-kind="Interface">FieldsData</a>
-							</li>
-						</ul>
+						<span class="target">RawProp</span>
 					</li>
 				</ul>
 			</section>
@@ -88,8 +90,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeParsedOxProps.html#recipType" class="tsd-kind-icon">recip<wbr>Type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeParsedOxProps.html#votingOptions" class="tsd-kind-icon">voting<wbr>Options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.RawProp.html#propertyLid" class="tsd-kind-icon">property<wbr>Lid</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.RawProp.html#propertySet" class="tsd-kind-icon">property<wbr>Set</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.RawProp.html#propertyTag" class="tsd-kind-icon">property<wbr>Tag</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.RawProp.html#value" class="tsd-kind-icon">value</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,59 +102,88 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="recipType" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> recip<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">recip<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;to&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cc&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;bcc&quot;</span></div>
+					<a name="propertyLid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> property<wbr>Lid</h3>
+					<div class="tsd-signature tsd-kind-icon">property<wbr>Lid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L416">MsgReader.ts:416</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L572">MsgReader.ts:572</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Contains the recipient type for a message recipient.</p>
+							<p>Long ID (LID)</p>
 						</div>
-						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;recipient&#39;.</p>
+						<p>The private <a href="MsgReader.RawProp.html#propertyTag">propertyTag</a> (<code>8000</code> ~ <code>ffff</code>) should have both this and <a href="MsgReader.RawProp.html#propertySet">propertySet</a></p>
+						<p>e.g. <code>00008580</code> is set for PidLidInternetAccountName.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
-							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/144ae256-8cf2-45a1-a297-221b44f68cfe">https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/144ae256-8cf2-45a1-a297-221b44f68cfe</a></p>
-							</dd>
-							<dt>see</dt>
-							<dd><p><a href="https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagrecipienttype-canonical-property">https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagrecipienttype-canonical-property</a></p>
-							</dd>
-							<dt>see</dt>
-							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C15-PidTagRecipientType.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0C15-PidTagRecipientType.md</a></p>
+							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/37dd7329-97a4-42ff-974d-d805ac4d7211">[MS-OXPROPS]: Structures | Microsoft Docs</a></p>
 							</dd>
 						</dl>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="votingOptions" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> voting<wbr>Options</h3>
-					<div class="tsd-signature tsd-kind-icon">voting<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="propertySet" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> property<wbr>Set</h3>
+					<div class="tsd-signature tsd-kind-icon">property<wbr>Set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L431">MsgReader.ts:431</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L561">MsgReader.ts:561</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>VerbStream (PidLidVerbStream)</p>
+							<p>Property set</p>
 						</div>
-						<p>e.g.</p>
-						<ul>
-							<li><code>Yes;No;Maybe</code></li>
-							<li><code>はい;いいえ;たぶん</code></li>
-						</ul>
-						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
+						<p>The private <a href="MsgReader.RawProp.html#propertyTag">propertyTag</a> (<code>8000</code> ~ <code>ffff</code>) should have both this and <a href="MsgReader.RawProp.html#propertyLid">propertyLid</a></p>
+						<p>e.g. <code>00062008-0000-0000-c000-000000000046</code> is set for PSETID_Common.</p>
 						<dl class="tsd-comment-tags">
 							<dt>see</dt>
-							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/e11cc753-cecf-4fdc-bec7-23304d12388a">https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/e11cc753-cecf-4fdc-bec7-23304d12388a</a></p>
-							</dd>
-							<dt>see</dt>
-							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/89a70cdb-28ca-4d63-9deb-6d8c15c2cb47">https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/89a70cdb-28ca-4d63-9deb-6d8c15c2cb47</a></p>
+							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/cc9d955b-1492-47de-9dce-5bdea80a3323">[MS-OXPROPS]: Commonly Used Property Sets | Microsoft Docs</a></p>
 							</dd>
 						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="propertyTag" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> property<wbr>Tag</h3>
+					<div class="tsd-signature tsd-kind-icon">property<wbr>Tag<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L550">MsgReader.ts:550</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>PidTag.</p>
+						</div>
+						<p>Every proerty should have single PidTag.</p>
+						<p>e.g.</p>
+						<ul>
+							<li><code>3001</code> is set for PidTagDisplayName.</li>
+							<li><code>8000</code> ~ <code>ffff</code> are private tags. Need to inspect: <a href="MsgReader.RawProp.html#propertySet">propertySet</a> and <a href="MsgReader.RawProp.html#propertyLid">propertyLid</a></li>
+						</ul>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/ed38d6e3-2871-4cb5-ab3e-0aebe9d02c21">[MS-OXPROPS]: Property ID Ranges | Microsoft Docs</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="value" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> value</h3>
+					<div class="tsd-signature tsd-kind-icon">value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/8066bae/src/MsgReader.ts#L577">MsgReader.ts:577</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The value depends on property.</p>
+						</div>
 					</div>
 				</section>
 			</section>
@@ -186,27 +219,33 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="MsgReader.ParserConfig.html" class="tsd-kind-icon">Parser<wbr>Config</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="MsgReader.RawProp.html" class="tsd-kind-icon">Raw<wbr>Prop</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="MsgReader.SomeOxProps.html" class="tsd-kind-icon">Some<wbr>OxProps</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="MsgReader.SomeParsedOxProps.html" class="tsd-kind-icon">Some<wbr>Parsed<wbr>OxProps</a>
+						<a href="MsgReader.RawProp.html" class="tsd-kind-icon">Raw<wbr>Prop</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="MsgReader.SomeParsedOxProps.html#recipType" class="tsd-kind-icon">recip<wbr>Type</a>
+								<a href="MsgReader.RawProp.html#propertyLid" class="tsd-kind-icon">property<wbr>Lid</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="MsgReader.SomeParsedOxProps.html#votingOptions" class="tsd-kind-icon">voting<wbr>Options</a>
+								<a href="MsgReader.RawProp.html#propertySet" class="tsd-kind-icon">property<wbr>Set</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="MsgReader.RawProp.html#propertyTag" class="tsd-kind-icon">property<wbr>Tag</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="MsgReader.RawProp.html#value" class="tsd-kind-icon">value</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="MsgReader.SomeOxProps.html" class="tsd-kind-icon">Some<wbr>OxProps</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="MsgReader.SomeParsedOxProps.html" class="tsd-kind-icon">Some<wbr>Parsed<wbr>OxProps</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
