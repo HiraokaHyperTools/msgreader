@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SomeParsedOxProps | @kenjiuno/msgreader - v1.7.4-alpha.3</title>
-	<meta name="description" content="Documentation for @kenjiuno/msgreader - v1.7.4-alpha.3">
+	<title>SomeParsedOxProps | @kenjiuno/msgreader - v1.7.4-alpha.4</title>
+	<meta name="description" content="Documentation for @kenjiuno/msgreader - v1.7.4-alpha.4">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<script async src="../assets/js/search.js" id="search-script"></script>
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">@kenjiuno/msgreader - v1.7.4-alpha.3</a>
+					<a href="../index.html" class="title">@kenjiuno/msgreader - v1.7.4-alpha.4</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -52,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../index.html">@kenjiuno/msgreader - v1.7.4-alpha.3</a>
+					<a href="../index.html">@kenjiuno/msgreader - v1.7.4-alpha.4</a>
 				</li>
 				<li>
 					<a href="../modules/MsgReader.html">MsgReader</a>
@@ -89,6 +89,8 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeParsedOxProps.html#recipType" class="tsd-kind-icon">recip<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeParsedOxProps.html#senderSmtpAddress" class="tsd-kind-icon">sender<wbr>Smtp<wbr>Address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeParsedOxProps.html#sentRepresentingSmtpAddress" class="tsd-kind-icon">sent<wbr>Representing<wbr>Smtp<wbr>Address</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="MsgReader.SomeParsedOxProps.html#votingOptions" class="tsd-kind-icon">voting<wbr>Options</a></li>
 							</ul>
 						</section>
@@ -103,7 +105,7 @@
 					<div class="tsd-signature tsd-kind-icon">recip<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;to&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;cc&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;bcc&quot;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/4e7c1a8/src/MsgReader.ts#L416">MsgReader.ts:416</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/2f21e92/src/MsgReader.ts#L416">MsgReader.ts:416</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -125,12 +127,64 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="senderSmtpAddress" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sender<wbr>Smtp<wbr>Address</h3>
+					<div class="tsd-signature tsd-kind-icon">sender<wbr>Smtp<wbr>Address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/2f21e92/src/MsgReader.ts#L444">MsgReader.ts:444</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contains the format of the Simple Mail Transport Protocol (SMTP) email address of the sending mailbox owner.</p>
+						</div>
+						<p>e.g.
+						<code>no-reply@microsoft.com</code> for <a href="MsgReader.SomeOxProps.html#senderAddressType">senderAddressType</a> = &#39;SMTP&#39;</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsendersmtpaddress-canonical-property">https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsendersmtpaddress-canonical-property</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D01-PidTagSenderSmtpAddress.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D01-PidTagSenderSmtpAddress.md</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sentRepresentingSmtpAddress" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sent<wbr>Representing<wbr>Smtp<wbr>Address</h3>
+					<div class="tsd-signature tsd-kind-icon">sent<wbr>Representing<wbr>Smtp<wbr>Address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/2f21e92/src/MsgReader.ts#L457">MsgReader.ts:457</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Contains the Simple Mail Transport Protocol (SMTP) email address for the messaging user who is represented by the sender.</p>
+						</div>
+						<p>e.g.
+						<code>no-reply@microsoft.com</code> for <a href="MsgReader.SomeOxProps.html#senderAddressType">senderAddressType</a> = &#39;SMTP&#39;</p>
+						<p>Target <a href="MsgReader.FieldsData.html#dataType">dataType</a> = &#39;msg&#39;.</p>
+						<dl class="tsd-comment-tags">
+							<dt>see</dt>
+							<dd><p><a href="https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsentrepresentingsmtpaddress-canonical-property">https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsentrepresentingsmtpaddress-canonical-property</a></p>
+							</dd>
+							<dt>see</dt>
+							<dd><p><a href="https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D02-PidTagSentRepresentingSmtpAddress.md">https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D02-PidTagSentRepresentingSmtpAddress.md</a></p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="votingOptions" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> voting<wbr>Options</h3>
 					<div class="tsd-signature tsd-kind-icon">voting<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/4e7c1a8/src/MsgReader.ts#L431">MsgReader.ts:431</a></li>
+							<li>Defined in <a href="https://github.com/HiraokaHyperTools/msgreader/blob/2f21e92/src/MsgReader.ts#L431">MsgReader.ts:431</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -199,6 +253,12 @@
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeParsedOxProps.html#recipType" class="tsd-kind-icon">recip<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="MsgReader.SomeParsedOxProps.html#senderSmtpAddress" class="tsd-kind-icon">sender<wbr>Smtp<wbr>Address</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="MsgReader.SomeParsedOxProps.html#sentRepresentingSmtpAddress" class="tsd-kind-icon">sent<wbr>Representing<wbr>Smtp<wbr>Address</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="MsgReader.SomeParsedOxProps.html#votingOptions" class="tsd-kind-icon">voting<wbr>Options</a>
