@@ -58,6 +58,8 @@ export default {
         '0c1a': 'senderName',
         '0c1e': 'senderAddressType',
         '0c1f': 'senderEmail',
+        '5d01': 'senderSmtpAddress',
+        '5d02': 'sentRepresentingSmtpAddress',
         '5d0a': 'creatorSMTPAddress',
         '5d0b': 'lastModifierSMTPAddress',
         '1000': 'body',
