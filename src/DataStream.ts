@@ -389,7 +389,7 @@ export default class DataStream {
     @return The read Int32Array.
    */
   readInt32Array(length: number, e?: boolean): Int32Array {
-    length = length == null ? (this.byteLength - this.position / 4) : length;
+    length = length == null ? (this.byteLength - this.position) / 4 : length;
     var arr = new Int32Array(length);
     DataStream.memcpy(arr.buffer, 0,
       this.buffer, this.byteOffset + this.position,
@@ -407,7 +407,7 @@ export default class DataStream {
     @return The read Int16Array.
    */
   readInt16Array(length: number, e?: boolean): Int16Array {
-    length = length == null ? (this.byteLength - this.position / 2) : length;
+    length = length == null ? (this.byteLength - this.position) / 2 : length;
     var arr = new Int16Array(length);
     DataStream.memcpy(arr.buffer, 0,
       this.buffer, this.byteOffset + this.position,
@@ -442,7 +442,7 @@ export default class DataStream {
     @return The read Uint32Array.
    */
   readUint32Array(length: number, e?: boolean): Uint32Array {
-    length = length == null ? (this.byteLength - this.position / 4) : length;
+    length = length == null ? (this.byteLength - this.position) / 4 : length;
     var arr = new Uint32Array(length);
     DataStream.memcpy(arr.buffer, 0,
       this.buffer, this.byteOffset + this.position,
@@ -460,7 +460,7 @@ export default class DataStream {
     @return The read Uint16Array.
    */
   readUint16Array(length: number, e?: boolean): Uint16Array {
-    length = length == null ? (this.byteLength - this.position / 2) : length;
+    length = length == null ? (this.byteLength - this.position) / 2 : length;
     var arr = new Uint16Array(length);
     DataStream.memcpy(arr.buffer, 0,
       this.buffer, this.byteOffset + this.position,
@@ -495,7 +495,7 @@ export default class DataStream {
     @return The read Float64Array.
    */
   readFloat64Array(length: number, e?: boolean): Float64Array {
-    length = length == null ? (this.byteLength - this.position / 8) : length;
+    length = length == null ? (this.byteLength - this.position) / 8 : length;
     var arr = new Float64Array(length);
     DataStream.memcpy(arr.buffer, 0,
       this.buffer, this.byteOffset + this.position,
@@ -513,7 +513,7 @@ export default class DataStream {
     @return The read Float32Array.
    */
   readFloat32Array(length: number, e?: boolean): Float32Array {
-    length = length == null ? (this.byteLength - this.position / 4) : length;
+    length = length == null ? (this.byteLength - this.position) / 4 : length;
     var arr = new Float32Array(length);
     DataStream.memcpy(arr.buffer, 0,
       this.buffer, this.byteOffset + this.position,

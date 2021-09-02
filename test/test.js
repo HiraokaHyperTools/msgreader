@@ -350,6 +350,40 @@ describe('DataStream', function () {
     assert.strictEqual(ds.readUint32(), 0x0b0a0908);
     assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
   });
+
+  it('little.readUint32Array', function () {
+    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readUint32Array()], [0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c]);
+  });
+  it('little.readInt32Array', function () {
+    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readInt32Array()], [0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c]);
+  });
+  it('little.readUint16Array', function () {
+    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readUint16Array()], [0x0100, 0x0302, 0x0504, 0x0706, 0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+  });
+  it('little.readInt16Array', function () {
+    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readInt16Array()], [0x0100, 0x0302, 0x0504, 0x0706, 0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+  });
+
+  it('little.readUint32Array +offset', function () {
+    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readUint32Array()], [0x0b0a0908, 0x0f0e0d0c]);
+  });
+  it('little.readInt32Array +offset', function () {
+    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readInt32Array()], [0x0b0a0908, 0x0f0e0d0c]);
+  });
+  it('little.readUint16Array +offset', function () {
+    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readUint16Array()], [0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+  });
+  it('little.readInt16Array +offset', function () {
+    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+    assert.notStrictEqual([...ds.readInt16Array()], [0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+  });
 });
 
 
