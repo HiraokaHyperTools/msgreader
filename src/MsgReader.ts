@@ -212,7 +212,7 @@ export interface SomeOxProps {
    * 
    * e.g. `Mon, 15 Feb 2021 08:19:21 GMT`
    * 
-   * Target {@link dataType} = 'msg'.
+   * Target {@link dataType} = 'msg' and 'attachment'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3007-PidTagCreationTime.md
    */
@@ -223,7 +223,7 @@ export interface SomeOxProps {
    * 
    * e.g. `Mon, 15 Feb 2021 08:19:21 GMT`
    * 
-   * Target {@link dataType} = 'msg'.
+   * Target {@link dataType} = 'msg' and 'attachment'.
    * 
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3008-PidTagLastModificationTime.md
    */
