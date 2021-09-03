@@ -67,6 +67,8 @@ export default {
         '1009': 'compressedRtf',
         '3ffa': 'lastModifierName',
         // attachment specific
+        '3007': 'creationTime',
+        '3008': 'lastModificationTime',
         '3703': 'extension',
         '3704': 'fileNameShort',
         '3707': 'fileName',
@@ -96,6 +98,7 @@ export default {
       TYPE_MAPPING: {
         '001e': 'string',
         '001f': 'unicode',
+        '0040': 'time',
         '0102': 'binary',
         '0003': 'integer',
         '000b': 'boolean',

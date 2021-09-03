@@ -709,6 +709,11 @@ export default class MsgReader {
     else if (decodeAs === "boolean") {
       value = ds.readUint16() ? true : false;
     }
+    else if (decodeAs === "time") {
+      const lo = ds.readUint32();
+      const fileTime = lo + (4294967296.0 * ds.readUint32());
+      value = new Date(fileTimeToUnixEpoch(fileTime)).toUTCString();
+    }
 
     if (skip) {
       key = undefined;
