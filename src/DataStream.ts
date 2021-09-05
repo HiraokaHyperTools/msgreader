@@ -1,4 +1,4 @@
-const iconv = require('@kenjiuno/iconvlite-wrapper-with-iso2022jp');
+const iconv = require('iconv-lite');
 
 /**
  * This DataStream is for internal use.
@@ -1142,7 +1142,7 @@ export default class DataStream {
     if (encoding == null || encoding == "ASCII") {
       return DataStream.createStringFromArray(this.mapUint8Array(length == null ? this.byteLength - this.position : length));
     } else {
-      return (new TextDecoder(encoding)).decode(this.mapUint8Array(length));
+      return iconv.decode(this.mapUint8Array(length), encoding);
     }
   };
 
