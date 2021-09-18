@@ -12,3 +12,4 @@ typedoc.json
 others/
 /cli.js
 /.editorconfig
+/yarn-error.log
