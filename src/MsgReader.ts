@@ -401,6 +401,32 @@ export interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/00008580-PidLidInternetAccountName.md
    */
   inetAcctName?: string;
+
+  /**
+   * Contains the format of the Simple Mail Transport Protocol (SMTP) email address of the sending mailbox owner.
+   * 
+   * e.g.
+   * `no-reply@microsoft.com` for {@link senderAddressType} = 'SMTP'
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsendersmtpaddress-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D01-PidTagSenderSmtpAddress.md
+   */
+  senderSmtpAddress?: string;
+
+  /**
+   * Contains the Simple Mail Transport Protocol (SMTP) email address for the messaging user who is represented by the sender.
+   * 
+   * e.g.
+   * `no-reply@microsoft.com` for {@link senderAddressType} = 'SMTP'
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsentrepresentingsmtpaddress-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D02-PidTagSentRepresentingSmtpAddress.md
+   */
+  sentRepresentingSmtpAddress?: string;
 }
 
 export interface SomeParsedOxProps {
@@ -430,31 +456,7 @@ export interface SomeParsedOxProps {
    */
   votingOptions?: string;
 
-  /**
-   * Contains the format of the Simple Mail Transport Protocol (SMTP) email address of the sending mailbox owner.
-   * 
-   * e.g.
-   * `no-reply@microsoft.com` for {@link senderAddressType} = 'SMTP'
-   * 
-   * Target {@link dataType} = 'msg'.
-   * 
-   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsendersmtpaddress-canonical-property
-   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D01-PidTagSenderSmtpAddress.md
-   */
-  senderSmtpAddress?: string;
-
-  /**
-   * Contains the Simple Mail Transport Protocol (SMTP) email address for the messaging user who is represented by the sender.
-   * 
-   * e.g.
-   * `no-reply@microsoft.com` for {@link senderAddressType} = 'SMTP'
-   * 
-   * Target {@link dataType} = 'msg'.
-   * 
-   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsentrepresentingsmtpaddress-canonical-property
-   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D02-PidTagSentRepresentingSmtpAddress.md
-   */
-  sentRepresentingSmtpAddress?: string;
+  // Only parsed props!
 }
 
 export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
