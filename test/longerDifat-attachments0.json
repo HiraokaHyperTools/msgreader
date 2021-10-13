@@ -15,6 +15,7 @@
   }
  ],
  "recipients": [],
+ "messageClass": "IPM.Note",
  "subject": "Has 8MiB.bin",
  "body": " \r\n",
  "inetAcctName": "xmailuser@xmailserver.test",

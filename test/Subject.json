@@ -24,6 +24,7 @@
    "recipType": "bcc"
   }
  ],
+ "messageClass": "IPM.Note",
  "subject": "Subject",
  "body": "Message\r\n",
  "creationTime": "Mon, 28 Sep 2020 11:28:52 GMT",

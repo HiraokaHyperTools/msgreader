@@ -15,6 +15,7 @@
   }
  ],
  "recipients": [],
+ "messageClass": "IPM.Note",
  "body": " \r\n",
  "subject": "",
  "inetAcctName": "ku@digitaldolphins.jp",

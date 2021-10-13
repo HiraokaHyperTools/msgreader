@@ -427,6 +427,22 @@ export interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/5D02-PidTagSentRepresentingSmtpAddress.md
    */
   sentRepresentingSmtpAddress?: string;
+
+  /**
+   * Contains a text string that identifies the sender-defined message class, such as IPM.Note.
+   * 
+   * e.g.
+   * 
+   * - `IPM.Note` for mail
+   * - `IPM.StickyNote` for sticky note
+   * - `IPM.Appointment` for schedule
+   * 
+   * See more at: [Item Types and Message Classes | Microsoft Docs](https://docs.microsoft.com/en-us/office/vba/outlook/concepts/forms/item-types-and-message-classes)
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagmessageclass-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/001A-PidTagMessageClass.md
+   */
+  messageClass?: string;
 }
 
 export interface SomeParsedOxProps {

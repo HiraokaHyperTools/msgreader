@@ -11,6 +11,7 @@
   }
  ],
  "senderEmail": "xmailuser@xmailserver.test",
+ "messageClass": "IPM.Note",
  "subject": "Sent time",
  "body": "Test mail\r\n\r\n",
  "senderName": "xmailuser",

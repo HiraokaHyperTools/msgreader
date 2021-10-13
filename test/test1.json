@@ -17,6 +17,7 @@
    "recipType": "cc"
   }
  ],
+ "messageClass": "IPM.Note",
  "subject": "title",
  "body": "body\r\n",
  "inetAcctName": "ku@digitaldolphins.jp",

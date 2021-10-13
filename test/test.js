@@ -231,6 +231,28 @@ describe('MsgReader', function () {
       use(testMsgInfo, 'test/voteYes.json');
     });
   });
+
+  describe('A schedule.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/A schedule.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    removeCompressedRtf(testMsgInfo);
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      use(testMsgInfo, 'test/A schedule.json');
+    });
+  });
+
+  describe('A memo.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/A memo.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    removeCompressedRtf(testMsgInfo);
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      use(testMsgInfo, 'test/A memo.json');
+    });
+  });
 });
 
 

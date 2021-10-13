@@ -1,0 +1,26 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "addressType": "EX",
+   "name": "UnoKenji",
+   "email": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
+   "smtpAddress": "ku@digitaldolphins.onmicrosoft.com",
+   "recipType": "to"
+  }
+ ],
+ "senderEmail": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
+ "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
+ "messageClass": "IPM.Appointment",
+ "subject": "A schedule",
+ "senderName": "UnoKenji",
+ "senderAddressType": "EX",
+ "body": "A message body.\r\n",
+ "inetAcctName": "ku@digitaldolphins.onmicrosoft.com",
+ "creationTime": "Wed, 13 Oct 2021 09:14:52 GMT",
+ "lastModificationTime": "Wed, 13 Oct 2021 09:14:52 GMT",
+ "clientSubmitTime": "Wed, 13 Oct 2021 09:14:08 GMT",
+ "messageDeliveryTime": "Wed, 13 Oct 2021 09:14:08 GMT"
+}

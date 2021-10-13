@@ -54,6 +54,7 @@ export default {
       // example (use fields as needed)
       NAME_MAPPING: {
         // email specific
+        '001a': 'messageClass',
         '0037': 'subject',
         '0c1a': 'senderName',
         '0c1e': 'senderAddressType',

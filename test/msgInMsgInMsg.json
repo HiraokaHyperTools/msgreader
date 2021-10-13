@@ -26,6 +26,7 @@
        "subject": "Microsoft Outlook テスト メッセージ",
        "senderName": "Microsoft Outlook",
        "inetAcctName": "xmailuser@xmailserver.test",
+       "messageClass": "IPM.Note",
        "senderEmail": "xmailuser@xmailserver.test"
       },
       "innerMsgContent": true,
@@ -49,6 +50,7 @@
     "recipients": [],
     "subject": "I have attachments!",
     "body": "I have attachments!\r\n",
+    "messageClass": "IPM.Note",
     "inetAcctName": "xmailuser@xmailserver.test"
    },
    "innerMsgContent": true,
@@ -70,6 +72,7 @@
   }
  ],
  "recipients": [],
+ "messageClass": "IPM.Note",
  "subject": "I have sub attachments!",
  "body": "I have sub attachments!\r\n",
  "inetAcctName": "xmailuser@xmailserver.test",
