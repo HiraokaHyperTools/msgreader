@@ -6,5 +6,9 @@
         "outDir": "lib",
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
+        "moduleResolution": "Node",
+        "typeRoots": [
+            "node_modules/@types"
+        ]
     },
 }
