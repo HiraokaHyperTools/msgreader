@@ -443,6 +443,55 @@ export interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/001A-PidTagMessageClass.md
    */
   messageClass?: string;
+
+  /**
+   * Represents the date and time when an appointment begins.
+   * 
+   * e.g. `Wed, 13 Oct 2021 09:30:00 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidappointmentstartwhole-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0000820D-PidLidAppointmentStartWhole.md
+   */
+  apptStartWhole?: string;
+
+  /**
+   * Represents the date and time that an appointment ends.
+   * 
+   * e.g. `Wed, 13 Oct 2021 10:00:00 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidappointmentendwhole-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/0000820E-PidLidAppointmentEndWhole.md
+   */
+  apptEndWhole?: string;
+
+  /**
+   * Specifies the start date and time of the event in Coordinated Universal Times (UTC) for single instance calendar objects,
+   * and specifies midnight on the date of the first instance in UTC for a recurring series.
+   * 
+   * e.g. `Wed, 13 Oct 2021 09:30:00 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidclipstart-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/00008235-PidLidClipStart.md
+   */
+  clipStart?: string;
+
+  /**
+   * Specifies the end date and time of the event in Coordinated Universal Time (UTC) for single instance calendar objects.
+   * 
+   * e.g. `Wed, 13 Oct 2021 09:30:00 GMT`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidclipend-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/00008236-PidLidClipEnd.md
+   */
+  clipEnd?: string;
 }
 
 export interface SomeParsedOxProps {
@@ -699,8 +748,14 @@ export default class MsgReader {
           if (lidDict !== undefined) {
             const prop = lidDict[keyed.propertyLid];
             if (prop !== undefined) {
-              key = prop.id;
-              keyType = KeyType.toSub;
+              if (prop.dispid !== undefined) {
+                key = prop.dispid; // e.g. `votingResponse`
+                keyType = KeyType.root;
+              }
+              else {
+                key = prop.id; // e.g. `PidLidVerbStream` listed in SomeParsedOxProps
+                keyType = KeyType.toSub;
+              }
             }
           }
         }
@@ -739,19 +794,9 @@ export default class MsgReader {
 
     if (0) { }
     else if (key === "PidLidVerbStream") {
-      value = parseVerbStream(ds);
-    }
-    else if (key === "PidLidVerbResponse") {
-      key = "votingResponse";
-      keyType = KeyType.root;
-    }
-    else if (key === "PidLidVerbStream") {
       key = "votingOptions";
       keyType = KeyType.root;
-    }
-    else if (key === "PidLidInternetAccountName") {
-      key = "inetAcctName";
-      keyType = KeyType.root;
+      value = parseVerbStream(ds);
     }
     else if (key === "recipType") {
       const MAPI_TO = 1;
@@ -972,12 +1017,6 @@ export default class MsgReader {
         return new Date(fileTimeToUnixEpoch(fileTime)).toUTCString();
       },
     };
-    const names = {
-      0x0039: 'clientSubmitTime',
-      0x0E06: 'messageDeliveryTime',
-      0x3007: 'creationTime',
-      0x3008: 'lastModificationTime',
-    };
 
     while (!propertiesDs.isEof()) {
       const propertyTag = propertiesDs.readUint32();
@@ -987,17 +1026,17 @@ export default class MsgReader {
       const flags = propertiesDs.readUint32();
 
       const arr = propertiesDs.readUint8Array(8);
-      const dataView = new DataView(arr.buffer);
 
       parserConfig.propertyObserver(fields, propertyTag, arr);
 
-      const typeConverter = typeConverters[propertyTag & 0xFFFF];
-      if (typeConverter) {
-        const name = names[(propertyTag / 65536) & 0xFFFF];
-        if (name) {
-          fields[name] = typeConverter(dataView);
-        }
-      }
+      const fieldClass = toHex2((propertyTag / 65536) & 0xFFFF);
+      const fieldType = toHex2(propertyTag & 0xFFFF);
+
+      this.setDecodedFieldTo(
+        parserConfig,
+        fields,
+        this.decodeField(fieldClass, fieldType, () => arr, true)
+      );
     }
   }
 

@@ -22,5 +22,9 @@
  "creationTime": "Wed, 13 Oct 2021 09:14:52 GMT",
  "lastModificationTime": "Wed, 13 Oct 2021 09:14:52 GMT",
  "clientSubmitTime": "Wed, 13 Oct 2021 09:14:08 GMT",
- "messageDeliveryTime": "Wed, 13 Oct 2021 09:14:08 GMT"
+ "messageDeliveryTime": "Wed, 13 Oct 2021 09:14:08 GMT",
+ "apptStartWhole": "Wed, 13 Oct 2021 09:30:00 GMT",
+ "apptEndWhole": "Wed, 13 Oct 2021 10:00:00 GMT",
+ "clipStart": "Wed, 13 Oct 2021 09:30:00 GMT",
+ "clipEnd": "Wed, 13 Oct 2021 09:30:00 GMT"
 }

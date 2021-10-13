@@ -67,6 +67,8 @@ export default {
         '007d': 'headers',
         '1009': 'compressedRtf',
         '3ffa': 'lastModifierName',
+        '0039': 'clientSubmitTime',
+        '0e06': 'messageDeliveryTime',
         // attachment specific
         '3007': 'creationTime',
         '3008': 'lastModificationTime',
@@ -87,11 +89,19 @@ export default {
         '10130102': 'html',
       },
       PIDLID_MAPPING: {
+        // PSETID_Common
         "00062008-0000-0000-c000-000000000046": {
           0x00008520: { id: "PidLidVerbStream", },
-          0x00008524: { id: "PidLidVerbResponse", },
-          0x00008580: { id: "PidLidInternetAccountName", },
-        }
+          0x00008524: { id: "PidLidVerbResponse", dispid: "votingResponse", },
+          0x00008580: { id: "PidLidInternetAccountName", dispid: "inetAcctName", },
+        },
+        // PSETID_Appointment
+        "00062002-0000-0000-c000-000000000046": {
+          0x0000820D: { id: "PidLidAppointmentStartWhole", dispid: "apptStartWhole", },
+          0x0000820E: { id: "PidLidAppointmentEndWhole", dispid: "apptEndWhole", },
+          0x00008235: { id: "PidLidClipStart", dispid: "clipStart", },
+          0x00008236: { id: "PidLidClipEnd", dispid: "clipEnd", },
+        },
       },
       CLASS_MAPPING: {
         ATTACHMENT_DATA: '3701'
