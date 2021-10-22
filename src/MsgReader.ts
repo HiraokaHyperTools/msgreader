@@ -776,6 +776,9 @@ export default class MsgReader {
       value = ds.readUCS2String(array.length / 2);
       skip = insideProps;
     }
+    else if (decodeAs === "binary") {
+      skip = insideProps;
+    }
     else if (decodeAs === "integer") {
       value = ds.readUint32();
     }

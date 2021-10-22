@@ -1,17 +1,20 @@
 const fs = require('fs');
 
 function removeCompressedRtf(msg) {
-  delete msg.compressedRtf;
-
-  msg.attachments.forEach(
-    it => {
-      if (it.innerMsgContentFields) {
-        removeCompressedRtf(it.innerMsgContentFields);
+  const attachments = msg.attachments.map(
+    sub => {
+      const newSub = Object.assign({}, sub);
+      if (newSub.innerMsgContentFields) {
+        newSub.innerMsgContentFields = removeCompressedRtf(sub.innerMsgContentFields);
       }
+      return newSub;
     }
   );
 
-  return msg;
+  const newMsg = Object.assign({}, msg);
+  delete newMsg.compressedRtf;
+  newMsg.attachments = attachments;
+  return newMsg;
 }
 
 const generateJsonData = false;
@@ -28,6 +31,23 @@ function use(testMsgInfo, jsonFilePath) {
   }
 }
 
+const { decompressRTF } = require('@kenjiuno/decompressrtf');
+
+function useRtf(testMsgInfo, rtfFilePath) {
+  const { compressedRtf } = testMsgInfo;
+  const rtf = decompressRTF(compressedRtf);
+
+  if (generateJsonData) {
+    fs.writeFileSync(rtfFilePath, Buffer.from(rtf));
+  }
+  else {
+    assert.deepStrictEqual(
+      rtf,
+      [...fs.readFileSync(rtfFilePath)]
+    );
+  }
+}
+
 const assert = require('assert');
 const { TypeEnum } = require('../lib/Reader');
 describe('MsgReader', function () {
@@ -37,9 +57,12 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/test1.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/test1.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/test1.json');
+    });
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/test1.rtf');
     });
   });
 
@@ -47,11 +70,11 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/test2.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
     const testMsgAttachment0 = testMsg.getAttachment(0);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/test2.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/test2.json');
     });
 
     it('verify attachment: A.txt', function () {
@@ -63,18 +86,22 @@ describe('MsgReader', function () {
         }
       );
     });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/test2.rtf');
+    });
   });
 
   describe('msgInMsg.msg', function () {
     const msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
     const testMsgAttachment0 = testMsg.getAttachment(0);
     const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/msgInMsg.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/msgInMsg.json');
     });
 
     it('testMsgAttachment0 === testMsgAttachments0', function () {
@@ -84,11 +111,14 @@ describe('MsgReader', function () {
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
-      removeCompressedRtf(subInfo);
 
-      use(subInfo, 'test/msgInMsg-attachments0.json');
+      const subMsg = removeCompressedRtf(subInfo);
+      use(subMsg, 'test/msgInMsg-attachments0.json');
     });
 
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/msgInMsg.rtf');
+    });
   });
 
 
@@ -96,7 +126,6 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/msgInMsgInMsg.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
     const testMsgAttachments0 = testMsg.getAttachment(
       testMsgInfo.attachments[0]
     );
@@ -105,23 +134,28 @@ describe('MsgReader', function () {
     );
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/msgInMsgInMsg.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/msgInMsgInMsg.json');
     });
 
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
-      removeCompressedRtf(subInfo);
+      const subMsg = removeCompressedRtf(subInfo);
 
-      use(subInfo, 'test/msgInMsgInMsg-attachments0.json');
+      use(subMsg, 'test/msgInMsgInMsg-attachments0.json');
     });
 
     it('re-parse and verify rebuilt inner testMsgAttachments0AndItsAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0AndItsAttachments0.content);
       const subInfo = subReader.getFileData();
-      removeCompressedRtf(subInfo);
+      const subMsg = removeCompressedRtf(subInfo);
 
-      use(subInfo, 'test/msgInMsgInMsg-attachments0-attachments0.json');
+      use(subMsg, 'test/msgInMsgInMsg-attachments0-attachments0.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/msgInMsgInMsg.rtf');
     });
   });
 
@@ -129,10 +163,14 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/Subject.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/Subject.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/Subject.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/Subject.rtf');
     });
   });
 
@@ -140,10 +178,14 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/sent.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/sent.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/sent.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/sent.rtf');
     });
   });
 
@@ -151,10 +193,14 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/sent2.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/sent2.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/sent2.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/sent2.rtf');
     });
   });
 
@@ -167,9 +213,9 @@ describe('MsgReader', function () {
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
-      removeCompressedRtf(subInfo);
+      const subMsg = removeCompressedRtf(subInfo);
 
-      use(subInfo, 'test/longerFat-attachments0.json');
+      use(subMsg, 'test/longerFat-attachments0.json');
     });
   });
 
@@ -182,9 +228,9 @@ describe('MsgReader', function () {
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
-      removeCompressedRtf(subInfo);
+      const subMsg = removeCompressedRtf(subInfo);
 
-      use(subInfo, 'test/longerDifat-attachments0.json');
+      use(subMsg, 'test/longerDifat-attachments0.json');
     });
   });
 
@@ -192,10 +238,14 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/attachAndInline.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/attachAndInline.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/attachAndInline.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/attachAndInline.rtf');
     });
   });
 
@@ -203,10 +253,14 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/voteItems.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/voteItems.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/voteItems.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/voteItems.rtf');
     });
   });
 
@@ -214,10 +268,10 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/voteNo.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/voteNo.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/voteNo.json');
     });
   });
 
@@ -225,10 +279,10 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/voteYes.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/voteYes.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/voteYes.json');
     });
   });
 
@@ -236,10 +290,14 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/A schedule.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/A schedule.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/A schedule.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/A schedule.rtf');
     });
   });
 
@@ -247,10 +305,14 @@ describe('MsgReader', function () {
     const msgFileBuffer = fs.readFileSync('test/A memo.msg');
     const testMsg = new MsgReader(msgFileBuffer);
     const testMsgInfo = testMsg.getFileData();
-    removeCompressedRtf(testMsgInfo);
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      use(testMsgInfo, 'test/A memo.json');
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/A memo.json');
+    });
+
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/A memo.rtf');
     });
   });
 });
@@ -291,22 +353,6 @@ describe('Burner', function () {
     test(1024 * 8192);
     test(1024 * 8192 * 2);
     test(1024 * 8192 * 3);
-  });
-
-  it.skip('sequential boundary tests', function () {
-    this.timeout(1000 * 60 * 60);
-    //64513
-    //129537
-    // 129K 6sec
-    //   1M 4min
-    for (let x = 1024 * 1024; x < 9 * 1024 * 1024; x++) {
-      try {
-        test(x);
-      }
-      catch (ex) {
-        throw new Error(`${x}`);
-      }
-    }
   });
 });
 
