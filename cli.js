@@ -180,6 +180,31 @@ program
     }
   });
 
+program
+  .command('walk <msgFilePath>')
+  .description('Walk entire msg file as a raw CFBF')
+  .action((msgFilePath, options) => {
+    const msgFileBuffer = fs.readFileSync(msgFilePath);
+    const reader = new Reader(msgFileBuffer);
+    reader.parse();
+
+    function walk(folder, prefix) {
+      console.info("Walking folder:", prefix);
+      for (let fileSet of folder.fileNameSets()) {
+        const contents = fileSet.provider();
+        console.info("Verify file:", fileSet.name, "(", fileSet.length, ")", "read", contents.length, "bytes");
+        if (fileSet.length != contents.length) {
+          throw new Error();
+        }
+      }
+      for (let subFolder of folder.subFolders()) {
+        walk(subFolder, `${prefix}${subFolder.name}/`);
+      }
+    }
+    
+    walk(reader.rootFolder(), "/");
+  });
+
 
 
 program

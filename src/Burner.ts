@@ -189,7 +189,7 @@ class LiteBurner {
         const numFatSectors = this.fat.count() - firstFatSector;
 
         const numDifatSectors = (numFatSectors > 109)
-            ? RoundUpto512(4 * (numFatSectors - 109)) / 512
+            ? RoundUpto512(4 * Math.floor((numFatSectors - 109) / 127 * 128)) / 512
             : 0;
 
         const firstDifatSector = (numDifatSectors !== 0)
@@ -206,8 +206,27 @@ class LiteBurner {
         const difat2 = [];
 
         {
-            for (let x = 0; x < numFatSectors; x++) {
-                ((x < 109) ? difat1 : difat2).push(firstFatSector + x);
+            let x = 0;
+            for (; x < 109; x++) {
+                difat1.push(firstFatSector + x);
+            }
+            let nextDifatSector = firstDifatSector + 1;
+            for (; x < numFatSectors; x++) {
+                difat2.push(firstFatSector + x);
+
+                const remain = (difat2.length & 127);
+                if (remain === 127) {
+                    difat2.push(nextDifatSector);
+                    nextDifatSector++;
+                }
+            }
+
+            while (true) {
+                const remain = (difat2.length & 127);
+                if (remain === 0) {
+                    break;
+                }
+                difat2.push((remain === 127) ? -2 : -1);
             }
         }
 
