@@ -4,12 +4,11 @@ data
 test/
 MEMO.md
 tsconfig.json
-.babelrc
 azure-pipelines.yml
 docs/
 typedoc.json
 .gitmodules
 others/
-/cli.js
 /.editorconfig
-/yarn-error.log
+/*.log
+/*.js
