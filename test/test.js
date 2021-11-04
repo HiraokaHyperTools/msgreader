@@ -323,6 +323,11 @@ describe('Burner', function () {
   const Reader = require('../lib/Reader').Reader;
 
   const test = (x) => {
+    const writeData = new Uint8Array(x);
+    for (let t = 0; t < writeData.length; t++) {
+      writeData[t] = Math.floor(Math.random() * 255);
+    }
+
     const array = burn([
       {
         name: "Root Entry",
@@ -334,25 +339,28 @@ describe('Burner', function () {
         name: "file",
         type: TypeEnum.DOCUMENT,
         length: x,
-        binaryProvider: () => new Uint8Array(x),
+        binaryProvider: () => writeData,
       }
     ]);
 
     //require('fs').writeFileSync(x + ".msg", array);
     const reader = new Reader(array);
     reader.parse();
+
+    const readData = reader.rootFolder().readFile("file");
+    assert.deepStrictEqual(readData, writeData);
   };
 
-  it('known boundary tests', function () {
-    test(4095);
-    test(4096);
-    test(8192);
-    test(64000);
-    test(64513);
-    test(129537);
-    test(1024 * 8192);
-    test(1024 * 8192 * 2);
-    test(1024 * 8192 * 3);
+  describe('Compare file contents among Burner/Reader', function () {
+    it('file size 4095', function () { test(4095); });
+    it('file size 4096', function () { test(4096); });
+    it('file size 8192', function () { test(8192); });
+    it('file size 64000', function () { test(64000); });
+    it('file size 64513', function () { test(64513); });
+    it('file size 129537', function () { test(129537); });
+    it('file size 1024 * 8192', function () { test(1024 * 8192); });
+    it('file size 1024 * 8192 * 2', function () { test(1024 * 8192 * 2); });
+    it('file size 1024 * 8192 * 3', function () { test(1024 * 8192 * 3); });
   });
 });
 
