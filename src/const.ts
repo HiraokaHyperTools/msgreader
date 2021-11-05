@@ -106,8 +106,8 @@ export default {
       CLASS_MAPPING: {
         ATTACHMENT_DATA: '3701'
       },
-      '001e': 'string',
       TYPE_MAPPING: {
+        '001e': 'string',
         '001f': 'unicode',
         '0040': 'time',
         '0102': 'binary',

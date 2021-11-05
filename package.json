@@ -1,6 +1,6 @@
 {
   "name": "@kenjiuno/msgreader",
-  "version": "1.12.0-alpha.2",
+  "version": "1.12.0-alpha.3",
   "description": "Outlook Item File (.msg) reader in JavaScript Npm Module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -9,7 +9,9 @@
     "build": "tsc",
     "test": "npm run mocha",
     "prepare": "npm run build && npm run test",
-    "mocha": "set NODE_ENV=test && mocha"
+    "mocha": "set NODE_ENV=test && mocha",
+    "dr": "npm publish --dry-run",
+    "p": "npm publish"
   },
   "author": "kenjiuno",
   "repository": "github:HiraokaHyperTools/msgreader",
