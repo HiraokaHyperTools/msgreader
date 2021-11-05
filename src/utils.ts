@@ -116,3 +116,7 @@ export function msftUuidStringify(array: ArrayLike<number>, offset: number): str
     + toHex1(array[offset + 15])
     ;
 }
+
+export function emptyToNull(text: string): string {
+  return (text === "") ? null : text;
+}

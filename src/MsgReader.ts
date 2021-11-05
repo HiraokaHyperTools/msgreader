@@ -20,7 +20,7 @@ import CONST from './const'
 import DataStream from './DataStream'
 import { CFileSet, CFolder, Reader } from './Reader';
 import { burn, Entry } from './Burner';
-import { msftUuidStringify, toHex2, toHex4 } from './utils';
+import { emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils';
 import { parse as entryStreamParser } from './EntryStreamParser';
 import { parse as parseVerbStream } from './VerbStreamParser';
 
@@ -1178,7 +1178,7 @@ export default class MsgReader {
         {
           propertyObserver: (this.parserConfig?.propertyObserver) || (() => { }),
           includeRawProps: this.parserConfig?.includeRawProps ? true : false,
-          ansiEncoding: this.parserConfig?.ansiEncoding,
+          ansiEncoding: emptyToNull(this.parserConfig?.ansiEncoding),
         }
       );
     }
