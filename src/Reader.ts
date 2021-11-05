@@ -249,10 +249,10 @@ export class Reader {
     parse(): void {
         this.headerData();
         this.batData = this.batDataReader();
-        this.sbatData = this.sbatDataReader();
         if (this.xbatCount > 0) {
             this.xbatDataReader();
         }
+        this.sbatData = this.sbatDataReader();
         this.propertyData = this.propertyDataReader(this.propertyStart);
     }
 
