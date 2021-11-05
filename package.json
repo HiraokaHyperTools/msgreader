@@ -10,8 +10,7 @@
     "test": "npm run mocha",
     "prepare": "npm run build && npm run test",
     "mocha": "set NODE_ENV=test && mocha",
-    "dr": "npm publish --dry-run",
-    "p": "npm publish"
+    "dr": "npm publish --dry-run"
   },
   "author": "kenjiuno",
   "repository": "github:HiraokaHyperTools/msgreader",

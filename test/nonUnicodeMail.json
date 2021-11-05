@@ -1,0 +1,19 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "name": "xmailuser2@xmailserver.test",
+   "email": "xmailuser2@xmailserver.test",
+   "addressType": "SMTP",
+   "recipType": "to"
+  }
+ ],
+ "messageClass": "IPM.Note",
+ "subject": "Non Unicode mail subject",
+ "body": "Non Unicode mail body!\r\n",
+ "creationTime": "Fri, 05 Nov 2021 10:23:10 GMT",
+ "lastModificationTime": "Fri, 05 Nov 2021 10:23:10 GMT",
+ "messageDeliveryTime": "Fri, 05 Nov 2021 10:22:54 GMT"
+}

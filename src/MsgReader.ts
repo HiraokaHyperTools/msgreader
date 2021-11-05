@@ -36,6 +36,33 @@ export interface ParserConfig {
    * Include {@link FieldsData.rawProps} while decoding msg.
    */
   includeRawProps?: boolean;
+
+  /**
+   * Specify iconv-lite's supported character encoding.
+   * This is used for PT_STRING8 (PtypString8) non-Unicode string properties.
+   * 
+   * e.g.
+   * 
+   * - `null`
+   * - windows-1251
+   *   - `windows1251`
+   *   - `1251`
+   *   - `win1251`
+   *   - `cp1251`
+   * - Windows-31J
+   *   - `shiftjis`
+   *   - `932`
+   *   - `ms932`
+   *   - `cp932`
+   * 
+   */
+  ansiEncoding?: string;
+}
+
+interface ParsingConfig {
+  propertyObserver: (fields: FieldsData, tag: number, raw: Uint8Array | null) => void;
+  includeRawProps: boolean;
+  ansiEncoding?: string;
 }
 
 /**
@@ -722,7 +749,7 @@ export default class MsgReader {
     this.reader = new Reader(arrayBuffer);
   }
 
-  private decodeField(fieldClass: string, fieldType: string, provider: () => Uint8Array, insideProps: boolean): FieldValuePair {
+  private decodeField(fieldClass: string, fieldType: string, provider: () => Uint8Array, ansiEncoding: string, insideProps: boolean): FieldValuePair {
     const array = provider();
     const ds = new DataStream(array, 0, DataStream.LITTLE_ENDIAN);
 
@@ -769,7 +796,7 @@ export default class MsgReader {
     const decodeAs = CONST.MSG.FIELD.TYPE_MAPPING[fieldType];
     if (0) { }
     else if (decodeAs === "string") {
-      value = ds.readString(array.length);
+      value = ds.readString(array.length, ansiEncoding);
       skip = insideProps;
     }
     else if (decodeAs === "unicode") {
@@ -822,7 +849,7 @@ export default class MsgReader {
     return { key, keyType, value, propertyTag, propertySet, propertyLid, };
   }
 
-  private fieldsDataDocument(parserConfig: ParserConfig, documentProperty: CFileSet, fields: FieldsData): void {
+  private fieldsDataDocument(parserConfig: ParsingConfig, documentProperty: CFileSet, fields: FieldsData): void {
     const value = documentProperty.name.substring(12).toLowerCase();
     const fieldClass = value.substring(0, 4);
     const fieldType = value.substring(4, 8);
@@ -843,12 +870,12 @@ export default class MsgReader {
       this.setDecodedFieldTo(
         parserConfig,
         fields,
-        this.decodeField(fieldClass, fieldType, documentProperty.provider, false)
+        this.decodeField(fieldClass, fieldType, documentProperty.provider, parserConfig.ansiEncoding, false)
       );
     }
   }
 
-  private setDecodedFieldTo(parserConfig: ParserConfig, fields: FieldsData, pair: FieldValuePair): void {
+  private setDecodedFieldTo(parserConfig: ParsingConfig, fields: FieldsData, pair: FieldValuePair): void {
     const { key, keyType, value } = pair;
     if (key !== undefined) {
       if (keyType === KeyType.root) {
@@ -874,7 +901,7 @@ export default class MsgReader {
     return value.substring(4, 8);
   }
 
-  private fieldsDataDirInner(parserConfig: ParserConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData): void {
+  private fieldsDataDirInner(parserConfig: ParsingConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData): void {
     if (dirProperty.name.indexOf(CONST.MSG.FIELD.PREFIX.ATTACHMENT) == 0) {
       // attachment
       const attachmentField: FieldsData = {
@@ -981,7 +1008,7 @@ export default class MsgReader {
     }
   }
 
-  private fieldsRecipAndAttachmentProperties(parserConfig: ParserConfig, documentProperty: CFileSet, fields: FieldsData): void {
+  private fieldsRecipAndAttachmentProperties(parserConfig: ParsingConfig, documentProperty: CFileSet, fields: FieldsData): void {
     const propertiesBinary: Uint8Array = documentProperty.provider();
     const propertiesDs = new DataStream(propertiesBinary, 8, DataStream.LITTLE_ENDIAN);
 
@@ -1002,12 +1029,12 @@ export default class MsgReader {
       this.setDecodedFieldTo(
         parserConfig,
         fields,
-        this.decodeField(fieldClass, fieldType, () => raw, true)
+        this.decodeField(fieldClass, fieldType, () => raw, parserConfig.ansiEncoding, true)
       );
     }
   }
 
-  private fieldsRootProperties(parserConfig: ParserConfig, documentProperty: CFileSet, fields: FieldsData): void {
+  private fieldsRootProperties(parserConfig: ParsingConfig, documentProperty: CFileSet, fields: FieldsData): void {
     const propertiesBinary: Uint8Array = documentProperty.provider();
     const propertiesDs = new DataStream(propertiesBinary, 32, DataStream.LITTLE_ENDIAN);
 
@@ -1038,12 +1065,12 @@ export default class MsgReader {
       this.setDecodedFieldTo(
         parserConfig,
         fields,
-        this.decodeField(fieldClass, fieldType, () => arr, true)
+        this.decodeField(fieldClass, fieldType, () => arr, parserConfig.ansiEncoding, true)
       );
     }
   }
 
-  private fieldsDataDir(parserConfig: ParserConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData, subClass?: string) {
+  private fieldsDataDir(parserConfig: ParsingConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData, subClass?: string) {
     for (let subFolder of dirProperty.subFolders()) {
       this.fieldsDataDirInner(parserConfig, subFolder, rootFolder, fields);
     }
@@ -1064,7 +1091,7 @@ export default class MsgReader {
     }
   }
 
-  private fieldsNameIdDir(parserConfig: ParserConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData) {
+  private fieldsNameIdDir(parserConfig: ParsingConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData) {
     let guidTable: Uint8Array = undefined;
     let stringTable: Uint8Array = undefined;
     let entryTable: Uint8Array = undefined;
@@ -1119,7 +1146,7 @@ export default class MsgReader {
   /**
    * extract real fields
    */
-  private fieldsDataReader(parserConfig: ParserConfig): FieldsData {
+  private fieldsDataReader(parserConfig: ParsingConfig): FieldsData {
     const fields: FieldsData = {
       dataType: "msg",
       attachments: [],
@@ -1132,7 +1159,7 @@ export default class MsgReader {
   /**
    * convert binary data to dictionary
    */
-  private parseMsgData(parserConfig: ParserConfig): FieldsData {
+  private parseMsgData(parserConfig: ParsingConfig): FieldsData {
     this.reader.parse();
     return this.fieldsDataReader(parserConfig);
   }
@@ -1150,7 +1177,8 @@ export default class MsgReader {
       this.fieldsData = this.parseMsgData(
         {
           propertyObserver: (this.parserConfig?.propertyObserver) || (() => { }),
-          includeRawProps: this.parserConfig?.includeRawProps,
+          includeRawProps: this.parserConfig?.includeRawProps ? true : false,
+          ansiEncoding: this.parserConfig?.ansiEncoding,
         }
       );
     }

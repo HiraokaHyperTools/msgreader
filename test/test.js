@@ -315,6 +315,35 @@ describe('MsgReader', function () {
       useRtf(testMsgInfo, 'test/A memo.rtf');
     });
   });
+
+  describe('nonUnicodeMail.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/nonUnicodeMail.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/nonUnicodeMail.json');
+    });
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/nonUnicodeMail.rtf');
+    });
+  });
+
+  describe('nonUnicodeCP932.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/nonUnicodeCP932.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    testMsg.parserConfig = {
+      ansiEncoding: '932',
+    };
+    const testMsgInfo = testMsg.getFileData();
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/nonUnicodeCP932.json');
+    });
+    it('compare rtf', function () {
+      useRtf(testMsgInfo, 'test/nonUnicodeCP932.rtf');
+    });
+  });
 });
 
 
