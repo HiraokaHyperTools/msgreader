@@ -49,5 +49,7 @@
  "inetAcctName": "xmailuser@xmailserver.test",
  "creationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
  "lastModificationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
- "messageDeliveryTime": "Thu, 10 Sep 2020 10:18:08 GMT"
+ "messageDeliveryTime": "Thu, 10 Sep 2020 10:18:08 GMT",
+ "internetCodepage": 50220,
+ "messageLocaleId": 1041
 }

@@ -15,5 +15,7 @@
  "body": "Non Unicode mail body!\r\n",
  "creationTime": "Fri, 05 Nov 2021 10:23:10 GMT",
  "lastModificationTime": "Fri, 05 Nov 2021 10:23:10 GMT",
- "messageDeliveryTime": "Fri, 05 Nov 2021 10:22:54 GMT"
+ "messageDeliveryTime": "Fri, 05 Nov 2021 10:22:54 GMT",
+ "internetCodepage": 20127,
+ "messageLocaleId": 1041
 }

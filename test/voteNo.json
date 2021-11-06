@@ -21,5 +21,7 @@
  "creationTime": "Thu, 29 Jul 2021 10:58:27 GMT",
  "lastModificationTime": "Thu, 29 Jul 2021 10:58:27 GMT",
  "clientSubmitTime": "Thu, 29 Jul 2021 10:57:50 GMT",
- "messageDeliveryTime": "Thu, 29 Jul 2021 10:57:50 GMT"
+ "messageDeliveryTime": "Thu, 29 Jul 2021 10:57:50 GMT",
+ "internetCodepage": 50220,
+ "messageLocaleId": 1041
 }

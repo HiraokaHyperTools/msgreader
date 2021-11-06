@@ -519,6 +519,36 @@ export interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/00008236-PidLidClipEnd.md
    */
   clipEnd?: string;
+
+  /**
+   * Indicates the code page used for PR_BODY (PidTagBody) or PR_BODY_HTML (PidTagBodyHtml) properties.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtaginternetcodepage-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FDE-PidTagInternetCodepage.md
+   */
+  internetCodepage?: number;
+
+  /**
+   * Contains the code page that is used for the message.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagmessagecodepage-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FFD-PidTagMessageCodepage.md
+   */
+  messageCodepage?: number;
+
+  /**
+   * Contains the Windows LCID of the end user who created this message.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagmessagelocaleid-canonical-property
+   * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FF1-PidTagMessageLocaleId.md
+   */
+  messageLocaleId?: number;
 }
 
 export interface SomeParsedOxProps {

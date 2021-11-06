@@ -21,5 +21,7 @@
  "inetAcctName": "ku@digitaldolphins.jp",
  "creationTime": "Tue, 05 Mar 2019 07:41:09 GMT",
  "lastModificationTime": "Tue, 05 Mar 2019 07:41:09 GMT",
- "messageDeliveryTime": "Tue, 05 Mar 2019 07:41:04 GMT"
+ "messageDeliveryTime": "Tue, 05 Mar 2019 07:41:04 GMT",
+ "internetCodepage": 20127,
+ "messageLocaleId": 1041
 }

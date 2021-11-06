@@ -69,6 +69,9 @@ export default {
         '3ffa': 'lastModifierName',
         '0039': 'clientSubmitTime',
         '0e06': 'messageDeliveryTime',
+        '3fde': 'internetCodepage',
+        '3ffd': 'messageCodepage',
+        '3ff1': 'messageLocaleId',
         // attachment specific
         '3007': 'creationTime',
         '3008': 'lastModificationTime',
