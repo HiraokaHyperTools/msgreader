@@ -3,7 +3,8 @@
     "./src/Burner.ts",
     "./src/DataStream.ts",
     "./src/MsgReader.ts",
-    "./src/Reader.ts"
+    "./src/Reader.ts",
+    "./src/Defs.ts"
   ],
   "out": "docs/typedoc",
   "excludePrivate": true,
