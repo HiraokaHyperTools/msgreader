@@ -1,5 +1,5 @@
 /**
- * Provide a list of some known property tags.
+ * Obtain a copy of list of some known property tags.
  * 
  * e.g.
  * 
@@ -2902,7 +2902,7 @@ export function getProps(): Array<{ area: string, key: string, name: string }> {
 }
 
 /**
- * A table for mapping from property type value to property type name.
+ * Obtain a copy of a table for mapping from property type value to property type name.
  * 
  * e.g.
  * 
@@ -2951,7 +2951,7 @@ export function getTypeNames(): { [key: number]: string } {
 }
 
 /**
- * A table to convert from [LCID](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/70feba9f-294e-491e-b6eb-56532684c37f)
+ * Obtain a copy of a table to convert from [LCID](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/70feba9f-294e-491e-b6eb-56532684c37f)
  * to [ANSICodePage](https://docs.microsoft.com/en-us/dotnet/api/system.globalization.textinfo.ansicodepage?view=net-5.0) list.
  * 
  * e.g.
