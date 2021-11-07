@@ -354,7 +354,7 @@ describe('Burner', function () {
   const test = (x) => {
     const writeData = new Uint8Array(x);
     for (let t = 0; t < writeData.length; t++) {
-      writeData[t] = Math.floor(Math.random() * 255);
+      writeData[t] = ((t ^ (t / 257) ^ (t / 65537) ^ (t / 1048573)) & 255);
     }
 
     const array = burn([
@@ -381,15 +381,15 @@ describe('Burner', function () {
   };
 
   describe('Compare file contents among Burner/Reader', function () {
-    it('file size 4095', function () { test(4095); });
-    it('file size 4096', function () { test(4096); });
-    it('file size 8192', function () { test(8192); });
-    it('file size 64000', function () { test(64000); });
-    it('file size 64513', function () { test(64513); });
-    it('file size 129537', function () { test(129537); });
-    it('file size 1024 * 8192', function () { test(1024 * 8192); });
-    it('file size 1024 * 8192 * 2', function () { test(1024 * 8192 * 2); });
-    it('file size 1024 * 8192 * 3', function () { test(1024 * 8192 * 3); });
+    it('file size 0', function () { test(0); });
+    it('file size 1', function () { test(1); });
+    it('file size 63', function () { test(63); });
+    it('file size 64 (minifat sector size)', function () { test(64); });
+    it('file size 65', function () { test(65); });
+    it('file size 511', function () { test(511); });
+    it('file size 512 (fat sector size)', function () { test(512); });
+    it('file size 513', function () { test(513); });
+    it('file size 65537', function () { test(65537); });
   });
 });
 
