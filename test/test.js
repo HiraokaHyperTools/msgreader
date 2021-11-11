@@ -466,7 +466,7 @@ describe('Burner', function () {
 
   describe('validateCompoundFile', function () {
     if (!useValidateCompoundFile) {
-      this.skip();
+      it.skip();
       return;
     }
 
