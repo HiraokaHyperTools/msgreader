@@ -19,6 +19,7 @@
     "@types/node": "^16.10.5",
     "commander": "^8.2.0",
     "mocha": "^9.1.2",
+    "temp": "^0.9.4",
     "typedoc": "^0.22.5",
     "typedoc-plugin-rename-defaults": "^0.4.0",
     "typescript": "^4.4.4"

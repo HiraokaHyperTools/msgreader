@@ -1,4 +1,8 @@
 const fs = require('fs');
+const temp = require('temp').track();
+
+const generateJsonData = false;
+const useValidateCompoundFile = process.platform === 'win32';
 
 function removeCompressedRtf(msg) {
   const attachments = msg.attachments.map(
@@ -17,7 +21,36 @@ function removeCompressedRtf(msg) {
   return newMsg;
 }
 
-const generateJsonData = false;
+function runAppAsync(file, args) {
+  return new Promise((resolve, reject) => {
+    const { execFile } = require('child_process');
+    const child = execFile(file, args, (error, stdout, stderr) => {
+      if (error) {
+        reject(error);
+      }
+    });
+    child.on('exit', () => {
+      if (child.exitCode === 0) {
+        resolve();
+      }
+      else {
+        reject(new Error(`returned exitCode: ${child.exitCode}`));
+      }
+    });
+  });
+}
+
+async function runValidateCompoundFileAsync(opt) {
+  if (opt.binary) {
+    const msgPath = temp.path({ suffix: '.msg' });
+    fs.writeFileSync(msgPath, opt.binary);
+    const { join } = require('path');
+    await runAppAsync(join(__dirname, "../tools/ValidateCompoundFile.exe"), [msgPath]);
+  }
+  else {
+    throw new Error("Pass binary");
+  }
+}
 
 function use(testMsgInfo, jsonFilePath) {
   if (generateJsonData) {
@@ -108,6 +141,15 @@ describe('MsgReader', function () {
       assert.deepStrictEqual(testMsgAttachment0, testMsgAttachments0);
     });
 
+    it('validateCompoundFile: inner testMsgAttachments0', async function () {
+      if (!useValidateCompoundFile) {
+        this.skip();
+      }
+      else {
+        await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
+      }
+    });
+
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
@@ -138,12 +180,31 @@ describe('MsgReader', function () {
       use(msg, 'test/msgInMsgInMsg.json');
     });
 
+    it('validateCompoundFile: inner testMsgAttachments0', async function () {
+      if (!useValidateCompoundFile) {
+        this.skip();
+      }
+      else {
+        await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
+      }
+    });
+
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
       const subReader = new MsgReader(testMsgAttachments0.content);
       const subInfo = subReader.getFileData();
       const subMsg = removeCompressedRtf(subInfo);
 
       use(subMsg, 'test/msgInMsgInMsg-attachments0.json');
+    });
+
+
+    it('validateCompoundFile: inner testMsgAttachments0AndItsAttachments0', async function () {
+      if (!useValidateCompoundFile) {
+        this.skip();
+      }
+      else {
+        await runValidateCompoundFileAsync({ binary: testMsgAttachments0AndItsAttachments0.content });
+      }
     });
 
     it('re-parse and verify rebuilt inner testMsgAttachments0AndItsAttachments0', function () {
@@ -351,7 +412,7 @@ describe('Burner', function () {
   const burn = require('../lib/Burner').burn;
   const Reader = require('../lib/Reader').Reader;
 
-  const test = (x) => {
+  const burnAFileHavingLengthBy = (x) => {
     const writeData = new Uint8Array(x);
     for (let t = 0; t < writeData.length; t++) {
       writeData[t] = ((t ^ (t / 257) ^ (t / 65537) ^ (t / 1048573)) & 255);
@@ -373,6 +434,11 @@ describe('Burner', function () {
     ]);
 
     //require('fs').writeFileSync(x + ".msg", array);
+
+    return { writeData, array };
+  };
+
+  const runReaderWith = ({ writeData, array }) => {
     const reader = new Reader(array);
     reader.parse();
 
@@ -381,15 +447,46 @@ describe('Burner', function () {
   };
 
   describe('Compare file contents among Burner/Reader', function () {
-    it('file size 0', function () { test(0); });
-    it('file size 1', function () { test(1); });
-    it('file size 63', function () { test(63); });
-    it('file size 64 (minifat sector size)', function () { test(64); });
-    it('file size 65', function () { test(65); });
-    it('file size 511', function () { test(511); });
-    it('file size 512 (fat sector size)', function () { test(512); });
-    it('file size 513', function () { test(513); });
-    it('file size 65537', function () { test(65537); });
+    const testIt = function (length) {
+      return runReaderWith(
+        burnAFileHavingLengthBy(length)
+      );
+    }
+
+    it('file size 0', function () { testIt(0); });
+    it('file size 1', function () { testIt(1); });
+    it('file size 63', function () { testIt(63); });
+    it('file size 64 (minifat sector size)', function () { testIt(64); });
+    it('file size 65', function () { testIt(65); });
+    it('file size 511', function () { testIt(511); });
+    it('file size 512 (fat sector size)', function () { testIt(512); });
+    it('file size 513', function () { testIt(513); });
+    it('file size 65537', function () { testIt(65537); });
+  });
+
+  describe('validateCompoundFile', function () {
+    if (!useValidateCompoundFile) {
+      this.skip();
+      return;
+    }
+
+    const testIt = async function (length) {
+      await runValidateCompoundFileAsync(
+        {
+          binary: burnAFileHavingLengthBy(length).array,
+        }
+      );
+    }
+
+    it('file size 0', function () { return testIt(0); });
+    it('file size 1', function () { return testIt(1); });
+    it('file size 63', function () { return testIt(63); });
+    it('file size 64 (minifat sector size)', function () { return testIt(64); });
+    it('file size 65', function () { return testIt(65); });
+    it('file size 511', function () { return testIt(511); });
+    it('file size 512 (fat sector size)', function () { return testIt(512); });
+    it('file size 513', function () { return testIt(513); });
+    it('file size 65537', function () { return testIt(65537); });
   });
 });
 
