@@ -30,7 +30,8 @@ steps:
       versionSpec: "12.x"
     displayName: "Install Node.js"
 
-  - script: |
-      npm i -g yarn
-      yarn
-    displayName: "npm install and build"
+  - script: "npm i -g yarn"
+    displayName: "Install yarn"
+
+  - script: "yarn"
+    displayName: "Invoke yarn"
