@@ -1,0 +1,34 @@
+@startuml how-to
+start
+
+:Open ""xxx.msg"" with Outlook;
+
+if (Success?) then (Yes)
+   :Case 0.
+It seems no problem.;
+  stop
+else (No: We can't open xxx.msg)
+  :Open ""xxx.msg"" with 7-Zip File Manager;
+  if (Success?) then (No: Can not open file xxx.msg as archive)
+    :Case 1.
+File is broken
+(Not valid Compound File);
+    :Maybe bug in **Compound File handling**.
+Check:
+- ""Reader"" class
+- ""Burner"" class
+;
+    stop
+  else (Yes)
+    :Case 2.
+File is not broken
+(Valid Compound File);
+    :Maybe bug in **structure handling**.
+Check:
+- ""MsgReader"" class
+;
+    stop
+  endif
+endif
+
+@enduml
