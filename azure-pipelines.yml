@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+  - master
 
 schedules:
   - cron: "0 9 1 * *"
@@ -14,16 +14,23 @@ schedules:
         - master
     always: true
 
+strategy:
+  matrix:
+    "Ubuntu":
+      image: "ubuntu-latest"
+    "Windows Server":
+      image: "windows-latest"
+
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "$(image)"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "12.x"
+    displayName: "Install Node.js"
 
-- script: |
-    npm i -g yarn
-    yarn
-  displayName: 'npm install and build'
+  - script: |
+      npm i -g yarn
+      yarn
+    displayName: "npm install and build"
