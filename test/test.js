@@ -141,13 +141,8 @@ describe('MsgReader', function () {
       assert.deepStrictEqual(testMsgAttachment0, testMsgAttachments0);
     });
 
-    it('validateCompoundFile: inner testMsgAttachments0', async function () {
-      if (!useValidateCompoundFile) {
-        this.skip();
-      }
-      else {
-        await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
-      }
+    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0', async function () {
+      await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
     });
 
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
@@ -180,13 +175,8 @@ describe('MsgReader', function () {
       use(msg, 'test/msgInMsgInMsg.json');
     });
 
-    it('validateCompoundFile: inner testMsgAttachments0', async function () {
-      if (!useValidateCompoundFile) {
-        this.skip();
-      }
-      else {
-        await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
-      }
+    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0', async function () {
+      await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
     });
 
     it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
@@ -198,13 +188,8 @@ describe('MsgReader', function () {
     });
 
 
-    it('validateCompoundFile: inner testMsgAttachments0AndItsAttachments0', async function () {
-      if (!useValidateCompoundFile) {
-        this.skip();
-      }
-      else {
-        await runValidateCompoundFileAsync({ binary: testMsgAttachments0AndItsAttachments0.content });
-      }
+    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0AndItsAttachments0', async function () {
+      await runValidateCompoundFileAsync({ binary: testMsgAttachments0AndItsAttachments0.content });
     });
 
     it('re-parse and verify rebuilt inner testMsgAttachments0AndItsAttachments0', function () {
@@ -464,12 +449,7 @@ describe('Burner', function () {
     it('file size 65537', function () { testIt(65537); });
   });
 
-  describe('validateCompoundFile', function () {
-    if (!useValidateCompoundFile) {
-      it.skip();
-      return;
-    }
-
+  (useValidateCompoundFile ? describe : describe.skip)('validateCompoundFile', function () {
     const testIt = async function (length) {
       await runValidateCompoundFileAsync(
         {
