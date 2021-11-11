@@ -207,7 +207,7 @@ class LiteBurner {
 
         {
             let x = 0;
-            for (; x < 109; x++) {
+            for (; x < 109 && x < numFatSectors; x++) {
                 difat1.push(firstFatSector + x);
             }
             let nextDifatSector = firstDifatSector + 1;
