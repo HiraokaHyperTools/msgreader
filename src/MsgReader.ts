@@ -728,6 +728,35 @@ export interface RawProp {
   propertyLid: string | undefined;
 
   /**
+   * String Named Property
+   * 
+   * The private {@link propertyTag} (`80000000` ~ `ffffffff`) may have this property.
+   * 
+   * If this is a "string named property", the name can be set arbitrary, as an Unicode text.
+   * 
+   * e.g.
+   * 
+   * - `x-ms-exchange-organization-originalclientipaddress`
+   * - `HeaderBodyFragmentList`
+   * - `DetectedLanguage`
+   * - `ConversationIndexTrackingEx`
+   * - `ClientInfo`
+   * - `x-ms-exchange-organization-originalserveripaddress`
+   * - `BigFunnelCorrelationId`
+   * - `ExchangeApplicationFlags`
+   * - `HasQuotedText`
+   * - `IsQuotedTextChanged`
+   * - `BigFunnelCompleteIndexingEnd`
+   * - `BigFunnelCompleteIndexingStart`
+   * - `BigFunnelCorrelationId`
+   * - `IsPartiallyIndexed`
+   * - `LastIndexingAttemptTime`
+   * 
+   * @see [[MS-OXMSG]: String Named Property | Microsoft Docs](https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/9e984a31-e32d-4e8f-bb92-93bd2df6cd12)
+   */
+  propertyName: string | undefined;
+
+  /**
    * The value depends on property.
    */
   value?: string | Uint8Array;
@@ -745,6 +774,7 @@ interface KeyedEntry {
 enum KeyType {
   root,
   toSub,
+  named,
 }
 
 interface FieldValuePair {
@@ -796,7 +826,7 @@ export default class MsgReader {
       if (keyed) {
         if (keyed.useName) {
           key = keyed.name;
-          keyType = KeyType.toSub;
+          keyType = KeyType.named;
         }
         else {
           propertySet = keyed.propertySet;
@@ -919,6 +949,7 @@ export default class MsgReader {
           propertyTag: pair.propertyTag,
           propertySet: pair.propertySet,
           propertyLid: pair.propertyLid,
+          propertyName: (pair.keyType === KeyType.named) ? pair.key : undefined,
 
           value: value,
         }
