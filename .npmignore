@@ -12,3 +12,6 @@ others/
 /.editorconfig
 /*.log
 /*.js
+/out
+/tools
+/uml
