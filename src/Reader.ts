@@ -280,6 +280,12 @@ export class Reader {
         return this.ds.readInt32Array(this.bigBlockLength);
     }
 
+    private getBlockValueAt(offset: number, index: number): number {
+        const startOffset = this.getBlockOffsetAt(offset);
+        this.ds.seek(startOffset + 4 * index);
+        return this.ds.readInt32();
+    }
+
     private getNextBlockInner(offset: number, blockOffsetData: number[]): number {
         const currentBlock = Math.floor(offset / this.bigBlockLength);
         const currentBlockIndex = offset % this.bigBlockLength;
@@ -289,7 +295,7 @@ export class Reader {
             return CONST.MSG.END_OF_CHAIN;
         }
 
-        return this.getBlockAt(startBlockOffset)[currentBlockIndex];
+        return this.getBlockValueAt(startBlockOffset, currentBlockIndex);
     }
 
     private getNextBlock(offset: number): number {
