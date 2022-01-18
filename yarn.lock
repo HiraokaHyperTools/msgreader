@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@kenjiuno/decompressrtf/-/decompressrtf-0.1.4.tgz#17b123616a4549203a64ce5bc58b40494b796e30"
   integrity sha512-v9c/iFz17jRWyd2cRnrvJg4VOg/4I/VCk+bG8JnoX2gJ9sAesPzo3uTqcmlVXdpasTI8hChpBVw00pghKe3qTQ==
 
-"@types/node@^17.0.8":
-  version "17.0.8"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.8.tgz#50d680c8a8a78fe30abe6906453b21ad8ab0ad7b"
-  integrity sha512-YofkM6fGv4gDJq78g4j0mMuGMkZVxZDgtU0JRdx6FgiJDG+0fY0GKVolOV8WqVmEhLCXkQRjwDdKyPxJp/uucg==
+"@types/node@^17.0.9":
+  version "17.0.9"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.9.tgz#0b7f161afb5b1cc12518d29b2cdc7175d5490628"
+  integrity sha512-5dNBXu/FOER+EXnyah7rn8xlNrfMOQb/qXnw4NQgLkCygKBKhdmF/CA5oXVOKZLBEahw8s2WP9LxIcN/oDDRgQ==
 
 "@ungap/promise-all-settled@1.1.2":
   version "1.1.2"
@@ -345,10 +345,10 @@ lunr@^2.3.9:
   resolved "https://registry.yarnpkg.com/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
   integrity sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==
 
-marked@^3.0.8:
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-3.0.8.tgz#2785f0dc79cbdc6034be4bb4f0f0a396bd3f8aeb"
-  integrity sha512-0gVrAjo5m0VZSJb4rpL59K1unJAMb/hm8HRXqasD8VeC8m91ytDPMritgFSlKonfdt+rRYYpP/JfLxgIX8yoSw==
+marked@^4.0.10:
+  version "4.0.10"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.0.10.tgz#423e295385cc0c3a70fa495e0df68b007b879423"
+  integrity sha512-+QvuFj0nGgO970fySghXGmuw+Fd0gD2x3+MqCWLIPf5oxdv1Ka6b2q+z9RP01P/IaKPMEramy+7cNy/Lw8c3hw==
 
 minimatch@3.0.4, minimatch@^3.0.4:
   version "3.0.4"
@@ -498,10 +498,10 @@ serialize-javascript@6.0.0:
   dependencies:
     randombytes "^2.1.0"
 
-shiki@^0.9.12:
-  version "0.9.15"
-  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.9.15.tgz#2481b46155364f236651319d2c18e329ead6fa44"
-  integrity sha512-/Y0z9IzhJ8nD9nbceORCqu6NgT9X6I8Fk8c3SICHI5NbZRLdZYFaB233gwct9sU0vvSypyaL/qaKvzyQGJBZSw==
+shiki@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.10.0.tgz#85f21ecfa95b377ff64db6c71442c22c220e9540"
+  integrity sha512-iczxaIYeBFHTFrQPb9DVy2SKgYxC4Wo7Iucm7C17cCh2Ge/refnvHscUOxM85u57MfLoNOtjoEFUWt9gBexblA==
   dependencies:
     jsonc-parser "^3.0.0"
     vscode-oniguruma "^1.6.1"
@@ -562,16 +562,16 @@ typedoc-plugin-rename-defaults@^0.4.0:
   resolved "https://registry.yarnpkg.com/typedoc-plugin-rename-defaults/-/typedoc-plugin-rename-defaults-0.4.0.tgz#9739bb87ce7c084d7d48feb485ede4d4014a9b49"
   integrity sha512-7m7MbNZKcxCA4Z+0MW06sFEmuQ+he1xfc+rLRtvvQcQypPTd3fgFmkEJKVu42t8mONC+kKS/WkbmqwzsiqI1YQ==
 
-typedoc@^0.22.10:
-  version "0.22.10"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.22.10.tgz#221e1a2b17bcb71817ef027dc4c4969d572e7620"
-  integrity sha512-hQYZ4WtoMZ61wDC6w10kxA42+jclWngdmztNZsDvIz7BMJg7F2xnT+uYsUa7OluyKossdFj9E9Ye4QOZKTy8SA==
+typedoc@^0.22.11:
+  version "0.22.11"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.22.11.tgz#a3d7f4577eef9fc82dd2e8f4e2915e69f884c250"
+  integrity sha512-pVr3hh6dkS3lPPaZz1fNpvcrqLdtEvXmXayN55czlamSgvEjh+57GUqfhAI1Xsuu/hNHUT1KNSx8LH2wBP/7SA==
   dependencies:
     glob "^7.2.0"
     lunr "^2.3.9"
-    marked "^3.0.8"
+    marked "^4.0.10"
     minimatch "^3.0.4"
-    shiki "^0.9.12"
+    shiki "^0.10.0"
 
 typescript@^4.5.4:
   version "4.5.4"
