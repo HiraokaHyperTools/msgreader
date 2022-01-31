@@ -549,6 +549,19 @@ export interface SomeOxProps {
    * @see https://github.com/HiraokaHyperTools/OXPROPS/blob/master/JSON/3FF1-PidTagMessageLocaleId.md
    */
   messageLocaleId?: number;
+
+  /**
+   * Contains a bitmask of flags that indicate the origin and current state of a message.
+   * 
+   * e.g.
+   * 
+   * - `mfRead` = `0x00000001`
+   * - `mfUnsent` = `0x00000008`
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagmessageflags-canonical-property
+   * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcmsg/a0c52fe2-3014-43a7-942d-f43f6f91c366
+   */
+  messageFlags?: number;
 }
 
 export interface SomeParsedOxProps {

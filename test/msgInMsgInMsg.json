@@ -79,6 +79,7 @@
  "creationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
  "lastModificationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
  "messageDeliveryTime": "Thu, 10 Sep 2020 10:21:41 GMT",
+ "messageFlags": 24,
  "internetCodepage": 20127,
  "messageLocaleId": 1041
 }

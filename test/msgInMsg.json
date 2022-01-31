@@ -50,6 +50,7 @@
  "creationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
  "lastModificationTime": "Thu, 10 Sep 2020 10:18:11 GMT",
  "messageDeliveryTime": "Thu, 10 Sep 2020 10:18:08 GMT",
+ "messageFlags": 25,
  "internetCodepage": 50220,
  "messageLocaleId": 1041
 }
