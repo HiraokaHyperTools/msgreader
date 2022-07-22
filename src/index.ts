@@ -1,3 +1,5 @@
-import MsgReader from './MsgReader'
+import MsgReader from "./MsgReader";
 
-export default MsgReader
+export * from "./MsgReader";
+
+export default MsgReader;
