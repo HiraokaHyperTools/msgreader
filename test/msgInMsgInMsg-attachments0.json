@@ -24,7 +24,12 @@
     "senderEmail": "xmailuser@xmailserver.test",
     "normalizedSubject": "Microsoft Outlook テスト メッセージ",
     "body": "この電子メール メッセージは、アカウントの設定のテスト中に、Microsoft Outlook から自動送信されたものです。 \r\n",
-    "inetAcctName": "xmailuser@xmailserver.test"
+    "inetAcctName": "xmailuser@xmailserver.test",
+    "creationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+    "lastModificationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+    "messageDeliveryTime": "Tue, 12 May 2020 05:45:17 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
    },
    "innerMsgContent": true,
    "folderId": 41,

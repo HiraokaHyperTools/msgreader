@@ -1569,32 +1569,10 @@ export default class MsgReader {
     const propertiesBinary: Uint8Array = documentProperty.provider();
     const propertiesDs = new DataStream(propertiesBinary, 8, DataStream.LITTLE_ENDIAN);
 
-    // See: [MS-OXMSG]: Outlook Item (.msg) File Format, 2.4 Property Stream
-    // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
-
-    while (!propertiesDs.isEof()) {
-      const propertyTag = propertiesDs.readUint32();
-      const flags = propertiesDs.readUint32();
-
-      const fieldClass = toHex2((propertyTag >> 16) & 65535);
-      const fieldType = toHex2(propertyTag & 65535);
-
-      const raw = propertiesDs.readUint8Array(8);
-
-      parserConfig.propertyObserver(fields, propertyTag, raw);
-
-      this.setDecodedFieldTo(
-        parserConfig,
-        fields,
-        this.decodeField(fieldClass, fieldType, () => raw, parserConfig.ansiEncoding, true)
-      );
-    }
+    this.importPropertiesFromFile(parserConfig, propertiesDs, fields);
   }
 
-  private fieldsRootProperties(parserConfig: ParsingConfig, documentProperty: CFileSet, fields: FieldsData): void {
-    const propertiesBinary: Uint8Array = documentProperty.provider();
-    const propertiesDs = new DataStream(propertiesBinary, 32, DataStream.LITTLE_ENDIAN);
-
+  private importPropertiesFromFile(parserConfig: ParsingConfig, propertiesDs: DataStream, fields: FieldsData) {
     // See: [MS-OXMSG]: Outlook Item (.msg) File Format, 2.4 Property Stream
     // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
 
@@ -1627,6 +1605,13 @@ export default class MsgReader {
     }
   }
 
+  private fieldsRootProperties(parserConfig: ParsingConfig, documentProperty: CFileSet, fields: FieldsData): void {
+    const propertiesBinary: Uint8Array = documentProperty.provider();
+    const propertiesDs = new DataStream(propertiesBinary, 32, DataStream.LITTLE_ENDIAN);
+
+    this.importPropertiesFromFile(parserConfig, propertiesDs, fields);
+  }
+
   private fieldsDataDir(parserConfig: ParsingConfig, dirProperty: CFolder, rootFolder: CFolder, fields: FieldsData, subClass?: string) {
     for (let subFolder of dirProperty.subFolders()) {
       this.fieldsDataDirInner(parserConfig, subFolder, rootFolder, fields);
@@ -1638,7 +1623,7 @@ export default class MsgReader {
         this.fieldsDataDocument(parserConfig, fileSet, fields);
       }
       else if (fileSet.name === "__properties_version1.0") {
-        if (subClass === "recip" || subClass === "attachment") {
+        if (subClass === "recip" || subClass === "attachment" || subClass === "sub") {
           this.fieldsRecipAndAttachmentProperties(parserConfig, fileSet, fields);
         }
         else if (subClass === "root") {

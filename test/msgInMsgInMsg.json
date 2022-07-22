@@ -29,7 +29,12 @@
        "inetAcctName": "xmailuser@xmailserver.test",
        "messageClass": "IPM.Note",
        "senderEmail": "xmailuser@xmailserver.test",
-       "normalizedSubject": "Microsoft Outlook テスト メッセージ"
+       "normalizedSubject": "Microsoft Outlook テスト メッセージ",
+       "creationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+       "lastModificationTime": "Thu, 10 Sep 2020 10:21:42 GMT",
+       "messageDeliveryTime": "Tue, 12 May 2020 05:45:17 GMT",
+       "messageFlags": 1,
+       "internetCodepage": 65001
       },
       "innerMsgContent": true,
       "folderId": 60,
