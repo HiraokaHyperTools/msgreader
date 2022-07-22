@@ -562,6 +562,489 @@ export interface SomeOxProps {
    * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcmsg/a0c52fe2-3014-43a7-942d-f43f6f91c366
    */
   messageFlags?: number;
+
+  /**
+   * Contains a name for the department in which the recipient works.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagdepartmentname-canonical-property
+   */
+  departmentName?: string;
+
+  /**
+   * Contains the middle name of a contact.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagmiddlename-canonical-property
+   */
+  middleName?: string;
+
+  /**
+   * Contains a generational abbreviation that follows the full name of the recipient.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtaggeneration-canonical-property
+   */
+  generation?: string;
+
+  /**
+   * Contains the last or surname of the recipient.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagsurname-canonical-property
+   */
+  surname?: string;
+
+  /**
+   * Contains the city for the recipient's home address.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtaghomeaddresscity-canonical-property
+   */
+  addressCity?: string;
+
+  /**
+   * Specifies the phonetic pronunciation of the contact's given name.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidyomifirstname-canonical-property
+   */
+  yomiFirstName?: string;
+
+  /**
+   * Contains the recipient's company name.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagcompanyname-canonical-property
+   */
+  companyName?: string;
+
+  /**
+   * Contains the telephone number of the recipient's business fax machine.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagbusinessfaxnumber-canonical-property
+   */
+  businessFaxNumber?: string;
+
+  /**
+   * Contains the recipient's street address.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagstreetaddress-canonical-property
+   */
+  streetAddress?: string;
+
+  /**
+   * Contains the URL of the home page for the business.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagbusinesshomepage-canonical-property
+   */
+  businessHomePage?: string;
+
+  /**
+   * Specifies the first email address of the contact.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidemail1emailaddress-canonical-property
+   */
+  email1EmailAddress?: string;
+
+  /**
+   * Specifies the phonetic pronunciation of the contact's company name.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see https://docs.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidyomicompanyname-canonical-property
+   */
+  yomiCompanyName?: string;
+
+  /**
+   * Contains the string value "FAX".
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax3AddressType PSETID_Address:000080d2
+   */
+  fax3AddrType?: string;
+
+  /**
+   * Contains the mail user's given name.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagGivenName propertyTag=3a06001f
+   */
+  givenName?: string;
+
+  /**
+   * Contains the primary telephone number of the mail user's home.
+   * 
+   * Target { @link dataType } = 'msg'.
+   * 
+   * Reference: PidTagHomeTelephoneNumber propertyTag = 3a09001f
+   */
+  homeTelephoneNumber?: string;
+
+  /**
+   * Contains the mail user's postal address.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagPostalAddress propertyTag=3a15001f
+   */
+  postalAddress?: string;
+
+  /**
+   * Contains the mail user's job title.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagTitle propertyTag=3a17001f
+   */
+  title?: string;
+
+  /**
+   * Contains the mail user's cellular telephone number.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagMobileTelephoneNumber propertyTag=3a1c001f
+   */
+  mobileTelephoneNumber?: string;
+
+  /**
+   * Contains the name of the mail user's country/region.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagCountry propertyTag=3a26001f
+   */
+  country?: string;
+
+  /**
+   * Contains the name of the mail user's state or province.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagStateOrProvince propertyTag=3a28001f
+   */
+  stateOrProvince?: string;
+
+  /**
+   * Contains the postal code for the mail user's postal address.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagPostalCode propertyTag=3a2a001f
+   */
+  postalCode?: string;
+
+  /**
+   * Contains the mail user's honorific title.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagDisplayNamePrefix propertyTag=3a45001f
+   */
+  displayNamePrefix?: string;
+
+  /**
+   * Specifies the user-readable display name for the email address.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidEmail1DisplayName PSETID_Address:00008080
+   */
+  email1DisplayName?: string;
+
+  /**
+   * Specifies the SMTP email address that corresponds to the email address for the Contact object.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidEmail1OriginalDisplayName PSETID_Address:00008084
+   */
+  email1OriginalDisplayName?: string;
+
+  /**
+   * Specifies the name under which to file a contact when displaying a list of contacts.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFileUnder PSETID_Address:00008005
+   */
+  fileUnder?: string;
+
+  /**
+   * Specifies the phonetic pronunciation of the surname of the contact.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidYomiLastName PSETID_Address:0000802d
+   */
+  yomiLastName?: string;
+
+  /**
+   * Contains the string value "FAX".
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax1AddressType PSETID_Address:000080b2
+   */
+  fax1AddrType?: string;
+
+  /**
+   * Contains a user-readable display name, followed by the "@" character, followed by a fax number.
+   * 
+   * e.g. `コム ドット イグザンプル 殿@+81 06-0001-0003`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax2EmailAddress PSETID_Address:000080c3
+   */
+  fax2EmailAddress?: string;
+
+  /**
+   * Specifies the city or locality portion of the work address of the contact.
+   * 
+   * e.g. `Osaka`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidWorkAddressCity PSETID_Address:00008046
+   */
+  workAddressCity?: string;
+
+  /**
+   * Contains an unchanging copy of the original subject.
+   * 
+   * e.g. `コム ドット イグザンプル 殿`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagConversationTopic propertyTag=0070001f
+   */
+  conversationTopic?: string;
+
+  /**
+   * Contains the normalized subject of the message.
+   * 
+   * e.g. `コム ドット イグザンプル 殿`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagNormalizedSubject propertyTag=0e1d001f
+   */
+  normalizedSubject?: string;
+
+  /**
+   * Specifies the country code portion of the mailing address of the contact.
+   * 
+   * e.g. `JP`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidAddressCountryCode PSETID_Address:000080dd
+   */
+  addressCountryCode?: string;
+
+  /**
+   * Contains the string value "FAX".
+   * 
+   * e.g. `FAX`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax2AddressType PSETID_Address:000080c2
+   */
+  fax2AddrType?: string;
+
+  /**
+   * Contains the same value as the PidTagNormalizedSubject property (section 2.812).
+   * 
+   * e.g. `コム ドット イグザンプル 殿`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax2OriginalDisplayName PSETID_Address:000080c4
+   */
+  fax2OriginalDisplayName?: string;
+
+  /**
+   * Specifies the postal code (ZIP code) portion of the work address of the contact.
+   * 
+   * e.g. `544-0001`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidWorkAddressPostalCode PSETID_Address:00008048
+   */
+  workAddressPostalCode?: string;
+
+  /**
+   * Specifies the street portion of the work address of the contact.
+   * 
+   * e.g. `Somewhere`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidWorkAddressStreet PSETID_Address:00008045
+   */
+  workAddressStreet?: string;
+
+  /**
+   * Specifies the state or province portion of the work address of the contact.
+   * 
+   * e.g. `Osaka`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidWorkAddressState PSETID_Address:00008047
+   */
+  workAddressState?: string;
+
+  /**
+   * Specifies the country code portion of the work address of the contact.
+   * 
+   * e.g. `JP`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidWorkAddressCountryCode PSETID_Address:000080db
+   */
+  workAddressCountryCode?: string;
+
+  /**
+   * Specifies the country or region portion of the work address of the contact.
+   * 
+   * e.g. `日本`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidWorkAddressCountry PSETID_Address:00008049
+   */
+  workAddressCountry?: string;
+
+  /**
+   * Specifies the business webpage URL of the contact.
+   * 
+   * e.g. `https://example.com`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidHtml PSETID_Address:0000802b
+   */
+  contactHtml?: string;
+  /**
+   * Specifies the complete address of the work address of the contact.
+   * 
+   * e.g. `544-0001\nOsaka\nOsaka\nSomewhere`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidWorkAddress PSETID_Address:0000801b
+   */
+  workAddress?: string;
+
+  /**
+   * Contains the same value as the PidTagNormalizedSubject property (section 2.812).
+   * 
+   * e.g. ``
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax1OriginalDisplayName PSETID_Address:000080b4
+   */
+  fax1OriginalDisplayName?: string;
+
+  /**
+   * Contains the primary telephone number of the mail user's place of business.
+   * 
+   * e.g. `06-0001-0002`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagBusinessTelephoneNumber propertyTag=3a08001f
+   */
+  businessTelephoneNumber?: string;
+
+  /**
+   * Specifies the instant messaging address of the contact.
+   * 
+   * e.g. ``
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidInstantMessagingAddress PSETID_Address:00008062
+   */
+  instMsg?: string;
+
+  /**
+   * This property is ignored by the server and is set to an empty string by the client.
+   * 
+   * e.g. ``
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidDepartment PSETID_Address:00008010
+   */
+  department?: string;
+
+  /**
+   * Contains the location of the mail user.
+   * 
+   * e.g. ``
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidTagLocation propertyTag=3a0d001f
+   */
+  location?: string;
+
+  /**
+   * Contains a user-readable display name, followed by the "@" character, followed by a fax number.
+   * 
+   * e.g. ``
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax1EmailAddress PSETID_Address:000080b3
+   */
+  fax1EmailAddress?: string;
+
+  /**
+   * Contains the same value as the PidTagNormalizedSubject property (section 2.812).
+   * 
+   * e.g. ``
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax3OriginalDisplayName PSETID_Address:000080d4
+   */
+  fax3OriginalDisplayName?: string;
+
+  /**
+   * Contains a user-readable display name, followed by the "@" character, followed by a fax number.
+   * 
+   * e.g. ``
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * Reference: PidLidFax3EmailAddress PSETID_Address:000080d3
+   */
+  fax3EmailAddress?: string;
+
 }
 
 export interface SomeParsedOxProps {

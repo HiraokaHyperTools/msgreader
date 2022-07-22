@@ -35,7 +35,9 @@
   }
  ],
  "messageClass": "IPM.Note",
+ "normalizedSubject": "Attach and inline",
  "subject": "Attach and inline",
+ "conversationTopic": "Attach and inline",
  "body": "\r\n \r\n",
  "inetAcctName": "xmailuser@xmailserver.test",
  "creationTime": "Tue, 27 Jul 2021 22:20:15 GMT",

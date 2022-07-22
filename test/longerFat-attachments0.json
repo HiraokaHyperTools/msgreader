@@ -17,6 +17,8 @@
  "recipients": [],
  "messageClass": "IPM.Note",
  "subject": "Has 64KB.bin",
+ "conversationTopic": "Has 64KB.bin",
+ "normalizedSubject": "Has 64KB.bin",
  "body": " \r\n",
  "creationTime": "Thu, 15 Jul 2021 13:31:27 GMT",
  "lastModificationTime": "Thu, 15 Jul 2021 13:31:27 GMT",

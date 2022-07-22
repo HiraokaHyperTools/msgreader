@@ -11,7 +11,9 @@
   }
  ],
  "messageClass": "IPM.Note",
+ "normalizedSubject": "Non Unicode mail subject",
  "subject": "Non Unicode mail subject",
+ "conversationTopic": "Non Unicode mail subject",
  "body": "Non Unicode mail body!\r\n",
  "creationTime": "Fri, 05 Nov 2021 10:23:10 GMT",
  "lastModificationTime": "Fri, 05 Nov 2021 10:23:10 GMT",

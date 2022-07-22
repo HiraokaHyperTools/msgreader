@@ -390,6 +390,28 @@ describe('MsgReader', function () {
       useRtf(testMsgInfo, 'test/nonUnicodeCP932.rtf');
     });
   });
+
+  describe('contactAnsi.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/contactAnsi.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/contactAnsi.json');
+    });
+  });
+
+  describe('contactUnicode.msg', function () {
+    const msgFileBuffer = fs.readFileSync('test/contactUnicode.msg');
+    const testMsg = new MsgReader(msgFileBuffer);
+    const testMsgInfo = testMsg.getFileData();
+
+    it('exact match with pre rendered data (except on compressedRtf)', function () {
+      const msg = removeCompressedRtf(testMsgInfo);
+      use(msg, 'test/contactUnicode.json');
+    });
+  });
 });
 
 

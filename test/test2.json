@@ -18,6 +18,8 @@
  "messageClass": "IPM.Note",
  "body": " \r\n",
  "subject": "",
+ "conversationTopic": "",
+ "normalizedSubject": "",
  "inetAcctName": "ku@digitaldolphins.jp",
  "creationTime": "Tue, 05 Mar 2019 07:41:09 GMT",
  "lastModificationTime": "Tue, 05 Mar 2019 07:41:09 GMT",

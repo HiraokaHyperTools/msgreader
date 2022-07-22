@@ -18,7 +18,9 @@
   }
  ],
  "messageClass": "IPM.Note",
+ "normalizedSubject": "title",
  "subject": "title",
+ "conversationTopic": "title",
  "body": "body\r\n",
  "inetAcctName": "ku@digitaldolphins.jp",
  "creationTime": "Tue, 05 Mar 2019 07:22:33 GMT",

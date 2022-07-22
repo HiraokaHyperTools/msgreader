@@ -25,7 +25,9 @@
   }
  ],
  "messageClass": "IPM.Note",
+ "normalizedSubject": "Subject",
  "subject": "Subject",
+ "conversationTopic": "Subject",
  "body": "Message\r\n",
  "creationTime": "Mon, 28 Sep 2020 11:28:52 GMT",
  "lastModificationTime": "Mon, 28 Sep 2020 11:28:52 GMT",
