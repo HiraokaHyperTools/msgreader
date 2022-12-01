@@ -23,8 +23,8 @@ import { burn, Entry } from './Burner';
 import { emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils';
 import { parse as entryStreamParser } from './EntryStreamParser';
 import { parse as parseVerbStream } from './VerbStreamParser';
-import { parse as parseTZDEFINITION } from './TZDEFINITIONParser';
-import { parse as parseTZREG } from './TZREGParser';
+import { parse as parseTZDEFINITION, TzDefinition } from './TZDEFINITIONParser';
+import { parse as parseTZREG, TzReg } from './TZREGParser';
 
 export { TzDefinitionRule, TzDefinition } from './TZDEFINITIONParser';
 export { TzReg } from './TZREGParser';
@@ -1050,6 +1050,17 @@ export interface SomeOxProps {
    */
   fax3EmailAddress?: string;
 
+  /**
+   * Specifies a string description of the time zone.
+   * 
+   * e.g. `(UTC+09:00) 大阪、札幌、東京`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see [PidLidTimeZoneDescription Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidtimezonedescription-canonical-property)
+   */
+  timeZoneDesc?: string;
+
 }
 
 export interface SomeParsedOxProps {
@@ -1078,6 +1089,38 @@ export interface SomeParsedOxProps {
    * @see https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxomsg/89a70cdb-28ca-4d63-9deb-6d8c15c2cb47
    */
   votingOptions?: string;
+
+  /**
+   * Contains a stream that maps to the persisted format of a TZDEFINITION structure, which stores the description for the time zone that is used when the start time of a single-instance appointment or meeting request is selected.
+   * 
+   * @see [PidLidAppointmentTimeZoneDefinitionStartDisplay Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidappointmenttimezonedefinitionstartdisplay-canonical-property)
+   * @see [TZDEFINITION | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/auxiliary/tzdefinition?redirectedfrom=MSDN)
+   */
+  apptTZDefStartDisplay?: TzDefinition;
+
+  /**
+   * Contains a stream that maps to the persisted format of a TZDEFINITION structure, which stores the description for the time zone that is used when the end time of a single-instance appointment or meeting request is selected.
+   * 
+   * @see [PidLidAppointmentTimeZoneDefinitionEndDisplay Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidappointmenttimezonedefinitionenddisplay-canonical-property)
+   * @see [TZDEFINITION | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/auxiliary/tzdefinition?redirectedfrom=MSDN)
+   */
+  apptTZDefEndDisplay?: TzDefinition;
+
+  /**
+   * Contains a stream that maps to the persisted format of a TZDEFINITION structure, which stores the description for the time zone that is used when a recurring appointment or meeting request is created.
+   * 
+   * @see [PidLidAppointmentTimeZoneDefinitionRecur Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidappointmenttimezonedefinitionrecur-canonical-property)
+   * @see [TZDEFINITION | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/auxiliary/tzdefinition?redirectedfrom=MSDN)
+   */
+  apptTZDefRecur?: TzDefinition;
+
+  /**
+   * Contains a stream that maps to the persisted format of a TZREG structure, which describes the time zone to be used for the start and end time of a recurring appointment or meeting request.
+   * 
+   * @see [PidLidTimeZoneStruct Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidtimezonestruct-canonical-property)
+   * @see [TZREG [Outlook 2007 Auxiliary Reference] | Microsoft Learn](https://learn.microsoft.com/en-us/previous-versions/office/developer/office-2007/bb820983%28v=office.12%29?redirectedfrom=MSDN)
+   */
+  timeZoneStruct?: TzReg;
 
   // Only parsed props!
 }
