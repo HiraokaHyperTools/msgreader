@@ -1,0 +1,53 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [],
+ "senderEmail": "Unknown",
+ "normalizedSubject": "A black friday",
+ "apptTZDefEndDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "messageClass": "IPM.Appointment",
+ "conversationTopic": "A black friday",
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "subject": "A black friday",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
+ "body": "Dec 02, 2012\r\n",
+ "apptTZDefStartDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "creationTime": "Thu, 01 Dec 2022 01:04:00 GMT",
+ "lastModificationTime": "Thu, 01 Dec 2022 01:04:00 GMT",
+ "clientSubmitTime": "Thu, 01 Dec 2022 01:02:43 GMT",
+ "messageDeliveryTime": "Thu, 01 Dec 2022 01:02:43 GMT",
+ "messageFlags": 1,
+ "internetCodepage": 50220,
+ "messageLocaleId": 1041,
+ "apptStartWhole": "Thu, 01 Dec 2022 15:00:00 GMT",
+ "apptEndWhole": "Fri, 02 Dec 2022 15:00:00 GMT",
+ "clipStart": "Thu, 01 Dec 2022 15:00:00 GMT",
+ "clipEnd": "Fri, 02 Dec 2022 15:00:00 GMT"
+}

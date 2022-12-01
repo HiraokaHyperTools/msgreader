@@ -20,6 +20,35 @@
  "senderName": "UnoKenji",
  "senderAddressType": "EX",
  "body": "A message body.\r\n",
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "apptTZDefStartDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "apptTZDefEndDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
  "inetAcctName": "ku@digitaldolphins.onmicrosoft.com",
  "creationTime": "Wed, 13 Oct 2021 09:14:52 GMT",
  "lastModificationTime": "Wed, 13 Oct 2021 09:14:52 GMT",

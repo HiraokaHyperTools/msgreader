@@ -1,0 +1,84 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "addressType": "UNKNOWN",
+   "name": "Unknown",
+   "email": "Unknown",
+   "recipType": "to"
+  }
+ ],
+ "senderEmail": "Unknown",
+ "normalizedSubject": "7 days, everyday",
+ "apptTZDefRecur": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "messageClass": "IPM.Appointment",
+ "conversationTopic": "7 days, everyday",
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "subject": "7 days, everyday",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
+ "body": "\r\n",
+ "apptTZDefEndDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "timeZoneStruct": {
+  "bias": -540,
+  "standardBias": 0,
+  "daylightBias": -60,
+  "standardYear": 0,
+  "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+  "daylightYear": 0,
+  "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+ },
+ "apptTZDefStartDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "creationTime": "Thu, 01 Dec 2022 02:43:40 GMT",
+ "lastModificationTime": "Thu, 01 Dec 2022 02:43:40 GMT",
+ "clientSubmitTime": "Thu, 01 Dec 2022 02:07:53 GMT",
+ "messageDeliveryTime": "Thu, 01 Dec 2022 02:07:53 GMT",
+ "messageFlags": 1,
+ "internetCodepage": 50220,
+ "messageLocaleId": 1041,
+ "apptStartWhole": "Wed, 30 Nov 2022 15:00:00 GMT",
+ "apptEndWhole": "Thu, 01 Dec 2022 15:00:00 GMT",
+ "clipStart": "Wed, 30 Nov 2022 15:00:00 GMT",
+ "clipEnd": "Tue, 06 Dec 2022 15:00:00 GMT"
+}

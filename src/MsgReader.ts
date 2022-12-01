@@ -23,6 +23,11 @@ import { burn, Entry } from './Burner';
 import { emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils';
 import { parse as entryStreamParser } from './EntryStreamParser';
 import { parse as parseVerbStream } from './VerbStreamParser';
+import { parse as parseTZDEFINITION } from './TZDEFINITIONParser';
+import { parse as parseTZREG } from './TZREGParser';
+
+export { TzDefinitionRule, TzDefinition } from './TZDEFINITIONParser';
+export { TzReg } from './TZREGParser';
 
 // MSG Reader implementation
 
@@ -1384,6 +1389,17 @@ export default class MsgReader {
       keyType = KeyType.root;
       value = parseVerbStream(ds);
     }
+    else if (false
+      || key === "apptTZDefStartDisplay"
+      || key === "apptTZDefEndDisplay"
+      || key === "apptTZDefRecur"
+    ) {
+      keyType = KeyType.root;
+      value = parseTZDEFINITION(ds);
+    }
+    else if (key === "timeZoneStruct") {
+      value = parseTZREG(ds);
+    }
     else if (key === "recipType") {
       const MAPI_TO = 1;
       const MAPI_CC = 2;
@@ -1729,7 +1745,7 @@ export default class MsgReader {
 
   /**
    Reads an attachment content by key/ID
-  
+   
     @return {Object} The attachment for specific attachment key
     */
   getAttachment(attach: number | FieldsData): { fileName: string; content: Uint8Array } {

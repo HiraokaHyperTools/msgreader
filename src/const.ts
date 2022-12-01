@@ -128,6 +128,11 @@ export default {
           0x0000820E: { id: "PidLidAppointmentEndWhole", dispid: "apptEndWhole", },
           0x00008235: { id: "PidLidClipStart", dispid: "clipStart", },
           0x00008236: { id: "PidLidClipEnd", dispid: "clipEnd", },
+          0x00008233: { id: "PidLidTimeZoneStruct", dispid: "timeZoneStruct" },
+          0x00008234: { id: "PidLidTimeZoneDescription", dispid: "timeZoneDesc" },
+          0x0000825E: { id: "PidLidAppointmentTimeZoneDefinitionStartDisplay", dispid: "apptTZDefStartDisplay" },
+          0x0000825F: { id: "PidLidAppointmentTimeZoneDefinitionEndDisplay", dispid: "apptTZDefEndDisplay" },
+          0x00008260: { id: "PidLidAppointmentTimeZoneDefinitionRecur", dispid: "apptTZDefRecur" },
         },
         // PSETID_Address
         "00062004-0000-0000-c000-000000000046": {
@@ -159,6 +164,9 @@ export default {
           0x000080d4: { id: "PidLidFax3OriginalDisplayName", dispid: "fax3OriginalDisplayName", },
           0x000080d3: { id: "PidLidFax3EmailAddress", dispid: "fax3EmailAddress", },
         },
+        // PSETID_Meeting
+        "6ed8da90-450b-101b-98da-00aa003f1305": {
+        }
       },
       CLASS_MAPPING: {
         ATTACHMENT_DATA: '3701'

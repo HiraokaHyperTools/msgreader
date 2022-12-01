@@ -1,4 +1,5 @@
 import { stringify } from "querystring";
+import DataStream from "./DataStream";
 
 /**
  * @internal
@@ -117,6 +118,28 @@ export function msftUuidStringify(array: ArrayLike<number>, offset: number): str
     ;
 }
 
+/**
+ * @internal
+ */
 export function emptyToNull(text: string): string {
   return (text === "") ? null : text;
+}
+
+/**
+ * @internal
+ */
+export function readSystemTime(ds: DataStream): Date {
+  // SYSTEMTIME structure (minwinbase.h)
+  // https://learn.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-systemtime
+
+  const wYear = ds.readUint16();
+  const wMonth = ds.readUint16();
+  const wDayOfWeek = ds.readUint16();
+  const wDay = ds.readUint16();
+  const wHour = ds.readUint16();
+  const wMinute = ds.readUint16();
+  const wSecond = ds.readUint16();
+  const wMilliseconds = ds.readUint16();
+
+  return new Date(wYear, wMonth - 1, wDay, wHour, wMinute, wSecond, wMilliseconds);
 }
