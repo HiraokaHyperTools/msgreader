@@ -41,7 +41,7 @@ export interface TzReg {
     /**
      * time to switch to standard time
      */
-    standardDate: string,
+    standardDate: string | null,
 
     /**
      * matches the stDaylightDate's wYear field
@@ -51,7 +51,7 @@ export interface TzReg {
     /**
      * time to switch to daylight time
      */
-    daylightDate: string,
+    daylightDate: string | null,
 }
 
 export function parse(ds: DataStream): TzReg | null {
@@ -74,9 +74,9 @@ export function parse(ds: DataStream): TzReg | null {
                 standardBias: lStandardBias,
                 daylightBias: lDaylightBias,
                 standardYear: wStandardYear,
-                standardDate: stStandardDate.toUTCString(),
+                standardDate: stStandardDate?.toUTCString() || null,
                 daylightYear: wDaylightYear,
-                daylightDate: stDaylightDate.toUTCString(),
+                daylightDate: stDaylightDate?.toUTCString() || null,
             }
         );
     }

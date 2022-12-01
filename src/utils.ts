@@ -125,10 +125,18 @@ export function emptyToNull(text: string): string {
   return (text === "") ? null : text;
 }
 
+
 /**
  * @internal
  */
-export function readSystemTime(ds: DataStream): Date {
+function padNumber(value: number, maxLen: number): string {
+  return ("" + value).padStart(maxLen, '0');
+}
+
+/**
+ * @internal
+ */
+export function readSystemTime(ds: DataStream): Date | null {
   // SYSTEMTIME structure (minwinbase.h)
   // https://learn.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-systemtime
 
@@ -141,5 +149,11 @@ export function readSystemTime(ds: DataStream): Date {
   const wSecond = ds.readUint16();
   const wMilliseconds = ds.readUint16();
 
-  return new Date(wYear, wMonth - 1, wDay, wHour, wMinute, wSecond, wMilliseconds);
+  const text = `${padNumber(wYear, 4)}-${padNumber(wMonth, 2)}-${padNumber(wDay, 2)}T${padNumber(wHour, 2)}:${padNumber(wMinute, 2)}:${padNumber(wSecond, 2)}Z`;
+  if (text === '0000-00-00T00:00:00Z') {
+    return null;
+  }
+  else {
+    return new Date(text);
+  }
 }

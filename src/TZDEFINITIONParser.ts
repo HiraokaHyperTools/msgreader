@@ -26,7 +26,7 @@ export interface TzDefinitionRule {
   /**
    * The time in Coordinated Universal Time (UTC) that the time zone rule started.
    */
-  start: string;
+  start: string | null;
 
   /**
    * The offset from Greenwich Mean Time (GMT).
@@ -46,12 +46,12 @@ export interface TzDefinitionRule {
   /**
    * The time to switch to standard time.
    */
-  standardDate: string;
+  standardDate: string | null;
 
   /**
    * The time to switch to daylight saving time.
    */
-  daylightDate: string;
+  daylightDate: string | null;
 }
 
 /**
@@ -125,12 +125,12 @@ export function parse(ds: DataStream): TzDefinition | null {
         {},
         {
           flags: wFlags,
-          start: stStart.toUTCString(),
+          start: stStart?.toUTCString() || null,
           bias: lBias,
           standardBias: lStandardBias,
           daylightBias: lDaylightBias,
-          standardDate: stStandardDate.toUTCString(),
-          daylightDate: stDaylightDate.toUTCString(),
+          standardDate: stStandardDate?.toUTCString() || null,
+          daylightDate: stDaylightDate?.toUTCString() || null,
         }
       );
       tz.rules.push(rule);

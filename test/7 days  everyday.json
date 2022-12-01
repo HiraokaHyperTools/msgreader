@@ -16,12 +16,12 @@
   "rules": [
    {
     "flags": 2,
-    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
     "bias": -540,
     "standardBias": 0,
     "daylightBias": -60,
-    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
-    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+    "standardDate": null,
+    "daylightDate": null
    }
   ],
   "keyName": "Tokyo Standard Time"
@@ -37,12 +37,12 @@
   "rules": [
    {
     "flags": 2,
-    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
     "bias": -540,
     "standardBias": 0,
     "daylightBias": -60,
-    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
-    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+    "standardDate": null,
+    "daylightDate": null
    }
   ],
   "keyName": "Tokyo Standard Time"
@@ -52,20 +52,20 @@
   "standardBias": 0,
   "daylightBias": -60,
   "standardYear": 0,
-  "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
+  "standardDate": null,
   "daylightYear": 0,
-  "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+  "daylightDate": null
  },
  "apptTZDefStartDisplay": {
   "rules": [
    {
     "flags": 2,
-    "start": "Sun, 31 Dec 1600 14:41:01 GMT",
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
     "bias": -540,
     "standardBias": 0,
     "daylightBias": -60,
-    "standardDate": "Wed, 29 Nov 1899 15:00:00 GMT",
-    "daylightDate": "Wed, 29 Nov 1899 15:00:00 GMT"
+    "standardDate": null,
+    "daylightDate": null
    }
   ],
   "keyName": "Tokyo Standard Time"
