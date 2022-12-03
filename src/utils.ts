@@ -1,5 +1,6 @@
 import { stringify } from "querystring";
 import DataStream from "./DataStream";
+import { TransitionSystemTime } from "./TZDEFINITIONParser";
 
 /**
  * @internal
@@ -156,4 +157,30 @@ export function readSystemTime(ds: DataStream): Date | null {
   else {
     return new Date(text);
   }
+}
+
+/**
+ * @internal
+ */
+export function readTransitionSystemTime(ds: DataStream): TransitionSystemTime {
+  // SYSTEMTIME structure (minwinbase.h)
+  // https://learn.microsoft.com/en-us/windows/win32/api/minwinbase/ns-minwinbase-systemtime
+
+  const wYear = ds.readUint16();
+  const wMonth = ds.readUint16();
+  const wDayOfWeek = ds.readUint16();
+  const wDay = ds.readUint16();
+  const wHour = ds.readUint16();
+  const wMinute = ds.readUint16();
+  const wSecond = ds.readUint16();
+  const wMilliseconds = ds.readUint16();
+
+  return {
+    year: wYear,
+    month: wMonth,
+    dayOfWeek: wDayOfWeek,
+    day: wDay,
+    hour: wHour,
+    minute: wMinute,
+  };
 }

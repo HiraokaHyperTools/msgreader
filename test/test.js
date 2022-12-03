@@ -418,7 +418,7 @@ describe('MsgReader', function () {
       const msgFileBuffer = fs.readFileSync(`test/${msgName}.msg`);
       const testMsg = new MsgReader(msgFileBuffer);
       const testMsgInfo = testMsg.getFileData();
-  
+
       it('exact match with pre rendered data (except on compressedRtf)', function () {
         const msg = removeCompressedRtf(testMsgInfo);
         use(msg, `test/${msgName}.json`);
@@ -429,6 +429,7 @@ describe('MsgReader', function () {
   generateRegression('A black friday (w tz)');
   generateRegression('A black friday (wo tz)');
   generateRegression('7 days  everyday');
+  generateRegression('Appointment sample EST');
 
 });
 

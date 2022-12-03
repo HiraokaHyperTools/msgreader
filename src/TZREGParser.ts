@@ -1,5 +1,6 @@
 import DataStream from "./DataStream";
-import { readSystemTime } from "./utils";
+import { TransitionSystemTime } from "./TZDEFINITIONParser";
+import { readSystemTime, readTransitionSystemTime } from "./utils";
 
 
 /**
@@ -41,7 +42,7 @@ export interface TzReg {
     /**
      * time to switch to standard time
      */
-    standardDate: string | null,
+    standardDate: TransitionSystemTime,
 
     /**
      * matches the stDaylightDate's wYear field
@@ -51,7 +52,7 @@ export interface TzReg {
     /**
      * time to switch to daylight time
      */
-    daylightDate: string | null,
+    daylightDate: TransitionSystemTime,
 }
 
 export function parse(ds: DataStream): TzReg | null {
@@ -63,9 +64,9 @@ export function parse(ds: DataStream): TzReg | null {
         const lStandardBias = ds.readInt32();
         const lDaylightBias = ds.readInt32();
         const wStandardYear = ds.readUint16();
-        const stStandardDate = readSystemTime(ds);
+        const stStandardDate = readTransitionSystemTime(ds);
         const wDaylightYear = ds.readUint16();
-        const stDaylightDate = readSystemTime(ds);
+        const stDaylightDate = readTransitionSystemTime(ds);
 
         return Object.assign(
             {},
@@ -74,9 +75,9 @@ export function parse(ds: DataStream): TzReg | null {
                 standardBias: lStandardBias,
                 daylightBias: lDaylightBias,
                 standardYear: wStandardYear,
-                standardDate: stStandardDate?.toUTCString() || null,
+                standardDate: stStandardDate,
                 daylightYear: wDaylightYear,
-                daylightDate: stDaylightDate?.toUTCString() || null,
+                daylightDate: stDaylightDate,
             }
         );
     }

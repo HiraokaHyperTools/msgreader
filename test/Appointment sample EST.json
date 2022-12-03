@@ -1,0 +1,104 @@
+{
+ "dataType": "msg",
+ "attachments": [],
+ "recipients": [],
+ "senderEmail": "Unknown",
+ "normalizedSubject": "Appointment sample EST",
+ "apptTZDefEndDisplay": {
+  "rules": [
+   {
+    "flags": 0,
+    "start": "Sun, 01 Jan 2006 00:00:00 GMT",
+    "bias": 300,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 10,
+     "dayOfWeek": 0,
+     "day": 5,
+     "hour": 2,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 4,
+     "dayOfWeek": 0,
+     "day": 1,
+     "hour": 2,
+     "minute": 0
+    }
+   },
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 2007 00:00:00 GMT",
+    "bias": 300,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 11,
+     "dayOfWeek": 0,
+     "day": 1,
+     "hour": 2,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 3,
+     "dayOfWeek": 0,
+     "day": 2,
+     "hour": 2,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Eastern Standard Time"
+ },
+ "messageClass": "IPM.Appointment",
+ "conversationTopic": "Appointment sample EST",
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "subject": "Appointment sample EST",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
+ "body": "\r\n",
+ "apptTZDefStartDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 2007 00:00:00 GMT",
+    "bias": 300,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 11,
+     "dayOfWeek": 0,
+     "day": 1,
+     "hour": 2,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 3,
+     "dayOfWeek": 0,
+     "day": 2,
+     "hour": 2,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Eastern Standard Time"
+ },
+ "creationTime": "Sat, 03 Dec 2022 06:13:05 GMT",
+ "lastModificationTime": "Sat, 03 Dec 2022 06:13:05 GMT",
+ "clientSubmitTime": "Sat, 03 Dec 2022 06:12:57 GMT",
+ "messageDeliveryTime": "Sat, 03 Dec 2022 06:12:57 GMT",
+ "messageFlags": 1,
+ "internetCodepage": 50220,
+ "messageLocaleId": 1041,
+ "apptStartWhole": "Sun, 04 Dec 2022 13:00:00 GMT",
+ "apptEndWhole": "Sun, 04 Dec 2022 13:30:00 GMT",
+ "clipStart": "Sun, 04 Dec 2022 13:00:00 GMT",
+ "clipEnd": "Sun, 04 Dec 2022 13:30:00 GMT"
+}

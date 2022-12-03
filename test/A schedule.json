@@ -29,8 +29,22 @@
     "bias": -540,
     "standardBias": 0,
     "daylightBias": -60,
-    "standardDate": null,
-    "daylightDate": null
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
    }
   ],
   "keyName": "Tokyo Standard Time"
@@ -43,8 +57,22 @@
     "bias": -540,
     "standardBias": 0,
     "daylightBias": -60,
-    "standardDate": null,
-    "daylightDate": null
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
    }
   ],
   "keyName": "Tokyo Standard Time"
