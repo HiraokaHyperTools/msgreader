@@ -27,7 +27,7 @@ import { parse as parseTZDEFINITION, TzDefinition } from './TZDEFINITIONParser';
 import { parse as parseTZREG, TzReg } from './TZREGParser';
 import { AppointmentRecur, parse as parseAppointmentRecur } from './AppointmentRecurParser';
 
-export { TzDefinitionRule, TzDefinition } from './TZDEFINITIONParser';
+export { TzDefinitionRule, TzDefinition, TransitionSystemTime } from './TZDEFINITIONParser';
 export { TzReg } from './TZREGParser';
 export {
   RecurFrequency, PatternType, CalendarType, EndType, PatternTypeWeek, PatternTypeMonth,
