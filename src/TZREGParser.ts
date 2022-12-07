@@ -55,6 +55,9 @@ export interface TzReg {
     daylightDate: TransitionSystemTime,
 }
 
+/**
+ * @internal
+ */
 export function parse(ds: DataStream): TzReg | null {
     // PidLidTimeZoneStruct Canonical Property
     // https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidtimezonestruct-canonical-property

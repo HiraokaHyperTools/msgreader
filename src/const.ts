@@ -133,6 +133,7 @@ export default {
           0x0000825E: { id: "PidLidAppointmentTimeZoneDefinitionStartDisplay", dispid: "apptTZDefStartDisplay" },
           0x0000825F: { id: "PidLidAppointmentTimeZoneDefinitionEndDisplay", dispid: "apptTZDefEndDisplay" },
           0x00008260: { id: "PidLidAppointmentTimeZoneDefinitionRecur", dispid: "apptTZDefRecur" },
+          0x00008216: { id: "PidLidAppointmentRecur", dispid: "apptRecur" },
         },
         // PSETID_Address
         "00062004-0000-0000-c000-000000000046": {

@@ -25,9 +25,14 @@ import { parse as entryStreamParser } from './EntryStreamParser';
 import { parse as parseVerbStream } from './VerbStreamParser';
 import { parse as parseTZDEFINITION, TzDefinition } from './TZDEFINITIONParser';
 import { parse as parseTZREG, TzReg } from './TZREGParser';
+import { AppointmentRecur, parse as parseAppointmentRecur } from './AppointmentRecurParser';
 
 export { TzDefinitionRule, TzDefinition } from './TZDEFINITIONParser';
 export { TzReg } from './TZREGParser';
+export {
+  RecurFrequency, PatternType, CalendarType, EndType, PatternTypeWeek, PatternTypeMonth,
+  PatternTypeMonthNth, RecurrencePattern, OverrideFlags, ExceptionInfo, AppointmentRecur,
+} from './AppointmentRecurParser';
 
 // MSG Reader implementation
 
@@ -1122,6 +1127,13 @@ export interface SomeParsedOxProps {
    */
   timeZoneStruct?: TzReg;
 
+  /**
+   * Specifies the dates and times when a recurring series occurs by using one of the recurrence patterns and ranges that are specified in [MS-OXOCAL].
+   * 
+   * @see [PidLidAppointmentRecur Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidappointmentrecur-canonical-property)
+   */
+  apptRecur?: AppointmentRecur;
+
   // Only parsed props!
 }
 
@@ -1442,6 +1454,9 @@ export default class MsgReader {
     }
     else if (key === "timeZoneStruct") {
       value = parseTZREG(ds);
+    }
+    else if (key === "apptRecur") {
+      value = parseAppointmentRecur(ds, ansiEncoding);
     }
     else if (key === "recipType") {
       const MAPI_TO = 1;

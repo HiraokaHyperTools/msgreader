@@ -7,7 +7,10 @@ export interface Entry {
     propertyIndex: number;
 }
 
-export function parse(array: Uint8Array): Entry[] {
+/**
+ * @internal
+ */
+ export function parse(array: Uint8Array): Entry[] {
     const ds = new DataStream(array, 0, DataStream.LITTLE_ENDIAN);
     const ret: Entry[] = [];
     while (!ds.isEof()) {

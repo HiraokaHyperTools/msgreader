@@ -96,6 +96,9 @@ export interface TzDefinition {
   rules: TzDefinitionRule[];
 }
 
+/**
+ * @internal
+ */
 export function parse(ds: DataStream): TzDefinition | null {
   // About persisting TZDEFINITION to a stream to commit to a binary property
   // https://learn.microsoft.com/en-us/office/client-developer/outlook/auxiliary/about-persisting-tzdefinition-to-a-stream-to-commit-to-a-binary-property?redirectedfrom=MSDN

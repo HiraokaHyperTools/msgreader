@@ -430,6 +430,9 @@ describe('MsgReader', function () {
   generateRegression('A black friday (wo tz)');
   generateRegression('7 days  everyday');
   generateRegression('Appointment sample EST');
+  generateRegression('Lanch time  every friday  in 2023 chgs1');
+  generateRegression('Lanch time  every friday  in 2023 chgs2');
+  generateRegression('Lanch time  every friday  in 2023 org');
 
 });
 

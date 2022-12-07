@@ -1,0 +1,205 @@
+//------------------------------------------------
+//--- 010 Editor v11.0.1 Binary Template
+//
+//      File: __substg1.0_XXXX0102
+//   Authors: kenjiuno
+//   Version: 
+//   Purpose: 2.2.1.44.5 AppointmentRecurrencePattern Structure
+//  Category: 
+// File Mask: 
+//  ID Bytes: 04 30 04 30
+//   History: 
+//------------------------------------------------
+
+LittleEndian();
+
+enum <ushort> RecurFrequencyT {
+Daily=0x200A,
+Weekly=0x200B,
+Monthly=0x200C,
+Yearly=0x200D,
+};
+
+enum <ushort> PatternTypeT {
+
+Day=0x0000,//The event has a daily recurrence.
+Week=0x0001,//The event has a weekly recurrence.
+Month=0x0002,//The event has a monthly recurrence.
+MonthEnd=0x0004,//The event has a month-end recurrence.<12>
+MonthNth=0x0003,//The event has an every nth month pattern.
+HjMonth=0x000A,//The event has a monthly recurrence in the Hijri calendar. For this value in the PatternType field, the value of the CalendarType field SHOULD be set to 0x0000.<13>
+HjMonthNth=0x000B,//The event has an every nth month pattern in the Hijri calendar. For this value in the PatternType field, the value of the CalendarType field MUST be set to 0x0000.
+HjMonthEnd=0x000C,//The event has a month end recurrence in the Hijri calendar. For this value in the PatternType field, the value of the CalendarType field MUST be set to 0x0000.
+
+};
+
+enum <ushort> CalendarTypeT {
+
+Default=0x0000,//The default value for the calendar type is Gregorian.
+CAL_GREGORIAN=0x0001,//Gregorian (localized) calendar
+CAL_GREGORIAN_US=0x0002,//Gregorian (U.S.) calendar
+CAL_JAPAN=0x0003,//Japanese Emperor era calendar
+CAL_TAIWAN=0x0004,//Taiwan calendar
+CAL_KOREA=0x0005,//Korean Tangun era calendar
+CAL_HIJRI=0x0006,//Hijri (Arabic Lunar) calendar
+CAL_THAI=0x0007,//Thai calendar
+CAL_HEBREW=0x0008,//Hebrew lunar calendar
+CAL_GREGORIAN_ME_FRENCH=0x0009,//Gregorian Middle East French calendar
+CAL_GREGORIAN_ARABIC=0x000A,//Gregorian Arabic calendar
+CAL_GREGORIAN_XLIT_ENGLISH=0x000B,//Gregorian transliterated English calendar
+CAL_GREGORIAN_XLIT_FRENCH=0x000C,//Gregorian transliterated French calendar
+CAL_LUNAR_JAPANESE=0x000E,//Japanese lunar calendar
+CAL_CHINESE_LUNAR=0x000F,//Chinese lunar calendar
+CAL_SAKA=0x0010,//Saka era calendar
+CAL_LUNAR_ETO_CHN=0x0011,//Lunar ETO Chinese calendar
+CAL_LUNAR_ETO_KOR=0x0012,//Lunar ETO Korean calendar
+CAL_LUNAR_ROKUYOU=0x0013,//Lunar Rokuyou calendar
+CAL_LUNAR_KOREAN=0x0014,//Korean lunar calendar
+CAL_UMALQURA=0x0017,//Um Al Qura calendar
+
+};
+
+enum <uint> EndTypeT {
+EndAfterDate = 0x00002021,
+EndAfterNOccurrences = 0x00002022,
+NeverEnd = 0x00002023,
+NeverEnd2 = 0xFFFFFFFF,
+};
+
+struct RecurrencePattern {
+
+ushort ReaderVersion;
+ushort WriterVersion;
+RecurFrequencyT RecurFrequency;
+PatternTypeT PatternType;
+CalendarTypeT CalendarType;
+uint FirstDateTime;
+uint Period;
+uint SlidingFlag;
+if (PatternType == Week) {
+uint PatternTypeSpecificWeek;
+}
+if (PatternType == Month || PatternType == MonthEnd || PatternType == HjMonth || PatternType == HjMonthEnd) {
+uint PatternTypeSpecificMonth;
+}
+if (PatternType == MonthNth || RecurFrequency == HjMonthNth) {
+uint64 PatternTypeSpecificMonthNth;
+}
+EndTypeT EndType;
+uint OccurrenceCount;
+uint FirstDOW;
+uint DeletedInstanceCount;
+uint DeletedInstanceDates[DeletedInstanceCount];
+uint ModifiedInstanceCount;
+uint ModifiedInstanceDates[ModifiedInstanceCount];
+uint StartDate;
+uint EndDate;
+
+};
+
+enum <ushort> OverrideFlagsT {
+ARO_SUBJECT=0x0001,//Indicates that the Subject, SubjectLength, and SubjectLength2 fields are present.
+ARO_MEETINGTYPE=0x0002,//Indicates that the MeetingType field is present.
+ARO_REMINDERDELTA=0x0004,//Indicates that the ReminderDelta field is present.
+ARO_REMINDER=0x0008,//Indicates that the ReminderSet field is present.
+ARO_LOCATION=0x0010,//Indicates that the Location, LocationLength, and LocationLength2 fields are present.
+ARO_BUSYSTATUS=0x0020,//Indicates that the BusyStatus field is present.
+ARO_ATTACHMENT=0x0040,//Indicates that the attachment field is present.
+ARO_SUBTYPE=0x0080,//Indicates that the SubType field is present.
+ARO_APPTCOLOR=0x0100,//Indicates that the AppointmentColor field is present.
+ARO_EXCEPTIONAL_BODY=0x0200,//Indicates that the Exception Embedded Message object has the PidTagRtfCompressed property ([MS-OXCMSG] section 2.2.1.56.4) set on it.
+
+};
+
+typedef struct {
+
+uint StartDateTime;
+uint EndDateTime;
+uint OriginalStartTime;
+OverrideFlagsT OverrideFlags;
+if (OverrideFlags & ARO_SUBJECT) {
+ushort SubjectLength;
+ushort SubjectLength2;
+byte Subject[SubjectLength2];
+}
+if (OverrideFlags & ARO_MEETINGTYPE) {
+uint MeetingType;
+}
+if (OverrideFlags & ARO_REMINDERDELTA) {
+uint ReminderDelta;
+}
+if (OverrideFlags & ARO_REMINDER) {
+uint ReminderSet;
+}
+if (OverrideFlags & ARO_SUBJECT) {
+ushort LocationLength;
+ushort LocationLength2;
+byte Location[LocationLength2];
+}
+if (OverrideFlags & ARO_BUSYSTATUS) {
+uint BusyStatus;
+}
+if (OverrideFlags & ARO_ATTACHMENT) {
+uint Attachment;
+}
+if (OverrideFlags & ARO_SUBTYPE) {
+uint SubType;
+}
+if (OverrideFlags & ARO_APPTCOLOR) {
+uint AppointmentColor;
+}
+
+
+
+} ExceptionInfoT;
+
+typedef struct {
+uint ChangeHighlightSize;
+byte ChangeHighlight[ChangeHighlightSize];
+} ChangeHighlightT;
+
+typedef struct ExtendedExceptionT(
+  uint OverrideFlags,
+  uint WriterVersion2
+) {
+if (0x00003009 <= WriterVersion2) {
+ChangeHighlightT ChangeHighlight;
+}
+
+uint ReservedBlockEE1Size;
+if (OverrideFlags & (ARO_SUBJECT | ARO_LOCATION)) {
+uint StartDateTime;
+uint EndDateTime;
+uint OriginalStartDate;
+}
+if (OverrideFlags & (ARO_SUBJECT)) {
+ushort WideCharSubjectLength;
+wchar_t WideCharSubject[WideCharSubjectLength];
+}
+if (OverrideFlags & (ARO_LOCATION)) {
+ushort WideCharLocationLength;
+wchar_t WideCharLocation[WideCharLocationLength];
+}
+uint ReservedBlockEE2Size;
+
+};
+
+struct AppointmentRecurrencePattern {
+
+RecurrencePattern p;
+uint ReaderVersion2;
+uint WriterVersion2;
+uint StartTimeOffset;
+uint EndTimeOffset;
+ushort ExceptionCount;
+ExceptionInfoT ExceptionInfo[ExceptionCount] <optimize=false>;
+uint ReservedBlock1Size;
+local int x;
+for (x=0; x<ExceptionCount; x++) {
+ExtendedExceptionT ExtendedException(ExceptionInfo[x].OverrideFlags, WriterVersion2) <optimize=false>;
+}
+uint ReservedBlock2Size;
+
+};
+
+AppointmentRecurrencePattern ar;

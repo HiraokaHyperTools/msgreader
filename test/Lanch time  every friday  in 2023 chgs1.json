@@ -1,0 +1,265 @@
+{
+ "dataType": "msg",
+ "attachments": [
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "addressType": "UNKNOWN",
+      "name": "Unknown",
+      "email": "Unknown",
+      "recipType": "to"
+     }
+    ],
+    "conversationTopic": "Lanch time, every friday, in 2023 [rescheduled!]",
+    "subject": "Lanch time, every friday, in 2023 [rescheduled!]",
+    "normalizedSubject": "Lanch time, every friday, in 2023 [rescheduled!]",
+    "messageClass": "IPM.OLE.CLASS.{00061055-0000-0000-C000-000000000046}",
+    "apptTZDefEndDisplay": {
+     "rules": [
+      {
+       "flags": 2,
+       "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+       "bias": -540,
+       "standardBias": 0,
+       "daylightBias": 0,
+       "standardDate": {
+        "year": 0,
+        "month": 0,
+        "dayOfWeek": 0,
+        "day": 0,
+        "hour": 0,
+        "minute": 0
+       },
+       "daylightDate": {
+        "year": 0,
+        "month": 0,
+        "dayOfWeek": 0,
+        "day": 0,
+        "hour": 0,
+        "minute": 0
+       }
+      }
+     ],
+     "keyName": "Tokyo Standard Time"
+    },
+    "apptTZDefStartDisplay": {
+     "rules": [
+      {
+       "flags": 2,
+       "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+       "bias": -540,
+       "standardBias": 0,
+       "daylightBias": 0,
+       "standardDate": {
+        "year": 0,
+        "month": 0,
+        "dayOfWeek": 0,
+        "day": 0,
+        "hour": 0,
+        "minute": 0
+       },
+       "daylightDate": {
+        "year": 0,
+        "month": 0,
+        "dayOfWeek": 0,
+        "day": 0,
+        "hour": 0,
+        "minute": 0
+       }
+      }
+     ],
+     "keyName": "Tokyo Standard Time"
+    },
+    "creationTime": "Wed, 07 Dec 2022 03:30:27 GMT",
+    "lastModificationTime": "Wed, 07 Dec 2022 03:30:27 GMT",
+    "messageFlags": 9,
+    "apptStartWhole": "Thu, 12 Jan 2023 03:00:00 GMT",
+    "apptEndWhole": "Thu, 12 Jan 2023 04:00:00 GMT",
+    "clipStart": "Thu, 12 Jan 2023 03:00:00 GMT",
+    "clipEnd": "Thu, 12 Jan 2023 04:00:00 GMT"
+   },
+   "innerMsgContent": true,
+   "folderId": 82,
+   "name": "無題",
+   "attachmentHidden": true
+  }
+ ],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "addressType": "UNKNOWN",
+   "name": "Unknown",
+   "email": "Unknown",
+   "recipType": "to"
+  }
+ ],
+ "senderEmail": "Unknown",
+ "normalizedSubject": "Lanch time, every friday, in 2023",
+ "apptTZDefRecur": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "messageClass": "IPM.Appointment",
+ "conversationTopic": "Lanch time, every friday, in 2023",
+ "timeZoneStruct": {
+  "bias": -540,
+  "standardBias": 0,
+  "daylightBias": -60,
+  "standardYear": 0,
+  "standardDate": {
+   "year": 0,
+   "month": 0,
+   "dayOfWeek": 0,
+   "day": 0,
+   "hour": 0,
+   "minute": 0
+  },
+  "daylightYear": 0,
+  "daylightDate": {
+   "year": 0,
+   "month": 0,
+   "dayOfWeek": 0,
+   "day": 0,
+   "hour": 0,
+   "minute": 0
+  }
+ },
+ "subject": "Lanch time, every friday, in 2023",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
+ "body": "Changes:\r\n-\tJan 6 cancel\r\n-\tJan 13 rescheduled to Jan 12\r\n\r\n",
+ "apptTZDefEndDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": 0,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "apptTZDefStartDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": 0,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "apptRecur": {
+  "recurrencePattern": {
+   "recurFrequency": 8203,
+   "patternType": 1,
+   "calendarType": 0,
+   "firstDateTime": 8640,
+   "period": 1,
+   "slidingFlag": 0,
+   "patternTypeWeek": {
+    "dayOfWeekBits": 32
+   },
+   "endType": 8225,
+   "occurrenceCount": 52,
+   "firstDOW": 0,
+   "deletedInstanceDates": [
+    221957280,
+    221967360
+   ],
+   "modifiedInstanceDates": [
+    221965920
+   ],
+   "startDate": 221957280,
+   "endDate": 222474240
+  },
+  "startTimeOffset": 720,
+  "endTimeOffset": 780,
+  "exceptionInfo": [
+   {
+    "startDateTime": 221966640,
+    "endDateTime": 221966700,
+    "originalStartTime": 221968080,
+    "overrideFlags": 1,
+    "subject": "Lanch time, every friday, in 2023 [rescheduled!]",
+    "changeHighlight": 0
+   }
+  ]
+ },
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "creationTime": "Wed, 07 Dec 2022 03:30:27 GMT",
+ "lastModificationTime": "Wed, 07 Dec 2022 03:30:27 GMT",
+ "clientSubmitTime": "Wed, 07 Dec 2022 02:23:01 GMT",
+ "messageDeliveryTime": "Wed, 07 Dec 2022 02:23:01 GMT",
+ "messageFlags": 17,
+ "internetCodepage": 50220,
+ "messageLocaleId": 1041,
+ "apptStartWhole": "Fri, 06 Jan 2023 03:00:00 GMT",
+ "apptEndWhole": "Fri, 06 Jan 2023 04:00:00 GMT",
+ "clipStart": "Thu, 05 Jan 2023 15:00:00 GMT",
+ "clipEnd": "Sat, 30 Dec 2023 15:00:00 GMT"
+}
