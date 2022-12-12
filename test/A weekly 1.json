@@ -11,33 +11,33 @@
    "firstDateTime": 8640,
    "period": 1,
    "slidingFlag": 0,
-   "endType": 8225,
-   "occurrenceCount": 52,
+   "endType": 8226,
+   "occurrenceCount": 1,
    "firstDOW": 0,
    "deletedInstanceDates": [],
    "modifiedInstanceDates": [],
-   "startDate": 221957280,
-   "endDate": 222474240,
+   "startDate": 221921280,
+   "endDate": 221921280,
    "patternTypeWeek": {
-    "dayOfWeekBits": 32
+    "dayOfWeekBits": 2
    }
   },
-  "startTimeOffset": 720,
-  "endTimeOffset": 780,
+  "startTimeOffset": 960,
+  "endTimeOffset": 990,
   "exceptionInfo": []
  },
- "normalizedSubject": "Lanch time, every friday, in 2023",
+ "normalizedSubject": "A weekly 1",
  "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
  "messageClass": "IPM.Appointment",
- "conversationTopic": "Lanch time, every friday, in 2023",
+ "conversationTopic": "Weekly 1",
  "apptTZDefRecur": {
   "rules": [
    {
-    "flags": 2,
+    "flags": 3,
     "start": "Mon, 01 Jan 1601 00:00:00 GMT",
     "bias": -540,
     "standardBias": 0,
-    "daylightBias": -60,
+    "daylightBias": 0,
     "standardDate": {
      "year": 0,
      "month": 0,
@@ -58,14 +58,14 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
- "subject": "Lanch time, every friday, in 2023",
+ "subject": "A weekly 1",
  "senderName": "Unknown",
  "senderAddressType": "UNKNOWN",
  "body": "\r\n",
  "timeZoneStruct": {
   "bias": -540,
   "standardBias": 0,
-  "daylightBias": -60,
+  "daylightBias": 0,
   "standardYear": 0,
   "standardDate": {
    "year": 0,
@@ -141,15 +141,15 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
- "creationTime": "Wed, 07 Dec 2022 02:48:58 GMT",
- "lastModificationTime": "Wed, 07 Dec 2022 02:48:58 GMT",
- "clientSubmitTime": "Wed, 07 Dec 2022 02:23:01 GMT",
- "messageDeliveryTime": "Wed, 07 Dec 2022 02:23:01 GMT",
+ "creationTime": "Mon, 12 Dec 2022 06:56:26 GMT",
+ "lastModificationTime": "Mon, 12 Dec 2022 06:56:26 GMT",
+ "clientSubmitTime": "Mon, 12 Dec 2022 06:55:38 GMT",
+ "messageDeliveryTime": "Mon, 12 Dec 2022 06:55:38 GMT",
  "messageFlags": 1,
  "internetCodepage": 50220,
  "messageLocaleId": 1041,
- "apptStartWhole": "Fri, 06 Jan 2023 03:00:00 GMT",
- "apptEndWhole": "Fri, 06 Jan 2023 04:00:00 GMT",
- "clipStart": "Thu, 05 Jan 2023 15:00:00 GMT",
- "clipEnd": "Sat, 30 Dec 2023 15:00:00 GMT"
+ "apptStartWhole": "Mon, 12 Dec 2022 07:00:00 GMT",
+ "apptEndWhole": "Mon, 12 Dec 2022 07:30:00 GMT",
+ "clipStart": "Sun, 11 Dec 2022 15:00:00 GMT",
+ "clipEnd": "Sun, 11 Dec 2022 15:00:00 GMT"
 }

@@ -433,6 +433,10 @@ describe('MsgReader', function () {
   generateRegression('Lanch time  every friday  in 2023 chgs1');
   generateRegression('Lanch time  every friday  in 2023 chgs2');
   generateRegression('Lanch time  every friday  in 2023 org');
+  generateRegression('A daily 1');
+  generateRegression('A monthly 1');
+  generateRegression('A weekly 1');
+  generateRegression('A yearly 1');
 
 });
 

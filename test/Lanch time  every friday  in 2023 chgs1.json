@@ -221,9 +221,6 @@
    "firstDateTime": 8640,
    "period": 1,
    "slidingFlag": 0,
-   "patternTypeWeek": {
-    "dayOfWeekBits": 32
-   },
    "endType": 8225,
    "occurrenceCount": 52,
    "firstDOW": 0,
@@ -235,7 +232,10 @@
     221965920
    ],
    "startDate": 221957280,
-   "endDate": 222474240
+   "endDate": 222474240,
+   "patternTypeWeek": {
+    "dayOfWeekBits": 32
+   }
   },
   "startTimeOffset": 720,
   "endTimeOffset": 780,
