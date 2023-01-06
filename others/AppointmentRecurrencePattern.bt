@@ -131,7 +131,7 @@ uint ReminderDelta;
 if (OverrideFlags & ARO_REMINDER) {
 uint ReminderSet;
 }
-if (OverrideFlags & ARO_SUBJECT) {
+if (OverrideFlags & ARO_LOCATION) {
 ushort LocationLength;
 ushort LocationLength2;
 byte Location[LocationLength2];
@@ -171,7 +171,7 @@ if (OverrideFlags & (ARO_SUBJECT | ARO_LOCATION)) {
 uint StartDateTime;
 uint EndDateTime;
 uint OriginalStartDate;
-}
+
 if (OverrideFlags & (ARO_SUBJECT)) {
 ushort WideCharSubjectLength;
 wchar_t WideCharSubject[WideCharSubjectLength];
@@ -181,6 +181,7 @@ ushort WideCharLocationLength;
 wchar_t WideCharLocation[WideCharLocationLength];
 }
 uint ReservedBlockEE2Size;
+}
 
 };
 

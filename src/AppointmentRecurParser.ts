@@ -873,11 +873,11 @@ export function parse(ds: DataStream, ansiEncoding: string): AppointmentRecur {
         const wideCharLocationLength = ds.readUint16();
         one.location = ds.readUCS2String(wideCharLocationLength);
       }
-    }
 
-    const reservedBlockEE2Size = ds.readUint32();
-    if (reservedBlockEE2Size !== 0) {
-      throw new Error(`reservedBlockEE2Size ${reservedBlockEE2Size} is not zero, AppointmentRecur is broken`);
+      const reservedBlockEE2Size = ds.readUint32();
+      if (reservedBlockEE2Size !== 0) {
+        throw new Error(`reservedBlockEE2Size ${reservedBlockEE2Size} is not zero, AppointmentRecur is broken`);
+      }
     }
 
   }

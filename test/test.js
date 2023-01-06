@@ -437,6 +437,7 @@ describe('MsgReader', function () {
   generateRegression('A monthly 1');
   generateRegression('A weekly 1');
   generateRegression('A yearly 1');
+  generateRegression('Friday Lunch');
 
 });
 
