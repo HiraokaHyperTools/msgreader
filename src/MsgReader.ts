@@ -1456,7 +1456,15 @@ export default class MsgReader {
       value = parseTZREG(ds);
     }
     else if (key === "apptRecur") {
-      value = parseAppointmentRecur(ds, ansiEncoding);
+      try {
+        value = parseAppointmentRecur(ds, ansiEncoding);
+      }
+      catch (ex) {
+        console.debug(ex);
+
+        // drop this data
+        key = undefined;
+      }
     }
     else if (key === "recipType") {
       const MAPI_TO = 1;
