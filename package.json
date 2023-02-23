@@ -7,7 +7,7 @@
   "private": false,
   "scripts": {
     "build": "tsc",
-    "test": "npm run mocha",
+    "test": "npm run mocha test/ test2/",
     "prepare": "npm run build && npm run test",
     "mocha": "set NODE_ENV=test && mocha",
     "dr": "npm publish --dry-run"

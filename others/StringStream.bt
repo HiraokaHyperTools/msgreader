@@ -14,8 +14,8 @@
 LittleEndian();
 
 struct Entry {
- uint32 NameLength;
- wchar_t Name[NameLength / 2];
+ uint32 NameLength <bgcolor=cLtGreen>;
+ wchar_t Name[NameLength / 2] <bgcolor=cLtBlue>;
 };
 
 while (!FEof()) {

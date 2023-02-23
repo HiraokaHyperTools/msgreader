@@ -44,7 +44,10 @@ export default class DataStream {
     } else if (arrayBuffer instanceof DataView) {
       this.dataView = arrayBuffer;
     } else if (arrayBuffer && arrayBuffer.buffer instanceof ArrayBuffer) {
-      this.buffer = arrayBuffer.buffer;
+      this._byteOffset += arrayBuffer.byteOffset;
+      this._buffer = arrayBuffer.buffer;
+      this._dataView = new DataView(this._buffer, this._byteOffset);
+      this._byteLength = this._dataView.byteLength + this._byteOffset;
     } else {
       throw new Error("Unknown arrayBuffer");
     }

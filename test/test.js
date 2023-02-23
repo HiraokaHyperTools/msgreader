@@ -87,342 +87,521 @@ describe('MsgReader', function () {
   const MsgReader = require('../lib/MsgReader').default;
 
   describe('test1.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/test1.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/test1.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
+
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/test1.json');
+      run(
+        ({ testMsgInfo }) => {
+          const msg = removeCompressedRtf(testMsgInfo);
+          use(msg, 'test/test1.json');
+        }
+      );
     });
     it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/test1.rtf');
+      run(
+        ({ testMsgInfo }) => {
+          useRtf(testMsgInfo, 'test/test1.rtf');
+        }
+      );
     });
   });
 
   describe('test2.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/test2.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
-    const testMsgAttachment0 = testMsg.getAttachment(0);
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/test2.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      const testMsgAttachment0 = testMsg.getAttachment(0);
+      callback({ testMsgInfo, testMsgAttachment0 });
+    }
 
     it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/test2.json');
+      run(
+        ({ testMsgInfo }) => {
+          const msg = removeCompressedRtf(testMsgInfo);
+          use(msg, 'test/test2.json');
+        }
+      )
     });
 
     it('verify attachment: A.txt', function () {
-      assert.deepStrictEqual(
-        testMsgAttachment0,
-        {
-          fileName: 'A.txt',
-          content: new Uint8Array([97, 116, 116, 97, 99, 104, 32, 116, 101, 115, 116])
+      run(
+        ({ testMsgAttachment0 }) => {
+          assert.deepStrictEqual(
+            testMsgAttachment0,
+            {
+              fileName: 'A.txt',
+              content: new Uint8Array([97, 116, 116, 97, 99, 104, 32, 116, 101, 115, 116])
+            }
+          );
         }
       );
     });
 
     it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/test2.rtf');
+      run(
+        ({ testMsgInfo }) => {
+          useRtf(testMsgInfo, 'test/test2.rtf');
+        }
+      )
     });
   });
 
   describe('msgInMsg.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
-    const testMsgAttachment0 = testMsg.getAttachment(0);
-    const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+    async function runAsync(callback) {
+      const msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      const testMsgAttachment0 = testMsg.getAttachment(0);
+      const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+      await callback({ testMsgInfo, testMsgAttachment0, testMsgAttachments0 });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/msgInMsg.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => runAsync(
+        async ({ testMsgInfo }) => {
+          const msg = removeCompressedRtf(testMsgInfo);
+          use(msg, 'test/msgInMsg.json');
+        }
+      )
+    );
 
-    it('testMsgAttachment0 === testMsgAttachments0', function () {
-      assert.deepStrictEqual(testMsgAttachment0, testMsgAttachments0);
-    });
+    it('testMsgAttachment0 === testMsgAttachments0',
+      () => runAsync(
+        async ({ testMsgAttachment0, testMsgAttachments0 }) => {
+          assert.deepStrictEqual(testMsgAttachment0, testMsgAttachments0);
+        }
+      )
+    );
 
-    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0', async function () {
-      await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
-    });
+    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0',
+      () => runAsync(
+        async ({ testMsgAttachments0 }) => {
+          await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
+        }
+      )
+    );
 
-    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
-      const subReader = new MsgReader(testMsgAttachments0.content);
-      const subInfo = subReader.getFileData();
+    it('re-parse and verify rebuilt inner testMsgAttachments0',
+      () => runAsync(
+        async ({ testMsgAttachments0 }) => {
+          const subReader = new MsgReader(testMsgAttachments0.content);
+          const subInfo = subReader.getFileData();
+          const subMsg = removeCompressedRtf(subInfo);
+          use(subMsg, 'test/msgInMsg-attachments0.json');
+        }
+      )
+    );
 
-      const subMsg = removeCompressedRtf(subInfo);
-      use(subMsg, 'test/msgInMsg-attachments0.json');
-    });
-
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/msgInMsg.rtf');
-    });
+    it('compare rtf',
+      () => runAsync(
+        async ({ testMsgInfo }) => {
+          useRtf(testMsgInfo, 'test/msgInMsg.rtf');
+        }
+      )
+    );
   });
 
 
   describe('msgInMsgInMsg.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/msgInMsgInMsg.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
-    const testMsgAttachments0 = testMsg.getAttachment(
-      testMsgInfo.attachments[0]
+    async function runAsync(callback) {
+      const msgFileBuffer = fs.readFileSync('test/msgInMsgInMsg.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      const testMsgAttachments0 = testMsg.getAttachment(
+        testMsgInfo.attachments[0]
+      );
+      const testMsgAttachments0AndItsAttachments0 = testMsg.getAttachment(
+        testMsgInfo.attachments[0].innerMsgContentFields.attachments[0]
+      );
+      await callback({ testMsgInfo, testMsgAttachments0, testMsgAttachments0AndItsAttachments0 });
+    }
+
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => runAsync(
+        async ({ testMsgInfo }) => {
+          const msg = removeCompressedRtf(testMsgInfo);
+          use(msg, 'test/msgInMsgInMsg.json');
+        }
+      )
     );
-    const testMsgAttachments0AndItsAttachments0 = testMsg.getAttachment(
-      testMsgInfo.attachments[0].innerMsgContentFields.attachments[0]
+
+    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0',
+      () => runAsync(
+        async ({ testMsgAttachments0 }) => {
+          await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
+        }
+      )
     );
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/msgInMsgInMsg.json');
-    });
+    it('re-parse and verify rebuilt inner testMsgAttachments0',
+      () => runAsync(
+        async ({ testMsgAttachments0 }) => {
+          const subReader = new MsgReader(testMsgAttachments0.content);
+          const subInfo = subReader.getFileData();
+          const subMsg = removeCompressedRtf(subInfo);
 
-    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0', async function () {
-      await runValidateCompoundFileAsync({ binary: testMsgAttachments0.content });
-    });
-
-    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
-      const subReader = new MsgReader(testMsgAttachments0.content);
-      const subInfo = subReader.getFileData();
-      const subMsg = removeCompressedRtf(subInfo);
-
-      use(subMsg, 'test/msgInMsgInMsg-attachments0.json');
-    });
+          use(subMsg, 'test/msgInMsgInMsg-attachments0.json');
+        }
+      )
+    );
 
 
-    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0AndItsAttachments0', async function () {
-      await runValidateCompoundFileAsync({ binary: testMsgAttachments0AndItsAttachments0.content });
-    });
+    (useValidateCompoundFile ? it : it.skip)('validateCompoundFile: inner testMsgAttachments0AndItsAttachments0',
+      () => runAsync(
+        async ({ testMsgAttachments0AndItsAttachments0 }) => {
+          await runValidateCompoundFileAsync({ binary: testMsgAttachments0AndItsAttachments0.content });
+        }
+      )
+    );
 
-    it('re-parse and verify rebuilt inner testMsgAttachments0AndItsAttachments0', function () {
-      const subReader = new MsgReader(testMsgAttachments0AndItsAttachments0.content);
-      const subInfo = subReader.getFileData();
-      const subMsg = removeCompressedRtf(subInfo);
+    it('re-parse and verify rebuilt inner testMsgAttachments0AndItsAttachments0',
+      () => runAsync(
+        async ({ testMsgAttachments0AndItsAttachments0 }) => {
+          const subReader = new MsgReader(testMsgAttachments0AndItsAttachments0.content);
+          const subInfo = subReader.getFileData();
+          const subMsg = removeCompressedRtf(subInfo);
 
-      use(subMsg, 'test/msgInMsgInMsg-attachments0-attachments0.json');
-    });
+          use(subMsg, 'test/msgInMsgInMsg-attachments0-attachments0.json');
+        }
+      )
+    );
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/msgInMsgInMsg.rtf');
-    });
+    it('compare rtf',
+      () => runAsync(
+        async ({ testMsgInfo }) => {
+          useRtf(testMsgInfo, 'test/msgInMsgInMsg.rtf');
+        }
+      )
+    );
   });
 
   describe('Subject.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/Subject.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/Subject.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/Subject.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/Subject.json');
+      })
+    );
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/Subject.rtf');
-    });
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/Subject.rtf');
+      })
+    );
   });
 
   describe('sent.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/sent.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/sent.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/sent.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/sent.json');
+      })
+    );
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/sent.rtf');
-    });
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/sent.rtf');
+      })
+    );
   });
 
   describe('sent2.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/sent2.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/sent2.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/sent2.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/sent2.json');
+      })
+    );
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/sent2.rtf');
-    });
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/sent2.rtf');
+      })
+    );
   });
 
   describe('longerFat.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/longerFat.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
-    const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/longerFat.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+      callback({ testMsgAttachments0 });
+    }
 
-    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
-      const subReader = new MsgReader(testMsgAttachments0.content);
-      const subInfo = subReader.getFileData();
-      const subMsg = removeCompressedRtf(subInfo);
+    it('re-parse and verify rebuilt inner testMsgAttachments0',
+      () => run(({ testMsgAttachments0 }) => {
+        const subReader = new MsgReader(testMsgAttachments0.content);
+        const subInfo = subReader.getFileData();
+        const subMsg = removeCompressedRtf(subInfo);
 
-      use(subMsg, 'test/longerFat-attachments0.json');
-    });
+        use(subMsg, 'test/longerFat-attachments0.json');
+      })
+    );
   });
 
   describe('longerDifat.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/longerDifat.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
-    const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/longerDifat.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      const testMsgAttachments0 = testMsg.getAttachment(testMsgInfo.attachments[0]);
+      callback({ testMsgAttachments0 });
+    }
 
-    it('re-parse and verify rebuilt inner testMsgAttachments0', function () {
-      const subReader = new MsgReader(testMsgAttachments0.content);
-      const subInfo = subReader.getFileData();
-      const subMsg = removeCompressedRtf(subInfo);
+    it('re-parse and verify rebuilt inner testMsgAttachments0',
+      () => run(({ testMsgAttachments0 }) => {
+        const subReader = new MsgReader(testMsgAttachments0.content);
+        const subInfo = subReader.getFileData();
+        const subMsg = removeCompressedRtf(subInfo);
 
-      use(subMsg, 'test/longerDifat-attachments0.json');
-    });
+        use(subMsg, 'test/longerDifat-attachments0.json');
+      })
+    );
   });
 
   describe('attachAndInline.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/attachAndInline.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/attachAndInline.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/attachAndInline.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/attachAndInline.json');
+      })
+    );
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/attachAndInline.rtf');
-    });
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/attachAndInline.rtf');
+      })
+    );
   });
 
   describe('voteItems.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/voteItems.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/voteItems.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/voteItems.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/voteItems.json');
+      })
+    );
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/voteItems.rtf');
-    });
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/voteItems.rtf');
+      })
+    );
   });
 
   describe('voteNo.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/voteNo.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/voteNo.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/voteNo.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/voteNo.json');
+      })
+    );
   });
 
   describe('voteYes.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/voteYes.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/voteYes.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/voteYes.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/voteYes.json');
+      })
+    );
   });
 
   describe('A schedule.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/A schedule.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/A schedule.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/A schedule.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/A schedule.json');
+      })
+    );
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/A schedule.rtf');
-    });
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/A schedule.rtf');
+      })
+    );
   });
 
   describe('A memo.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/A memo.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/A memo.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/A memo.json');
-    });
+      callback({ testMsgInfo });
+    }
 
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/A memo.rtf');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/A memo.json');
+      })
+    );
+
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/A memo.rtf');
+      })
+    );
   });
 
   describe('nonUnicodeMail.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/nonUnicodeMail.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/nonUnicodeMail.json');
-    });
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/nonUnicodeMail.rtf');
-    });
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/nonUnicodeMail.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
+
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/nonUnicodeMail.json');
+      })
+    );
+
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/nonUnicodeMail.rtf');
+      })
+    );
   });
 
   describe('nonUnicodeCP932.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/nonUnicodeCP932.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    testMsg.parserConfig = {
-      ansiEncoding: '932',
-    };
-    const testMsgInfo = testMsg.getFileData();
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/nonUnicodeCP932.json');
-    });
-    it('compare rtf', function () {
-      useRtf(testMsgInfo, 'test/nonUnicodeCP932.rtf');
-    });
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/nonUnicodeCP932.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      testMsg.parserConfig = {
+        ansiEncoding: '932',
+      };
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
+
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/nonUnicodeCP932.json');
+      })
+    );
+
+    it('compare rtf',
+      () => run(({ testMsgInfo }) => {
+        useRtf(testMsgInfo, 'test/nonUnicodeCP932.rtf');
+      })
+    );
   });
 
   describe('contactAnsi.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/contactAnsi.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/contactAnsi.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/contactAnsi.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/contactAnsi.json');
+      })
+    );
   });
 
   describe('contactUnicode.msg', function () {
-    const msgFileBuffer = fs.readFileSync('test/contactUnicode.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
+    function run(callback) {
+      const msgFileBuffer = fs.readFileSync('test/contactUnicode.msg');
+      const testMsg = new MsgReader(msgFileBuffer);
+      const testMsgInfo = testMsg.getFileData();
+      callback({ testMsgInfo });
+    }
 
-    it('exact match with pre rendered data (except on compressedRtf)', function () {
-      const msg = removeCompressedRtf(testMsgInfo);
-      use(msg, 'test/contactUnicode.json');
-    });
+    it('exact match with pre rendered data (except on compressedRtf)',
+      () => run(({ testMsgInfo }) => {
+        const msg = removeCompressedRtf(testMsgInfo);
+        use(msg, 'test/contactUnicode.json');
+      })
+    );
   });
 
   function generateRegression(msgName) {
     describe(`${msgName}.msg`, function () {
-      const msgFileBuffer = fs.readFileSync(`test/${msgName}.msg`);
-      const testMsg = new MsgReader(msgFileBuffer);
-      const testMsgInfo = testMsg.getFileData();
+      function run(callback) {
+        const msgFileBuffer = fs.readFileSync(`test/${msgName}.msg`);
+        const testMsg = new MsgReader(msgFileBuffer);
+        const testMsgInfo = testMsg.getFileData();
+        callback({ testMsgInfo });
+      }
 
-      it('exact match with pre rendered data (except on compressedRtf)', function () {
-        const msg = removeCompressedRtf(testMsgInfo);
-        use(msg, `test/${msgName}.json`);
-      });
+      it('exact match with pre rendered data (except on compressedRtf)',
+        () => run(({ testMsgInfo }) => {
+          const msg = removeCompressedRtf(testMsgInfo);
+          use(msg, `test/${msgName}.json`);
+        })
+      );
     });
   }
 
@@ -541,79 +720,122 @@ describe('toHexStr', function () {
 describe('DataStream', function () {
   const DataStream = require('../lib/DataStream').default;
 
-  const buff = new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
-  it('little.readUint32', function () {
-    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
-    assert.strictEqual(ds.readUint32(), 0x03020100);
-    assert.strictEqual(ds.readUint32(), 0x07060504);
-    assert.strictEqual(ds.readUint32(), 0x0b0a0908);
-    assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
-  });
-  it('big.readUint32', function () {
-    const ds = new DataStream(buff, 0, DataStream.BIG_ENDIAN);
-    assert.strictEqual(ds.readUint32(), 0x00010203);
-    assert.strictEqual(ds.readUint32(), 0x04050607);
-    assert.strictEqual(ds.readUint32(), 0x08090a0b);
-    assert.strictEqual(ds.readUint32(), 0x0c0d0e0f);
-  });
-  it('little.offset.readUint32', function () {
-    const ds = new DataStream(buff, 4, DataStream.LITTLE_ENDIAN);
-    assert.strictEqual(ds.readUint32(), 0x07060504);
-    assert.strictEqual(ds.readUint32(), 0x0b0a0908);
-    assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
-  });
-  it('big.offset.readUint32', function () {
-    const ds = new DataStream(buff, 4, DataStream.BIG_ENDIAN);
-    assert.strictEqual(ds.readUint32(), 0x04050607);
-    assert.strictEqual(ds.readUint32(), 0x08090a0b);
-    assert.strictEqual(ds.readUint32(), 0x0c0d0e0f);
-  });
-  it('little.buffer.readUint32', function () {
-    const ds = new DataStream(buff.buffer, 0, DataStream.LITTLE_ENDIAN);
-    assert.strictEqual(ds.readUint32(), 0x03020100);
-    assert.strictEqual(ds.readUint32(), 0x07060504);
-    assert.strictEqual(ds.readUint32(), 0x0b0a0908);
-    assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
-  });
-  it('little.buffer.offset.readUint32', function () {
-    const ds = new DataStream(buff.buffer, 4, DataStream.LITTLE_ENDIAN);
-    assert.strictEqual(ds.readUint32(), 0x07060504);
-    assert.strictEqual(ds.readUint32(), 0x0b0a0908);
-    assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
+  describe('byteOffset', function () {
+    it('little.buffer.offset.readInt32Array', function () {
+      const buffer = new ArrayBuffer(32);
+      new Int32Array(buffer).set([0, 1, 2, 3, 4, 5, 6, 7]);
+      const array2 = new Uint8Array(buffer, 8);
+
+      const ds = new DataStream(array2, 8, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 16);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.deepEqual(Array.from(ds.readInt32Array(2)), [4, 5]);
+    });
   });
 
-  it('little.readUint32Array', function () {
-    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readUint32Array()], [0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c]);
-  });
-  it('little.readInt32Array', function () {
-    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readInt32Array()], [0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c]);
-  });
-  it('little.readUint16Array', function () {
-    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readUint16Array()], [0x0100, 0x0302, 0x0504, 0x0706, 0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
-  });
-  it('little.readInt16Array', function () {
-    const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readInt16Array()], [0x0100, 0x0302, 0x0504, 0x0706, 0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
-  });
+  describe('0 to 15', function () {
+    const buff = new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
+    it('little.readUint32', function () {
+      const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 0);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.strictEqual(ds.readUint32(), 0x03020100);
+      assert.strictEqual(ds.readUint32(), 0x07060504);
+      assert.strictEqual(ds.readUint32(), 0x0b0a0908);
+      assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
+    });
+    it('big.readUint32', function () {
+      const ds = new DataStream(buff, 0, DataStream.BIG_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 0);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.strictEqual(ds.readUint32(), 0x00010203);
+      assert.strictEqual(ds.readUint32(), 0x04050607);
+      assert.strictEqual(ds.readUint32(), 0x08090a0b);
+      assert.strictEqual(ds.readUint32(), 0x0c0d0e0f);
+    });
+    it('little.offset.readUint32', function () {
+      const ds = new DataStream(buff, 4, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 4);
+      assert.strictEqual(ds.byteLength, 12);
+      assert.strictEqual(ds.readUint32(), 0x07060504);
+      assert.strictEqual(ds.readUint32(), 0x0b0a0908);
+      assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
+    });
+    it('big.offset.readUint32', function () {
+      const ds = new DataStream(buff, 4, DataStream.BIG_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 4);
+      assert.strictEqual(ds.byteLength, 12);
+      assert.strictEqual(ds.readUint32(), 0x04050607);
+      assert.strictEqual(ds.readUint32(), 0x08090a0b);
+      assert.strictEqual(ds.readUint32(), 0x0c0d0e0f);
+    });
+    it('little.buffer.readUint32', function () {
+      const ds = new DataStream(buff.buffer, 0, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 0);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.strictEqual(ds.readUint32(), 0x03020100);
+      assert.strictEqual(ds.readUint32(), 0x07060504);
+      assert.strictEqual(ds.readUint32(), 0x0b0a0908);
+      assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
+    });
+    it('little.buffer.offset.readUint32', function () {
+      const ds = new DataStream(buff.buffer, 4, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 4);
+      assert.strictEqual(ds.byteLength, 12);
+      assert.strictEqual(ds.readUint32(), 0x07060504);
+      assert.strictEqual(ds.readUint32(), 0x0b0a0908);
+      assert.strictEqual(ds.readUint32(), 0x0f0e0d0c);
+    });
 
-  it('little.readUint32Array +offset', function () {
-    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readUint32Array()], [0x0b0a0908, 0x0f0e0d0c]);
-  });
-  it('little.readInt32Array +offset', function () {
-    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readInt32Array()], [0x0b0a0908, 0x0f0e0d0c]);
-  });
-  it('little.readUint16Array +offset', function () {
-    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readUint16Array()], [0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
-  });
-  it('little.readInt16Array +offset', function () {
-    const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
-    assert.notStrictEqual([...ds.readInt16Array()], [0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+    it('little.readUint32Array', function () {
+      const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 0);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.notStrictEqual([...ds.readUint32Array()], [0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c]);
+    });
+    it('little.readInt32Array', function () {
+      const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 0);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.notStrictEqual([...ds.readInt32Array()], [0x03020100, 0x07060504, 0x0b0a0908, 0x0f0e0d0c]);
+    });
+    it('little.readUint16Array', function () {
+      const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 0);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.notStrictEqual([...ds.readUint16Array()], [0x0100, 0x0302, 0x0504, 0x0706, 0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+    });
+    it('little.readInt16Array', function () {
+      const ds = new DataStream(buff, 0, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 0);
+      assert.strictEqual(ds.byteLength, 16);
+      assert.notStrictEqual([...ds.readInt16Array()], [0x0100, 0x0302, 0x0504, 0x0706, 0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+    });
+
+    it('little.readUint32Array +offset', function () {
+      const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 8);
+      assert.strictEqual(ds.byteLength, 8);
+      assert.notStrictEqual([...ds.readUint32Array()], [0x0b0a0908, 0x0f0e0d0c]);
+    });
+    it('little.readInt32Array +offset', function () {
+      const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 8);
+      assert.strictEqual(ds.byteLength, 8);
+      assert.notStrictEqual([...ds.readInt32Array()], [0x0b0a0908, 0x0f0e0d0c]);
+    });
+    it('little.readUint16Array +offset', function () {
+      const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 8);
+      assert.strictEqual(ds.byteLength, 8);
+      assert.notStrictEqual([...ds.readUint16Array()], [0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+    });
+    it('little.readInt16Array +offset', function () {
+      const ds = new DataStream(buff, 8, DataStream.LITTLE_ENDIAN);
+      assert.strictEqual(ds.byteOffset, 8);
+      assert.strictEqual(ds.byteLength, 8);
+      assert.notStrictEqual([...ds.readInt16Array()], [0x0908, 0x0b0a, 0x0d0c, 0x0f0e]);
+    });
   });
 });
 

@@ -401,9 +401,21 @@ export class Reader {
       return new Uint8Array(0);
     }
     else {
-      const offset = this.getBlockOffsetAt(fieldProperty.startBlock);
-      this.ds.seek(offset);
-      return this.ds.readUint8Array(fieldProperty.sizeBlock);
+      let nextBlock = fieldProperty.startBlock;
+      let remaining = fieldProperty.sizeBlock;
+      let position = 0;
+      const resultData = new Uint8Array(fieldProperty.sizeBlock);
+      while (1 <= remaining) {
+        const blockStartOffset = this.getBlockOffsetAt(nextBlock);
+        this.ds.seek(blockStartOffset);
+        const partSize = Math.min(remaining, this.bigBlockSize);
+        const part = this.ds.readUint8Array(partSize);
+        resultData.set(part, position);
+        position += partSize;
+        remaining -= partSize;
+        nextBlock = this.getNextBlock(nextBlock);
+      }
+      return resultData;
     }
   }
 
