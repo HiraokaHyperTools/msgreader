@@ -491,6 +491,17 @@ export default class DataStream {
   };
 
   /**
+   * @internal
+   */
+  readToUint8Array(length: number, arr: Uint8Array, dstOffset: number): void {
+    length = length == null ? (this.byteLength - this.position) : length;
+    DataStream.memcpy(arr.buffer, dstOffset,
+      this.buffer, this.byteOffset + this.position,
+      length * arr.BYTES_PER_ELEMENT);
+    this.position += arr.byteLength;
+  };
+
+  /**
     Reads a Float64Array of desired length and endianness from the DataStream.
   
     @param length Number of elements to map.

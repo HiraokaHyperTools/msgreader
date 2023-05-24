@@ -132,6 +132,7 @@ export class Reader {
   private batData?: number[];
   private sbatData?: number[];
   private propertyData?: Property[];
+  private bigBlockTable: number[];
 
   constructor(arrayBuffer: ArrayBuffer | DataView) {
     this.ds = new DataStream(arrayBuffer, 0, DataStream.LITTLE_ENDIAN);
@@ -254,6 +255,7 @@ export class Reader {
     }
     this.sbatData = this.sbatDataReader();
     this.propertyData = this.propertyDataReader(this.propertyStart);
+    this.bigBlockTable = this.readBigBlockTable();
   }
 
   private batCountInHeader(): number {
@@ -353,35 +355,40 @@ export class Reader {
     return blockChain;
   }
 
-  private readDataByBlockSmall(startBlock: number, blockSize: number): Uint8Array {
+  private readBigBlockTable(): number[] {
+    const rootProp = this.propertyData[0];
+    const table: number[] = [];
+    let nextBlock = rootProp.startBlock;
+    for (let i = 0; nextBlock != CONST.MSG.END_OF_CHAIN; i++) {
+      table.push(nextBlock);
+      nextBlock = this.getNextBlock(nextBlock);
+    }
+    return table;
+  }
+
+  private readDataByBlockSmall(startBlock: number, blockSize: number, arr: Uint8Array, dstOffset: number): void {
     const byteOffset = startBlock * CONST.MSG.SMALL_BLOCK_SIZE;
     const bigBlockNumber = Math.floor(byteOffset / this.bigBlockSize);
     const bigBlockOffset = byteOffset % this.bigBlockSize;
 
-    const rootProp = this.propertyData[0];
-
-    let nextBlock = rootProp.startBlock;
-    for (let i = 0; i < bigBlockNumber; i++) {
-      nextBlock = this.getNextBlock(nextBlock);
-    }
+    const nextBlock = this.bigBlockTable[bigBlockNumber];
     const blockStartOffset = this.getBlockOffsetAt(nextBlock);
 
     this.ds.seek(blockStartOffset + bigBlockOffset);
-    return this.ds.readUint8Array(blockSize);
+    return this.ds.readToUint8Array(blockSize, arr, dstOffset);
   }
 
   private readChainDataByBlockSmall(fieldProperty: Property, chain: number[]): Uint8Array {
     let resultData = new Uint8Array(fieldProperty.sizeBlock);
 
     for (let i = 0, idx = 0; i < chain.length; i++) {
-      const data = this.readDataByBlockSmall(chain[i], CONST.MSG.SMALL_BLOCK_SIZE);
-      if (resultData.length < idx + data.length) {
-        resultData.set(data.subarray(0, resultData.length - idx), idx);
-      }
-      else {
-        resultData.set(data, idx);
-      }
-      idx += data.length;
+      const readLen = (resultData.length < idx + CONST.MSG.SMALL_BLOCK_SIZE)
+        ? resultData.length - idx
+        : CONST.MSG.SMALL_BLOCK_SIZE;
+
+      this.readDataByBlockSmall(chain[i], readLen, resultData, idx);
+
+      idx += readLen;
     }
 
     return resultData;
@@ -394,7 +401,9 @@ export class Reader {
     else if (fieldProperty.sizeBlock < CONST.MSG.BIG_BLOCK_MIN_DOC_SIZE) {
       const chain = this.getChainByBlockSmall(fieldProperty);
       if (chain.length == 1) {
-        return this.readDataByBlockSmall(fieldProperty.startBlock, fieldProperty.sizeBlock);
+        const resultData = new Uint8Array(fieldProperty.sizeBlock);
+        this.readDataByBlockSmall(fieldProperty.startBlock, fieldProperty.sizeBlock, resultData, 0);
+        return resultData;
       } else if (chain.length > 1) {
         return this.readChainDataByBlockSmall(fieldProperty, chain);
       }
