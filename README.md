@@ -13,7 +13,7 @@ Original projects:
 This repo contains the code of the modified project.
 And also it is published as a [npm package](https://www.npmjs.com/package/@kenjiuno/msgreader).
 
-Links: [_typedoc documentation_](https://hiraokahypertools.github.io/msgreader/typedoc/) | [_online demo_](https://hiraokahypertools.github.io/msgreader_demo/) | [_online demo 2_](https://hiraokahypertools.github.io/msgreader_demo2/)
+Links: [_typedoc documentation_](https://hiraokahypertools.github.io/msgreader/typedoc/) | [_online demo_](https://hiraokahypertools.github.io/msgreader_demo/) | [_online demo 2_](https://hiraokahypertools.github.io/msgreader_demo2/) | [_online demo 3_](https://hiraokahypertools.github.io/msgreader_demo3/)
 
 ## How to use
 
