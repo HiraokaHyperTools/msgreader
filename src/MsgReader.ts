@@ -1066,6 +1066,16 @@ export interface SomeOxProps {
    */
   timeZoneDesc?: string;
 
+  /**
+   * Contains formatting information about a Multipurpose Internet Mail Extensions (MIME) attachment.
+   * 
+   * e.g. `image/png`
+   * 
+   * Target {@link dataType} = 'attachment'.
+   * 
+   * @see [PidTagAttachMimeTag Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagattachmimetag-canonical-property)
+   */
+  attachMimeTag?: string;
 }
 
 export interface SomeParsedOxProps {

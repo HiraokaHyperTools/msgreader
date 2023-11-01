@@ -20,6 +20,7 @@
    "dataId": 57,
    "contentLength": 809,
    "extension": ".png",
+   "attachMimeTag": "image/png",
    "fileName": "image001.png",
    "pidContentId": "image001.png@01D78380.EF6DC500",
    "attachmentHidden": true

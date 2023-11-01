@@ -81,6 +81,7 @@ export default {
         '3707': 'fileName',
         '3712': 'pidContentId',
         '7ffe': 'attachmentHidden',
+        '370e': 'attachMimeTag',
         // recipient specific
         '0c15': 'recipType',
         '3001': 'name',

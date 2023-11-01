@@ -1,0 +1,55 @@
+{
+ "dataType": "msg",
+ "attachments": [
+  {
+   "dataType": "attachment",
+   "dataId": 58,
+   "contentLength": 726,
+   "fileName": "jpg.jpg",
+   "fileNameShort": "jpg.jpg",
+   "attachMimeTag": "image/jpeg"
+  },
+  {
+   "dataType": "attachment",
+   "dataId": 66,
+   "contentLength": 134,
+   "fileName": "png.png",
+   "fileNameShort": "png.png",
+   "attachMimeTag": "image/png"
+  },
+  {
+   "dataType": "attachment",
+   "dataId": 74,
+   "contentLength": 664,
+   "fileName": "tif.tif",
+   "fileNameShort": "tif.tif",
+   "attachMimeTag": "image/tiff"
+  }
+ ],
+ "recipients": [
+  {
+   "dataType": "recipient",
+   "addressType": "SMTP",
+   "name": "hmailuser@hmailserver.test",
+   "email": "hmailuser@hmailserver.test",
+   "recipType": "to"
+  }
+ ],
+ "messageClass": "IPM.Note",
+ "senderEmail": "hmailuser@hmailserver.test",
+ "subject": "attachmentFiles",
+ "conversationTopic": "attachmentFiles",
+ "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTPA\r\n\t; Wed, 1 Nov 2023 09:48:31 +0900\r\nFrom: \"hmailuser\" <hmailuser@hmailserver.test>\r\nTo: <hmailuser@hmailserver.test>\r\nSubject: attachmentFiles\r\nDate: Wed, 1 Nov 2023 09:48:31 +0900\r\nMessage-ID: <000001da0c5d$22ab1460$68013d20$@hmailserver.test>\r\nMIME-Version: 1.0\r\nContent-Type: multipart/mixed;\r\n\tboundary=\"----=_NextPart_000_0001_01DA0CA8.92933190\"\r\nX-Mailer: Microsoft Outlook 15.0\r\nThread-Index: AdoMXRSNJVJU6zGuSsKW/eBdqjoYLA==\r\nContent-Language: ja\r\n\r\n",
+ "senderName": "hmailuser",
+ "senderAddressType": "SMTP",
+ "normalizedSubject": "attachmentFiles",
+ "inetAcctName": "hmailuser@hmailserver.test",
+ "creationTime": "Wed, 01 Nov 2023 00:52:39 GMT",
+ "lastModificationTime": "Wed, 01 Nov 2023 00:52:39 GMT",
+ "clientSubmitTime": "Wed, 01 Nov 2023 00:48:31 GMT",
+ "messageDeliveryTime": "Wed, 01 Nov 2023 00:48:31 GMT",
+ "messageFlags": 65554,
+ "internetCodepage": 20127,
+ "messageLocaleId": 1041,
+ "body": "attachmentFiles\r\n\r\n"
+}
