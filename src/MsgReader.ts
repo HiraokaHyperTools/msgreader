@@ -1076,6 +1076,21 @@ export interface SomeOxProps {
    * @see [PidTagAttachMimeTag Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtagattachmimetag-canonical-property)
    */
   attachMimeTag?: string;
+
+  /**
+   * Corresponds to the message ID field as specified in [RFC2822].
+   * 
+   * e.g.
+   * 
+   * - `<!&!AAAAAAAAAAAYAAAAAAAAAMhvd5eG4u1FrRI13ZUKpD3CgAAAEAAAACfDkx1LwvlJrcgpqnDqBPIBAAAAAA==@xmailserver.test>`
+   * - `<000001da0c5d$22ab1460$68013d20$@hmailserver.test>`
+   * - `<OS3P286MB0565639EF64566509A9EE31281CC9@OS3P286MB0565.JPNP286.PROD.OUTLOOK.COM>`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see [PidTagInternetMessageId Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtaginternetmessageid-canonical-property)
+   */
+  messageId?: string;
 }
 
 export interface SomeParsedOxProps {

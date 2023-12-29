@@ -73,6 +73,7 @@ export default {
         '3ffd': 'messageCodepage',
         '3ff1': 'messageLocaleId',
         '0e07': 'messageFlags',
+        '1035': 'messageId',
         // attachment specific
         '3007': 'creationTime',
         '3008': 'lastModificationTime',

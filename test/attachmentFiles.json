@@ -51,5 +51,6 @@
  "messageFlags": 65554,
  "internetCodepage": 20127,
  "messageLocaleId": 1041,
- "body": "attachmentFiles\r\n\r\n"
+ "body": "attachmentFiles\r\n\r\n",
+ "messageId": "<000001da0c5d$22ab1460$68013d20$@hmailserver.test>"
 }
