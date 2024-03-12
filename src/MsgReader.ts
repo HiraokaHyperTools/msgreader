@@ -1398,6 +1398,11 @@ interface FieldValuePair {
   keyType: KeyType;
   value: string | Uint8Array;
 
+  /**
+   * About rawProp, skip this one in case of getting unread value from Property Stream.
+   */
+  notForRawProp: boolean;
+
   propertyTag?: string;
   propertySet?: string;
   propertyLid?: string
@@ -1547,7 +1552,7 @@ export default class MsgReader {
 
     const propertyTag = `${fieldClass}${fieldType}`;
 
-    return { key, keyType, value, propertyTag, propertySet, propertyLid, };
+    return { key, keyType, value, notForRawProp: skip, propertyTag, propertySet, propertyLid, };
   }
 
   private fieldsDataDocument(parserConfig: ParsingConfig, documentProperty: CFileSet, fields: FieldsData): void {
@@ -1585,16 +1590,18 @@ export default class MsgReader {
     }
     if (parserConfig.includeRawProps === true) {
       fields.rawProps = fields.rawProps || [];
-      fields.rawProps.push(
-        {
-          propertyTag: pair.propertyTag,
-          propertySet: pair.propertySet,
-          propertyLid: pair.propertyLid,
-          propertyName: (pair.keyType === KeyType.named) ? pair.key : undefined,
+      if (!pair.notForRawProp) {
+        fields.rawProps.push(
+          {
+            propertyTag: pair.propertyTag,
+            propertySet: pair.propertySet,
+            propertyLid: pair.propertyLid,
+            propertyName: (pair.keyType === KeyType.named) ? pair.key : undefined,
 
-          value: value,
-        }
-      );
+            value: value,
+          }
+        );
+      }
     }
   }
 
