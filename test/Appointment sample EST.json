@@ -3,6 +3,7 @@
  "attachments": [],
  "recipients": [],
  "senderEmail": "Unknown",
+ "apptLocation": "",
  "normalizedSubject": "Appointment sample EST",
  "apptTZDefEndDisplay": {
   "rules": [
@@ -90,6 +91,7 @@
   ],
   "keyName": "Eastern Standard Time"
  },
+ "globalAppointmentID": "040000008200E00074C5B7101A82E00800000000900FCFA32907D901000000000000000010000000B33703C253FC254D8AC55471CA0D9ECC",
  "creationTime": "Sat, 03 Dec 2022 06:13:05 GMT",
  "lastModificationTime": "Sat, 03 Dec 2022 06:13:05 GMT",
  "clientSubmitTime": "Sat, 03 Dec 2022 06:12:57 GMT",

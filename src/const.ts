@@ -136,6 +136,7 @@ export default {
           0x0000825F: { id: "PidLidAppointmentTimeZoneDefinitionEndDisplay", dispid: "apptTZDefEndDisplay" },
           0x00008260: { id: "PidLidAppointmentTimeZoneDefinitionRecur", dispid: "apptTZDefRecur" },
           0x00008216: { id: "PidLidAppointmentRecur", dispid: "apptRecur" },
+          0x00008208: { id: "PidLidLocation", dispid: "apptLocation", },
         },
         // PSETID_Address
         "00062004-0000-0000-c000-000000000046": {
@@ -169,7 +170,9 @@ export default {
         },
         // PSETID_Meeting
         "6ed8da90-450b-101b-98da-00aa003f1305": {
-        }
+          0x00000003: { id: "PidLidGlobalObjectId", dispid: "globalAppointmentID", },
+          0x00000028: { id: "PidLidOldLocation", dispid: "apptOldLocation", },
+        },
       },
       CLASS_MAPPING: {
         ATTACHMENT_DATA: '3701'

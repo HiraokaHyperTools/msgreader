@@ -21,6 +21,8 @@
  "senderAddressType": "EX",
  "body": "A message body.\r\n",
  "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "apptLocation": "A place",
+ "globalAppointmentID": "040000008200E00074C5B7101A82E0080000000080E86D1D5EC0D70100000000000000001000000042A83B3C2CADD148B1039F5CCBD1D5B8",
  "apptTZDefStartDisplay": {
   "rules": [
    {

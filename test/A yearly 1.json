@@ -30,6 +30,7 @@
  "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
  "messageClass": "IPM.Appointment",
  "conversationTopic": "Yearly 1",
+ "apptLocation": "",
  "apptTZDefRecur": {
   "rules": [
    {
@@ -141,6 +142,7 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
+ "globalAppointmentID": "040000008200E00074C5B7101A82E00800000000F00CCA08420ED9010000000000000000100000000A38926A5274684B98AD0F9A47DF3B9F",
  "creationTime": "Mon, 12 Dec 2022 06:56:26 GMT",
  "lastModificationTime": "Mon, 12 Dec 2022 06:56:26 GMT",
  "clientSubmitTime": "Mon, 12 Dec 2022 06:55:09 GMT",

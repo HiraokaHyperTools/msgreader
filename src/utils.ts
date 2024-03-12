@@ -184,3 +184,14 @@ export function readTransitionSystemTime(ds: DataStream): TransitionSystemTime {
     minute: wMinute,
   };
 }
+
+/**
+ * @internal
+ */
+export function bin2HexUpper(ds: DataStream): string {
+  var text = "";
+  while (!ds.isEof()) {
+    text += toHex1(ds.readUint8());
+  }
+  return text.toUpperCase();
+}

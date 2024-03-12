@@ -20,7 +20,7 @@ import CONST from './const'
 import DataStream from './DataStream'
 import { CFileSet, CFolder, Reader } from './Reader';
 import { burn, Entry } from './Burner';
-import { emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils';
+import { bin2HexUpper, emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils';
 import { parse as entryStreamParser } from './EntryStreamParser';
 import { parse as parseVerbStream } from './VerbStreamParser';
 import { parse as parseTZDEFINITION, TzDefinition } from './TZDEFINITIONParser';
@@ -1091,6 +1091,41 @@ export interface SomeOxProps {
    * @see [PidTagInternetMessageId Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidtaginternetmessageid-canonical-property)
    */
   messageId?: string;
+
+  /**
+   * Represents the location of an appointment.
+   * 
+   * e.g.
+   * 
+   * - ``
+   * - `Awesome coffee shop`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see [PidLidLocation Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidlocation-canonical-property)
+   */
+  apptLocation?: string;
+
+  /**
+   * Indicates the original value of the dispidLocation (PidLidLocation) property before a meeting update.
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see [PidLidOldLocation Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidoldlocation-canonical-property)
+   */
+  apptOldLocation?: string;
+
+  /**
+   * Specifies the unique identifier of the calendar object.
+   * 
+   * e.g. `040000008200E00074C5B7101A82E00800000000A048DAF17405D9010000000000000000100000003C10A5564C9D36459E7780C78BAFCB77`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see [PidLidGlobalObjectId Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidglobalobjectid-canonical-property)
+   * @see [AppointmentItem.GlobalAppointmentID property (Outlook) | Microsoft Learn](https://learn.microsoft.com/en-us/office/vba/api/outlook.appointmentitem.globalappointmentid)
+   */
+  globalAppointmentID?: string;
 }
 
 export interface SomeParsedOxProps {
@@ -1505,6 +1540,9 @@ export default class MsgReader {
       else if (value === MAPI_BCC) {
         value = "bcc";
       }
+    }
+    else if (key === "globalAppointmentID") {
+      value = bin2HexUpper(ds);
     }
 
     const propertyTag = `${fieldClass}${fieldType}`;

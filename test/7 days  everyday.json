@@ -67,6 +67,7 @@
  "senderName": "Unknown",
  "senderAddressType": "UNKNOWN",
  "body": "\r\n",
+ "apptLocation": "",
  "apptTZDefEndDisplay": {
   "rules": [
    {
@@ -95,6 +96,7 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
+ "globalAppointmentID": "040000008200E00074C5B7101A82E00800000000A048DAF17405D9010000000000000000100000003C10A5564C9D36459E7780C78BAFCB77",
  "timeZoneStruct": {
   "bias": -540,
   "standardBias": 0,

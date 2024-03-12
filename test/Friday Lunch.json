@@ -49,6 +49,7 @@
      ],
      "keyName": "Tokyo Standard Time"
     },
+    "apptLocation": "",
     "creationTime": "Fri, 06 Jan 2023 16:26:34 GMT",
     "lastModificationTime": "Fri, 06 Jan 2023 16:26:34 GMT",
     "messageFlags": 9,
@@ -255,6 +256,7 @@
    }
   ]
  },
+ "apptLocation": "",
  "apptTZDefEndDisplay": {
   "rules": [
    {
@@ -306,6 +308,7 @@
    "minute": 0
   }
  },
+ "globalAppointmentID": "040000008200E00074C5B7101A82E00800000000404F1AC33622D901000000000000000010000000417B5EFFCF8AF14DB668B9BA15609337",
  "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
  "apptTZDefRecur": {
   "rules": [

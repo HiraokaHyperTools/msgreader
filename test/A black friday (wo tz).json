@@ -3,6 +3,7 @@
  "attachments": [],
  "recipients": [],
  "senderEmail": "Unknown",
+ "apptLocation": "",
  "normalizedSubject": "A black friday",
  "apptTZDefEndDisplay": {
   "rules": [
@@ -67,6 +68,7 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
+ "globalAppointmentID": "040000008200E00074C5B7101A82E0080000000090A4F9F86B05D90100000000000000001000000057BD115DD6EE3A48AB219BD1FD41A570",
  "creationTime": "Thu, 01 Dec 2022 01:03:06 GMT",
  "lastModificationTime": "Thu, 01 Dec 2022 01:03:06 GMT",
  "clientSubmitTime": "Thu, 01 Dec 2022 01:02:43 GMT",
