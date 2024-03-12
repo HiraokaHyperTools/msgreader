@@ -1,7 +1,7 @@
 const fs = require('fs');
 const temp = require('temp').track();
 
-const generateJsonData = true;
+const generateJsonData = false;
 const useValidateCompoundFile = process.platform === 'win32';
 
 function removeCompressedRtf(msg) {

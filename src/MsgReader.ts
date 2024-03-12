@@ -1114,18 +1114,6 @@ export interface SomeOxProps {
    * @see [PidLidOldLocation Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidoldlocation-canonical-property)
    */
   apptOldLocation?: string;
-
-  /**
-   * Specifies the unique identifier of the calendar object.
-   * 
-   * e.g. `040000008200E00074C5B7101A82E00800000000A048DAF17405D9010000000000000000100000003C10A5564C9D36459E7780C78BAFCB77`
-   * 
-   * Target {@link dataType} = 'msg'.
-   * 
-   * @see [PidLidGlobalObjectId Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidglobalobjectid-canonical-property)
-   * @see [AppointmentItem.GlobalAppointmentID property (Outlook) | Microsoft Learn](https://learn.microsoft.com/en-us/office/vba/api/outlook.appointmentitem.globalappointmentid)
-   */
-  globalAppointmentID?: string;
 }
 
 export interface SomeParsedOxProps {
@@ -1193,6 +1181,18 @@ export interface SomeParsedOxProps {
    * @see [PidLidAppointmentRecur Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidappointmentrecur-canonical-property)
    */
   apptRecur?: AppointmentRecur;
+
+  /**
+   * Specifies the unique identifier of the calendar object.
+   * 
+   * e.g. `040000008200E00074C5B7101A82E00800000000A048DAF17405D9010000000000000000100000003C10A5564C9D36459E7780C78BAFCB77`
+   * 
+   * Target {@link dataType} = 'msg'.
+   * 
+   * @see [PidLidGlobalObjectId Canonical Property | Microsoft Learn](https://learn.microsoft.com/en-us/office/client-developer/outlook/mapi/pidlidglobalobjectid-canonical-property)
+   * @see [AppointmentItem.GlobalAppointmentID property (Outlook) | Microsoft Learn](https://learn.microsoft.com/en-us/office/vba/api/outlook.appointmentitem.globalappointmentid)
+   */
+  globalAppointmentID?: string;
 
   // Only parsed props!
 }
