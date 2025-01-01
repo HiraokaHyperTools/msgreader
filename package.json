@@ -16,13 +16,13 @@
   "repository": "github:HiraokaHyperTools/msgreader",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^17.0.23",
-    "commander": "^9.1.0",
-    "mocha": "^9.2.2",
+    "@types/node": "^22.10.3",
+    "commander": "^13.0.0",
+    "mocha": "^11.0.1",
     "temp": "^0.9.4",
-    "typedoc": "^0.22.13",
-    "typedoc-plugin-rename-defaults": "^0.4.0",
-    "typescript": "^4.6.3"
+    "typedoc": "^0.27.6",
+    "typedoc-plugin-rename-defaults": "^0.7.2",
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "@kenjiuno/decompressrtf": "^0.1.3",
