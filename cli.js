@@ -1,4 +1,5 @@
-const program = require('commander');
+const { Command } = require('commander');
+const program = new Command();
 
 const MsgReader = require('./lib/MsgReader').default;
 const { props, typeNames } = require('./lib/Defs');
