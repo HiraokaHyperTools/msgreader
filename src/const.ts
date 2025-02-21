@@ -189,5 +189,25 @@ export default {
         INNER_MSG: '000d'
       }
     }
-  }
+  },
+  HEADER: {
+    HeaderSignature: 0,
+    HeaderCLSID: 8,
+    MinorVersion: 24,
+    MajorVersion: 26,
+    ByteOrder: 28,
+    SectorShift: 30,
+    MiniSectorShift: 32,
+    Reserved: 34,
+    NumberofDirectorySectors: 40,
+    NumberofFATSectors: 44,
+    FirstDirectorySectorLocation: 48,
+    TransactionSignatureNumber: 52,
+    MiniStreamCutoffSize: 56,
+    FirstMiniFATSectorLocation: 60,
+    NumberofMiniFATSectors: 64,
+    FirstDIFATSectorLocation: 68,
+    NumberofDIFATSectors: 72,
+    DIFAT: 76,
+  },
 }
