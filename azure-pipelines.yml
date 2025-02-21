@@ -35,3 +35,6 @@ steps:
 
   - script: "yarn"
     displayName: "Invoke yarn"
+
+  - script: "node cli -h"
+    displayName: "Invoke cli.js"
