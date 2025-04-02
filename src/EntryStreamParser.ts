@@ -1,4 +1,4 @@
-import DataStream from "./DataStream";
+import DataStream from "./DataStream.js";
 
 export interface Entry {
     key: number;

@@ -1,6 +1,6 @@
-import { TypeEnum } from "./Reader";
-import DataStream from "./DataStream";
-import CONST from "./const";
+import { TypeEnum } from "./Reader.js";
+import DataStream from "./DataStream.js";
+import CONST from "./const.js";
 
 /**
  * CFBF entry for CFBF burner.

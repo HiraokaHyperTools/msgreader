@@ -16,23 +16,23 @@
  MSG Reader
  */
 
-import CONST from './const'
-import DataStream from './DataStream'
-import { CFileSet, CFolder, Reader } from './Reader';
-import { burn, Entry } from './Burner';
-import { bin2HexUpper, emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils';
-import { parse as entryStreamParser } from './EntryStreamParser';
-import { parse as parseVerbStream } from './VerbStreamParser';
-import { parse as parseTZDEFINITION, TzDefinition } from './TZDEFINITIONParser';
-import { parse as parseTZREG, TzReg } from './TZREGParser';
-import { AppointmentRecur, parse as parseAppointmentRecur } from './AppointmentRecurParser';
+import CONST from './const.js'
+import DataStream from './DataStream.js'
+import { CFileSet, CFolder, Reader } from './Reader.js';
+import { burn, Entry } from './Burner.js';
+import { bin2HexUpper, emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils.js';
+import { parse as entryStreamParser } from './EntryStreamParser.js';
+import { parse as parseVerbStream } from './VerbStreamParser.js';
+import { parse as parseTZDEFINITION, TzDefinition } from './TZDEFINITIONParser.js';
+import { parse as parseTZREG, TzReg } from './TZREGParser.js';
+import { AppointmentRecur, parse as parseAppointmentRecur } from './AppointmentRecurParser.js';
 
-export { TzDefinitionRule, TzDefinition, TransitionSystemTime } from './TZDEFINITIONParser';
-export { TzReg } from './TZREGParser';
+export { TzDefinitionRule, TzDefinition, TransitionSystemTime } from './TZDEFINITIONParser.js';
+export { TzReg } from './TZREGParser.js';
 export {
   RecurFrequency, PatternType, CalendarType, EndType, PatternTypeWeek, PatternTypeMonth,
   PatternTypeMonthNth, RecurrencePattern, OverrideFlags, ExceptionInfo, AppointmentRecur,
-} from './AppointmentRecurParser';
+} from './AppointmentRecurParser.js';
 
 // MSG Reader implementation
 

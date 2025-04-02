@@ -1,6 +1,6 @@
 import { stringify } from "querystring";
-import DataStream from "./DataStream";
-import { TransitionSystemTime } from "./TZDEFINITIONParser";
+import DataStream from "./DataStream.js";
+import { TransitionSystemTime } from "./TZDEFINITIONParser.js";
 
 /**
  * @internal

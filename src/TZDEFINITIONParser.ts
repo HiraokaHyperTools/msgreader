@@ -1,5 +1,5 @@
-import DataStream from "./DataStream";
-import { readSystemTime, readTransitionSystemTime } from "./utils";
+import DataStream from "./DataStream.js";
+import { readSystemTime, readTransitionSystemTime } from "./utils.js";
 
 const TZDEFINITION_FLAG_VALID_GUID = 1;
 const TZDEFINITION_FLAG_VALID_KEYNAME = 2;

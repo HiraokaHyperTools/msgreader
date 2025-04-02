@@ -1,6 +1,6 @@
-import DataStream from "./DataStream";
-import { TransitionSystemTime } from "./TZDEFINITIONParser";
-import { readSystemTime, readTransitionSystemTime } from "./utils";
+import DataStream from "./DataStream.js";
+import { TransitionSystemTime } from "./TZDEFINITIONParser.js";
+import { readSystemTime, readTransitionSystemTime } from "./utils.js";
 
 
 /**

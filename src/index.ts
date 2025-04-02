@@ -1,5 +1,5 @@
-import MsgReader from "./MsgReader";
+import MsgReader from "./MsgReader.js";
 
-export * from "./MsgReader";
+export * from "./MsgReader.js";
 
 export default MsgReader;

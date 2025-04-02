@@ -2,6 +2,7 @@
   "name": "@kenjiuno/msgreader",
   "version": "1.22.0",
   "description": "Outlook Item File (.msg) reader in JavaScript Npm Module",
+  "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "private": false,

@@ -1,4 +1,5 @@
-const iconv = require('iconv-lite');
+import iconv from 'iconv-lite';
+// const iconv = require('iconv-lite');
 
 /**
  * This DataStream is for internal use.
@@ -1152,13 +1153,20 @@ export default class DataStream {
                               Defaults to ASCII.
     @return The read string.
    */
-  readString(length?: number, encoding?: string) {
-    if (encoding == null || encoding == "ASCII") {
-      return DataStream.createStringFromArray(this.mapUint8Array(length == null ? this.byteLength - this.position : length));
-    } else {
-      return iconv.decode(this.mapUint8Array(length), encoding);
+    readString(length?: number, encoding?: string): string {
+      const uint8 = this.mapUint8Array(length == null ? this.byteLength - this.position : length);
+    
+      if (encoding == null || encoding.toUpperCase() === "ASCII") {
+        return DataStream.createStringFromArray(uint8);
+      } else if (typeof window !== 'undefined' && typeof TextDecoder !== 'undefined') {
+        // Browser-Umgebung: TextDecoder verwenden
+        const decoder = new TextDecoder(encoding);
+        return decoder.decode(uint8);
+      } else {
+        // Node.js-Umgebung: iconv-lite mit Buffer verwenden
+        return iconv.decode(Buffer.from(uint8), encoding);
+      }
     }
-  };
 
   /**
     Writes a string of desired length and encoding to the DataStream.

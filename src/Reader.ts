@@ -1,6 +1,6 @@
-import DataStream from "./DataStream";
-import { arraysEqual } from "./utils";
-import CONST from './const'
+import DataStream from "./DataStream.js";
+import { arraysEqual } from "./utils.js";
+import CONST from './const.js'
 
 /**
  * `Object Type` in `2.6.1 Compound File Directory Entry`
