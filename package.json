@@ -1,6 +1,6 @@
 {
-  "name": "@kenjiuno/msgreader",
-  "version": "1.22.0",
+  "name": "@alisarioglu/msgreader",
+  "version": "1.22.1",
   "description": "Outlook Item File (.msg) reader in JavaScript Npm Module",
   "type": "module",
   "main": "lib/index.js",
@@ -14,7 +14,7 @@
     "dr": "npm publish --dry-run"
   },
   "author": "kenjiuno",
-  "repository": "github:HiraokaHyperTools/msgreader",
+  "repository": "github:alisarioglu/msgreader",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.10.3",
