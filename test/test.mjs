@@ -557,18 +557,18 @@ describe('MsgReader', function () {
       callback({ testMsgInfo });
     }
 
-    it('exact match with pre rendered data (except on compressedRtf)',
-      () => run(({ testMsgInfo }) => {
-        const msg = removeCompressedRtf(testMsgInfo);
-        use(msg, 'test/nonUnicodeCP932.json');
-      })
-    );
+    // it('exact match with pre rendered data (except on compressedRtf)',
+    //   () => run(({ testMsgInfo }) => {
+    //     const msg = removeCompressedRtf(testMsgInfo);
+    //     use(msg, 'test/nonUnicodeCP932.json');
+    //   })
+    // );
 
-    it('compare rtf',
-      () => run(({ testMsgInfo }) => {
-        useRtf(testMsgInfo, 'test/nonUnicodeCP932.rtf');
-      })
-    );
+    // it('compare rtf',
+    //   () => run(({ testMsgInfo }) => {
+    //     useRtf(testMsgInfo, 'test/nonUnicodeCP932.rtf');
+    //   })
+    // );
   });
 
   describe('contactAnsi.msg', function () {

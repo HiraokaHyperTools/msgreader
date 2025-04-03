@@ -1,6 +1,3 @@
-import iconv from 'iconv-lite';
-// const iconv = require('iconv-lite');
-
 /**
  * This DataStream is for internal use.
  */
@@ -1158,13 +1155,9 @@ export default class DataStream {
     
       if (encoding == null || encoding.toUpperCase() === "ASCII") {
         return DataStream.createStringFromArray(uint8);
-      } else if (typeof window !== 'undefined' && typeof TextDecoder !== 'undefined') {
-        // Browser-Umgebung: TextDecoder verwenden
+      } else {
         const decoder = new TextDecoder(encoding);
         return decoder.decode(uint8);
-      } else {
-        // Node.js-Umgebung: iconv-lite mit Buffer verwenden
-        return iconv.decode(Buffer.from(uint8), encoding);
       }
     }
 
@@ -1176,26 +1169,28 @@ export default class DataStream {
                               Defaults to ASCII.
     @param length The number of characters to write.
    */
-  writeString(s: string, encoding?: string, length?: number): void {
-    if (encoding == null || encoding == "ASCII") {
-      if (length != null) {
-        var i = 0;
-        var len = Math.min(s.length, length);
-        for (i = 0; i < len; i++) {
-          this.writeUint8(s.charCodeAt(i));
-        }
-        for (; i < length; i++) {
-          this.writeUint8(0);
+    writeString(s: string, encoding?: string, length?: number): void {
+      if (encoding == null || encoding.toUpperCase() === "ASCII") {
+        if (length != null) {
+          let i = 0;
+          const len = Math.min(s.length, length);
+          for (i = 0; i < len; i++) {
+            this.writeUint8(s.charCodeAt(i));
+          }
+          for (; i < length; i++) {
+            this.writeUint8(0);
+          }
+        } else {
+          for (let i = 0; i < s.length; i++) {
+            this.writeUint8(s.charCodeAt(i));
+          }
         }
       } else {
-        for (var i = 0; i < s.length; i++) {
-          this.writeUint8(s.charCodeAt(i));
-        }
+        const encoder = new TextEncoder();
+        const encoded = encoder.encode(s.substring(0, length));
+        this.writeUint8Array(encoded);
       }
-    } else {
-      this.writeUint8Array(iconv.encode(s.substring(0, length), encoding));
     }
-  };
 
 
   /**
