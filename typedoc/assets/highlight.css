@@ -19,13 +19,9 @@
     --dark-hl-8: #DCDCAA;
     --light-hl-9: #AF00DB;
     --dark-hl-9: #C586C0;
-    --light-hl-10: #EE0000;
-    --dark-hl-10: #D7BA7D;
-    --light-hl-11: #CD3131;
-    --dark-hl-11: #F44747;
-    --light-hl-12: #0000FF;
-    --dark-hl-12: #569CD6;
-    --light-code-background: #F5F5F5;
+    --light-hl-10: #0000FF;
+    --dark-hl-10: #569CD6;
+    --light-code-background: #FFFFFF;
     --dark-code-background: #1E1E1E;
 }
 
@@ -41,8 +37,6 @@
     --hl-8: var(--light-hl-8);
     --hl-9: var(--light-hl-9);
     --hl-10: var(--light-hl-10);
-    --hl-11: var(--light-hl-11);
-    --hl-12: var(--light-hl-12);
     --code-background: var(--light-code-background);
 } }
 
@@ -58,12 +52,10 @@
     --hl-8: var(--dark-hl-8);
     --hl-9: var(--dark-hl-9);
     --hl-10: var(--dark-hl-10);
-    --hl-11: var(--dark-hl-11);
-    --hl-12: var(--dark-hl-12);
     --code-background: var(--dark-code-background);
 } }
 
-body.light {
+:root[data-theme='light'] {
     --hl-0: var(--light-hl-0);
     --hl-1: var(--light-hl-1);
     --hl-2: var(--light-hl-2);
@@ -75,12 +67,10 @@ body.light {
     --hl-8: var(--light-hl-8);
     --hl-9: var(--light-hl-9);
     --hl-10: var(--light-hl-10);
-    --hl-11: var(--light-hl-11);
-    --hl-12: var(--light-hl-12);
     --code-background: var(--light-code-background);
 }
 
-body.dark {
+:root[data-theme='dark'] {
     --hl-0: var(--dark-hl-0);
     --hl-1: var(--dark-hl-1);
     --hl-2: var(--dark-hl-2);
@@ -92,8 +82,6 @@ body.dark {
     --hl-8: var(--dark-hl-8);
     --hl-9: var(--dark-hl-9);
     --hl-10: var(--dark-hl-10);
-    --hl-11: var(--dark-hl-11);
-    --hl-12: var(--dark-hl-12);
     --code-background: var(--dark-code-background);
 }
 
@@ -108,6 +96,4 @@ body.dark {
 .hl-8 { color: var(--hl-8); }
 .hl-9 { color: var(--hl-9); }
 .hl-10 { color: var(--hl-10); }
-.hl-11 { color: var(--hl-11); }
-.hl-12 { color: var(--hl-12); }
 pre, code { background: var(--code-background); }
