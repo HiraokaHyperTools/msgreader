@@ -1106,7 +1106,7 @@ export default class DataStream {
     @param endianness The endianness of the string data in the DataStream.
     @return The read string.
    */
-  readUCS2String(length: number, endianness?: boolean) {
+  readUCS2String(length: number, endianness?: boolean): string {
     return DataStream.createStringFromArray(this.readUint16Array(length, endianness));
   };
 
@@ -1152,7 +1152,7 @@ export default class DataStream {
                               Defaults to ASCII.
     @return The read string.
    */
-  readString(length?: number, encoding?: string) {
+  readString(length?: number, encoding?: string): string {
     if (encoding == null || encoding == "ASCII") {
       return DataStream.createStringFromArray(this.mapUint8Array(length == null ? this.byteLength - this.position : length));
     } else {

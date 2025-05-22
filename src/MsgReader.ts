@@ -1412,6 +1412,14 @@ function fileTimeToUnixEpoch(time: number) {
   return (time - 116444736000000000) / 10000;
 }
 
+function removeTrailingNull(text: string): string {
+  const index = text.indexOf("\0");
+  if (index !== -1) {
+    return text.substring(0, index);
+  }
+  return text;
+}
+
 /**
  * The core implementation of MsgReader
  */
@@ -1477,11 +1485,11 @@ export default class MsgReader {
     const decodeAs = CONST.MSG.FIELD.TYPE_MAPPING[fieldType];
     if (0) { }
     else if (decodeAs === "string") {
-      value = ds.readString(array.length, ansiEncoding);
+      value = removeTrailingNull(ds.readString(array.length, ansiEncoding));
       skip = insideProps;
     }
     else if (decodeAs === "unicode") {
-      value = ds.readUCS2String(array.length / 2);
+      value = removeTrailingNull(ds.readUCS2String(array.length / 2));
       skip = insideProps;
     }
     else if (decodeAs === "binary") {
