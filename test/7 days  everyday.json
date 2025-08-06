@@ -4,13 +4,20 @@
  "recipients": [
   {
    "dataType": "recipient",
-   "addressType": "UNKNOWN",
    "name": "Unknown",
+   "addressType": "UNKNOWN",
    "email": "Unknown",
    "recipType": "to"
   }
  ],
+ "messageClass": "IPM.Appointment",
+ "subject": "7 days, everyday",
+ "conversationTopic": "7 days, everyday",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
  "senderEmail": "Unknown",
+ "normalizedSubject": "7 days, everyday",
+ "body": "\r\n",
  "apptRecur": {
   "recurrencePattern": {
    "recurFrequency": 8202,
@@ -31,72 +38,6 @@
   "endTimeOffset": 1440,
   "exceptionInfo": []
  },
- "normalizedSubject": "7 days, everyday",
- "apptTZDefRecur": {
-  "rules": [
-   {
-    "flags": 2,
-    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
-    "bias": -540,
-    "standardBias": 0,
-    "daylightBias": -60,
-    "standardDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    },
-    "daylightDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    }
-   }
-  ],
-  "keyName": "Tokyo Standard Time"
- },
- "messageClass": "IPM.Appointment",
- "conversationTopic": "7 days, everyday",
- "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
- "subject": "7 days, everyday",
- "senderName": "Unknown",
- "senderAddressType": "UNKNOWN",
- "body": "\r\n",
- "apptLocation": "",
- "apptTZDefEndDisplay": {
-  "rules": [
-   {
-    "flags": 2,
-    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
-    "bias": -540,
-    "standardBias": 0,
-    "daylightBias": -60,
-    "standardDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    },
-    "daylightDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    }
-   }
-  ],
-  "keyName": "Tokyo Standard Time"
- },
- "globalAppointmentID": "040000008200E00074C5B7101A82E00800000000A048DAF17405D9010000000000000000100000003C10A5564C9D36459E7780C78BAFCB77",
  "timeZoneStruct": {
   "bias": -540,
   "standardBias": 0,
@@ -120,6 +61,7 @@
    "minute": 0
   }
  },
+ "apptLocation": "",
  "apptTZDefStartDisplay": {
   "rules": [
    {
@@ -148,6 +90,64 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "apptTZDefEndDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "apptTZDefRecur": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "globalAppointmentID": "040000008200E00074C5B7101A82E00800000000A048DAF17405D9010000000000000000100000003C10A5564C9D36459E7780C78BAFCB77",
  "creationTime": "Thu, 01 Dec 2022 02:43:40 GMT",
  "lastModificationTime": "Thu, 01 Dec 2022 02:43:40 GMT",
  "clientSubmitTime": "Thu, 01 Dec 2022 02:07:53 GMT",

@@ -2,34 +2,17 @@
  "dataType": "msg",
  "attachments": [],
  "recipients": [],
+ "messageClass": "IPM.Appointment",
+ "subject": "Appointment sample EST",
+ "conversationTopic": "Appointment sample EST",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
  "senderEmail": "Unknown",
- "apptLocation": "",
  "normalizedSubject": "Appointment sample EST",
- "apptTZDefEndDisplay": {
+ "body": "\r\n",
+ "apptLocation": "",
+ "apptTZDefStartDisplay": {
   "rules": [
-   {
-    "flags": 0,
-    "start": "Sun, 01 Jan 2006 00:00:00 GMT",
-    "bias": 300,
-    "standardBias": 0,
-    "daylightBias": -60,
-    "standardDate": {
-     "year": 0,
-     "month": 10,
-     "dayOfWeek": 0,
-     "day": 5,
-     "hour": 2,
-     "minute": 0
-    },
-    "daylightDate": {
-     "year": 0,
-     "month": 4,
-     "dayOfWeek": 0,
-     "day": 1,
-     "hour": 2,
-     "minute": 0
-    }
-   },
    {
     "flags": 2,
     "start": "Mon, 01 Jan 2007 00:00:00 GMT",
@@ -56,15 +39,32 @@
   ],
   "keyName": "Eastern Standard Time"
  },
- "messageClass": "IPM.Appointment",
- "conversationTopic": "Appointment sample EST",
  "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
- "subject": "Appointment sample EST",
- "senderName": "Unknown",
- "senderAddressType": "UNKNOWN",
- "body": "\r\n",
- "apptTZDefStartDisplay": {
+ "apptTZDefEndDisplay": {
   "rules": [
+   {
+    "flags": 0,
+    "start": "Sun, 01 Jan 2006 00:00:00 GMT",
+    "bias": 300,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 10,
+     "dayOfWeek": 0,
+     "day": 5,
+     "hour": 2,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 4,
+     "dayOfWeek": 0,
+     "day": 1,
+     "hour": 2,
+     "minute": 0
+    }
+   },
    {
     "flags": 2,
     "start": "Mon, 01 Jan 2007 00:00:00 GMT",

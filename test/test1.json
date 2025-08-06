@@ -5,22 +5,22 @@
   {
    "dataType": "recipient",
    "name": "to@example.com",
-   "email": "to@example.com",
    "addressType": "SMTP",
+   "email": "to@example.com",
    "recipType": "to"
   },
   {
    "dataType": "recipient",
    "name": "cc@example.com",
-   "email": "cc@example.com",
    "addressType": "SMTP",
+   "email": "cc@example.com",
    "recipType": "cc"
   }
  ],
  "messageClass": "IPM.Note",
- "normalizedSubject": "title",
  "subject": "title",
  "conversationTopic": "title",
+ "normalizedSubject": "title",
  "body": "body\r\n",
  "inetAcctName": "ku@digitaldolphins.jp",
  "creationTime": "Tue, 05 Mar 2019 07:22:33 GMT",

@@ -4,10 +4,10 @@
   {
    "dataType": "attachment",
    "name": "attach.png",
-   "fileNameShort": "attach.png",
    "dataId": 47,
    "contentLength": 1558,
    "extension": ".png",
+   "fileNameShort": "attach.png",
    "fileName": "attach.png",
    "creationTime": "Tue, 27 Jul 2021 22:19:41 GMT",
    "lastModificationTime": "Tue, 27 Jul 2021 22:19:41 GMT",
@@ -16,12 +16,12 @@
   {
    "dataType": "attachment",
    "name": "image001.png",
-   "fileNameShort": "image001.png",
    "dataId": 57,
    "contentLength": 809,
    "extension": ".png",
-   "attachMimeTag": "image/png",
+   "fileNameShort": "image001.png",
    "fileName": "image001.png",
+   "attachMimeTag": "image/png",
    "pidContentId": "image001.png@01D78380.EF6DC500",
    "attachmentHidden": true
   }
@@ -30,15 +30,15 @@
   {
    "dataType": "recipient",
    "name": "xmailuser@xmailserver.test",
-   "email": "xmailuser@xmailserver.test",
    "addressType": "SMTP",
+   "email": "xmailuser@xmailserver.test",
    "recipType": "to"
   }
  ],
  "messageClass": "IPM.Note",
- "normalizedSubject": "Attach and inline",
  "subject": "Attach and inline",
  "conversationTopic": "Attach and inline",
+ "normalizedSubject": "Attach and inline",
  "body": "\r\n \r\n",
  "inetAcctName": "xmailuser@xmailserver.test",
  "creationTime": "Tue, 27 Jul 2021 22:20:15 GMT",

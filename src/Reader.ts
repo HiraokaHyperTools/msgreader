@@ -210,23 +210,29 @@ export class Reader {
     }
     nodeProperty.children = [];
 
-    const children = [nodeProperty.childProperty];
+    const children = [{ currentMode: "walk", currentIndex: nodeProperty.childProperty }];
     while (children.length != 0) {
-      const currentIndex = children.shift();
+      const { currentMode, currentIndex } = children.pop();
       const current = props[currentIndex];
-      if (current == null) {
-        continue;
-      }
-      nodeProperty.children.push(currentIndex);
 
-      if (current.type == CONST.MSG.PROP.TYPE_ENUM.DIRECTORY) {
-        this.createPropertyHierarchy(props, current);
+      if (currentMode === "push") {
+        nodeProperty.children.push(currentIndex);
       }
-      if (current.previousProperty != CONST.MSG.PROP.NO_INDEX) {
-        children.push(current.previousProperty);
-      }
-      if (current.nextProperty != CONST.MSG.PROP.NO_INDEX) {
-        children.push(current.nextProperty);
+      else {
+        if (current.type == CONST.MSG.PROP.TYPE_ENUM.DIRECTORY) {
+          this.createPropertyHierarchy(props, current);
+        }
+
+        if (current.nextProperty != CONST.MSG.PROP.NO_INDEX) {
+          children.push({ currentMode: "walk", currentIndex: current.nextProperty, });
+        }
+
+        children.push({ currentMode: "push", currentIndex: currentIndex, });
+
+        if (current.previousProperty != CONST.MSG.PROP.NO_INDEX) {
+          children.push({ currentMode: "walk", currentIndex: current.previousProperty, });
+        }
+
       }
     }
   }

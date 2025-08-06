@@ -5,29 +5,29 @@
   {
    "dataType": "recipient",
    "name": "ToUser",
-   "email": "to@example.com",
    "addressType": "SMTP",
+   "email": "to@example.com",
    "recipType": "to"
   },
   {
    "dataType": "recipient",
    "name": "ToCc",
-   "email": "cc@example.com",
    "addressType": "SMTP",
+   "email": "cc@example.com",
    "recipType": "cc"
   },
   {
    "dataType": "recipient",
    "name": "ToBcc",
-   "email": "bcc@example.com",
    "addressType": "SMTP",
+   "email": "bcc@example.com",
    "recipType": "bcc"
   }
  ],
  "messageClass": "IPM.Note",
- "normalizedSubject": "Subject",
  "subject": "Subject",
  "conversationTopic": "Subject",
+ "normalizedSubject": "Subject",
  "body": "Message\r\n",
  "creationTime": "Mon, 28 Sep 2020 11:28:52 GMT",
  "lastModificationTime": "Mon, 28 Sep 2020 11:28:52 GMT",

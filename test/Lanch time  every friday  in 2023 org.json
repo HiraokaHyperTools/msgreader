@@ -2,7 +2,14 @@
  "dataType": "msg",
  "attachments": [],
  "recipients": [],
+ "messageClass": "IPM.Appointment",
+ "subject": "Lanch time, every friday, in 2023",
+ "conversationTopic": "Lanch time, every friday, in 2023",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
  "senderEmail": "Unknown",
+ "normalizedSubject": "Lanch time, every friday, in 2023",
+ "body": "\r\n",
  "apptRecur": {
   "recurrencePattern": {
    "recurFrequency": 8203,
@@ -26,43 +33,6 @@
   "endTimeOffset": 780,
   "exceptionInfo": []
  },
- "normalizedSubject": "Lanch time, every friday, in 2023",
- "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
- "messageClass": "IPM.Appointment",
- "conversationTopic": "Lanch time, every friday, in 2023",
- "apptLocation": "",
- "apptTZDefRecur": {
-  "rules": [
-   {
-    "flags": 2,
-    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
-    "bias": -540,
-    "standardBias": 0,
-    "daylightBias": -60,
-    "standardDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    },
-    "daylightDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    }
-   }
-  ],
-  "keyName": "Tokyo Standard Time"
- },
- "subject": "Lanch time, every friday, in 2023",
- "senderName": "Unknown",
- "senderAddressType": "UNKNOWN",
- "body": "\r\n",
  "timeZoneStruct": {
   "bias": -540,
   "standardBias": 0,
@@ -86,6 +56,7 @@
    "minute": 0
   }
  },
+ "apptLocation": "",
  "apptTZDefStartDisplay": {
   "rules": [
    {
@@ -114,6 +85,7 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
  "apptTZDefEndDisplay": {
   "rules": [
    {
@@ -122,6 +94,34 @@
     "bias": -540,
     "standardBias": 0,
     "daylightBias": 0,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "apptTZDefRecur": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
     "standardDate": {
      "year": 0,
      "month": 0,

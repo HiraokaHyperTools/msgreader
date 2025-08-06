@@ -9,18 +9,19 @@
     "recipients": [
      {
       "dataType": "recipient",
-      "addressType": "EX",
       "name": "UnoKenji",
+      "addressType": "EX",
       "email": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
       "smtpAddress": "ku@digitaldolphins.onmicrosoft.com",
       "recipType": "to"
      }
     ],
-    "conversationTopic": "Monday Lunch",
-    "subject": "Monday Lunch",
-    "normalizedSubject": "Monday Lunch",
     "messageClass": "IPM.OLE.CLASS.{00061055-0000-0000-C000-000000000046}",
+    "subject": "Monday Lunch",
+    "conversationTopic": "Monday Lunch",
+    "normalizedSubject": "Monday Lunch",
     "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
+    "apptLocation": "",
     "apptTZDefStartDisplay": {
      "rules": [
       {
@@ -49,14 +50,6 @@
      ],
      "keyName": "Tokyo Standard Time"
     },
-    "apptLocation": "",
-    "creationTime": "Fri, 06 Jan 2023 16:26:34 GMT",
-    "lastModificationTime": "Fri, 06 Jan 2023 16:26:34 GMT",
-    "messageFlags": 9,
-    "apptStartWhole": "Mon, 09 Jan 2023 03:00:00 GMT",
-    "apptEndWhole": "Mon, 09 Jan 2023 04:00:00 GMT",
-    "clipStart": "Mon, 09 Jan 2023 03:00:00 GMT",
-    "clipEnd": "Mon, 09 Jan 2023 04:00:00 GMT",
     "apptTZDefEndDisplay": {
      "rules": [
       {
@@ -84,7 +77,14 @@
       }
      ],
      "keyName": "Tokyo Standard Time"
-    }
+    },
+    "creationTime": "Fri, 06 Jan 2023 16:26:34 GMT",
+    "lastModificationTime": "Fri, 06 Jan 2023 16:26:34 GMT",
+    "messageFlags": 9,
+    "apptStartWhole": "Mon, 09 Jan 2023 03:00:00 GMT",
+    "apptEndWhole": "Mon, 09 Jan 2023 04:00:00 GMT",
+    "clipStart": "Mon, 09 Jan 2023 03:00:00 GMT",
+    "clipEnd": "Mon, 09 Jan 2023 04:00:00 GMT"
    },
    "innerMsgContent": true,
    "folderId": 89,
@@ -97,9 +97,9 @@
     "dataType": "msg",
     "attachments": [],
     "recipients": [],
-    "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
     "messageClass": "IPM.OLE.CLASS.{00061055-0000-0000-C000-000000000046}",
-    "apptTZDefEndDisplay": {
+    "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
+    "apptTZDefStartDisplay": {
      "rules": [
       {
        "flags": 2,
@@ -127,7 +127,7 @@
      ],
      "keyName": "Tokyo Standard Time"
     },
-    "apptTZDefStartDisplay": {
+    "apptTZDefEndDisplay": {
      "rules": [
       {
        "flags": 2,
@@ -165,18 +165,23 @@
  "recipients": [
   {
    "dataType": "recipient",
-   "addressType": "EX",
    "name": "UnoKenji",
+   "addressType": "EX",
    "email": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
    "smtpAddress": "ku@digitaldolphins.onmicrosoft.com",
    "recipType": "to"
   }
  ],
- "senderEmail": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
- "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
- "normalizedSubject": "Friday Lunch",
  "messageClass": "IPM.Appointment",
+ "subject": "Friday Lunch",
  "conversationTopic": "Friday Lunch",
+ "senderName": "UnoKenji",
+ "senderAddressType": "EX",
+ "senderEmail": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
+ "normalizedSubject": "Friday Lunch",
+ "body": "\r\n",
+ "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
+ "apptLocation": "",
  "apptTZDefStartDisplay": {
   "rules": [
    {
@@ -205,10 +210,34 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
- "subject": "Friday Lunch",
- "senderName": "UnoKenji",
- "senderAddressType": "EX",
- "body": "\r\n",
+ "apptTZDefEndDisplay": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
  "apptRecur": {
   "recurrencePattern": {
    "recurFrequency": 8203,
@@ -255,35 +284,6 @@
     "changeHighlight": 0
    }
   ]
- },
- "apptLocation": "",
- "apptTZDefEndDisplay": {
-  "rules": [
-   {
-    "flags": 2,
-    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
-    "bias": -540,
-    "standardBias": 0,
-    "daylightBias": -60,
-    "standardDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    },
-    "daylightDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    }
-   }
-  ],
-  "keyName": "Tokyo Standard Time"
  },
  "timeZoneStruct": {
   "bias": -540,

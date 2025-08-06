@@ -4,25 +4,25 @@
  "recipients": [
   {
    "dataType": "recipient",
-   "addressType": "EX",
    "name": "UnoKenji",
+   "addressType": "EX",
    "email": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
    "smtpAddress": "ku@digitaldolphins.onmicrosoft.com",
    "recipType": "to"
   }
  ],
- "senderEmail": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
- "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
- "normalizedSubject": "A schedule",
  "messageClass": "IPM.Appointment",
- "conversationTopic": "A schedule",
  "subject": "A schedule",
+ "conversationTopic": "A schedule",
  "senderName": "UnoKenji",
  "senderAddressType": "EX",
+ "senderEmail": "/o=ExchangeLabs/ou=Exchange Administrative Group (FYDIBOHF23SPDLT)/cn=Recipients/cn=a17940f5293148ccb36a0455deaf4f84-ku",
+ "normalizedSubject": "A schedule",
  "body": "A message body.\r\n",
- "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "lastModifierName": "ku@digitaldolphins.onmicrosoft.com",
  "apptLocation": "A place",
  "globalAppointmentID": "040000008200E00074C5B7101A82E0080000000080E86D1D5EC0D70100000000000000001000000042A83B3C2CADD148B1039F5CCBD1D5B8",
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
  "apptTZDefStartDisplay": {
   "rules": [
    {

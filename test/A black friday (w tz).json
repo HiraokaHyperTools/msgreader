@@ -2,10 +2,16 @@
  "dataType": "msg",
  "attachments": [],
  "recipients": [],
+ "messageClass": "IPM.Appointment",
+ "subject": "A black friday",
+ "conversationTopic": "A black friday",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
  "senderEmail": "Unknown",
- "apptLocation": "",
  "normalizedSubject": "A black friday",
- "apptTZDefEndDisplay": {
+ "body": "Dec 02, 2012\r\n",
+ "apptLocation": "",
+ "apptTZDefStartDisplay": {
   "rules": [
    {
     "flags": 2,
@@ -33,14 +39,8 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
- "messageClass": "IPM.Appointment",
- "conversationTopic": "A black friday",
  "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
- "subject": "A black friday",
- "senderName": "Unknown",
- "senderAddressType": "UNKNOWN",
- "body": "Dec 02, 2012\r\n",
- "apptTZDefStartDisplay": {
+ "apptTZDefEndDisplay": {
   "rules": [
    {
     "flags": 2,

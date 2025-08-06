@@ -5,19 +5,19 @@
   {
    "dataType": "recipient",
    "name": "'xmailuser@xmailserver.test'",
-   "email": "xmailuser@xmailserver.test",
    "addressType": "SMTP",
+   "email": "xmailuser@xmailserver.test",
    "recipType": "to"
   }
  ],
- "senderEmail": "xmailuser@xmailserver.test",
  "messageClass": "IPM.Note",
  "subject": "Sent time",
  "conversationTopic": "Sent time",
- "body": "Test mail\r\n\r\n",
  "senderName": "xmailuser",
  "senderAddressType": "SMTP",
+ "senderEmail": "xmailuser@xmailserver.test",
  "normalizedSubject": "Sent time",
+ "body": "Test mail\r\n\r\n",
  "creationTime": "Mon, 15 Feb 2021 08:19:21 GMT",
  "lastModificationTime": "Mon, 15 Feb 2021 08:19:21 GMT",
  "clientSubmitTime": "Mon, 15 Feb 2021 08:19:04 GMT",

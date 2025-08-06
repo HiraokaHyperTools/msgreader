@@ -2,7 +2,14 @@
  "dataType": "msg",
  "attachments": [],
  "recipients": [],
+ "messageClass": "IPM.Appointment",
+ "subject": "A monthly 1",
+ "conversationTopic": "Monthly",
+ "senderName": "Unknown",
+ "senderAddressType": "UNKNOWN",
  "senderEmail": "Unknown",
+ "normalizedSubject": "A monthly 1",
+ "body": "\r\n",
  "apptRecur": {
   "recurrencePattern": {
    "recurFrequency": 8204,
@@ -26,43 +33,6 @@
   "endTimeOffset": 1440,
   "exceptionInfo": []
  },
- "normalizedSubject": "A monthly 1",
- "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
- "messageClass": "IPM.Appointment",
- "conversationTopic": "Monthly",
- "apptLocation": "",
- "apptTZDefRecur": {
-  "rules": [
-   {
-    "flags": 3,
-    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
-    "bias": -540,
-    "standardBias": 0,
-    "daylightBias": 0,
-    "standardDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    },
-    "daylightDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    }
-   }
-  ],
-  "keyName": "Tokyo Standard Time"
- },
- "subject": "A monthly 1",
- "senderName": "Unknown",
- "senderAddressType": "UNKNOWN",
- "body": "\r\n",
  "timeZoneStruct": {
   "bias": -540,
   "standardBias": 0,
@@ -86,6 +56,7 @@
    "minute": 0
   }
  },
+ "apptLocation": "",
  "apptTZDefStartDisplay": {
   "rules": [
    {
@@ -114,10 +85,39 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
+ "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
  "apptTZDefEndDisplay": {
   "rules": [
    {
     "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": 0,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "apptTZDefRecur": {
+  "rules": [
+   {
+    "flags": 3,
     "start": "Mon, 01 Jan 1601 00:00:00 GMT",
     "bias": -540,
     "standardBias": 0,

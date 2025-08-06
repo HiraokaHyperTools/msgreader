@@ -5,15 +5,15 @@
   {
    "dataType": "recipient",
    "name": "xmailuser2@xmailserver.test",
-   "email": "xmailuser2@xmailserver.test",
    "addressType": "SMTP",
+   "email": "xmailuser2@xmailserver.test",
    "recipType": "to"
   }
  ],
  "messageClass": "IPM.Note",
- "normalizedSubject": "日本語 Non Unicode タイトル",
  "subject": "日本語 Non Unicode タイトル",
  "conversationTopic": "日本語 Non Unicode タイトル",
+ "normalizedSubject": "日本語 Non Unicode タイトル",
  "body": "日本語 Non Unicode 本文\r\n",
  "creationTime": "Fri, 05 Nov 2021 10:25:21 GMT",
  "lastModificationTime": "Fri, 05 Nov 2021 10:25:21 GMT",

@@ -618,6 +618,7 @@ describe('MsgReader', function () {
   generateRegression('A yearly 1');
   generateRegression('Friday Lunch');
   generateRegression('attachmentFiles');
+  generateRegression('attachmentsOrder');
 
 });
 

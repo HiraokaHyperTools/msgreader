@@ -9,10 +9,10 @@
      {
       "dataType": "attachment",
       "name": "JSCoffeeScript_64x.png",
-      "fileNameShort": "JSCoffeeScript_64x.png",
       "dataId": 112,
       "contentLength": 1538,
       "extension": ".png",
+      "fileNameShort": "JSCoffeeScript_64x.png",
       "fileName": "JSCoffeeScript_64x.png",
       "creationTime": "Wed, 23 Aug 2017 13:29:43 GMT",
       "lastModificationTime": "Fri, 08 Jan 2016 01:37:42 GMT",
@@ -22,17 +22,19 @@
     "recipients": [
      {
       "dataType": "recipient",
-      "addressType": "UNKNOWN",
       "name": "Unknown",
+      "addressType": "UNKNOWN",
       "email": "Unknown",
       "recipType": "to"
      }
     ],
-    "normalizedSubject": "Lanch time, every friday, in 2023 [rescheduled!]",
-    "conversationTopic": "Lanch time, every friday, in 2023 [rescheduled!]",
-    "apptLocation": "Awesome coffee shop",
+    "messageClass": "IPM.OLE.CLASS.{00061055-0000-0000-C000-000000000046}",
     "subject": "Lanch time, every friday, in 2023 [rescheduled!]",
-    "apptTZDefEndDisplay": {
+    "conversationTopic": "Lanch time, every friday, in 2023 [rescheduled!]",
+    "normalizedSubject": "Lanch time, every friday, in 2023 [rescheduled!]",
+    "body": "Changes:\r\n-\tJan 6 cancel\r\n-\tJan 13 rescheduled to Jan 12 (alarm set to 30 mins before, set location, change busy flag, add attachment file, set importance higher)\r\n\r\n \r\n",
+    "apptLocation": "Awesome coffee shop",
+    "apptTZDefStartDisplay": {
      "rules": [
       {
        "flags": 2,
@@ -60,9 +62,7 @@
      ],
      "keyName": "Tokyo Standard Time"
     },
-    "messageClass": "IPM.OLE.CLASS.{00061055-0000-0000-C000-000000000046}",
-    "body": "Changes:\r\n-\tJan 6 cancel\r\n-\tJan 13 rescheduled to Jan 12 (alarm set to 30 mins before, set location, change busy flag, add attachment file, set importance higher)\r\n\r\n \r\n",
-    "apptTZDefStartDisplay": {
+    "apptTZDefEndDisplay": {
      "rules": [
       {
        "flags": 2,
@@ -108,73 +108,22 @@
  "recipients": [
   {
    "dataType": "recipient",
-   "addressType": "UNKNOWN",
    "name": "Unknown",
+   "addressType": "UNKNOWN",
    "email": "Unknown",
    "recipType": "to"
   }
  ],
- "senderEmail": "Unknown",
- "apptLocation": "",
- "normalizedSubject": "Lanch time, every friday, in 2023",
- "apptTZDefRecur": {
-  "rules": [
-   {
-    "flags": 2,
-    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
-    "bias": -540,
-    "standardBias": 0,
-    "daylightBias": -60,
-    "standardDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    },
-    "daylightDate": {
-     "year": 0,
-     "month": 0,
-     "dayOfWeek": 0,
-     "day": 0,
-     "hour": 0,
-     "minute": 0
-    }
-   }
-  ],
-  "keyName": "Tokyo Standard Time"
- },
  "messageClass": "IPM.Appointment",
- "conversationTopic": "Lanch time, every friday, in 2023",
- "timeZoneStruct": {
-  "bias": -540,
-  "standardBias": 0,
-  "daylightBias": -60,
-  "standardYear": 0,
-  "standardDate": {
-   "year": 0,
-   "month": 0,
-   "dayOfWeek": 0,
-   "day": 0,
-   "hour": 0,
-   "minute": 0
-  },
-  "daylightYear": 0,
-  "daylightDate": {
-   "year": 0,
-   "month": 0,
-   "dayOfWeek": 0,
-   "day": 0,
-   "hour": 0,
-   "minute": 0
-  }
- },
  "subject": "Lanch time, every friday, in 2023",
+ "conversationTopic": "Lanch time, every friday, in 2023",
  "senderName": "Unknown",
  "senderAddressType": "UNKNOWN",
+ "senderEmail": "Unknown",
+ "normalizedSubject": "Lanch time, every friday, in 2023",
  "body": "Changes:\r\n-\tJan 6 cancel\r\n-\tJan 13 rescheduled to Jan 12\r\n\r\n",
- "apptTZDefEndDisplay": {
+ "apptLocation": "",
+ "apptTZDefStartDisplay": {
   "rules": [
    {
     "flags": 2,
@@ -202,8 +151,7 @@
   ],
   "keyName": "Tokyo Standard Time"
  },
- "globalAppointmentID": "040000008200E00074C5B7101A82E008000000002000F9F62D0AD901000000000000000010000000F00F89203A1BCA479377447BDED6505A",
- "apptTZDefStartDisplay": {
+ "apptTZDefEndDisplay": {
   "rules": [
    {
     "flags": 2,
@@ -272,7 +220,59 @@
    }
   ]
  },
+ "timeZoneStruct": {
+  "bias": -540,
+  "standardBias": 0,
+  "daylightBias": -60,
+  "standardYear": 0,
+  "standardDate": {
+   "year": 0,
+   "month": 0,
+   "dayOfWeek": 0,
+   "day": 0,
+   "hour": 0,
+   "minute": 0
+  },
+  "daylightYear": 0,
+  "daylightDate": {
+   "year": 0,
+   "month": 0,
+   "dayOfWeek": 0,
+   "day": 0,
+   "hour": 0,
+   "minute": 0
+  }
+ },
  "timeZoneDesc": "(UTC+09:00) 大阪、札幌、東京",
+ "apptTZDefRecur": {
+  "rules": [
+   {
+    "flags": 2,
+    "start": "Mon, 01 Jan 1601 00:00:00 GMT",
+    "bias": -540,
+    "standardBias": 0,
+    "daylightBias": -60,
+    "standardDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    },
+    "daylightDate": {
+     "year": 0,
+     "month": 0,
+     "dayOfWeek": 0,
+     "day": 0,
+     "hour": 0,
+     "minute": 0
+    }
+   }
+  ],
+  "keyName": "Tokyo Standard Time"
+ },
+ "globalAppointmentID": "040000008200E00074C5B7101A82E008000000002000F9F62D0AD901000000000000000010000000F00F89203A1BCA479377447BDED6505A",
  "creationTime": "Wed, 07 Dec 2022 04:32:54 GMT",
  "lastModificationTime": "Wed, 07 Dec 2022 04:32:54 GMT",
  "clientSubmitTime": "Wed, 07 Dec 2022 02:23:01 GMT",

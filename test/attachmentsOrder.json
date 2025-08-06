@@ -1,0 +1,65 @@
+{
+ "dataType": "msg",
+ "attachments": [
+  {
+   "dataType": "attachment",
+   "name": "A.docx",
+   "dataId": 33,
+   "contentLength": 11627,
+   "extension": ".docx",
+   "fileNameShort": "A774F~1.DOC",
+   "fileName": "A.docx",
+   "creationTime": "Wed, 06 Aug 2025 11:07:27 GMT",
+   "lastModificationTime": "Wed, 06 Aug 2025 11:07:28 GMT",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "name": "B.docx",
+   "dataId": 43,
+   "contentLength": 11631,
+   "extension": ".docx",
+   "fileNameShort": "B72F6~1.DOC",
+   "fileName": "B.docx",
+   "creationTime": "Wed, 06 Aug 2025 11:08:00 GMT",
+   "lastModificationTime": "Wed, 06 Aug 2025 11:08:01 GMT",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "name": "C.docx",
+   "dataId": 53,
+   "contentLength": 11753,
+   "extension": ".docx",
+   "fileNameShort": "CB128~1.DOC",
+   "fileName": "C.docx",
+   "creationTime": "Wed, 06 Aug 2025 11:08:07 GMT",
+   "lastModificationTime": "Wed, 06 Aug 2025 11:08:08 GMT",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "name": "D.docx",
+   "dataId": 63,
+   "contentLength": 11762,
+   "extension": ".docx",
+   "fileNameShort": "D598F~1.DOC",
+   "fileName": "D.docx",
+   "creationTime": "Wed, 06 Aug 2025 11:08:18 GMT",
+   "lastModificationTime": "Wed, 06 Aug 2025 11:08:19 GMT",
+   "attachmentHidden": false
+  }
+ ],
+ "recipients": [],
+ "messageClass": "IPM.Note",
+ "subject": "Attachments order",
+ "conversationTopic": "Attachments order",
+ "normalizedSubject": "Attachments order",
+ "body": "Attachments order\r\n",
+ "creationTime": "Wed, 06 Aug 2025 11:08:37 GMT",
+ "lastModificationTime": "Wed, 06 Aug 2025 11:08:37 GMT",
+ "messageDeliveryTime": "Wed, 06 Aug 2025 11:08:27 GMT",
+ "messageFlags": 24,
+ "internetCodepage": 20127,
+ "messageLocaleId": 1041
+}
