@@ -60,12 +60,22 @@ export interface Entry {
 interface LiteEntry {
     entry: Entry;
 
+    /**
+     * Lesser side of {@link Entry.name}
+     */
     left: number;
+
+    /**
+     * Greater side of {@link Entry.name}
+     */
     right: number;
+
     child: number;
 
     firstSector: number;
     isMini?: boolean;
+
+    isRed: boolean;
 }
 
 function RoundUpto4096(num: number) {
@@ -144,6 +154,7 @@ class LiteBurner {
                     child: -1,
                     firstSector: 0,
                     isMini: it.length < 4096,
+                    isRed: false,
                 })
             );
 
@@ -275,7 +286,7 @@ class LiteBurner {
             ds.seek(pos + 0x40);
             ds.writeUint16(Math.min(64, numBytesName + 2));
             ds.writeUint8(liteEnt.entry.type);
-            ds.writeUint8((x === 0) ? 0 : 1);
+            ds.writeUint8(liteEnt.isRed ? 0 : 1);
             ds.writeInt32(liteEnt.left);
             ds.writeInt32(liteEnt.right);
             ds.writeInt32(liteEnt.child);
@@ -362,6 +373,11 @@ class LiteBurner {
         return t;
     }
 
+    /**
+     * Build the directory tree.
+     * 
+     * @param dirIndex The index of the directory entry to be built.
+     */
     private buildTree(dirIndex: number) {
         const { liteEnts } = this;
         const liteEntry = liteEnts[dirIndex];
@@ -370,8 +386,9 @@ class LiteBurner {
             throw new Error("It must be a storage!");
         }
 
+        // Array.sort is destructive, so copy it by concat() before changing
         const children = liteEntry.entry.children.concat();
-        if (children.length >= 1) {
+        if (1 <= children.length) {
             children.sort(
                 (a, b) => {
                     return this.compareName(
@@ -381,11 +398,43 @@ class LiteBurner {
                 }
             );
 
-            liteEntry.child = children[0];
-
-            for (let x = 0; x < children.length - 1; x++) {
-                liteEnts[children[x]].right = children[x + 1];
+            // (     | 0   )
+            // (   0 | 1   )
+            // (   0 | 1 2 )
+ 
+            // (left, right), returns first right node
+            const split2 = (start: number, end: number, isRed: boolean): number => {
+                if (start < end) {
+                    const midNum = Math.floor((start + end) / 2);
+                    const entryIndex = children[midNum];
+                    const entry = liteEnts[entryIndex];
+                    entry.isRed = isRed;
+                    entry.left = split2(start, midNum, !isRed);
+                    entry.right = split2(midNum + 1, end, !isRed);
+                    return entryIndex;
+                } else {
+                    return -1;
+                }
             }
+
+            // (     | 0 |     )
+            // (     | 0 | 1   )
+            // (   0 | 1 | 2   )
+            // (   0 | 1 | 2 3 )
+            // ( 0 1 | 2 | 3 4 )
+
+            // (left, root, right), returns root node
+            const split3 = (): number => {
+                const midNum = Math.floor(children.length / 2);
+                const entryIndex = children[midNum];
+                const entry = liteEnts[entryIndex];
+                entry.isRed = false;
+                entry.left = split2(0, midNum, true);
+                entry.right = split2(midNum + 1, children.length, true);
+                return entryIndex;
+            };
+
+            liteEntry.child = split3();
 
             for (let subIndex of children
                 .filter(it => liteEnts[it].entry.type === TypeEnum.DIRECTORY)

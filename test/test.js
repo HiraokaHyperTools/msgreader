@@ -627,6 +627,65 @@ describe('Burner', function () {
   const burn = require('../lib/Burner').burn;
   const Reader = require('../lib/Reader').Reader;
 
+  /**
+   * 
+   * path: `file`, `dir/file`, `dir1/dir2/file`
+   * 
+   * @param { path: string, binary?: ArrayLike<number> }[] entries 
+   * @returns { array: Uint8Array }
+   */
+  const burnByFsEntries = (entries) => {
+    const fsEntries = [
+      {
+        name: "Root Entry",
+        type: TypeEnum.ROOT,
+        length: 0,
+        children: [],
+      },
+    ];
+
+    for (const entry of entries) {
+      const { path, binary } = entry;
+      const elements = path.split('/');
+
+      let parentIndex = 0;
+      for (let index = 0; index < elements.length - 1; index++) {
+        const name = elements[index];
+        const hitIndex = fsEntries[parentIndex].children.find(it => fsEntries[it].name === name);
+        if (hitIndex === undefined) {
+          const newIndex = fsEntries.length;
+          fsEntries.push({
+            name,
+            type: TypeEnum.DIRECTORY,
+            length: 0,
+            children: [],
+          });
+          fsEntries[parentIndex].children.push(newIndex);
+          parentIndex = newIndex;
+        } else {
+          parentIndex = hitIndex;
+        }
+      }
+
+      {
+        const newIndex = fsEntries.length;
+
+        fsEntries.push({
+          name: elements[elements.length - 1],
+          type: TypeEnum.DOCUMENT,
+          length: binary ? binary.length : 0,
+          binaryProvider: binary ? () => new Uint8Array(binary) : undefined,
+          children: [],
+        });
+
+        fsEntries[parentIndex].children.push(newIndex);
+      }
+    }
+
+    const array = burn(fsEntries);
+    return { array: array };
+  };
+
   const burnAFileHavingLengthBy = (x) => {
     const writeData = new Uint8Array(x);
     for (let t = 0; t < writeData.length; t++) {
@@ -653,50 +712,134 @@ describe('Burner', function () {
     return { writeData, array };
   };
 
-  const runReaderWith = ({ writeData, array }) => {
-    const reader = new Reader(array);
-    reader.parse();
+  const files10 = [
+    { path: "file1", binary: new Uint8Array(Buffer.from("data1")) },
+    { path: "file2", binary: new Uint8Array(Buffer.from("data2")) },
+    { path: "file3", binary: new Uint8Array(Buffer.from("data3")) },
+    { path: "file4", binary: new Uint8Array(Buffer.from("data4")) },
+    { path: "file5", binary: new Uint8Array(Buffer.from("data5")) },
+    { path: "file6", binary: new Uint8Array(Buffer.from("data6")) },
+    { path: "file7", binary: new Uint8Array(Buffer.from("data7")) },
+    { path: "file8", binary: new Uint8Array(Buffer.from("data8")) },
+    { path: "file9", binary: new Uint8Array(Buffer.from("data9")) },
+    { path: "file10", binary: new Uint8Array(Buffer.from("data10")) },
+  ];
 
-    const readData = reader.rootFolder().readFile("file");
-    assert.deepStrictEqual(readData, writeData);
-  };
+  const dirs3_10 = [
+    { path: "d1/e1/file1", binary: new Uint8Array(Buffer.from("data1")) },
+    { path: "d1/e2/file2", binary: new Uint8Array(Buffer.from("data2")) },
+    { path: "d2/e1/file3", binary: new Uint8Array(Buffer.from("data3")) },
+    { path: "d2/e2/file4", binary: new Uint8Array(Buffer.from("data4")) },
+    { path: "d3/e1/file5", binary: new Uint8Array(Buffer.from("data5")) },
+    { path: "d3/e2/file6", binary: new Uint8Array(Buffer.from("data6")) },
+    { path: "d1/e1/file7", binary: new Uint8Array(Buffer.from("data7")) },
+    { path: "d2/e1/file8", binary: new Uint8Array(Buffer.from("data8")) },
+    { path: "d3/e1/file9", binary: new Uint8Array(Buffer.from("data9")) },
+    { path: "d1/e1/file10", binary: new Uint8Array(Buffer.from("data10")) },
+  ];
 
   describe('Compare file contents among Burner/Reader', function () {
-    const testIt = function (length) {
-      return runReaderWith(
-        burnAFileHavingLengthBy(length)
-      );
-    }
+    describe('file size', function () {
+      const runReaderWith = ({ writeData, array }) => {
+        const reader = new Reader(array);
+        reader.parse();
 
-    it('file size 0', function () { testIt(0); });
-    it('file size 1', function () { testIt(1); });
-    it('file size 63', function () { testIt(63); });
-    it('file size 64 (minifat sector size)', function () { testIt(64); });
-    it('file size 65', function () { testIt(65); });
-    it('file size 511', function () { testIt(511); });
-    it('file size 512 (fat sector size)', function () { testIt(512); });
-    it('file size 513', function () { testIt(513); });
-    it('file size 65537', function () { testIt(65537); });
+        const readData = reader.rootFolder().readFile("file");
+        assert.deepStrictEqual(readData, writeData);
+      };
+
+      const testIt = function (length) {
+        return runReaderWith(
+          burnAFileHavingLengthBy(length)
+        );
+      };
+
+      it('file size 0', function () { testIt(0); });
+      it('file size 1', function () { testIt(1); });
+      it('file size 63', function () { testIt(63); });
+      it('file size 64 (minifat sector size)', function () { testIt(64); });
+      it('file size 65', function () { testIt(65); });
+      it('file size 511', function () { testIt(511); });
+      it('file size 512 (fat sector size)', function () { testIt(512); });
+      it('file size 513', function () { testIt(513); });
+      it('file size 65537', function () { testIt(65537); });
+    });
+
+    describe('tree builder', function () {
+      const runReaderWith = (array, entries) => {
+        const reader = new Reader(array);
+        reader.parse();
+
+        const loadedEntries = [];
+
+        function walk(folder, prefix) {
+          for (const subFolder of folder.subFolders()) {
+            walk(subFolder, prefix + subFolder.name + "/");
+          }
+
+          for (const fileSet of folder.fileNameSets()) {
+            const path = `${prefix}${fileSet.name}`;
+            loadedEntries.push({
+              path: path,
+              binary: fileSet.provider(),
+            });
+          }
+        }
+
+        walk(reader.rootFolder(), "");
+
+        function sort(array) {
+          return [...array].sort((a, b) => a.path.localeCompare(b.path));
+        }
+
+        assert.deepStrictEqual(sort(loadedEntries), sort(entries));
+      };
+
+      const testIt = function (entries) {
+        return runReaderWith(
+          burnByFsEntries(entries).array,
+          entries
+        );
+      };
+
+      it('files10', function () { testIt(files10); });
+      it('dirs3_10', function () { testIt(dirs3_10); });
+    });
   });
 
   (useValidateCompoundFile ? describe : describe.skip)('validateCompoundFile', function () {
-    const testIt = async function (length) {
-      await runValidateCompoundFileAsync(
-        {
-          binary: burnAFileHavingLengthBy(length).array,
-        }
-      );
-    }
+    describe("file size", function () {
+      const testIt = async function (length) {
+        await runValidateCompoundFileAsync(
+          {
+            binary: burnAFileHavingLengthBy(length).array,
+          }
+        );
+      }
 
-    it('file size 0', function () { return testIt(0); });
-    it('file size 1', function () { return testIt(1); });
-    it('file size 63', function () { return testIt(63); });
-    it('file size 64 (minifat sector size)', function () { return testIt(64); });
-    it('file size 65', function () { return testIt(65); });
-    it('file size 511', function () { return testIt(511); });
-    it('file size 512 (fat sector size)', function () { return testIt(512); });
-    it('file size 513', function () { return testIt(513); });
-    it('file size 65537', function () { return testIt(65537); });
+      it('file size 0', function () { return testIt(0); });
+      it('file size 1', function () { return testIt(1); });
+      it('file size 63', function () { return testIt(63); });
+      it('file size 64 (minifat sector size)', function () { return testIt(64); });
+      it('file size 65', function () { return testIt(65); });
+      it('file size 511', function () { return testIt(511); });
+      it('file size 512 (fat sector size)', function () { return testIt(512); });
+      it('file size 513', function () { return testIt(513); });
+      it('file size 65537', function () { return testIt(65537); });
+    });
+
+    describe("tree builder", function () {
+      const testIt = async function (entries) {
+        await runValidateCompoundFileAsync(
+          {
+            binary: burnByFsEntries(entries).array,
+          }
+        );
+      }
+
+      it('files10', function () { testIt(files10); });
+      it('dirs3_10', function () { testIt(dirs3_10); });
+    });
   });
 });
 
