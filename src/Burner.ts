@@ -66,6 +66,8 @@ interface LiteEntry {
 
     firstSector: number;
     isMini?: boolean;
+
+    isRed: boolean;
 }
 
 function RoundUpto4096(num: number) {
@@ -144,6 +146,7 @@ class LiteBurner {
                     child: -1,
                     firstSector: 0,
                     isMini: it.length < 4096,
+                    isRed: false,
                 })
             );
 
@@ -275,7 +278,7 @@ class LiteBurner {
             ds.seek(pos + 0x40);
             ds.writeUint16(Math.min(64, numBytesName + 2));
             ds.writeUint8(liteEnt.entry.type);
-            ds.writeUint8((x === 0) ? 0 : 1);
+            ds.writeUint8(liteEnt.isRed ? 0 : 1);
             ds.writeInt32(liteEnt.left);
             ds.writeInt32(liteEnt.right);
             ds.writeInt32(liteEnt.child);
@@ -362,6 +365,11 @@ class LiteBurner {
         return t;
     }
 
+    /**
+     * Build the directory tree with RB-tree idea starting at specified index.
+     * 
+     * @param dirIndex The index of the directory entry to be built.
+     */
     private buildTree(dirIndex: number) {
         const { liteEnts } = this;
         const liteEntry = liteEnts[dirIndex];
@@ -381,10 +389,23 @@ class LiteBurner {
                 }
             );
 
-            liteEntry.child = children[0];
+            // Select the middle node as the root of this subtree
+            const midIndex = Math.floor(children.length / 2);
+            liteEntry.child = children[midIndex];
+            liteEnts[liteEntry.child].isRed = false; // Root of the subtree is always black
 
-            for (let x = 0; x < children.length - 1; x++) {
-                liteEnts[children[x]].right = children[x + 1];
+            // Recursively build left and right subtrees
+            const leftChildren = children.slice(0, midIndex);
+            const rightChildren = children.slice(midIndex + 1);
+
+            if (leftChildren.length !== 0) {
+                liteEnts[children[midIndex]].left = leftChildren[0];
+                this.buildSubTree(leftChildren, children[midIndex]);
+            }
+
+            if (rightChildren.length !== 0) {
+                liteEnts[children[midIndex]].right = rightChildren[0];
+                this.buildSubTree(rightChildren, children[midIndex]);
             }
 
             for (let subIndex of children
@@ -392,6 +413,40 @@ class LiteBurner {
             ) {
                 this.buildTree(subIndex);
             }
+        }
+    }
+
+    private buildSubTree(children: number[], parentIndex: number) {
+        const { liteEnts } = this;
+
+        if (children.length === 0) return;
+
+        const midIndex = Math.floor(children.length / 2);
+        const rootIndex = children[midIndex];
+
+        liteEnts[rootIndex].isRed = true; // New nodes are red by default
+        liteEnts[rootIndex].left = -1;
+        liteEnts[rootIndex].right = -1;
+
+        // Link to parent
+        if (rootIndex < parentIndex) {
+            liteEnts[parentIndex].left = rootIndex;
+        } else {
+            liteEnts[parentIndex].right = rootIndex;
+        }
+
+        // Recursively build left and right subtrees
+        const leftChildren = children.slice(0, midIndex);
+        const rightChildren = children.slice(midIndex + 1);
+
+        if (leftChildren.length !== 0) {
+            liteEnts[rootIndex].left = leftChildren[0];
+            this.buildSubTree(leftChildren, rootIndex);
+        }
+
+        if (rightChildren.length !== 0) {
+            liteEnts[rootIndex].right = rightChildren[0];
+            this.buildSubTree(rightChildren, rootIndex);
         }
     }
 }
