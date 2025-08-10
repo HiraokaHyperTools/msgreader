@@ -1,0 +1,41 @@
+@startuml class
+
+interface ReadFile {
+    +readFile(view: Uint8Array, position: number): Promise<number>
+}
+
+interface WriteFile {
+    +writeFile(view: Uint8Array, position: number): Promise
+}
+
+ReadFile --|> CfbfUtil
+WriteFile --|> CfbfUtil
+
+class CfbfUtil {
+    +createNew(readFile: ReadFile, writeFile: WriteFile): Promise<CStore>
+    +open(readFile: ReadFile, writeFile: WriteFile): Promise<CStore>
+}
+
+CfbfUtil --|> CStore
+
+interface CEntry {
+    +id: number
+    +name: String
+    +type: number
+    +clsid: Uint8Array
+    +creationTime: Uint8Array
+    +modifiedTime: Uint8Array
+}
+
+CStore --|> CEntry
+
+interface CStore {
+    +listEntries(parentId: number): Promise<CEntry[]>
+    +deleteEntry(id: number): Promise
+    +addFile(name: String): Promise<number>
+    +addFolder(name: String): Promise<number>
+    +readFile(id: number): Promise<ReadFile>
+    +writeFile(id: number, readFile: ReadFile): Promise
+}
+
+@enduml
