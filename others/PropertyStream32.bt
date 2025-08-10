@@ -1,10 +1,10 @@
 //------------------------------------------------
 //--- 010 Editor v11.0.1 Binary Template
 //
-//      File: PropertyStream Top
+//      File: 2.4.1.1 Top Level PropertyStream (32 bytes header)
 //   Authors: kenjiuno
 //   Version: 0.1
-//   Purpose: https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
+//   Purpose: https://learn.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/ed03f930-fdef-4cc8-b400-b69007d7f416
 //  Category: 
 // File Mask: __properties_version1.0
 //  ID Bytes: 
@@ -594,6 +594,11 @@ enum Tag {
 
 struct Header {
  byte Reserved[8];
+ int NextRecipientID;
+ int NextAttachmentID;
+ int RecipientCount;
+ int AttachmentCount;
+ byte Reserved2[8];
 };
 
 struct Data {

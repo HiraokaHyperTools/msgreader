@@ -1,10 +1,10 @@
 //------------------------------------------------
 //--- 010 Editor v11.0.1 Binary Template
 //
-//      File: PropertyStream Top
+//      File: 2.4.1.2 Embedded Message object Storage (24 bytes header)
 //   Authors: kenjiuno
 //   Version: 0.1
-//   Purpose: https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/20c1125f-043d-42d9-b1dc-cb9b7e5198ef
+//   Purpose: https://learn.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxmsg/2fa308e0-8326-46db-af78-5811a355fc73
 //  Category: 
 // File Mask: __properties_version1.0
 //  ID Bytes: 
@@ -598,7 +598,6 @@ struct Header {
  int NextAttachmentID;
  int RecipientCount;
  int AttachmentCount;
- byte Reserved2[8];
 };
 
 struct Data {
