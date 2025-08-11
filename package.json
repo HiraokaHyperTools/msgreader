@@ -7,8 +7,9 @@
   "private": false,
   "scripts": {
     "build": "tsc",
+    "clean": "rimraf lib",
     "test": "npm run mocha test/ test2/",
-    "prepare": "npm run build && npm run test",
+    "prepare": "npm run clean && npm run build && npm run test",
     "mocha": "set NODE_ENV=test && mocha",
     "dr": "npm publish --dry-run"
   },
@@ -19,6 +20,7 @@
     "@types/node": "^22.10.3",
     "commander": "^13.0.0",
     "mocha": "^11.0.1",
+    "rimraf": "^6.0.1",
     "temp": "^0.9.4",
     "typedoc": "^0.27.6",
     "typedoc-plugin-rename-defaults": "^0.7.2",
