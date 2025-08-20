@@ -3,7 +3,8 @@ const program = new Command();
 
 const MsgReader = require('./lib/MsgReader').default;
 const { props, typeNames } = require('./lib/Defs');
-const { Reader } = require('./lib/Reader');
+const { Reader, TypeEnum } = require('./lib/Reader');
+const { burn } = require('./lib/Burner');
 
 const fs = require('fs');
 const path = require('path');
@@ -162,6 +163,57 @@ program
     expose(store.rootFolder(), exportToDir);
   });
 
+
+program
+  .command('makecfbf <msgFilePath> <importFromDir>')
+  .description('Create a Compound File Binary Format (CFBF) from files/folders')
+  .action((msgFilePath, importFromDir, options) => {
+    const entries = [
+      {
+        name: "Root Entry",
+        type: TypeEnum.ROOT,
+        children: [],
+        length: 0,
+      }
+    ];
+
+    function addFolder(dir, parentIndex) {
+      for (const fileName of fs.readdirSync(dir)) {
+        const fullPath = path.join(dir, fileName);
+        const stat = fs.statSync(fullPath);
+        const index = entries.length;
+        entries[parentIndex].children.push(index);
+        if (stat.isDirectory()) {
+          entries.push({
+            name: fileName,
+            type: TypeEnum.DIRECTORY,
+            children: [],
+            length: 0,
+          });
+          addFolder(fullPath, index);
+        }
+        else {
+          entries.push({
+            name: fileName,
+            type: TypeEnum.DOCUMENT,
+            binaryProvider: () => {
+              const b = fs.readFileSync(fullPath);
+              const a = new Uint8Array(b, b.byteOffset, b.byteLength);
+              a.set(b);
+              return a;
+            },
+            length: stat.size,
+          });
+        }
+      }
+    }
+
+    addFolder(importFromDir, 0);
+
+    const array = burn(entries);
+    fs.writeFileSync(msgFilePath, array);
+  });
+
 program
   .command('html <msgFilePath>')
   .description('Parse msg file and display 1013001f:bodyHtml or 10130102:html')
@@ -202,7 +254,7 @@ program
         walk(subFolder, `${prefix}${subFolder.name}/`);
       }
     }
-    
+
     walk(reader.rootFolder(), "/");
   });
 
