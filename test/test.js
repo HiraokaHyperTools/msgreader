@@ -622,7 +622,6 @@ describe('MsgReader', function () {
 
 });
 
-
 describe('Burner', function () {
   const burn = require('../lib/Burner').burn;
   const Reader = require('../lib/Reader').Reader;
@@ -840,6 +839,21 @@ describe('Burner', function () {
       it('files10', function () { testIt(files10); });
       it('dirs3_10', function () { testIt(dirs3_10); });
     });
+  });
+});
+
+describe('Rewriter', function () {
+  const { Rewriter } = require('../lib/MsgReader');
+  it('createNew', async function () {
+    const file = await fs.promises.open("C:/A/a.msg", "r+");
+    const filesys = await Rewriter.createNew(
+      async (view, position) => {
+        return (await file.read(view, 0, view.byteLength, position)).bytesRead;
+      },
+      async (view, position) => {
+        await file.write(view, 0, view.byteLength, position);
+      }
+    );
   });
 });
 
