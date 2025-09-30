@@ -1295,6 +1295,13 @@ export interface FieldsData extends SomeOxProps, SomeParsedOxProps {
    * - And then invoke {@link MsgReader.getFileData}.
    */
   rawProps?: RawProp[];
+
+  /**
+   * An undocumented property known as PR_PREVIEW.
+   * 
+   * Target {@link dataType} = 'msg'.
+   */
+  preview?: string;
 }
 
 /**
