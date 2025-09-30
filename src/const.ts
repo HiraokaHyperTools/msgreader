@@ -74,6 +74,7 @@ export default {
         '3ff1': 'messageLocaleId',
         '0e07': 'messageFlags',
         '1035': 'messageId',
+        '3fd9': 'preview',
         // attachment specific
         '3007': 'creationTime',
         '3008': 'lastModificationTime',
