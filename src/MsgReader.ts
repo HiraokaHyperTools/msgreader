@@ -33,6 +33,7 @@ export {
   RecurFrequency, PatternType, CalendarType, EndType, PatternTypeWeek, PatternTypeMonth,
   PatternTypeMonthNth, RecurrencePattern, OverrideFlags, ExceptionInfo, AppointmentRecur,
 } from './AppointmentRecurParser';
+export * as Rewriter from './Rewriter';
 
 // MSG Reader implementation
 
