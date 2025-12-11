@@ -1427,6 +1427,45 @@ function removeTrailingNull(text: string): string {
   return text;
 }
 
+export interface AttachmentData {
+  /**
+   * A file name of this attachment without directory specification.
+   * 
+   * @see {@link SomeOxProps.fileName}
+   * 
+   * e.g.
+   * 
+   * - `blue.png`
+   * - `Microsoft Outlook テスト メッセージ.msg`
+   */
+  fileName: string;
+
+  /**
+   * The binary content of this attachment.
+   * 
+   * ---
+   * 
+   * You can select a method to handle this content:
+   * 
+   * @see [Uint8Array - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array)
+   * 
+   * ```js
+   * // Node.js ≧ v25
+   * attachment.content.toBase64()
+   * ```
+   * 
+   * @see [Buffer | Node.js v25.2.1 Documentation](https://nodejs.org/api/buffer.html)
+   * 
+   * ```js
+   * // Node.js ≧ v0.1.90
+   * Buffer.from(attachment.content).toString('base64')
+   * ```
+   * 
+   * ---
+   */
+  content: Uint8Array;
+}
+
 /**
  * The core implementation of MsgReader
  */
@@ -1895,11 +1934,12 @@ export default class MsgReader {
   }
 
   /**
-   Reads an attachment content by key/ID
-   
-    @return {Object} The attachment for specific attachment key
-    */
-  getAttachment(attach: number | FieldsData): { fileName: string; content: Uint8Array } {
+   * Reads an attachment content by key/ID
+   * 
+   * @param attach 
+   * @returns The attachment for specific attachment key
+   */
+  getAttachment(attach: number | FieldsData): AttachmentData {
     const attachData = typeof attach === 'number' ? this.fieldsData.attachments[attach] : attach;
     if (attachData.innerMsgContent === true && typeof attachData.folderId === "number") {
       // embedded msg

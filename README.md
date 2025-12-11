@@ -64,10 +64,23 @@ const testMsgAttachment0 = testMsg.getAttachment(testMsgInfo.attachments[0])
   const testMsgInfo = testMsg.getFileData()
 
   for (const att of testMsgInfo.attachments) {
-    console.log(att.fileName);
-    // testMsg.getAttachment(att).content
-  }
+    const attachment = testMsg.getAttachment(att);
+    console.log(attachment.fileName);
+
+    // fs.writeFileSync("save-" + attachment.fileName, attachment.content);
+
+    // Node.js ≧ v0.1.90
+    // Buffer.from(attachment.content).toString('base64')
+
+    // Node.js ≧ v25
+    // attachment.content.toBase64()
+}
 ```
+
+For a reference:
+
+- [Buffer | Node.js v25.2.1 Documentation](https://nodejs.org/api/buffer.html#buftostringencoding-start-end)
+- [Uint8Array.prototype.toBase64() - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array/toBase64)
 
 ## Build msgreader locally
 

@@ -258,8 +258,6 @@ program
     walk(reader.rootFolder(), "/");
   });
 
-
-
 program
   .command('dummy1')
   .action(() => {
@@ -273,10 +271,17 @@ program
 program
   .command('dummy2')
   .action(() => {
-    const msgFileBuffer = fs.readFileSync('test/voteItems.msg');
-    const testMsg = new MsgReader(msgFileBuffer);
-    const testMsgInfo = testMsg.getFileData();
-    console.log(testMsgInfo);
+    const msgFileBuffer = fs.readFileSync('test/msgInMsg.msg');
+    const testMsg = new MsgReader(msgFileBuffer)
+    const testMsgInfo = testMsg.getFileData()
+
+    for (const att of testMsgInfo.attachments) {
+      const attachment = testMsg.getAttachment(att);
+      console.log(attachment.fileName);
+
+      //console.log(Buffer.from(attachment.content).toString('base64'));
+      fs.writeFileSync("save-" + attachment.fileName, attachment.content);
+    }
   });
 
 program
