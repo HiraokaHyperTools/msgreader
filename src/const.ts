@@ -39,6 +39,7 @@ export default {
       START_BLOCK_OFFSET: 0x74,
       SIZE_OFFSET: 0x78,
       TYPE_ENUM: {
+        UNALLOCATED: 0,
         DIRECTORY: 1,
         DOCUMENT: 2,
         ROOT: 5
