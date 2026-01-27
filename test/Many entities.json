@@ -1,0 +1,832 @@
+{
+ "dataType": "msg",
+ "attachments": [
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (最終承認済み)",
+    "conversationTopic": "ワークフロー通知 (最終承認済み)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:41:22 +0900\r\nMessage-ID: <18E7FCC8-8BC0-4F15-AA23-2AE1AF605C3F@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:41:22 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmnIDntYLmib8=?=\r\n =?utf-8?B?6KqN5riI44G/KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (最終承認済み)",
+    "body": "申請が最終承認されました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<18E7FCC8-8BC0-4F15-AA23-2AE1AF605C3F@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:41:22 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:41:22 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2238,
+   "name": "ワークフロー通知 (最終承認済み)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (最終承認済み)",
+    "conversationTopic": "ワークフロー通知 (最終承認済み)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:41:19 +0900\r\nMessage-ID: <4A09B424-0237-4241-997F-F9131D9F86A8@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:41:19 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmnIDntYLmib8=?=\r\n =?utf-8?B?6KqN5riI44G/KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (最終承認済み)",
+    "body": "申請が最終承認されました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<4A09B424-0237-4241-997F-F9131D9F86A8@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:41:19 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:41:19 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2292,
+   "name": "ワークフロー通知 (最終承認済み)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (最終承認済み)",
+    "conversationTopic": "ワークフロー通知 (最終承認済み)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:41:14 +0900\r\nMessage-ID: <73F7949A-CD33-411D-95FF-36CECB837E65@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:41:14 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmnIDntYLmib8=?=\r\n =?utf-8?B?6KqN5riI44G/KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (最終承認済み)",
+    "body": "申請が最終承認されました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<73F7949A-CD33-411D-95FF-36CECB837E65@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:41:14 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:41:14 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2346,
+   "name": "ワークフロー通知 (最終承認済み)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (承認依頼)",
+    "conversationTopic": "ワークフロー通知 (承認依頼)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:40:50 +0900\r\nMessage-ID: <5466D6B9-D172-45CE-AEB3-F88737384032@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:40:50 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmib/oqo3kvp0=?=\r\n =?utf-8?B?6aC8KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (承認依頼)",
+    "body": "申請の承認依頼が来ています。確認をお願いいたします。\n\nhttp://127.0.0.1:13718/WF/",
+    "messageId": "<5466D6B9-D172-45CE-AEB3-F88737384032@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:40:50 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:40:50 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2400,
+   "name": "ワークフロー通知 (承認依頼)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (差戻し)",
+    "conversationTopic": "ワークフロー通知 (差戻し)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:40:37 +0900\r\nMessage-ID: <53F3DD4B-0532-4E39-93A5-87D0485A597F@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:40:37 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjlt67miLvjgZcp?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (差戻し)",
+    "body": "申請が差戻しされました。確認をお願いいたします。\n\nhttp://127.0.0.1:13718/WF/",
+    "messageId": "<53F3DD4B-0532-4E39-93A5-87D0485A597F@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:40:37 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:40:37 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2454,
+   "name": "ワークフロー通知 (差戻し)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (承認依頼)",
+    "conversationTopic": "ワークフロー通知 (承認依頼)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:39:27 +0900\r\nMessage-ID: <B4D8D3DE-9BF1-4F16-A375-FCA136CBC80F@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:39:27 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmib/oqo3kvp0=?=\r\n =?utf-8?B?6aC8KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (承認依頼)",
+    "body": "申請の承認依頼が来ています。確認をお願いいたします。\n\nhttp://127.0.0.1:13718/WF/",
+    "messageId": "<B4D8D3DE-9BF1-4F16-A375-FCA136CBC80F@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:39:27 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:39:27 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2508,
+   "name": "ワークフロー通知 (承認依頼)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (却下)",
+    "conversationTopic": "ワークフロー通知 (却下)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:34:29 +0900\r\nMessage-ID: <02ACA7A3-0193-46B7-A915-438E53AC9B09@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:34:29 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjljbTkuIsp?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (却下)",
+    "body": "申請が却下されました。確認をお願いいたします。\n\nhttp://127.0.0.1:13718/WF/",
+    "messageId": "<02ACA7A3-0193-46B7-A915-438E53AC9B09@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:34:29 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:34:29 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2562,
+   "name": "ワークフロー通知 (却下)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (最終承認済み)",
+    "conversationTopic": "ワークフロー通知 (最終承認済み)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:32:39 +0900\r\nMessage-ID: <D9D23CFC-E659-4EF4-A713-D807279C8B85@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:32:39 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmnIDntYLmib8=?=\r\n =?utf-8?B?6KqN5riI44G/KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (最終承認済み)",
+    "body": "申請が最終承認されました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<D9D23CFC-E659-4EF4-A713-D807279C8B85@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:32:39 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:32:39 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2616,
+   "name": "ワークフロー通知 (最終承認済み)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (承認依頼)",
+    "conversationTopic": "ワークフロー通知 (承認依頼)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Wed, 19 Mar 2025 14:24:47 +0900\r\nMessage-ID: <DBD62157-E1A0-48C0-A96E-9704C7CEB75B@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 19 Mar 2025 14:24:47 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmib/oqo3kvp0=?=\r\n =?utf-8?B?6aC8KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (承認依頼)",
+    "body": "申請の承認依頼が来ています。確認をお願いいたします。\n\nhttp://127.0.0.1:13718/WF/",
+    "messageId": "<DBD62157-E1A0-48C0-A96E-9704C7CEB75B@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Wed, 19 Mar 2025 05:24:47 GMT",
+    "messageDeliveryTime": "Wed, 19 Mar 2025 05:24:47 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2670,
+   "name": "ワークフロー通知 (承認依頼)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "hmailuser@hmailserver.test",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "テストメール",
+    "conversationTopic": "テストメール",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 20:01:50 +0900\r\nMessage-ID: <DE4530F6-D14C-4F5B-B3DF-BDCF712AC609@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: hmailuser@hmailserver.test\r\nDate: 28 Feb 2025 20:01:50 +0900\r\nSubject: =?utf-8?B?44OG44K544OI44Oh44O844Or?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "テストメール",
+    "body": "これはテストメールです。",
+    "messageId": "<DE4530F6-D14C-4F5B-B3DF-BDCF712AC609@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 11:01:50 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 11:01:50 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2724,
+   "name": "テストメール",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (差し戻し)",
+    "conversationTopic": "ワークフロー通知 (差し戻し)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 19:58:53 +0900\r\nMessage-ID: <4EE8381F-9E85-4326-82A9-FD260729BE4A@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 19:58:53 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjlt67jgZfmiLs=?=\r\n =?utf-8?B?44GXKQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (差し戻し)",
+    "body": "差し戻しされました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<4EE8381F-9E85-4326-82A9-FD260729BE4A@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 10:58:53 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 10:58:53 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2778,
+   "name": "ワークフロー通知 (差し戻し)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (承認依頼)",
+    "conversationTopic": "ワークフロー通知 (承認依頼)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:52:36 +0900\r\nMessage-ID: <3DA28215-F05B-4780-AD75-1AA76F1B4655@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 17:52:36 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmib/oqo3kvp0=?=\r\n =?utf-8?B?6aC8KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (承認依頼)",
+    "body": "確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<3DA28215-F05B-4780-AD75-1AA76F1B4655@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:52:36 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:52:36 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2832,
+   "name": "ワークフロー通知 (承認依頼)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (承認依頼)",
+    "conversationTopic": "ワークフロー通知 (承認依頼)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:51:54 +0900\r\nMessage-ID: <7DEDC948-5A7F-4570-A9C6-A77388072279@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 17:51:54 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmib/oqo3kvp0=?=\r\n =?utf-8?B?6aC8KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (承認依頼)",
+    "body": "確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<7DEDC948-5A7F-4570-A9C6-A77388072279@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:51:54 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:51:54 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2886,
+   "name": "ワークフロー通知 (承認依頼)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (却下)",
+    "conversationTopic": "ワークフロー通知 (却下)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:51:42 +0900\r\nMessage-ID: <11292253-6A93-4754-9C9D-27F5BA28907F@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 17:51:42 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjljbTkuIsp?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (却下)",
+    "body": "却下されました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<11292253-6A93-4754-9C9D-27F5BA28907F@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:51:42 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:51:42 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2940,
+   "name": "ワークフロー通知 (却下)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (差し戻し)",
+    "conversationTopic": "ワークフロー通知 (差し戻し)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:50:58 +0900\r\nMessage-ID: <FE92F699-8D19-4EAE-962E-EA15E9C03891@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 17:50:58 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjlt67jgZfmiLs=?=\r\n =?utf-8?B?44GXKQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (差し戻し)",
+    "body": "差し戻しされました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<FE92F699-8D19-4EAE-962E-EA15E9C03891@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:50:58 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:50:58 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 2994,
+   "name": "ワークフロー通知 (差し戻し)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (却下)",
+    "conversationTopic": "ワークフロー通知 (却下)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:50:10 +0900\r\nMessage-ID: <C2482815-3CA1-4719-B1FE-717693754BDE@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 17:50:10 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjljbTkuIsp?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (却下)",
+    "body": "却下されました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<C2482815-3CA1-4719-B1FE-717693754BDE@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:50:10 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:50:10 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 3048,
+   "name": "ワークフロー通知 (却下)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (最終承認済み)",
+    "conversationTopic": "ワークフロー通知 (最終承認済み)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:49:42 +0900\r\nMessage-ID: <506B667E-69C9-4152-8FB7-2B5CE2B7141F@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 17:49:42 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmnIDntYLmib8=?=\r\n =?utf-8?B?6KqN5riI44G/KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (最終承認済み)",
+    "body": "最終承認されました。確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<506B667E-69C9-4152-8FB7-2B5CE2B7141F@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:49:42 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:49:42 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 3102,
+   "name": "ワークフロー通知 (最終承認済み)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "WF 管理者",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "ワークフロー通知 (承認依頼)",
+    "conversationTopic": "ワークフロー通知 (承認依頼)",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:46:45 +0900\r\nMessage-ID: <EE52C31E-6BE2-475D-90A3-3334CAE974E6@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: =?utf-8?Q?WF_=E7=AE=A1=E7=90=86=E8=80=85?= <hmailuser@hmailserver.test>\r\nDate: 28 Feb 2025 17:46:45 +0900\r\nSubject: =?utf-8?B?44Ov44O844Kv44OV44Ot44O86YCa55+lICjmib/oqo3kvp0=?=\r\n =?utf-8?B?6aC8KQ==?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "ワークフロー通知 (承認依頼)",
+    "body": "確認をお願いいたします。\n\nhttp://localhost:5257/",
+    "messageId": "<EE52C31E-6BE2-475D-90A3-3334CAE974E6@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:46:45 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:46:45 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 3156,
+   "name": "ワークフロー通知 (承認依頼)",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "hmailuser@hmailserver.test",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "テストメール",
+    "conversationTopic": "テストメール",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:42:03 +0900\r\nMessage-ID: <E458A56C-5436-4EFF-9F9C-A75955348B4C@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: hmailuser@hmailserver.test\r\nDate: 28 Feb 2025 17:42:03 +0900\r\nSubject: =?utf-8?B?44OG44K544OI44Oh44O844Or?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "テストメール",
+    "body": "これはテストメールです。",
+    "messageId": "<E458A56C-5436-4EFF-9F9C-A75955348B4C@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:42:03 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:42:03 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 3210,
+   "name": "テストメール",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "hmailuser@hmailserver.test",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "テストメール",
+    "conversationTopic": "テストメール",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 17:10:02 +0900\r\nMessage-ID: <29B7A998-959E-4E4E-8345-FAB534F76759@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: hmailuser@hmailserver.test\r\nDate: 28 Feb 2025 17:10:02 +0900\r\nSubject: =?utf-8?B?44OG44K544OI44Oh44O844Or?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "テストメール",
+    "body": "これはテストメールです。",
+    "messageId": "<29B7A998-959E-4E4E-8345-FAB534F76759@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 08:10:02 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 08:10:02 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 3264,
+   "name": "テストメール",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "hmailuser@hmailserver.test",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "テストメール",
+    "conversationTopic": "テストメール",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 16:59:36 +0900\r\nMessage-ID: <E4823FC3-DDAB-459C-A87A-5977DFD0D7A7@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: hmailuser@hmailserver.test\r\nDate: 28 Feb 2025 16:59:36 +0900\r\nSubject: =?utf-8?B?44OG44K544OI44Oh44O844Or?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "テストメール",
+    "body": "これはテストメールです。",
+    "messageId": "<E4823FC3-DDAB-459C-A87A-5977DFD0D7A7@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 07:59:36 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 07:59:36 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 3318,
+   "name": "テストメール",
+   "attachmentHidden": false
+  },
+  {
+   "dataType": "attachment",
+   "innerMsgContentFields": {
+    "dataType": "msg",
+    "attachments": [],
+    "recipients": [
+     {
+      "dataType": "recipient",
+      "name": "hmailuser@hmailserver.test",
+      "addressType": "SMTP",
+      "email": "hmailuser@hmailserver.test",
+      "recipType": "to"
+     }
+    ],
+    "messageClass": "IPM.Note",
+    "subject": "テストメール",
+    "conversationTopic": "テストメール",
+    "headers": "Return-Path: hmailuser@hmailserver.test\r\nReceived: from H270 (kubernetes.docker.internal [127.0.0.1])\r\n\tby H270 with ESMTP\r\n\t; Fri, 28 Feb 2025 16:10:10 +0900\r\nMessage-ID: <8574CDEC-8E69-4CCA-B2A2-EC77762B5664@H270>\r\nMIME-Version: 1.0\r\nFrom: hmailuser@hmailserver.test\r\nTo: hmailuser@hmailserver.test\r\nDate: 28 Feb 2025 16:10:10 +0900\r\nSubject: =?utf-8?B?44OG44K544OI44Oh44O844Or?=\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n",
+    "senderName": "hmailuser@hmailserver.test",
+    "senderAddressType": "SMTP",
+    "senderEmail": "hmailuser@hmailserver.test",
+    "normalizedSubject": "テストメール",
+    "body": "これはテストメールです。",
+    "messageId": "<8574CDEC-8E69-4CCA-B2A2-EC77762B5664@H270>",
+    "inetAcctName": "hmailuser@hmailserver.test",
+    "creationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "lastModificationTime": "Tue, 27 Jan 2026 15:23:39 GMT",
+    "clientSubmitTime": "Fri, 28 Feb 2025 07:10:10 GMT",
+    "messageDeliveryTime": "Fri, 28 Feb 2025 07:10:10 GMT",
+    "messageFlags": 1,
+    "internetCodepage": 65001
+   },
+   "innerMsgContent": true,
+   "folderId": 3372,
+   "name": "テストメール",
+   "attachmentHidden": false
+  }
+ ],
+ "recipients": [],
+ "messageClass": "IPM.Note",
+ "subject": "Many entities",
+ "conversationTopic": "Many entities",
+ "normalizedSubject": "Many entities",
+ "body": "Many entities!!!\r\n",
+ "inetAcctName": "hmailuser@hmailserver.test",
+ "creationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+ "lastModificationTime": "Tue, 27 Jan 2026 15:23:38 GMT",
+ "messageDeliveryTime": "Tue, 27 Jan 2026 15:30:24 GMT",
+ "messageFlags": 24,
+ "internetCodepage": 50220,
+ "messageLocaleId": 1041
+}

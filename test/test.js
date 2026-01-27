@@ -619,6 +619,7 @@ describe('MsgReader', function () {
   generateRegression('Friday Lunch');
   generateRegression('attachmentFiles');
   generateRegression('attachmentsOrder');
+  generateRegression('Many entities');
 
 });
 

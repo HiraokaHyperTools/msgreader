@@ -198,6 +198,18 @@ export class Reader {
         case CONST.MSG.PROP.TYPE_ENUM.DOCUMENT:
           props.push(this.convertProperty(propertyOffset));
           break;
+        case CONST.MSG.PROP.TYPE_ENUM.UNALLOCATED:
+        default:
+          props.push({
+            type: propertyType,
+            name: '',
+            previousProperty: -1,
+            nextProperty: -1,
+            childProperty: -1,
+            startBlock: 0,
+            sizeBlock: 0,
+          });
+          break;
       }
 
       propertyOffset += CONST.MSG.PROP.PROPERTY_SIZE;
