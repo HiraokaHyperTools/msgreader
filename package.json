@@ -19,7 +19,7 @@
   "devDependencies": {
     "@types/node": "^22.10.3",
     "commander": "^13.0.0",
-    "mocha": "^11.0.1",
+    "mocha": "^11.7.5",
     "rimraf": "^6.0.1",
     "temp": "^0.9.4",
     "typedoc": "^0.27.6",
