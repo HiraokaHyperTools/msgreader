@@ -45,7 +45,7 @@ export default class DataStream {
       this.dataView = arrayBuffer;
     } else if (arrayBuffer && arrayBuffer.buffer instanceof ArrayBuffer) {
       this._byteOffset += arrayBuffer.byteOffset;
-      this._buffer = arrayBuffer.buffer;
+      this._buffer = arrayBuffer.buffer as ArrayBuffer;
       this._dataView = new DataView(this._buffer, this._byteOffset);
       this._byteLength = this._dataView.byteLength + this._byteOffset;
     } else {
@@ -158,7 +158,7 @@ export default class DataStream {
   }
   set dataView(v: DataView) {
     this._byteOffset = v.byteOffset;
-    this._buffer = v.buffer;
+    this._buffer = v.buffer as ArrayBuffer;
     this._dataView = new DataView(this._buffer, this._byteOffset);
     this._byteLength = this._byteOffset + v.byteLength;
   }
