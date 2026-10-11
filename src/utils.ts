@@ -198,3 +198,18 @@ export function bin2HexUpper(ds: DataStream): string {
   }
   return text.toUpperCase();
 }
+
+/**
+ * @internal
+ */
+export function createVisitTester(throwErrorOnDuplicate: Error): (value: number) => void {
+  const set = new Set<number>();
+  return (value: number) => {
+    if (set.has(value)) {
+      throw throwErrorOnDuplicate;
+    }
+    else {
+      set.add(value);
+    }
+  };
+}
