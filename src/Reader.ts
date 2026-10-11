@@ -129,13 +129,27 @@ export class Reader {
   private xbatStart: number;
   private xbatCount: number;
 
-  private batData?: number[];
-  private sbatData?: number[];
-  private propertyData?: Property[];
+  private batData: number[];
+  private sbatData: number[];
+  private propertyData: Property[];
   private bigBlockTable: number[];
 
   constructor(arrayBuffer: ArrayBuffer | DataView) {
     this.ds = new DataStream(arrayBuffer, 0, DataStream.LITTLE_ENDIAN);
+
+    this.bigBlockSize = 0;
+    this.bigBlockLength = 0;
+    this.xBlockLength = 0;
+    this.batCount = 0;
+    this.propertyStart = 0;
+    this.sbatStart = 0;
+    this.sbatCount = 0;
+    this.xbatStart = 0;
+    this.xbatCount = 0;
+    this.batData = [];
+    this.sbatData = [];
+    this.propertyData = [];
+    this.bigBlockTable = [];
   }
 
   isMSGFile(): boolean {
@@ -222,9 +236,9 @@ export class Reader {
     }
     nodeProperty.children = [];
 
-    const children = [{ currentMode: "walk", currentIndex: nodeProperty.childProperty }];
+    const children: { currentMode: string, currentIndex: number }[] = [{ currentMode: "walk", currentIndex: nodeProperty.childProperty }];
     while (children.length != 0) {
-      const { currentMode, currentIndex } = children.pop();
+      const { currentMode, currentIndex } = children.pop() || (() => { throw Error(); })();
       const current = props[currentIndex];
 
       if (currentMode === "push") {
@@ -503,7 +517,8 @@ export class Reader {
         if (children) {
           return children
             .filter(subIndex => propertyData[subIndex].type == TypeEnum.DIRECTORY)
-            .map(subIndex => this.folderOf(subIndex));
+            .map(subIndex => this.folderOf(subIndex))
+            .filter(it => it !== null);
         }
         return [];
       },
@@ -528,6 +543,6 @@ export class Reader {
    * @returns root folder
    */
   rootFolder(): CFolder {
-    return this.folderOf(0);
+    return this.folderOf(0)!;
   }
 }

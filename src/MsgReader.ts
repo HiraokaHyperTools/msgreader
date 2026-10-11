@@ -20,7 +20,7 @@ import CONST from './const'
 import DataStream from './DataStream'
 import { CFileSet, CFolder, Reader } from './Reader';
 import { burn, Entry } from './Burner';
-import { bin2HexUpper, emptyToNull, msftUuidStringify, toHex2, toHex4 } from './utils';
+import { bin2HexUpper, emptyToUndefined, msftUuidStringify, toHex2, toHex4 } from './utils';
 import { parse as entryStreamParser } from './EntryStreamParser';
 import { parse as parseVerbStream } from './VerbStreamParser';
 import { parse as parseTZDEFINITION, TzDefinition } from './TZDEFINITIONParser';
@@ -1926,7 +1926,7 @@ export default class MsgReader {
         {
           propertyObserver: (this.parserConfig?.propertyObserver) || (() => { }),
           includeRawProps: this.parserConfig?.includeRawProps ? true : false,
-          ansiEncoding: emptyToNull(this.parserConfig?.ansiEncoding),
+          ansiEncoding: emptyToUndefined(this.parserConfig?.ansiEncoding),
         }
       );
     }

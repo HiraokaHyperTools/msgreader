@@ -101,7 +101,7 @@ function repeatValue(value: number, count: number): number[] {
 class LiteFat {
     sectors: number[];
 
-    constructor(source) {
+    constructor(source: number[]) {
         this.sectors = source;
     }
 
@@ -233,7 +233,7 @@ class LiteBurner {
             }
 
             while (true) {
-                const remain = (difat2.length & 127);
+                const remain: number = (difat2.length & 127);
                 if (remain === 0) {
                     break;
                 }
@@ -280,7 +280,7 @@ class LiteBurner {
             const pos = 512 * (1 + entriesFirstSector) + 128 * x;
 
             ds.seek(pos);
-            ds.writeUCS2String(liteEnt.entry.name, null, null);
+            ds.writeUCS2String(liteEnt.entry.name, undefined, undefined);
             const numBytesName = ds.position - pos;
 
             ds.seek(pos + 0x40);
@@ -314,7 +314,7 @@ class LiteBurner {
                 && it.isMini === false
             )
         ) {
-            const bytes = liteEnt.entry.binaryProvider();
+            const bytes = liteEnt.entry.binaryProvider && liteEnt.entry.binaryProvider() || [];
             ds.seek(512 * (1 + liteEnt.firstSector));
             ds.writeUint8Array(bytes);
         }
@@ -325,7 +325,7 @@ class LiteBurner {
                 && it.isMini === true
             )
         ) {
-            const bytes = liteEnt.entry.binaryProvider();
+            const bytes = liteEnt.entry.binaryProvider && liteEnt.entry.binaryProvider() || [];
             ds.seek(512 * (1 + firstMiniDataSector) + 64 * liteEnt.firstSector);
             ds.writeUint8Array(bytes);
         }
@@ -387,7 +387,7 @@ class LiteBurner {
         }
 
         // Array.sort is destructive, so copy it by concat() before changing
-        const children = liteEntry.entry.children.concat();
+        const children = (liteEntry.entry.children || []).concat();
         if (1 <= children.length) {
             children.sort(
                 (a, b) => {
@@ -401,7 +401,7 @@ class LiteBurner {
             // (     | 0   )
             // (   0 | 1   )
             // (   0 | 1 2 )
- 
+
             // (left, right), returns first right node
             const split2 = (start: number, end: number, isRed: boolean): number => {
                 if (start < end) {

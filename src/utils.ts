@@ -1,4 +1,3 @@
-import { stringify } from "querystring";
 import DataStream from "./DataStream";
 import { TransitionSystemTime } from "./TZDEFINITIONParser";
 
@@ -122,8 +121,8 @@ export function msftUuidStringify(array: ArrayLike<number>, offset: number): str
 /**
  * @internal
  */
-export function emptyToNull(text: string): string {
-  return (text === "") ? null : text;
+export function emptyToUndefined(text: string): string | undefined {
+  return (text === "") ? undefined : text;
 }
 
 
@@ -131,7 +130,11 @@ export function emptyToNull(text: string): string {
  * @internal
  */
 function padNumber(value: number, maxLen: number): string {
-  return ("" + value).padStart(maxLen, '0');
+  let text = "" + value;
+  while (text.length < maxLen) {
+    text = '0' + text;
+  }
+  return text;
 }
 
 /**
