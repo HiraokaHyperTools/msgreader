@@ -1,7 +1,7 @@
 # msgreader
 
 [![npm](https://img.shields.io/npm/v/@kenjiuno/msgreader)](https://www.npmjs.com/package/@kenjiuno/msgreader)
-[![Build Status](https://dev.azure.com/HiraokaHyperTools/msgreader/_apis/build/status/HiraokaHyperTools.msgreader?branchName=master)](https://dev.azure.com/HiraokaHyperTools/msgreader/_build/latest?definitionId=7&branchName=master)
+![GitHub branch status](https://img.shields.io/github/checks-status/HiraokaHyperTools/msgreader/master)
 
 Outlook Item File (.msg) reader in JavaScript npm Module
 
