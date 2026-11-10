@@ -621,6 +621,17 @@ describe('MsgReader', function () {
   generateRegression('attachmentsOrder');
   generateRegression('Many entities');
 
+  it('reads a unicode property with an odd byte length', function () {
+    const { burn } = require('../lib/Burner');
+    const body = new Uint8Array(Buffer.from('Hello'));
+    const array = burn([
+      { name: 'Root Entry', type: TypeEnum.ROOT, length: 0, children: [1] },
+      { name: '__substg1.0_1000001F', type: TypeEnum.DOCUMENT, length: body.length, binaryProvider: () => body },
+    ]);
+    const fields = new MsgReader(array).getFileData();
+    assert.strictEqual(fields.body, Buffer.from('Hell').toString('utf16le'));
+  });
+
 });
 
 
