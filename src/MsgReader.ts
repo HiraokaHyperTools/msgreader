@@ -1535,7 +1535,7 @@ export default class MsgReader {
       skip = insideProps;
     }
     else if (decodeAs === "unicode") {
-      value = removeTrailingNull(ds.readUCS2String(array.length / 2));
+      value = removeTrailingNull(ds.readUCS2String(Math.floor(array.length / 2)));
       skip = insideProps;
     }
     else if (decodeAs === "binary") {
